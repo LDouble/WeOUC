@@ -134,9 +134,9 @@ Page({
             });
           }
         }else{
-          app.showErrorModal(res.data.message);
+          app.showErrorModal('接口暂时还没有开放');
           _this.setData({
-            'active.remind': '加载失败'
+            'active.remind': '待开放的功能'
           });
         }
       },

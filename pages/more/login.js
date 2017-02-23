@@ -111,14 +111,15 @@ Page({
           }, 1500);
         } else {
           wx.hideToast();
-          app.showErrorModal(res.data, '绑定失败1');
+          //console.log("服务器返回失败的内容："+res.data[0])
+          app.showErrorModal(res.data[0].data, '错误状态码:'+res.data[0].status);
           _this.getlogincode();
         }
       },
       fail: function (res) {
         wx.hideToast();
         console.log(res)
-        app.showErrorModal(res.data, '服务器连接失败,请检查网络');
+        app.showErrorModal('请检查网络', '服务器连接失败!');
         _this.getlogincode();
       }
     });

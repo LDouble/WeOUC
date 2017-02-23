@@ -10,33 +10,21 @@
             <text class="user-name">{{stuinfo.name}}</text>
             <text class="user-id">学号： {{stuinfo.num}}</text>
           </view>
-          <view class="time-box">
-            <text class="time-term">{{time.term}}</text>
-            <text class="time-now">第{{time.week}}周 - 星期{{time.day}}</text>
-          </view>
+          
         </view>
         <view class="info-bd" wx:if="{{!user.teacher}}">
           <view class="info-bd-left">
             <text class="user-text">班级：{{stuinfo.className}}</text>
-            <text class="user-text">邮箱：{{stuinfo.email}}级</text>
             <text class="user-text">专业：{{stuinfo.major}}</text>
-          </view>
-          <view class="info-bd-right">
-            <text class="user-text">绩点：{{stuinfo.gradePoint}}</text>
-            <text class="user-text">导师：{{stuinfo.teacher}}</text>
+            <text class="user-text">邮箱：{{stuinfo.email}}</text>
             <text class="user-text">辅导员：{{stuinfo.counsellor}}</text>
+            <text class="user-text">导师：{{stuinfo.teacher}}</text>
+            <text class="user-text">绩点：{{stuinfo.gradePoint}}</text>
           </view>
+          
         </view>
       </view>
-      <navigator url="append" class="append-link" wx:if="{{!user.teacher}}">
-        <view class="more-btn">
-          <image class="btn-icon" src="/images/more/append.png"></image>
-          <text class="btn-text">完善信息</text>
-          <view class="btn-open">
-            <image class="btn-enter" src="/images/more/enter.png"></image>
-          </view>
-        </view>
-      </navigator>
+      
     </block>
     <navigator url="/pages/more/login" class="user-info" wx:else>
       <view class="info-hd">
@@ -57,7 +45,7 @@
     <navigator url="/pages/more/issues" class="issue-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/more/issue.png"></image>
-        <text class="btn-text">反馈</text>
+        <text class="btn-text">发布</text>
         <view class="btn-open">
           <image class="btn-enter" src="/images/more/enter.png"></image>
         </view>
@@ -74,9 +62,12 @@
     </navigator>
   </view>
 
-  <navigator url="login" class="login-btn">
-    <text wx:if="{{is_bind}}">切换绑定</text>
-    <text wx:else>立即绑定</text>
-  </navigator>
+  <view wx:if="{{is_bind}}" class="login-btn" bindtap="delbind">
+    <text>切换绑定</text>
+  </view>
+
+  <view wx:else class="login-btn" bindtap="gobind">
+    <text>立即绑定</text>
+  </view>
 
 </view>

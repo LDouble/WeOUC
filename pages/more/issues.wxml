@@ -2,7 +2,7 @@
 <view class="container">
   <view class="list-btn" bindtap="openList">
     <image class="btn-icon" src="/images/more/issue.png"></image>
-    <text class="btn-text">我的反馈记录（{{list.count}}次）</text>
+    <text class="btn-text">我的动态记录（{{list.count}}次）</text>
     <view class="btn-open">
       <image class="btn-open-img" src="/images/core/common/{{list.status ? 'up' : 'down'}}.png"></image>
     </view>
@@ -18,8 +18,8 @@
             <view class="item-labels">
               <text wx:for="{{item.content.labels}}" wx:key="id" wx:for-item="label" class="item-label">{{label.name}}</text>
             </view>
-            <text class="item-status" wx:if="{{item.content.state == 'closed'}}">已解决</text>
-            <text class="item-status" wx:elif="{{item.content.state == 'open'}}">进行中</text>
+            <text class="item-status" wx:if="{{item.content.state == 'closed'}}">已过期的消息</text>
+            <text class="item-status" wx:elif="{{item.content.state == 'open'}}">首页动态显示中</text>
           </block>
         </view>
 
@@ -40,18 +40,18 @@
         </view>
       </view>
 
-      <text class="issues-remind">该反馈记录仅显示了反馈及回复的内容摘要，若要了解反馈详细，请访问 https://github.com/lanshan-studio/wecqupt/issues We重邮-Github。</text>
+      <text class="issues-remind">该记录仅显示内容摘要，更换微信登陆无效</text>
     </block>
     <text wx:else class="issues-remind text-center">{{list_remind}}</text>
   </view>
 
   <block wx:else>
-    <text class="issues-label">新建反馈</text>
+    <text class="issues-label">新建动态</text>
     <view class="issues-panel">
       <view class="issues-input {{(showError&&!title)?'error':''}}">
-        <input placeholder="请输入反馈标题" bindinput="listenerTitle" />
+        <input placeholder="请输入动态摘要" bindinput="listenerTitle" />
       </view>
-      <textarea class="issues-textarea {{(showError&&!content)?'error':''}}" cursor-spacing="50" placeholder="请输入反馈内容" bindinput="listenerTextarea"></textarea>
+      <textarea class="issues-textarea {{(showError&&!content)?'error':''}}" cursor-spacing="50" placeholder="请输入动态内容" bindinput="listenerTextarea"></textarea>
     </view>
 
     <block wx:if="{{upload}}">
@@ -67,9 +67,9 @@
       </view>
     </block>
 
-    <text class="issues-remind">您的反馈将会以Issues的形式提交至We重邮的Github，您可通过访问 https://github.com/lanshan-studio/wecqupt/issues 来了解反馈动态；此外，您还可以加入We重邮用户反馈QQ群487586022进行即时反馈。另注：频繁恶意反馈的用户将取消其反馈资格。</text>
+    <text class="issues-remind">这是一个彩蛋功能，您的动态将会以类似朋友圈形式发布到资讯区，每天凌晨三点会定时清除所有动态，也就是如果你在2点59分发的动态，服务器也会在3点删掉。另注：频繁恶意发送动态的用户将取消其发送动态资格，原则上我们只鼓励用户每天至多发一条。</text>
     <view class="submit-btn {{uploading?'disabled':''}}" bindtap="submit">
-      <text>提交反馈</text>
+      <text>发布</text>
     </view>
   </block>
 </view>

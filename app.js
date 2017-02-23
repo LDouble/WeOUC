@@ -1,8 +1,10 @@
 //app.js
 App({
   version: 'v0.1.2', //版本号
+  todat: '',
   logincode: '',
   openid: '',
+  week:'1',
   onLaunch: function () {
     var _this = this;
     //读取缓存
@@ -111,10 +113,26 @@ App({
         typeof cb == "function" && cb(res);
       },
       fail: function (res) {
-        _this.showErrorModal('拒绝授权将导致无法关联学校帐号并影响使用，请重新打开We华软再点击允许授权！', '授权失败');
+        _this.showErrorModal('拒绝授权将导致无法关联学校帐号并影响使用，请关闭We华软后台，再打开We华软再点击允许授权！', '授权失败');
         _this.g_status = '未授权';
       }
     });
+  },
+  in_array : function (arr) {
+    var _this=this;
+ 
+    // 不是数组返回错误
+    if(arr==null||arr==''||arr===[]){
+      console.log('不是数组返回错误');
+        return false; 
+    }
+
+    for(var i=0,k=arr.length;i<k;i++){
+        if(_this.week==arr[i]){
+          console.log("存在")
+            return true;    
+        }
+    }
   },
   showErrorModal: function (content, title) {
     wx.showModal({

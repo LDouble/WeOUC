@@ -7,18 +7,31 @@ Page({
     openid: '',
     stuinfo: null,
   },
-  onShow: function () {
-    console.log(app._user.is_bind)
-    var _this = this;
-    this.getData();
+  onLoad: function () {
     if (app.openid === '') {
       wx.navigateTo({
         url: '/pages/more/login'
       });
-    } else {
-      _this.setData({openid:app.openid});
+    }
+    else {
+      app._user.is_bind = true;
+    }
+  },
+  onShow: function () {
+    console.log(app._user.is_bind)
+    var _this = this;
+    this.getData();
+    if (wx.getStorageSync('stuinfo')) {
+      var stuinfo = wx.getStorageSync('stuinfo')
+      _this.setData({ stuinfo: stuinfo });
+    }
+    else {
+      app.showLoadToast('更新数据',1500);
+      _this.setData({ openid: app.openid });
       _this.getStuinfo();
     }
+
+
 
   },
   //连接服务器获取学生信息内容
@@ -30,7 +43,7 @@ Page({
         if (res.data[0].status < 40000) {
           console.log(res.data[0].data);
           var stuinfo = JSON.parse(res.data[0].data);
-          _this.setData({stuinfo:stuinfo});
+          _this.setData({ stuinfo: stuinfo });
           wx.setStorageSync('stuinfo', stuinfo)
         }
       },
@@ -38,6 +51,36 @@ Page({
         app.showErrorModal("服务器连接失败", "请检查网络连接")
       }
     })
+  },
+  delbind: function () {
+    setTimeout(function () {
+      wx.showModal({
+        title: '切换绑定',
+        content: '是否确认解除绑定,可解决数据不同步、异常等问题',
+        cancelText: '点错了',
+        confirmText: '是',
+        success: function (res) {
+          if (res.confirm) {
+            app.openid=null;
+            wx.clearStorageSync();
+            wx.navigateTo({
+              url: '/pages/more/login'
+            });
+          } else {
+            wx.showToast({
+              title: '取消解绑操作',
+              icon: 'success',
+              duration: 1000
+            });
+          }
+        }
+      });
+    }, 100);
+  },
+  gobind: function () {
+    wx.navigateTo({
+      url: '/pages/more/login'
+    });
   },
   getData: function () {
     var _this = this;
