@@ -26,7 +26,7 @@ Page({
       _this.setData({ stuinfo: stuinfo });
     }
     else {
-      app.showLoadToast('更新数据',1500);
+      wx.showNavigationBarLoading();
       _this.setData({ openid: app.openid });
       _this.getStuinfo();
     }
@@ -37,6 +37,7 @@ Page({
   //连接服务器获取学生信息内容
   getStuinfo: function () {
     var _this = this;
+    app.showLoadToast('更新数据中');
     wx.request({
       url: app._server + '/mywebapp/stuinfo?openid=' + _this.data.openid,
       success: function (res) {
@@ -49,6 +50,10 @@ Page({
       },
       fail: function () {
         app.showErrorModal("服务器连接失败", "请检查网络连接")
+      },
+      complete: function (){
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       }
     })
   },
@@ -61,11 +66,29 @@ Page({
         confirmText: '是',
         success: function (res) {
           if (res.confirm) {
-            app.openid=null;
+            app.showLoadToast('解绑中');
+            wx.request({
+              url: app._server + '/mywebapp/jiebang?openid=' + app.openid,
+              method: 'GET', 
+              success: function(res){
+                  wx.showToast({
+                title: '解绑成功',
+                icon: 'success',
+                duration: 1000
+              });
+              },
+              fail: function() {
+                // fail
+              },
+              complete: function() {
+                app.openid=null;
             wx.clearStorageSync();
             wx.navigateTo({
               url: '/pages/more/login'
             });
+              }
+            })
+            
           } else {
             wx.showToast({
               title: '取消解绑操作',

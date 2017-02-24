@@ -5,6 +5,7 @@ Page({
   data: {
     offline: false,
     remind: '加载中',
+    nothingclass: false,
     stuclass: null,
     classtime: [
       { '1 - 2 节': '09:00 - 10:20' },
@@ -17,7 +18,7 @@ Page({
       { '15 - 16 节': '20:30 - 21:50' },
     ],
     core: [
-      { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: false, offline_disabled: false },
+      { id: 'kb', name: '课表查询', disabled: true, teacher_disabled: false, offline_disabled: true },
       { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
       { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: false, offline_disabled: false },
       { id: 'xs', name: '学生查询', disabled: false, teacher_disabled: false, offline_disabled: true },
@@ -88,9 +89,6 @@ Page({
     }
   },
   onShow: function () {
-    app.today = parseInt(new Date().getDay());
-    var today = app.today;
-    console.log("目前星期：" + app.today);
     var _this = this;
     if (app.openid === '') {
       console.log("onshow openid获取的缓存为空");
@@ -101,23 +99,43 @@ Page({
     if (wx.getStorageSync('stuclass') === '') {
       console.log("onshow stuclass获取的缓存为空");
       //重定向
-
+      _this.setData({remind:'加载中'});
       this.getStuclass();
     }
     else {
       stuclass = wx.getStorageSync('stuclass')
       var stuclass = JSON.parse(stuclass);
       console.log(stuclass);
-      var strTem = {};  // 临时变量
+      _this.getTodayclass(stuclass);
+    }
+    console.log("index onshow");
+    
+
+  },
+  onReady: function () {
+
+  },
+  getTodayclass: function (stuclass) {
+    var _this=this;
+    wx.showNavigationBarLoading();
+    app.today = parseInt(new Date().getDay());
+    var today = app.today-1;
+    console.log("目前星期：" + app.today);
+
+    var strTem = {};  // 临时变量
+      
       for (var value in stuclass) {
-        var todaydata = stuclass[value].classes[today -1];
+        if(stuclass[value].classes[today]==null){
+          _this.setData({ nothingclass: true });
+          break;
+        }
+        var todaydata = stuclass[value].classes[today];
         var arrayweek = [];
         arrayweek = todaydata.weeks;
-        console.log(arrayweek);
+        console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
         if (app.in_array(arrayweek)) {
-          console.log( stuclass[value].classes[today - 5]);
-          strTem[value].class = stuclass[value].classes[today - 5];
+          strTem[value].class = stuclass[value].classes[today - 1];
           strTem[value].classtime = stuclass[value].time;
         }
         else{
@@ -126,18 +144,10 @@ Page({
       };
       _this.setData({ stuclass: strTem });
       _this.setData({
-        'remind': '绑定'
+        'remind': ''
       });
-    }
-    console.log("index onshow");
-
-
-  },
-  onReady: function () {
-
-  },
-  getToday: function () {
-
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
   },
   getStuclass: function () {
     var _this = this;
@@ -151,16 +161,7 @@ Page({
           var stuclass = JSON.parse(res.data[0].data);
           wx.setStorageSync('stuclass', stuclass.allClass);
           wx.setStorageSync('week', stuclass.week);
-          stuclass = wx.getStorageSync('stuclass')
-          var strTem = {};  // 临时变量
-          for (var value in stuclass) {
-            strTem[value] = stuclass[value].classes[today - 1];
-          };
-          _this.setData({ stuclass: strTem });
-          console.log("index课程的信息" + _this.data.stuclass)
-          _this.setData({
-            'remind': '绑定'
-          });
+          _this.getTodayclass(JSON.parse(stuclass.allClass));
         }
       },
       fail: function () {
@@ -278,6 +279,7 @@ Page({
         'card.kb.nothing': !list.length,
         'remind': ''
       });
+      _this.on
     }
     //获取课表数据
     var kb_data = {
