@@ -45,10 +45,10 @@
         <view wx:else class="card-item-bd">
           <view class="kb-item" wx:for="{{stuclass}}" wx:if="{{item.class}}">
             <view class="kb-item-left">
-              <text class="kb-item-what">{{item.class.classRoom}} {{item.class.name}} </text>
-              <text class="kb-item-when">{{item.classtime}}    老师：{{item.class.teacher}} ({{item.class.classNum}}) </text>
+              <text class="kb-item-what">{{item.class.name}}  ({{item.class.classNum}})</text>
+              <text class="kb-item-when">{{item.classtime}}    老师：{{item.class.teacher}} </text>
             </view>
-            <text class="kb-item-where">{{item.where}}</text>
+            <text class="kb-item-where">{{item.class.classRoom}}</text>
           </view>
         </view>
         <view class="kb-open">

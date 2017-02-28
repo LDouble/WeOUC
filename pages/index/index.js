@@ -138,17 +138,18 @@ Page({
     var _this=this;
     wx.showNavigationBarLoading();
     app.today = parseInt(new Date().getDay());
+    //这个today是数组下标，所以减一
     var today = app.today-1;
     console.log("目前星期：" + app.today);
     console.log(stuclass)
     var strTem = {};  // 临时变量
-      
       for (var value in stuclass) {
         if(stuclass[value].classes[today]==null){
           _this.setData({ nothingclass: true });
           break;
         }
         var todaydata = stuclass[value].classes[today];
+        console.log(todaydata);
         var arrayweek = [];
         arrayweek = todaydata.weeks;
         console.log('arrayweek的值'+arrayweek);

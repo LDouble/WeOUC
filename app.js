@@ -167,7 +167,7 @@ App({
       var thisweek = _this.getISOYearWeek(date);
       _this.thisweek = thisweek;
     }
-    var thisweek = _this.thisweek-_this.beginweek+1;
+    var thisweek = _this.thisweek-_this.beginweek;
     if(thisweek<=1){
       thisweek=1;
     }

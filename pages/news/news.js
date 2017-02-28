@@ -6,9 +6,9 @@ Page({
     page: 0,
     list: [
       { id: 0, 'type': 'all', name: '头条',storage:[], url: '/blog/getblog.do', enabled: {guest:false, student:true, teacher:true} },
-      { id: 1, 'type': 'jw', name: '教务公告',storage:[], url: 'news/jw_list.php', enabled: {guest:false, student:true, teacher:true} },
-      { id: 2, 'type': 'oa', name: 'OA公告',storage:[], url: 'news/oa_list.php', enabled: {guest:false, student:true, teacher:true} },
-      { id: 5, 'type': 'new', name: '校园周边',storage:[], url: 'news/new_list.php', enabled: {guest:true, student:true, teacher:true} },
+      { id: 1, 'type': 'jw', name: '教务公告',storage:[], url: '/blog/getblog.do', enabled: {guest:false, student:true, teacher:true} },
+      { id: 2, 'type': 'oa', name: 'OA公告',storage:[], url: '/blog/getblog.do', enabled: {guest:false, student:true, teacher:true} },
+      { id: 3, 'type': 'new', name: '校园周边',storage:[], url: '/blog/getblog.do', enabled: {guest:true, student:true, teacher:true} },
     ],
     'active': {
       id: 0,
