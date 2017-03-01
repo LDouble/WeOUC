@@ -8,7 +8,7 @@ Page({
     stuinfo: null,
   },
   onLoad: function () {
-    if (app.openid === '') {
+    if (app.openid === ''||app.openid ===null) {
       wx.navigateTo({
         url: '/pages/more/login'
       });
@@ -81,7 +81,7 @@ Page({
                 // fail
               },
               complete: function() {
-                app.openid=null;
+                app.openid='';
             wx.clearStorageSync();
             wx.navigateTo({
               url: '/pages/more/login'

@@ -101,7 +101,7 @@ Page({
   },
   onShow: function () {
     var _this = this;
-    if (app.openid === '') {
+    if (app.openid === ''||app.openid ===null) {
       console.log("onshow openid获取的缓存为空");
       wx.navigateTo({
         url: '/pages/more/login'
