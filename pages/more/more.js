@@ -18,15 +18,16 @@ Page({
     }
   },
   onShow: function () {
+    wx.showNavigationBarLoading();
     console.log(app._user.is_bind)
     var _this = this;
     this.getData();
     if (wx.getStorageSync('stuinfo')) {
       var stuinfo = wx.getStorageSync('stuinfo')
       _this.setData({ stuinfo: stuinfo });
+      wx.hideNavigationBarLoading();
     }
     else {
-      wx.showNavigationBarLoading();
       _this.setData({ openid: app.openid });
       _this.getStuinfo();
     }
@@ -53,7 +54,6 @@ Page({
       },
       complete: function (){
         wx.hideNavigationBarLoading();
-        wx.stopPullDownRefresh();
       }
     })
   },

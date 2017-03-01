@@ -78,12 +78,26 @@ Page({
   },
   //下拉更新
   onPullDownRefresh: function () {
-    if (app._user.is_bind) {
+    
       //this.getCardData();
-      wx.stopPullDownRefresh();
-    } else {
-      wx.stopPullDownRefresh();
+      
+      if (wx.getStorageSync('stuclass') === '') {
+      console.log("onshow stuclass获取的缓存为空");
+      //重定向
+      _this.setData({remind:'加载中'});
+       _this.setData({'user': {
+        'is_bind': true
+      }});
+      this.getStuclass();
+     
     }
+
+       wx.showToast({
+        title: '刷新成功',
+        icon: 'success',
+        duration: 1500
+      });
+      wx.stopPullDownRefresh();  
   },
   onShow: function () {
     var _this = this;
@@ -114,7 +128,7 @@ Page({
       
     }
     console.log("index onshow");
-    
+    app._user.is_bind = true;
 
   },
   onReady: function () {

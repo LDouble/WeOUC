@@ -1,1 +1,4 @@
-{}
+{
+  "navigationBarTitleText": "动态",
+  "enablePullDownRefresh": false
+}

@@ -1,7 +1,7 @@
 //app.js
 App({
   version: 'v0.1.2', //版本号
-  todat: '',
+  today: '',
   logincode: '',
   openid: '',
   beginweek: '9',

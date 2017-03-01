@@ -1,2 +1,29 @@
-<!--pages/more/issues.wxml-->
-<text>pages/more/issues.wxml</text>
+<!--issues.wxml-->
+<view class="container">
+  <view class="list-btn" bindtap="openList">
+    <image class="btn-icon" src="/images/more/issue.png"></image>
+    <text class="btn-text">我的动态记录</text>
+    <view class="btn-open">
+      <image class="btn-open-img" src="/images/core/common/{{list.status ? 'up' : 'down'}}.png"></image>
+    </view>
+  </view>
+
+
+
+  <block>
+    <text class="issues-label">新建动态</text>
+    <view class="issues-panel">
+      
+      <textarea class="issues-textarea {{(showError&&!content)?'error':''}}" cursor-spacing="50" placeholder="分享新鲜事" bindinput="listenerTextarea"></textarea>
+    </view>
+
+    <view class="issues-input">
+        <input class="input-group" placeholder="可选：点击修改昵称(默认使用微信昵称)" bindinput="listenerTitle" />
+      </view>
+
+    <text class="issues-remind">这是一个彩蛋功能，您的动态将会以列表形式发布到资讯区，每天凌晨三点会定时清除所有动态，也就是如果你在2点59分发的动态，服务器也会在3点删掉。另注：频繁恶意发送动态的用户将取消其发送动态资格，原则上我们只鼓励用户每天至多发一条。</text>
+    <view class="submit-btn" bindtap="submit">
+      <text>发布</text>
+    </view>
+  </block>
+</view>

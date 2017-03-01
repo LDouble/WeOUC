@@ -42,7 +42,15 @@
   </view>
 
   <view class="more-list">
-    
+    <navigator url="/pages/more/issues" class="issue-link">
+      <view class="more-btn">
+        <image class="btn-icon" src="/images/more/issue.png"></image>
+        <text class="btn-text">动态</text>
+        <view class="btn-open">
+          <image class="btn-enter" src="/images/more/enter.png"></image>
+        </view>
+      </view>
+    </navigator>
     <navigator url="about" class="about-link">
       <view class="more-btn">
         <image class="btn-icon" src="/images/more/about.png"></image>
