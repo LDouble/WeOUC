@@ -79,7 +79,7 @@ Page({
     wx.request({
       url: app._server  + _this.data.list[typeId].url,
       data: {
-        blogid: 100120,
+        blogid: _this.data.page,
         openid: app.openid
       },
       success: function(res){
