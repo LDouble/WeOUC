@@ -64,23 +64,9 @@ Page({
   //获取新闻列表
   getNewsList: function(typeId){
     var _this = this;
-    if(app.g_status){
-      _this.setData({
-        'active.showMore': false,
-        'active.remind': app.g_status,
-        loading: false
-      });
-      wx.stopPullDownRefresh();
-      return;
-    }
+    
     typeId = typeId || _this.data.active.id;
-    if (_this.data.page >= 5){
-      _this.setData({
-        'active.showMore': false,
-        'active.remind': '没有更多啦'
-      });
-      return false;
-    }
+    
     if(!_this.data.page){
       _this.setData({
         'active.data': _this.data.list[typeId].storage
@@ -93,49 +79,43 @@ Page({
     wx.request({
       url: app._server  + _this.data.list[typeId].url,
       data: {
-        blogid: _this.data.page + 1,
+        blogid: 100120,
         openid: app.openid
       },
       success: function(res){
-        if(res.data && res.data.status === 200){
-          if(_this.data.active.id != typeId){ return false; }
-          if(res.data.data){
-            if(!_this.data.page){
-              if(!_this.data.list[typeId].storage.length || app.util.md5(JSON.stringify(res.data.data)) != app.util.md5(JSON.stringify(_this.data.list[typeId].storage))){
-                var data = {
-                  'page': _this.data.page + 1,
-                  'active.data': res.data.data,
-                  'active.showMore': true,
-                  'active.remind': '上滑加载更多',
-                };
-                data['list['+typeId+'].storage'] = res.data.data;
-                _this.setData(data);
-              }else{
-                _this.setData({
-                  'page': _this.data.page + 1,
-                  'active.showMore': true,
-                  'active.remind': '上滑加载更多'
-                });
-              }
-            }else{
-              _this.setData({
-                'page': _this.data.page + 1,
-                'active.data': _this.data.active.data.concat(res.data.data),
-                'active.showMore': true,
-                'active.remind': '上滑加载更多',
-              });
-            }
-          }else{
+        console.log(res)
+        if(res.data && res.data.status === 20010){
+          var blogdata=res.data.data;
+          var size=res.data.size
+          var lastblogid=res.data.lastblogid;
             _this.setData({
-              'active.showMore': false,
-              'active.remind': '没有更多啦'
-            });
-          }
+        'loading': true,
+        'active.data': blogdata,
+        'active.showMore': true,
+        'active.remind': '上滑加载更多',
+        'page': lastblogid
+      });
+        wx.showToast({
+        title: '更新了'+size+'条数据',
+        icon: 'success',
+        duration: 2000
+      });
         }else{
+          if(res.data.status === 40705){
+            wx.showToast({
+        title: '亲，没有更多数据了噢~~',
+        icon: 'success',
+        duration: 1500
+      });
+          _this.setData({
+            'active.remind': '已经是最新数据啦'
+          });
+          }else{
           app.showErrorModal('接口暂时还没有开放');
           _this.setData({
             'active.remind': '待开放的功能'
           });
+          }
         }
       },
       fail: function(res){
@@ -147,6 +127,7 @@ Page({
       complete: function(){
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
+        app.saveCache('blogdata',_this.data.active.data);
         _this.setData({
           loading: false
         });

@@ -66,12 +66,12 @@ Page({
       success: function (res) {
         if (res.confirm) {
           if(_this.data.title==''){
-      title = '【' + app._user.wx.nickName + '】';
+      title = '' + app._user.wx.nickName + '';
     }else{
       title = '【' + _this.data.title + '】' 
     }
           
-          content = _this.data.content + '\r\n\r\n' + _this.data.info;
+          content = _this.data.content;
           app.showLoadToast();
           wx.request({
             url: app._server + '/blog/pushblog.do',

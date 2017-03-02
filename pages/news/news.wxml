@@ -13,14 +13,14 @@
     <view class="loader">
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
-    <block wx:for="{{active.data}}" wx:key="item.articleid">
-      <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.articleid}}">
-        <view class="list-item {{item.type}}">
+    <block wx:for="{{active.data}}" wx:key="item.blogid">
+      <navigator url="/pages/news/new/new_detail?type=new&id={{index}}">
+        <view class="list-item oa">
           <view class="list-item-left">
-            <text class="list-item-title">11111{{item.title}}</text>
-            <text class="list-item-time">22222{{item.time}}</text>
+            <text class="list-item-title">{{item.pubissue}}</text>
+            <text class="list-item-time">发布者：{{item.nickname}} </text>
           </view>
-          <image class="list-item-icon" src="/images/news/{{item.type}}.png"></image>
+          <image class="list-item-icon" src="/images/news/oa.png"></image>
         </view>
       </navigator>
     </block>
@@ -28,5 +28,7 @@
   <!--提醒消息-->
   <text class="content-ending">{{active.remind}}</text>
   <!--悬浮消息-->
- 
+  <view class="fix_tip {{disabledRemind?'active':''}}">
+    <text>无权限查阅</text>
+  </view>
 </view>
