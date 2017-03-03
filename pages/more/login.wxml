@@ -5,6 +5,7 @@
   </view>
   <block wx:else>
     <image class="title" src="/images/more/title.png"></image>
+     
     <view class="content">
       <view class="hd" style="transform:rotateZ({{angle}}deg);">
           <image class="logo" src="/images/more/logo.png"></image>
@@ -12,6 +13,8 @@
           <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
       </view>
       <view class="bd">
+      <contact-button class="contact-help" type="default-light" size="22" session-from="weapp"></contact-button>
+ <text class="contact-text">联系客服</text>
         <form class="login-form">
           <view class="input-group {{userid_focus ? 'active' : ''}}">
             <text class="input-label">帐号</text>

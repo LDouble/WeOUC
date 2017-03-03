@@ -252,3 +252,21 @@ form {
 page .wx-video-bar{
   display: none;
 }
+.contact-help {
+  width: 65rpx;
+  height: 65rpx;
+  background: #09BB07;
+  -webkit-border-radius: 65rpx;
+  border-radius: 65rpx;
+  padding-top: 15rpx;
+  padding-left: 15rpx;
+  margin:0px 40rpx 0rpx auto;
+}
+.contact-text {
+  padding-top: 10rpx;
+  margin-top: -10rpx;
+  padding-left: 10rpx;
+  margin:0px 40rpx 0rpx auto;
+  font-size: 8pt;
+  color: #09BB07;
+}

@@ -110,5 +110,24 @@
   color: #fff;
   text-align: center;
   border-radius: 5px;
-  margin: 40rpx 3%;
+  margin: 20rpx 3%;
+}
+.contact-help {
+  width: 65rpx;
+  height: 65rpx;
+  background: #09BB07;
+  -webkit-border-radius: 65rpx;
+  border-radius: 65rpx;
+  padding-top: 15rpx;
+  padding-left: 15rpx;
+  margin:0px 40rpx 0rpx auto;
+}
+.contact-text {
+  flex: 1;
+  padding-top: 10rpx;
+  margin-top: -10rpx;
+  padding-left: 10rpx;
+  margin:0px 40rpx 0rpx auto;
+  font-size: 8pt;
+  color: #09BB07;
 }
