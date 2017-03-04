@@ -90,7 +90,7 @@ Page({
           setTimeout(function () {
             wx.showModal({
               title: '连接服务器成功',
-              content: '是否授权登陆mysie？',
+              content: '是否授权登陆mysise？',
               cancelText: '否',
               confirmText: '是',
               success: function (res) {
