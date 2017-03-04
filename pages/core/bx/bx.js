@@ -8,11 +8,11 @@ Page({
     list: [],
     process_state: {
       '未审核': 'waited',
-      '未受理': 'waited',
-      '已受理': 'accepted',
-      '已派出': 'dispatched',
+      '请假': 'waited',
+      '全勤': 'accepted',
+      '旷课': 'dispatched',
       '已完工': 'finished',
-      '驳回': 'refused'
+      '未知': 'refused'
     }
   },
   //下拉更新
@@ -24,7 +24,7 @@ Page({
   },
   getData: function(){
     var that = this;
-    if(!app._user.we.ykth){
+    if(!app.openid){
       that.setData({
         remind: '未绑定'
       });
@@ -32,24 +32,31 @@ Page({
     }
     // 发送请求
     wx.request({
-      url: app._server + "/api/bx/get_repair_list.php", 
-      method: 'POST',
-      data: app.key({
-        openid: app._user.openid,
-        "yktID": app._user.we.ykth
-      }),
+      url: app._server + "/mywebapp/kaoqin?openid="+app.openid, 
+      method: 'GET',
       success: function(res) {
-
-        if(res.data && res.data.status === 200) {
-          var list = res.data.data;
+        console.log(res);
+        if(res.data[0].status < 40000) {
+          var list = JSON.parse(res.data[0].data);
+          console.log(list);
           if(!list || !list.length){
             that.setData({
-              'remind': '无申报记录'
+              'remind': '天呐，你大概在度假吧~~'
             });
           }else{
             for(var i = 0, len = list.length; i < len; i++) {
-              list[i].state = that.data.process_state[list[i].wx_wxztm];
-              list[i].wx_bt = that.convertHtmlToText(list[i].wx_bt).replace(/[\r|\n]/g, "");
+              var tempstat=list[i].information;
+               if(tempstat.indexOf("全勤")!=-1){  
+        list[i].state = that.data.process_state['全勤'];  
+    }    
+    else if(tempstat.indexOf("请假")!=-1){  
+        list[i].state = that.data.process_state['请假'];  
+    }
+    else if(tempstat.indexOf("旷课")!=-1){  
+        list[i].state = that.data.process_state['旷课'];  
+    } else{
+      list[i].state = that.data.process_state['未知'];  
+    } 
             }
             that.setData({
               'list': list,

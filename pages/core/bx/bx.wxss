@@ -1,7 +1,7 @@
 /**bx.wxss**/
 .container{
     background-color: #f7f7f7;
-    padding-top: 200rpx;
+    padding-top: 15rpx;
 }
 .service-nav{
     position: fixed;
@@ -102,7 +102,7 @@
     color: #ffcb63;
 }
 .process-state-accepted{
-    color: #73b4ef;
+    color: #09bb07;
 }
 .process-state-dispatched{
     color: #e78ab0;
