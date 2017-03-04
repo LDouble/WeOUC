@@ -20,8 +20,8 @@
     <view class="describe" wx:if="{{!showLog}}">
         <text class="desc-title">简介</text>
         <view class="desc-list">
-          <text class="desc-list-item">官网：https://yicodes.com</text>
-          <text class="desc-list-item">Github：https://github.com/cncoder</text>
+          <text class="desc-list-item">官网：https://yicodes.com/wemysise/</text>
+          <text class="desc-list-item">Github：https://github.com/cncoder/wemysise</text>
         </view>
         <text class="desc-content">We华软是一款微信小程序，由华软json工作室（学生技术组织/团队）开发。有别于公众号的的一种请全新连接用户与服务的方式，无需下载与安装即可在微信内被便捷地获取和传播，同时致力于提供更加出色的体验。</text>
         <text class="desc-content">We华软是碎片化、一站式、一体化校园移动门户，适用于学生，集课表、成绩、考试、资讯等功能于一身。</text>

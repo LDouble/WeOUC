@@ -93,3 +93,68 @@
 .cj-info-socre{
     padding-left: 100rpx;
 }
+
+.help {
+  position: fixed;
+  z-index: 100;
+  top: 150rpx;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 80%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 50px rgba(22,22,22,.35);
+  transform: translate3d(0,-400rpx,0);
+}
+.box-hd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  border-bottom: 1px solid #eee;
+}
+.box-title {
+  font-size: 13pt;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 10rpx;
+}
+.box-close {
+  position: absolute;
+  right: 20rpx;
+  width: 35rpx;
+  height: 35rpx;
+  padding: 15rpx;
+}
+.box-bd {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15rpx 40rpx 30rpx;
+}
+.help-q {
+  color: #999;
+  font-size: 11pt;
+  line-height: 200%;
+  margin-top: 5rpx;
+}
+.help-a {
+  text-indent: 1em;
+  line-height: 160%;
+  display: flex;
+  flex-direction: column;
+}
+.help-a text{
+  word-break: break-all;
+}

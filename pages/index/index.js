@@ -18,7 +18,9 @@ Page({
       { '15 - 16 节': '20:30 - 21:50' },
     ],
     core: [
-      { id: 'kb', name: '课表查询', disabled: true, teacher_disabled: false, offline_disabled: true }
+      { id: 'kb', name: '课表查询', disabled: true, teacher_disabled: false, offline_disabled: true },
+      { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
+      { id: 'bx', name: '考勤信息', disabled: false, teacher_disabled: false, offline_disabled: true }
     ],
     card: {
       'kb': {
@@ -175,7 +177,7 @@ Page({
       url: app._server + '/mywebapp/kebiao?openid=' + app.openid,
       success: function (res) {
         if (res.data[0].status < 40000) {
-          wx.hideNavigationBarLoading();
+          
           app.today = parseInt(new Date().getDay());
           var today = app.today;
           var stuclass = JSON.parse(res.data[0].data);
@@ -186,6 +188,9 @@ Page({
       },
       fail: function () {
         app.showErrorModal("服务器连接失败", "请检查网络连接")
+      },
+      complete:function(){
+        wx.hideNavigationBarLoading();
       }
     })
   },

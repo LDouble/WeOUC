@@ -62,6 +62,7 @@ Page({
       return false;
     }
     app.showLoadToast('绑定中');
+    wx.showNavigationBarLoading();
     wx.request({
       url: app._server + '/mywebapp/login?username=' + _this.data.userid + '&password=' + _this.data.passwd + '&logincode=' + app.logincode,
       success: function (res) {
@@ -69,11 +70,7 @@ Page({
         console.log(res.data[0])
         //小于40000则登陆成功
         if (res.data[0].status < 40000) {
-          wx.showToast({
-            title: '请稍后',
-            icon: 'success',
-            duration: 1000
-          });
+          
           //清除缓存
           //app.cache = {};
           //wx.clearStorage();
@@ -92,9 +89,9 @@ Page({
           //询问用户跳转的页面
           setTimeout(function () {
             wx.showModal({
-              title: '登陆成功',
-              content: '是否查看个人信息',
-              cancelText: '跳回主页',
+              title: '连接服务器成功',
+              content: '是否授权登陆mysie？',
+              cancelText: '否',
               confirmText: '是',
               success: function (res) {
                 if (res.confirm) {
@@ -102,9 +99,9 @@ Page({
                     url: '/pages/more/more'
                   })
                 } else {
-                  wx.switchTab({
-                    url: '/pages/index/index'
-                  })
+                  _this.showErrorModal('同意授权才可以登陆噢~~', '授权失败');
+                  _this.getlogincode();
+                  return false;
                 }
               }
             });
@@ -121,6 +118,9 @@ Page({
         console.log(res)
         app.showErrorModal('请检查网络', '服务器连接失败!');
         _this.getlogincode();
+      },
+      complete: function (){
+       wx.hideNavigationBarLoading();
       }
     });
   },

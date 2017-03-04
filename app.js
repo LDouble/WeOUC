@@ -10,6 +10,7 @@ App({
     var _this = this;
     //读取缓存
     try {
+      
       var data = wx.getStorageInfoSync();
       if (data && data.keys.length) {
         data.keys.forEach(function (key) {

@@ -18,7 +18,6 @@ Page({
     }
   },
   onShow: function () {
-    wx.showNavigationBarLoading();
     console.log(app._user.is_bind)
     var _this = this;
     this.getData();
@@ -31,14 +30,12 @@ Page({
       _this.setData({ openid: app.openid });
       _this.getStuinfo();
     }
-
-    wx.hideNavigationBarLoading();
-
+    app._user.we=_this.data.stuinfo;
   },
   //连接服务器获取学生信息内容
   getStuinfo: function () {
     var _this = this;
-    
+    wx.showNavigationBarLoading();
     wx.request({
       url: app._server + '/mywebapp/stuinfo?openid=' + _this.data.openid,
       success: function (res) {
@@ -48,12 +45,20 @@ Page({
           _this.setData({ stuinfo: stuinfo });
           wx.setStorageSync('stuinfo', stuinfo)
         }
+        else{
+          if(res.data[0].status >= 50000){
+            app.showErrorModal("请稍后再打开此页面", res.data[0].data)
+          }
+          else{
+            app.showErrorModal("请稍后再打开此页面，或者联系客服", "客户端异常")
+          }
+        }
       },
       fail: function () {
         app.showErrorModal("服务器连接失败", "请检查网络连接")
       },
       complete: function (){
-        wx.hideNavigationBarLoading();
+       wx.hideNavigationBarLoading();
       }
     })
   },
