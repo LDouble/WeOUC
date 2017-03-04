@@ -18,16 +18,23 @@ Page({
   //下拉更新
   onPullDownRefresh: function(){
     this.getData();
+    wx.showToast({
+        title: '刷新成功',
+        icon: 'success',
+        duration: 1500
+      });
+      wx.stopPullDownRefresh();
   },
   onLoad: function(){
     this.getData();
   },
   getData: function(){
     var that = this;
-    if(!app.openid){
+    if(app.openid==''||app.openid==null){
       that.setData({
         remind: '未绑定'
       });
+      console.log('false');
       return false;
     }
     // 发送请求
@@ -82,13 +89,6 @@ Page({
         wx.stopPullDownRefresh();
       }
     });
-  },
-  convertHtmlToText: function(inputText){
-    var returnText = "" + inputText;
-    returnText = returnText.replace(/<\/?[^>]*>/g, '').replace(/[ | ]*\n/g, '\n').replace(/ /ig, '')
-                  .replace(/&mdash/gi,'-').replace(/&ldquo/gi,'“').replace(/&rdquo/gi,'”');
-    return returnText;
-  }
-  
+  } 
 });
 
