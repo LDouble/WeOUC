@@ -3,6 +3,7 @@ var app = getApp();
 module.exports.ipage = {
   data: {
     remind: "",
+    settitle: "",
     id: "",
     title: "",    // 新闻标题
     date: "",     // 发布日期

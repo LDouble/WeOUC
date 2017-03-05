@@ -13,8 +13,10 @@
           <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
       </view>
       <view class="bd">
+      <view class="contact-box">
       <contact-button class="contact-help" type="default-light" size="22" session-from="weapp"></contact-button>
  <text class="contact-text">联系客服</text>
+ </view>
         <form class="login-form">
           <view class="input-group {{userid_focus ? 'active' : ''}}">
             <text class="input-label">帐号</text>

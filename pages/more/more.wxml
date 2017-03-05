@@ -59,10 +59,10 @@
     </navigator>
   </view>
 
- 
+<view class="contact-box">
 <contact-button class="contact-help" type="default-light" size="22" session-from="weapp"></contact-button>
  <text class="contact-text">联系客服</text>
-
+</view>
 
 
   <view wx:if="{{is_bind}}" class="login-btn" bindtap="delbind">

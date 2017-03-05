@@ -88,7 +88,7 @@ Page({
               console.log(res)
               if (res.data.status === 20010) {
                 console.log('发布成功');
-                var text = '注意:为了减少不必要的信息流，此条动态将会下一个凌晨3点被删除,您可通过点开资讯头条查看你发送的新鲜事。';
+                var text = '一般在两分钟内即会显示到资讯页面。注意:为了减少不必要的信息流，此条动态将会在下一个凌晨3点被删除,';
                 wx.showModal({
                   title: '发布成功',
                   content: text,

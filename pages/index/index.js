@@ -84,7 +84,7 @@ Page({
       //this.getCardData();
       
       if (wx.getStorageSync('stuclass') === '') {
-      console.log("onshow stuclass获取的缓存为空");
+      //console.log("onshow stuclass获取的缓存为空");
       //重定向
       _this.setData({remind:'加载中'});
        _this.setData({'user': {
@@ -104,13 +104,13 @@ Page({
   onShow: function () {
     var _this = this;
     if (app.openid === ''||app.openid ===null) {
-      console.log("onshow openid获取的缓存为空");
+      //console.log("onshow openid获取的缓存为空");
       wx.navigateTo({
         url: '/pages/more/login'
       });
     }
     if (wx.getStorageSync('stuclass') === '') {
-      console.log("onshow stuclass获取的缓存为空");
+      //console.log("onshow stuclass获取的缓存为空");
       //重定向
       _this.setData({remind:'加载中'});
        _this.setData({'user': {
@@ -122,7 +122,7 @@ Page({
     else {
       stuclass = wx.getStorageSync('stuclass')
       var stuclass = JSON.parse(stuclass);
-      console.log(stuclass);
+      //console.log(stuclass);
        _this.setData({'user': {
         'is_bind': true
       }});
@@ -144,26 +144,36 @@ Page({
     var today = app.today-1;
     console.log("目前星期：" + app.today);
     console.log(stuclass)
+    //计算没课节数
+    var noclassnum=0;
     var strTem = {};  // 临时变量
+    //周末都是没课滴
+    if(app.today===0||app.today===6){
+       _this.setData({ nothingclass: true });
+    }else{
       for (var value in stuclass) {
-        if(stuclass[value].classes[today]==null){
-          _this.setData({ nothingclass: true });
-          break;
-        }
+        //console.log("第星期"+today+'第'+value+'节');
+        
         var todaydata = stuclass[value].classes[today];
-        console.log(todaydata);
+        
         var arrayweek = [];
         arrayweek = todaydata.weeks;
-        console.log('arrayweek的值'+arrayweek);
+        //console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
         if (app.in_array(arrayweek)) {
           strTem[value].class = stuclass[value].classes[today];
           strTem[value].classtime = stuclass[value].time;
         }
         else{
+          noclassnum++;
           continue;
         }
       };
+    }
+      //如果没课的数量是8节那么当天没课
+      if(noclassnum==stuclass.length){
+        _this.setData({ nothingclass: true });
+      }
       _this.setData({ stuclass: strTem });
       _this.setData({
         'remind': ''

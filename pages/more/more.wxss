@@ -112,22 +112,23 @@
   border-radius: 5px;
   margin: 20rpx 3%;
 }
+.contact-box {
+  margin-right: 35rpx; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 .contact-help {
   width: 65rpx;
   height: 65rpx;
   background: #09BB07;
   -webkit-border-radius: 65rpx;
   border-radius: 65rpx;
-  padding-top: 15rpx;
-  padding-left: 15rpx;
-  margin:0px 40rpx 0rpx auto;
+  padding: 18rpx 0rpx 0rpx 18rpx;
 }
 .contact-text {
-  flex: 1;
-  padding-top: 10rpx;
-  margin-top: -10rpx;
-  padding-left: 10rpx;
-  margin:0px 40rpx 0rpx auto;
+  padding-right: 5rpx;
   font-size: 8pt;
   color: #09BB07;
 }

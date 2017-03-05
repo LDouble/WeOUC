@@ -65,8 +65,8 @@ Page({
   delbind: function () {
     setTimeout(function () {
       wx.showModal({
-        title: '切换绑定',
-        content: '是否确认解除绑定,可解决数据不同步、异常等问题',
+        title: '切换绑定？',
+        content: '是否确认解除绑定,可解决数据不同步、异常等问题。为了数据安全，系统不允许频繁更换mysise账号，即与此微信账号解绑需要数小时生效，期间再次绑定仍默认登陆当前mysise账号。',
         cancelText: '点错了',
         confirmText: '是',
         success: function (res) {

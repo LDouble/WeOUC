@@ -66,6 +66,11 @@ Page({
     wx.request({
       url: app._server + '/mywebapp/login?username=' + _this.data.userid + '&password=' + _this.data.passwd + '&logincode=' + app.logincode,
       success: function (res) {
+        wx.showToast({
+              title: '请稍后...',
+              icon: 'success',
+              duration: 1000
+            });
         console.log("登陆请求成功输出的" + app.logincode);
         console.log(res.data[0])
         //小于40000则登陆成功

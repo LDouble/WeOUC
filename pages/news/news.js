@@ -72,7 +72,7 @@ Page({
   onReachBottom: function(){
     var _this = this;
     _this.setData({
-      'active.remind': '————有底线的小程序————'
+      'active.remind': '————有底线的小程序😆————'
     })
   },
   //获取新闻列表
@@ -101,6 +101,9 @@ Page({
         icon: 'success',
         duration: 1500
       });
+      _this.setData({
+          'active.remind': '——没有更多啦😆——'
+        });
         }else{
           var j=0;
           for(var i=size;i<size+tempblog_size;i++){
@@ -114,7 +117,7 @@ Page({
       });
       app.saveCache('blogdata',blogdata);
       _this.setData({
-          'active.remind': '————有底线的小程序————',
+          'active.remind': '————做一个有底线的小程序😆————',
           'active.data': blogdata,
         });
         }
