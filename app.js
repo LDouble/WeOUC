@@ -197,7 +197,7 @@ App({
   util: require('./utils/util'),
   key: function (data) { return this.util.key(data) },
   cache: {},
-  _server: 'https://wxapp.yicodes.com',
+  _server: 'https://www.baidu.com',
   _user: {
     //微信数据
     wx: {},
