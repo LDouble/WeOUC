@@ -4,6 +4,7 @@ var app = getApp();
 Page({
   data: {
     remind: '',
+    thisweek: '',
     nothingclass: false,
     stuclass: null,
     _days: ['一','二','三','四','五'],
@@ -13,17 +14,19 @@ Page({
       { begin: '9:00', end: '10:20', beginTop: 0, endTop: 200 },
       { begin: '10:21', end: '10:39', beginTop: 204, endTop: 204 },
       { begin: '10:40', end: '12:00', beginTop: 208, endTop: 408 },
-      { begin: '12:01', end: '13:59', beginTop: 414, endTop: 414 },
-      { begin: '14:00', end: '15:20', beginTop: 420, endTop: 620 },
-      { begin: '15:21', end: '15:29', beginTop: 624, endTop: 624 },
-      { begin: '15:30', end: '16:50', beginTop: 628, endTop: 828 },
-      { begin: '16:51', end: '16:59', beginTop: 834, endTop: 834 },
-      { begin: '17:00', end: '18:20', beginTop: 840, endTop: 1040 },
-      { begin: '18:21', end: '18:59', beginTop: 1044, endTop: 1044 },
-      { begin: '19:00', end: '20:20', beginTop: 1048, endTop: 1248 },
-      { begin: '20:21', end: '20:29', beginTop: 1254, endTop: 1254 },
-      { begin: '20:30', end: '21:50', beginTop: 1258, endTop: 1458 },
-      { begin: '21:51', end: '23:59', beginTop: 1462, endTop: 1662 },
+      { begin: '12:01', end: '12:29', beginTop: 414, endTop: 414 },
+      { begin: '12:30', end: '13:50', beginTop: 420, endTop: 620 },
+      { begin: '13:51', end: '13:59', beginTop: 624, endTop: 624 },
+      { begin: '14:00', end: '15:20', beginTop: 628, endTop: 828 },
+      { begin: '15:21', end: '15:29', beginTop: 834, endTop: 834 },
+      { begin: '15:30', end: '16:50', beginTop: 840, endTop: 1040 },
+      { begin: '16:51', end: '16:59', beginTop: 1044, endTop: 1044 },
+      { begin: '17:00', end: '18:20', beginTop: 1048, endTop: 1248 },
+      { begin: '18:21', end: '18:59', beginTop: 1254, endTop: 1254 },
+      { begin: '19:00', end: '20:20', beginTop: 1258, endTop: 1458 },
+      { begin: '20:21', end: '20:29', beginTop: 1462, endTop: 1662 },
+      { begin: '20:30', end: '21:50', beginTop: 1666, endTop: 1666 },
+      { begin: '21:51', end: '23:59', beginTop: 1700, endTop: 1900 },
     ],
     timelineTop: 0,
     scroll: {
@@ -56,6 +59,13 @@ Page({
   },
   onLoad: function(options){
     var _this = this;
+    var thisweek=app.thisweek-app.beginweek;
+    var today=app.today-1;
+    _this.setData({
+        today : today,
+        toweek: thisweek,
+        week: thisweek
+      });
     // onLoad时获取一次课表
     var id = app.openid;
     if(!id){

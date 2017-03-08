@@ -72,9 +72,10 @@
                 <view class="kb-cards-ctn blur-area {{blur?'blur':''}}">
                     <!-- 每一列为一组 -->
                     <view class="kb-cards-column" wx:for="{{lessons}}" wx:key="{{day}}" wx:for-item="day_lesson" wx:for-index="day">
-                
+          
                         <!-- today 0周一,1周二 -->
-                        <block wx:if="{{(today===day) && (toweek == week)}}">
+                        <block wx:if="{{(today==day) && (toweek == week)}}">
+                       
                             <view class="kb-bg" style="background:-webkit-gradient(linear,left top,left bottom,from(#eff7ff),color-stop({{(timelineTop+4)/1260}}, #8cc4ff),to(#eff7ff));"></view>
                             <view class="kb-timeline" style="display:block;top:{{timelineTop}}rpx"></view>
                         </block>
@@ -122,7 +123,7 @@
             <view class="kb-info-title" wx:if="{{!blur}}">
                 <block wx:if="{{week != '*'}}">
                     <text class="kb-info-week" wx:if="{{toweek==week}}">星期{{_days[today]}}</text>
-                    <text class="kb-info-week" wx:else bindtap="returnCurrent">返回{{toweek}}周</text>
+                    <text class="kb-info-week" wx:else bindtap="returnCurrent">返回第{{toweek}}周</text>
                     <view class="kb-swipers" wx:if="{{week != '*'}}">
                         <view class="kb-swiper-mask-left" data-target="week" data-direction="left" bindtap="swiperChangeBtn">
                             <image src="/images/core/common/left_g.png"></image>
@@ -140,7 +141,7 @@
                     </view>
                 </block>
                 <block wx:else>
-                    <text class="kb-info-week">{{toweek}}周周{{_days[today]}}</text>
+                    <text class="kb-info-week">第{{toweek}}周周{{_days[today]}}</text>
                     <text class="kb-term">{{term}}</text>
                 </block>
                 <!--切换视图-->
