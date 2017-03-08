@@ -143,7 +143,7 @@ Page({
     //这个today是数组下标，所以减一
     var today = app.today-1;
     console.log("目前星期：" + app.today);
-    console.log(stuclass)
+    //console.log(stuclass)
     //计算没课节数
     var noclassnum=0;
     var strTem = {};  // 临时变量
@@ -160,7 +160,7 @@ Page({
         arrayweek = todaydata.weeks;
         //console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
-        console.log(arrayweek);
+        //console.log(arrayweek);
         if (app.in_array(arrayweek)) {
           strTem[value].class = stuclass[value].classes[today];
           strTem[value].classtime = stuclass[value].time;

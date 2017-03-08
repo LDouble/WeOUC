@@ -160,7 +160,7 @@ App({
 
     // 不是数组返回错误
     if (arr == null || arr == '' || arr === []) {
-      console.log('不是数组返回错误');
+      //console.log('不是数组返回错误');
       return false;
     }
     if (_this.thisweek == '' || null) {
@@ -172,10 +172,10 @@ App({
     if(thisweek<=1){
       thisweek=1;
     }
-    console.log(thisweek);
+    //console.log(thisweek);
     for (var i = 0, k = arr.length; i < k; i++) {
       if (thisweek == arr[i]) {
-        console.log("存在")
+        //console.log("存在")
         return true;
       }
     }

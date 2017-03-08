@@ -266,24 +266,26 @@ Page({
     }
     // 根据获取课表
     var _this = this, data = {
-      openid: app._user.openid,
-      id: id,
+      openid: app.openid
     };
-    if(app._user.teacher && !_this.data.name){ data.type = 'teacher'; }
-    //判断并读取缓存
-    if(app.cache.kb && !_this.data.name){ kbRender(app.cache.kb); }
+    
+
     //课表渲染
     function kbRender(_data){
-      var colors = ['red','green','purple','yellow'];
+      var colors = ['green','red','purple','yellow'];
       var i,ilen,j,jlen,k,klen;
       var colorsDic = {};
-      var _lessons = _data.lessons;
+      var _lessons = _data;
       var _colors = colors.slice(0); //暂存一次都未用过的颜色
+      console.log(_data);
       // 循环课程
       for( i = 0, ilen = _lessons.length; i < ilen; i++){
+        
         for( j = 0, jlen = _lessons[i].length; j < jlen; j++){
           for( k = 0, klen = _lessons[i][j].length; k < klen; k++){
-            if (_lessons[i][j][k] && _lessons[i][j][k].class_id) {
+            
+            if (_lessons[i][j][k] && _lessons[i][j][k].classNum) {
+              console.log(_lessons[i][j][k]);
               // 找出冲突周数,及课程数
               var conflictWeeks = {};
               _lessons[i][j][k].weeks.forEach(function(e){
@@ -297,7 +299,7 @@ Page({
               _lessons[i][j][k].klen = klen;
               _lessons[i][j][k].xf_num = _lessons[i][j][k].xf ? parseFloat(_lessons[i][j][k].xf).toFixed(1) : '';
               // 为课程上色
-              if (!colorsDic[_lessons[i][j][k].class_id]) { //如果该课还没有被上色
+              if (!colorsDic[_lessons[i][j][k].classNum]) { //如果该课还没有被上色
                 var iColors = !_colors.length ? colors.slice(0) : _colors.slice(0); // 本课程可选颜色
                 if(!_colors.length){ //未用过的颜色还没用过，就优先使用
                   // 剔除掉其上边和左边的课程的可选颜色，如果i!==0则可剔除左边课程颜色，如果j!==0则可剔除上边课程颜色
@@ -335,10 +337,11 @@ Page({
           }
         }
       }
-      var today = parseInt(_data.day);  //0周日,1周一
+      var today = parseInt(app.today);  //0周日,1周一
+      console.log("今天星期"+today)
       today = today === 0 ? 6 : today-1; //0周一,1周二...6周日
-      var week = _data.week;
-      var lessons = _data.lessons;
+      var week = _this.data.week;
+      var lessons = _lessons;
       //各周日期计算
       var nowD = new Date(),
           nowMonth = nowD.getMonth() + 1,
@@ -356,35 +359,34 @@ Page({
         return idates;
       });
       _this.setData({
-        today : today,
-        week : week,
-        toweek: week,
         lessons : lessons,
         dates: dates,
         remind: ''
       });
     }
 
+
     //读取课表缓存
     var stuclass = wx.getStorageSync('stuclass')
       var stuclass = JSON.parse(stuclass);
-      console.log(stuclass);
-      var strTem={};
+      //console.log(stuclass);
+      var strTem=[];
       for(var i=0;i<5;i++){
-        var todaydata ={};
-        console.log("星期"+i+"课程")
+        var todaydata =[];
+        //console.log("星期"+i+"课程")
         for (var value in stuclass) {
-          console.log("第"+value+"节：");
-          todaydata[value]={};
+          //console.log("第"+value+"节：");
+          todaydata[value]=[];
          todaydata[value][0]=stuclass[value].classes[i];
-         console.log(todaydata[value]);
+         //console.log(todaydata[value]);
       }
       strTem[i] = todaydata;
-      console.log(strTem[i]);
+      //console.log(strTem[i]);
       }
       
-      _this.setData({ lessons: strTem});
-      todayclass();
+      //_this.setData({ lessons: strTem});
+      kbRender(strTem);
+      //todayclass();
       function todayclass(){
         app.today = parseInt(new Date().getDay());
     //这个today是数组下标，所以减一
