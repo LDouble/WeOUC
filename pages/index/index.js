@@ -160,6 +160,7 @@ Page({
         arrayweek = todaydata.weeks;
         //console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
+        console.log(arrayweek);
         if (app.in_array(arrayweek)) {
           strTem[value].class = stuclass[value].classes[today];
           strTem[value].classtime = stuclass[value].time;

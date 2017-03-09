@@ -56,34 +56,28 @@ Page({
   },
   onLoad: function(options){
     var _this = this;
-    app.loginLoad(function(){
-      _this.loginHandler.call(_this, options);
-    });
-  },
-  //让分享时自动登录
-  loginHandler: function(options){
-    var _this = this;
-    _this.setData({
-      'term': app._time.term,
-      'teacher': app._user.teacher
-    });
     // onLoad时获取一次课表
-    var id = options.id || app._user.we.info.id;
+    var id = app.openid;
     if(!id){
       _this.setData({
         remind: '未绑定'
       });
       return false;
     }
-    if(options.id && options.name){
-      _this.setData({
-        name: options.name
-      });
-    }
     _this.get_kb(id);
+  },
+  //让分享时自动登录
+  loginHandler: function(options){
+    console.log('让分享时自动登录');
+    var _this = this;
+    _this.setData({
+      'term': app._time.term,
+      'teacher': app._user.teacher
+    });  
   },
   onShow: function(){
     var _this = this;
+    
     // 计算timeline时针位置
     function parseMinute(dateStr){ return dateStr.split(':')[0]*60 + parseInt(dateStr.split(':')[1]); }
     function compareDate(dateStr1,dateStr2){
@@ -252,6 +246,7 @@ Page({
     _this.setData(data);
   },
   get_kb: function(id){
+    console.log('课表渲染函数');
     //数组去除指定值
     function removeByValue(array,val){
       for(var i=0,len=array.length;i<len;i++) {
@@ -359,41 +354,65 @@ Page({
         remind: ''
       });
     }
-    wx.showNavigationBarLoading();
-    //获取课表
-    wx.request({
-      url: "https://we.cqu.pt/api/get_kebiao.php",
-      method: 'POST',
-      data: app.key(data),
-      success: function(res) {
-        if (res.data && res.data.status === 200){
-          var _data = res.data.data;
-          if(_data) {
-            if(!_this.data.name){
-              //保存课表缓存
-              app.saveCache('kb', _data);
-            }
-            kbRender(_data);
-          }else{ _this.setData({ remind: '暂无数据' }); }
 
-        }else{
-          app.removeCache('kb');
-          _this.setData({
-            remind: res.data.message || '未知错误'
-          });
-        }
-      },
-      fail: function(res) {
-        if(_this.data.remind == '加载中'){
-          _this.setData({
-            remind: '网络错误'
-          });
-        }
-        console.warn('网络错误');
-      },
-      complete: function() {
-        wx.hideNavigationBarLoading();
+    //读取课表缓存
+    var stuclass = wx.getStorageSync('stuclass')
+      var stuclass = JSON.parse(stuclass);
+      console.log(stuclass);
+      var strTem={};
+      for(var i=0;i<5;i++){
+        var todaydata ={};
+        console.log("星期"+i+"课程")
+        for (var value in stuclass) {
+          console.log("第"+value+"节：");
+          todaydata[value]={};
+         todaydata[value][0]=stuclass[value].classes[i];
+         console.log(todaydata[value]);
       }
-    });
+      strTem[i] = todaydata;
+      console.log(strTem[i]);
+      }
+      
+      _this.setData({ lessons: strTem});
+      todayclass();
+      function todayclass(){
+        app.today = parseInt(new Date().getDay());
+    //这个today是数组下标，所以减一
+    var today = app.today-1;
+    console.log("目前星期：" + app.today);
+    console.log(stuclass)
+    //计算没课节数
+    var noclassnum=0;
+    var strTem = {};  // 临时变量
+    //周末都是没课滴
+    if(app.today===0||app.today===6){
+       _this.setData({ nothingclass: true });
+    }else{
+      for (var value in stuclass) {
+        //console.log("第星期"+today+'第'+value+'节');
+        
+        var todaydata = stuclass[value].classes[today];
+        
+        var arrayweek = [];
+        arrayweek = todaydata.weeks;
+        //console.log('arrayweek的值'+arrayweek);
+        strTem[value] = {};
+        console.log(arrayweek);
+        if (app.in_array(arrayweek)) {
+          strTem[value].class = stuclass[value].classes[today];
+          strTem[value].classtime = stuclass[value].time;
+        }
+        else{
+          noclassnum++;
+          continue;
+        }
+      };
+    }
+      //如果没课的数量是8节那么当天没课
+      if(noclassnum==stuclass.length){
+        _this.setData({ nothingclass: true });
+      }
+      
+      }
   }
 });
