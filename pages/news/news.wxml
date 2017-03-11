@@ -14,10 +14,11 @@
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
     <block wx:for="{{active.data}}" wx:key="item.blogid">
-      <navigator url="/pages/news/new/new_detail?type=new&id={{index}}">
-        <view class="list-item oa">
+      <navigator url="/pages/news/{{(active.type)=='all'?'new':(active.type)}}/{{(active.type)=='all'?'new':(active.type)}}_detail?type={{active.type}}&id={{index}}">
+        <view class="list-item {{(active.type)=='all'?'oa':(active.type)}}">
           <view class="list-item-left">
-            <text class="list-item-title">{{item.pubissue}}</text>
+          <text class="list-item-title" wx:if="{{item.title}}">{{item.title}}</text>
+            <text class="list-item-title" wx:else>{{item.pubissue}}</text>
             <text class="list-item-time">发布者：{{item.nickname}} </text>
           </view>
           <image class="list-item-icon" src="/images/news/oa.png"></image>

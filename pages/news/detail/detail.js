@@ -46,12 +46,13 @@ module.exports.ipage = {
   contentHandler: function(options){
     var _this = this;
     var id=options.id;
-    var content=wx.getStorageSync('blogdata');
+    var type=options.type;
+    var content=wx.getStorageSync(type);
     content=content[id];
     _this.setData({
       'type': options.type,
       id: options.id,
-      title: content.blogid,
+      title: content.title,
       author: content.nickname,
       date: content.pubtime,
       content: content.pubissue

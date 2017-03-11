@@ -8,6 +8,7 @@ Page({
     stuinfo: null,
   },
   onLoad: function () {
+    app.getUser();
     if (app.openid === ''||app.openid ===null) {
       wx.navigateTo({
         url: '/pages/more/login'

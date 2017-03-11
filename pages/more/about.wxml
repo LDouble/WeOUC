@@ -22,6 +22,7 @@
         <view class="desc-list">
           <text class="desc-list-item">官网：https://yicodes.com/wemysise/</text>
           <text class="desc-list-item">Github：https://github.com/cncoder/wemysise</text>
+          <text class="desc-list-item">商业合作：romennts@gmail.com</text>
         </view>
         <text class="desc-content">We华软是一款微信小程序，由华软json工作室（学生技术组织/团队）开发。有别于公众号的的一种请全新连接用户与服务的方式，无需下载与安装即可在微信内被便捷地获取和传播，同时致力于提供更加出色的体验。</text>
         <text class="desc-content">We华软是碎片化、一站式、一体化校园移动门户，适用于学生，集课表、成绩、考试、资讯等功能于一身。</text>
@@ -34,19 +35,16 @@
     <view class="log-list" wx:else>
       <view class="describe">
           <view class="desc-title">
-            <text class="desc-v">v0.1.2 公测版</text>
+            <text class="desc-v">v2.0 公测版</text>
             <text class="desc-time">2017.02.10</text>
           </view>
           <text class="desc-content">修复BUG</text>
           <view class="desc-list">
-            <text class="desc-list-item">修复ios无法显示电费查询截至日期的问题</text>
             <text class="desc-list-item">修复首页卡片都无数据导致无法正常使用的问题</text>
           </view>
           <text class="desc-content">优化完善</text>
           <view class="desc-list">
-            <text class="desc-list-item">新增反馈记录列表，能够即时查看反馈回复及动态</text>
             <text class="desc-list-item">完善缓存机制，异常情况即时清除缓存</text>
-            <text class="desc-list-item">修改资讯类别导航颜色状态，避免灰色误导</text>
             <text class="desc-list-item">涉及隐私不外泄的原因，禁止学生查询的分享</text>
             <text class="desc-list-item">考试安排新增支持下拉刷新</text>
           </view>
@@ -105,7 +103,6 @@
           <text class="desc-content">优化完善</text>
           <view class="desc-list">
             <text class="desc-list-item">表单验证提示优化</text>
-            <text class="desc-list-item">物业报修服务申报按钮再度优化</text>
             <text class="desc-list-item">强化缓存机制，根据版本号判断是否更新从而清除缓存</text>
           </view>
       </view>
@@ -174,7 +171,7 @@
         <image src="/images/more/lanshan.png"></image>
         <text>json工作室</text>
     </view>
-    <text>感谢两位后端大神@lxw @tdtcn帮我完成服务器交换的事情</text>
+    <text>特别感谢两位后端大神@lxw @tdtcn完成服务器交换的事情</text>
     <text>Copyright @ {{year}} All Rights Reserved</text>
   </view>
 </view>

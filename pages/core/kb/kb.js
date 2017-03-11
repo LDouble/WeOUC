@@ -7,7 +7,7 @@ Page({
     thisweek: '',
     nothingclass: false,
     stuclass: null,
-    _days: ['一','二','三','四','五'],
+    _days: ['一','二','三','四','五','六','日'],
     _weeks : ['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周','第九周','第十周','十一周','十二周','十三周','十四周','十五周','十六周','十七周','十八周','十九周','二十周'],    
     _time: [ //课程时间与指针位置的映射，{begin:课程开始,end:结束时间,top:指针距开始top格数}
       { begin: '0:00', end: '8:59', beginTop: -4, endTop: -4 },
@@ -124,16 +124,20 @@ Page({
   showDetail: function(e){
     // 点击课程卡片后执行
     var _this = this;
+    console.log(e);
     var week = _this.data.week;
     var dataset = e.currentTarget.dataset;
     var lessons = _this.data.lessons[dataset.day][dataset.wid];
+    console.log(lessons);
     var targetI = 0;
     lessons[dataset.cid].target = true;
-    if(week != '*'){
-      lessons = lessons.filter(function(e){
-        return e.weeks.indexOf(parseInt(week)) !== -1;
-      });
-    }
+    // if(week != '*'){
+      
+    //   lessons = lessons.filter(function(e){
+    //     console.log(week);
+    //     return e.weeks.indexOf(parseInt(week)) !== -1;
+    //   });
+    // }
     lessons.map(function(e,i){
       if(lessons.length === 1){
         e.left = 0;
@@ -277,7 +281,7 @@ Page({
       var colorsDic = {};
       var _lessons = _data;
       var _colors = colors.slice(0); //暂存一次都未用过的颜色
-      console.log(_data);
+      //console.log(_data);
       // 循环课程
       for( i = 0, ilen = _lessons.length; i < ilen; i++){
         
@@ -285,7 +289,7 @@ Page({
           for( k = 0, klen = _lessons[i][j].length; k < klen; k++){
             
             if (_lessons[i][j][k] && _lessons[i][j][k].classNum) {
-              console.log(_lessons[i][j][k]);
+              //console.log(_lessons[i][j][k]);
               // 找出冲突周数,及课程数
               var conflictWeeks = {};
               _lessons[i][j][k].weeks.forEach(function(e){
@@ -300,6 +304,7 @@ Page({
               _lessons[i][j][k].xf_num = _lessons[i][j][k].xf ? parseFloat(_lessons[i][j][k].xf).toFixed(1) : '';
               // 为课程上色
               if (!colorsDic[_lessons[i][j][k].classNum]) { //如果该课还没有被上色
+              console.log(_lessons[i][j][k].classNum);
                 var iColors = !_colors.length ? colors.slice(0) : _colors.slice(0); // 本课程可选颜色
                 if(!_colors.length){ //未用过的颜色还没用过，就优先使用
                   // 剔除掉其上边和左边的课程的可选颜色，如果i!==0则可剔除左边课程颜色，如果j!==0则可剔除上边课程颜色
@@ -327,11 +332,12 @@ Page({
                 // var iColor = iColors[Math.floor(Math.random()*iColors.length)];
                 var iColor = iColors[0];
                 _lessons[i][j][k].color = iColor;
-                colorsDic[_lessons[i][j][k].class_id] = iColor;
+                colorsDic[_lessons[i][j][k].classNum] = iColor;
                 if(_colors.length){ _colors = removeByValue(_colors, iColor); }
               } else {
                 //该课继续拥有之前所上的色
-                _lessons[i][j][k].color = colorsDic[_lessons[i][j][k].class_id];
+                console.log("该课继续拥有之前所上的色"+_lessons[i][j][k].classNum);
+                _lessons[i][j][k].color = colorsDic[_lessons[i][j][k].classNum];
               }
             }
           }
@@ -371,15 +377,21 @@ Page({
       var stuclass = JSON.parse(stuclass);
       //console.log(stuclass);
       var strTem=[];
-      for(var i=0;i<5;i++){
+      for(var i=0;i<7;i++){
         var todaydata =[];
         //console.log("星期"+i+"课程")
         for (var value in stuclass) {
           //console.log("第"+value+"节：");
           todaydata[value]=[];
          todaydata[value][0]=stuclass[value].classes[i];
-         //console.log(todaydata[value]);
+         //防止null对象错误 
+         if(stuclass[value].classes[i]==null){
+          //console.log("当日课程为空")
+          //console.log(todaydata[value][0]);
+          todaydata[value][0]='';
+         }
       }
+      
       strTem[i] = todaydata;
       //console.log(strTem[i]);
       }

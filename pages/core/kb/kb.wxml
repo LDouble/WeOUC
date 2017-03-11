@@ -157,7 +157,7 @@
                     <block>
                         <text wx:if="{{week != '*'}}" class="kb-info-week">{{toweek}}周周{{_days[targetDay]}}</text>
                         <text wx:else class="kb-info-week">星期{{_days[targetDay]}}</text>
-                        <text class="kb-lesson-time">{{targetWid*2+1}}-{{targetWid*2+targetLessons[targetI].number}}节</text>
+                        <text class="kb-lesson-time">{{targetWid*2+1}}-{{targetWid*2+2}}节</text>
                         <image class="kb-info-card-close" src="/images/core/common/down_w.png" bindtap="hideDetail"></image>
                     </block>
                 </view>
@@ -181,17 +181,17 @@
                                         <text class="info-item-value">{{item.teacher}}</text>（任课教师）
                                     </view>
                                     <view class="info-item">
-                                        <text class="info-item-value">{{item.place}}</text>（上课地点）
+                                        <text class="info-item-value">{{item.classRoom}}</text>（上课地点）
                                     </view>
                                     <view class="info-item">
-                                        <text class="info-item-value">{{item.all_week}}</text>（课程周数）
+                                        <text class="info-item-value">{{item.weeks}}</text>（课程周数）
                                     </view>
                                     <view class="info-item">
-                                        <text class="info-item-value">{{item.class_id}}</text>（教学班）
+                                        <text class="info-item-value">{{item.classNum}}</text>（教学班）
                                     </view>
                                     <view class="info-item">
-                                        <image class="info-item-icon" src="/images/core/xs.png"></image>
-                                        <navigator open-type="redirect" url="/pages/core/xs/xs?key=教学班:{{item.class_id}}">查看学生名单</navigator>
+                                  <!--            <image class="info-item-icon" src="/images/core/xs.png"></image>
+                                  <navigator open-type="redirect" url="/pages/core/xs/xs?key=教学班:{{item.class_id}}">查看学生名单</navigator> -->
                                     </view>
                                 </view>
                             </view>
@@ -207,6 +207,7 @@
                     <block wx:for="{{targetLessons}}" wx:key="{{cid}}" wx:for-index="cid" style="z-index:{{cid}};">
                         <swiper-item class="kb-info-card">
                             <view class="kb-info-card-content">
+                            <!--重叠课程处理 -->
                                 <view class="info-name">
                                     <text>{{item.name}}</text>
                                 </view>
@@ -215,23 +216,25 @@
                                         <text>{{item.type}}</text>
                                         <text wx:if="{{item.more && !teacher}}">{{item.more}}</text>
                                     </view> 
+
                                     <view class="info-list">
                                         <text class="info-text" wx:if="{{item.xf_num}}">{{item.xf_num}}</text>
                                         <view class="info-item">
                                             <text class="info-item-value">{{item.teacher}}</text>（任课教师）
                                         </view>
                                         <view class="info-item">
-                                            <text class="info-item-value">{{item.place}}</text>（上课地点）
+                                            <text class="info-item-value">{{item.classRoom}}</text>（上课地点）
                                         </view>
                                         <view class="info-item">
-                                            <text class="info-item-value">{{item.all_week}}{{item.number===3?' / 三节连上':''}}</text>（课程周数）
+                                            <text class="info-item-value">{{item.week}}{{item.number===3?' / 三节连上':''}}</text>（课程周数）
                                         </view>
                                         <view class="info-item">
-                                            <text class="info-item-value">{{item.class_id}}</text>（教学班）
+                                            <text class="info-item-value">{{item.classNum}}</text>（教学班）
                                         </view>
                                         <view class="info-item">
-                                            <image class="info-item-icon" src="/images/core/xs.png"></image>
-                                            <navigator open-type="redirect" url="/pages/core/xs/xs?key=教学班:{{item.class_id}}">查看学生名单</navigator>
+                              <!--               <image class="info-item-icon" src="/images/core/xs.png"></image>
+                                           <navigator open-type="redirect" url="/pages/core/xs/xs?key=教学班:{{item.class_id}}">查看学生名单</navigator>
+                                -->    
                                         </view>
                                     </view>
                                 </view>

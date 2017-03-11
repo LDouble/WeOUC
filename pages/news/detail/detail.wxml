@@ -9,7 +9,7 @@
   </view>
   <block wx:else>
     <view class="title">
-      <text>{{settitle}}</text>
+      <text>{{title}}</text>
     </view>
     <view class="info">
       <text wx:if="{{date}}">Date：{{date}}</text>

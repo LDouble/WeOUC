@@ -6,9 +6,9 @@ Page({
     page: 0,
     list: [
       { id: 0, 'type': 'all', name: '头条',storage:[], url: '/blog/getblog.do', enabled: {guest:false, student:true, teacher:true} },
-      { id: 1, 'type': 'jw', name: '教务公告',storage:[], url: '/blog/getblog.do', enabled: {guest:false, student:true, teacher:true} },
-      { id: 2, 'type': 'oa', name: 'OA公告',storage:[], url: '/blog/getblog.do', enabled: {guest:false, student:true, teacher:true} },
-      { id: 3, 'type': 'new', name: '校园周边',storage:[], url: '/blog/getblog.do', enabled: {guest:true, student:true, teacher:true} },
+      { id: 1, 'type': 'jw', name: '教务公告',storage:[], url: '/blog/getjwblog.do', enabled: {guest:false, student:true, teacher:true} },
+      { id: 2, 'type': 'oa', name: 'OA公告',storage:[], url: '/blog/getoablog.do', enabled: {guest:false, student:true, teacher:true} },
+      { id: 3, 'type': 'new', name: '校园周边',storage:[], url: '/blog/getnewsblog.do', enabled: {guest:true, student:true, teacher:true} },
     ],
     'active': {
       id: 0,
@@ -30,7 +30,7 @@ Page({
     }else{
       this.setData({
         user_type: 'guest',
-        'active.id': 5,
+        'active.id': 3,
         'active.type': 'new'
       });
     }
@@ -41,8 +41,8 @@ Page({
       'active.showMore': true,
       'active.remind': '下滑加载更多',
     });
-    var temp_blog_data=wx.getStorageSync('blogdata');
-    var temp_lastblogid=wx.getStorageSync('lastblogid');
+    var temp_blog_data=wx.getStorageSync('all');
+    var temp_lastblogid=wx.getStorageSync('allid');
     if(temp_blog_data== ''){
       console.log("首次使用blog功能")
       this.getNewsList();
@@ -57,6 +57,7 @@ Page({
     }
     console.log(this.data.active.data);
   },
+  
   //下拉更新
   onPullDownRefresh: function(){
     var _this = this;
@@ -78,18 +79,24 @@ Page({
   //获取新闻列表
   getNewsList: function(typeId){
     var _this = this;
-    var tempblog=_this.data.active.data;
+    typeId = typeId || _this.data.active.id;
+
+    var temptype=_this.data.list[typeId].type;
+    var tempblog=wx.getStorageSync(temptype);
     var tempblog_size=tempblog.length
+    var temp_lastblogid=wx.getStorageSync(temptype+'id');
+
     console.log(tempblog_size);
     console.log("当前请求的blogid"+_this.data.page);
-    typeId = typeId || _this.data.active.id;
     
+
+    console.log('当前请求的类型'+temptype);
     _this.setData({
-      'active.remind': '正在加载中'
+      'active.remind': '正在努力加载中'
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server  + _this.data.list[typeId].url + '?blogid='+_this.data.page+'&openid='+app.openid,
+      url: app._server  + _this.data.list[typeId].url + '?blogid='+temp_lastblogid+'&openid='+app.openid,
       method: 'GET',
       success: function(res){
         console.log(res)
@@ -97,12 +104,13 @@ Page({
         var size=res.data.size
         if(size==0){
           wx.showToast({
-        title: '亲，没有更多数据了噢~~',
+        title: '无更新~',
         icon: 'success',
         duration: 1500
       });
       _this.setData({
-          'active.remind': '——没有更多啦😆——'
+          'active.remind': '——没有更多啦😆——',
+          'active.data': tempblog,
         });
         }else{
           var j=0;
@@ -115,7 +123,8 @@ Page({
         icon: 'success',
         duration: 2000
       });
-      app.saveCache('blogdata',blogdata);
+      app.saveCache(temptype,blogdata);
+      
       _this.setData({
           'active.remind': '————做一个有底线的小程序😆————',
           'active.data': blogdata,
@@ -124,7 +133,7 @@ Page({
         
         var lastblogid=res.data.lastblogid;
         if(lastblogid>0){
-          app.saveCache('lastblogid',lastblogid);
+          app.saveCache(temptype+'id',lastblogid);
           _this.setData({
             'page': lastblogid
           });
@@ -162,6 +171,7 @@ Page({
       },
       'page': 0
     });
+    
     this.getNewsList(e.target.dataset.id);
   }
 });

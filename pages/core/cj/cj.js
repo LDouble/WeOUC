@@ -4,6 +4,7 @@ var app = getApp();
 Page({
   data: {
     remind: '加载中',
+    openid: '',
     clickcj: '',
     help_status: false,
     cjInfo : [
@@ -33,12 +34,18 @@ Page({
       });
     }
     _this.setData({
+      openid: app.openid,
       id: app._user.we.num,
       name: app._user.we.name,
       point: app._user.we.gradePoint
     });
+
+  },
+  onShow : function(){
+    var _this = this;
     //判断并读取缓存
-    if (wx.getStorageSync('cj') === '') {
+    console.log('cj onshow 执行')
+    if (wx.getStorageSync('cj') === ''||wx.getStorageSync('cj') === null) {
       console.log("onshow cj获取的缓存为空");
       //重定向
       _this.setData({remind:'加载中'});
@@ -54,17 +61,16 @@ Page({
       _this.cjRender(cj);
       
     }
-
   },
   getkscj : function(){
     var _this=this;
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server + "/mywebapp/chengji?openid="+app.openid,
+      url: app._server + "/mywebapp/chengji?openid="+this.data.openid,
       method: 'GET',
-      success: function(res) {
-        if(res.data[0].status < 40000) {
-          
+      success: function(res){
+         if(res.data[0].status < 40000) {
+          console.log(res.data[0].status);
           var _data = JSON.parse(res.data[0].data);
           console.log(_data);
           if(_data) {
@@ -79,9 +85,8 @@ Page({
             remind: res.data.message || '未知错误'
           });
         }
-
       },
-      fail: function(res) {
+      fail: function() {
         if(_this.data.remind == '加载中'){
           _this.setData({
             remind: '网络错误'
@@ -92,7 +97,7 @@ Page({
       complete: function() {
         wx.hideNavigationBarLoading();
       }
-    });
+    })
   },
   cjRender : function(_data){
       var _this=this;
