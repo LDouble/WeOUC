@@ -31,9 +31,11 @@
             <image class="login-help-img" src="/images/more/help.png"></image>
           </view>
         </form>
-        <view class="confirm-btn" bindtap="bind">
-            <text>确认绑定</text>
+        <form bindsubmit="bind" report-submit>
+        <view>
+          <button class="confirm-btn" formType="submit">确认绑定</button>
         </view>
+        </form>
       </view>
 
       <view class="help" id="help" wx:if="{{help_status}}" bindtap="tapHelp">

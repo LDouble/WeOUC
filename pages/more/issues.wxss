@@ -258,6 +258,7 @@
 }
 .input-group {
   align-items: center;
+  margin-top: 10rpx;
   padding: 10rpx;
   background: #fff;
   border: 2px solid #f4f4f4;

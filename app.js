@@ -4,8 +4,8 @@ App({
   today: '',
   logincode: '',
   openid: '',
-  beginweek: '9',
-  thisweek: '',
+  beginweek: '9',//开学那一天在这一年的周数，例如开学第一周应该是10
+  thisweek: '',//当天在这一年的周数
   onLaunch: function () {
     var _this = this;
     //读取缓存
@@ -53,6 +53,7 @@ App({
     var _this = this;
     var date = new Date();
     var thisweek = _this.getISOYearWeek(date);
+    console.log("这周的值是："+thisweek)
     _this.thisweek = thisweek;
   },
   //判断是否有登录信息，让分享时自动登录
@@ -87,7 +88,7 @@ App({
         }
       }
     });
-    console.log("appjsgetUser函数调用");
+    //console.log("appjsgetUser函数调用");
     if (!wx.getStorageSync("openid")) {
       wx.showToast({
         title: 'appjs未绑定',
@@ -168,14 +169,15 @@ App({
       var thisweek = _this.getISOYearWeek(date);
       _this.thisweek = thisweek;
     }
-    var thisweek = _this.thisweek-_this.beginweek;
-    if(thisweek<=1){
-      thisweek=1;
+    var classweek = _this.thisweek-_this.beginweek;
+    console.log("app的当前校历周数是："+classweek);
+    if(thisweek<=1&&thisweek>=-2){
+      classweek=1;
     }
-    //console.log(thisweek);
+    
     for (var i = 0, k = arr.length; i < k; i++) {
-      if (thisweek == arr[i]) {
-        //console.log("存在")
+      if (classweek == arr[i]) {
+        console.log("存在")
         return true;
       }
     }

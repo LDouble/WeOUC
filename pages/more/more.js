@@ -19,7 +19,7 @@ Page({
     }
   },
   onShow: function () {
-    console.log(app._user.is_bind)
+    //console.log(app._user.is_bind)
     var _this = this;
     this.getData();
     if (wx.getStorageSync('stuinfo')) {
@@ -41,7 +41,7 @@ Page({
       url: app._server + '/mywebapp/stuinfo?openid=' + _this.data.openid,
       success: function (res) {
         if (res.data[0].status < 40000) {
-          console.log(res.data[0].data);
+          //console.log(res.data[0].data);
           var stuinfo = JSON.parse(res.data[0].data);
           _this.setData({ stuinfo: stuinfo });
           wx.setStorageSync('stuinfo', stuinfo)

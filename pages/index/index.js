@@ -129,7 +129,7 @@ Page({
       _this.getTodayclass(stuclass);
       
     }
-    console.log("index onshow");
+    //console.log("index onshow");
     app._user.is_bind = true;
 
   },
@@ -142,7 +142,7 @@ Page({
     app.today = parseInt(new Date().getDay());
     //这个today是数组下标，所以减一
     var today = app.today-1;
-    console.log("目前星期：" + app.today);
+    //console.log("目前星期：" + app.today);
     //console.log(stuclass)
     //计算没课节数
     var noclassnum=0;
@@ -234,7 +234,7 @@ Page({
     });
   },
   response: function (status) {
-    console.log("执行了response")
+    //console.log("执行了response")
     var _this = this;
     if (status) {
       if (status != '离线缓存模式') {
@@ -279,7 +279,7 @@ Page({
     }
   },
   getCardData: function () {
-    console.log("更新卡片内容");
+    //console.log("更新卡片内容");
     var _this = this;
     //判断并读取缓存
     if (app.cache.kb) { kbRender(app.cache.kb); }

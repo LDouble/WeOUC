@@ -44,7 +44,7 @@ Page({
       url: app._server + "/mywebapp/kaoqin?openid=" + _this.data.openid,
       method: 'GET',
       success: function (res) {
-        console.log(res);
+        //console.log(res);
         if (res.data[0].status < 40000) {
           
           if (res.data[0].status ==20040) {
@@ -54,7 +54,7 @@ Page({
           }
           else {
             var list = JSON.parse(res.data[0].data);
-          console.log(list);
+          //console.log(list);
             for (var i = 0, len = list.length; i < len; i++) {
               var tempstat = list[i].information;
               if (tempstat.indexOf("全勤") != -1) {

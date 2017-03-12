@@ -4,6 +4,7 @@ var app = getApp();
 Page({
   data: {
     list_remind: '加载中',
+    mockname_status: false,
     list: {
       status: false,  //是否显示列表
       count: '0',   //次数
@@ -130,6 +131,12 @@ Page({
           });
         }
       }
+    });
+  },
+  isrealname: function (e){
+    console.log('isrealname 发生 change 事件，携带值为', e.detail.value);
+    this.setData({
+      'mockname_status': e.detail.value
     });
   }
 });

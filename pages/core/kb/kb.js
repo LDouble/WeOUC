@@ -59,12 +59,20 @@ Page({
   },
   onLoad: function(options){
     var _this = this;
-    var thisweek=app.thisweek-app.beginweek;
+    var date = new Date();
+    var thisweek = app.getISOYearWeek(date);
+    console.log("kb这周的值是："+thisweek)
+   
+    var classweek=thisweek-app.beginweek;
     var today=app.today-1;
+    if(today<0){
+      today=6;
+    }
+    console.log("当前校历是："+classweek);
     _this.setData({
         today : today,
-        toweek: thisweek,
-        week: thisweek
+        toweek: classweek,
+        week: classweek
       });
     // onLoad时获取一次课表
     var id = app.openid;
@@ -78,7 +86,7 @@ Page({
   },
   //让分享时自动登录
   loginHandler: function(options){
-    console.log('让分享时自动登录');
+    //console.log('让分享时自动登录');
     var _this = this;
     _this.setData({
       'term': app._time.term,
@@ -124,11 +132,11 @@ Page({
   showDetail: function(e){
     // 点击课程卡片后执行
     var _this = this;
-    console.log(e);
+    //console.log(e);
     var week = _this.data.week;
     var dataset = e.currentTarget.dataset;
     var lessons = _this.data.lessons[dataset.day][dataset.wid];
-    console.log(lessons);
+    //console.log(lessons);
     var targetI = 0;
     lessons[dataset.cid].target = true;
     // if(week != '*'){
@@ -260,7 +268,7 @@ Page({
     _this.setData(data);
   },
   get_kb: function(id){
-    console.log('课表渲染函数');
+    //console.log('课表渲染函数');
     //数组去除指定值
     function removeByValue(array,val){
       for(var i=0,len=array.length;i<len;i++) {
@@ -304,7 +312,7 @@ Page({
               _lessons[i][j][k].xf_num = _lessons[i][j][k].xf ? parseFloat(_lessons[i][j][k].xf).toFixed(1) : '';
               // 为课程上色
               if (!colorsDic[_lessons[i][j][k].classNum]) { //如果该课还没有被上色
-              console.log(_lessons[i][j][k].classNum);
+              //console.log(_lessons[i][j][k].classNum);
                 var iColors = !_colors.length ? colors.slice(0) : _colors.slice(0); // 本课程可选颜色
                 if(!_colors.length){ //未用过的颜色还没用过，就优先使用
                   // 剔除掉其上边和左边的课程的可选颜色，如果i!==0则可剔除左边课程颜色，如果j!==0则可剔除上边课程颜色
@@ -336,7 +344,7 @@ Page({
                 if(_colors.length){ _colors = removeByValue(_colors, iColor); }
               } else {
                 //该课继续拥有之前所上的色
-                console.log("该课继续拥有之前所上的色"+_lessons[i][j][k].classNum);
+                //console.log("该课继续拥有之前所上的色"+_lessons[i][j][k].classNum);
                 _lessons[i][j][k].color = colorsDic[_lessons[i][j][k].classNum];
               }
             }
@@ -344,7 +352,7 @@ Page({
         }
       }
       var today = parseInt(app.today);  //0周日,1周一
-      console.log("今天星期"+today)
+      //console.log("今天星期"+today)
       today = today === 0 ? 6 : today-1; //0周一,1周二...6周日
       var week = _this.data.week;
       var lessons = _lessons;
@@ -403,8 +411,8 @@ Page({
         app.today = parseInt(new Date().getDay());
     //这个today是数组下标，所以减一
     var today = app.today-1;
-    console.log("目前星期：" + app.today);
-    console.log(stuclass)
+    //console.log("目前星期：" + app.today);
+    //console.log(stuclass)
     //计算没课节数
     var noclassnum=0;
     var strTem = {};  // 临时变量
@@ -421,7 +429,7 @@ Page({
         arrayweek = todaydata.weeks;
         //console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
-        console.log(arrayweek);
+        //console.log(arrayweek);
         if (app.in_array(arrayweek)) {
           strTem[value].class = stuclass[value].classes[today];
           strTem[value].classtime = stuclass[value].time;

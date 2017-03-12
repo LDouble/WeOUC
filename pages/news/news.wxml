@@ -6,6 +6,7 @@
       <image wx:if="{{item.enabled[user_type]}}" class="filter-item {{active.type === item.type ? 'active' : ''}}" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilter" src="/images/news/{{item.type}}@colour.png"></image>
       <image wx:else class="filter-item disabled" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilterDisabled" src="/images/news/{{item.type}}@gray.png"></image>
     </block>
+    <image class="filter-item 'active'" bindtap="addnews" src="/images/news/add@color.png"></image>
   </scroll-view>
   
   <!--新闻列表-->

@@ -51,7 +51,8 @@ Page({
       }
     });
   },
-  bind: function () {
+  bind: function (e) {
+    //console.log(e.detail.formId);
     var _this = this;
     if (app.g_status) {
       app.showErrorModal(app.g_status, '绑定失败');

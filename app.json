@@ -57,5 +57,5 @@
     "uploadFile": 30000,
     "downloadFile": 30000
   },
-  "debug" :  true
+  "debug":true
 }

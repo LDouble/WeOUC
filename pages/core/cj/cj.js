@@ -28,7 +28,7 @@ Page({
       app.showErrorModal('建议打开个人信息页面查看个人信息', '个人信息获取异常')
     }
      if (app.openid === ''||app.openid ===null) {
-      console.log("onshow openid获取的缓存为空");
+      //console.log("onshow openid获取的缓存为空");
       wx.navigateTo({
         url: '/pages/more/login'
       });
@@ -44,9 +44,9 @@ Page({
   onShow : function(){
     var _this = this;
     //判断并读取缓存
-    console.log('cj onshow 执行')
+    //console.log('cj onshow 执行')
     if (wx.getStorageSync('cj') === ''||wx.getStorageSync('cj') === null) {
-      console.log("onshow cj获取的缓存为空");
+      //console.log("onshow cj获取的缓存为空");
       //重定向
       _this.setData({remind:'加载中'});
       this.getkscj();  
@@ -54,7 +54,7 @@ Page({
     else {
       var cj = wx.getStorageSync('cj')
       
-      console.log(cj);
+      //console.log(cj);
        _this.setData({'user': {
         'is_bind': true
       }});
@@ -70,9 +70,9 @@ Page({
       method: 'GET',
       success: function(res){
          if(res.data[0].status < 40000) {
-          console.log(res.data[0].status);
+          //console.log(res.data[0].status);
           var _data = JSON.parse(res.data[0].data);
-          console.log(_data);
+          //console.log(_data);
           if(_data) {
             //保存成绩缓存
             app.saveCache('cj', _data);
@@ -86,13 +86,13 @@ Page({
           });
         }
       },
-      fail: function() {
+      fail: function(res) {
         if(_this.data.remind == '加载中'){
           _this.setData({
             remind: '网络错误'
           });
         }
-        console.warn('网络错误');
+        //console.warn('网络错误');
       },
       complete: function() {
         wx.hideNavigationBarLoading();
