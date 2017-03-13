@@ -101,7 +101,7 @@ Page({
     //console.log("当前请求的blogid"+_this.data.page);
 
 
-    console.log('当前请求的类型' + temptype);
+    //console.log('当前请求的类型' + temptype);
     _this.setData({
       'active.remind': '正在努力加载中'
     });
@@ -116,7 +116,7 @@ Page({
             var myDate = new Date();
             if (myDate.getHours() >= 3) {
               app.saveCache('allcurrent_time', myDate.getDate());
-              console.log('写入头条更新时间' + myDate.getDate());
+              //console.log('写入头条更新时间' + myDate.getDate());
             }
 
           }

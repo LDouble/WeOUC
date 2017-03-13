@@ -4,11 +4,11 @@ App({
   today: '',
   logincode: '',
   openid: '',
-  beginday: '2 27, 2017',//开学那一天,注意格式要一致
-  schoolweek: '',//教学周
+  beginday: '2017/02/27',//开学那一天,注意格式要一致（不够要补上0）
+  schoolweek: 1,//教学周
   onLaunch: function () {
     var _this = this;
-    _this.schoolweek=_this.calWeek();
+    
     //读取缓存
     try {
       
@@ -53,7 +53,7 @@ App({
   onShow: function () {
     var _this = this;
     var _this = this;
-    _this.schoolweek=_this.calWeek();
+    _this.schoolweek=parseInt(_this.calWeek());
   },
   //判断是否有登录信息，让分享时自动登录
   loginLoad: function (onLoad) {
@@ -123,20 +123,6 @@ App({
       }
     });
   },
-  //控制周数，返回当前教学周数
-  calWeek : function () {
-    var _this=this;
-    var begindate =new Date(Date.parse(_this.beginday));
-    var beginweek=_this.getISOYearWeek(begindate);
-
-    var nowdate =new Date();
-    var tempstr=(nowdate.getMonth()+1) +' '+nowdate.getDate()+ ',' +nowdate.getFullYear();
-    var tempdate1 =new Date(Date.parse(tempstr));
-    var thisweek=_this.getISOYearWeek(tempdate1);
-    var week=thisweek-beginweek+1;
-    console.log(week);
-    return week;
-  },
   //传入时间计算周数
   getISOYearWeek: function (date) {
     var _this = this;
@@ -181,8 +167,8 @@ App({
     
     //console.log("app的当前校历周数是："+ _this.schoolweek);
 
-    var classweek=_this.schoolweek;
-    if(classweek<=1&&thisweek>=0){
+    var classweek=parseInt(_this.calWeek());
+    if(classweek<=1&&classweek>=0){
       classweek=1;
     }
     
@@ -210,6 +196,25 @@ App({
   },
   util: require('./utils/util'),
   key: function (data) { return this.util.key(data) },
+  //控制周数，返回当前教学周数
+  calWeek : function () {
+    var _this=this;
+    var begindate =new Date(_this.beginday);
+    var beginweek=parseInt(_this.getISOYearWeek(begindate));
+
+    var nowdate =new Date();
+    var intYear=parseInt(nowdate.getFullYear());
+    var intMon=parseInt(nowdate.getMonth())+1;
+    var intDate=parseInt(nowdate.getDate()); 
+    if(intMon<10){intMon='0'+intMon}
+    if(intDate<10){intDate='0'+intMon}
+    var tempstr=intYear+'/'+intMon+'/'+intDate;
+    var tempdate1 =new Date(tempstr);
+    var thisweek=_this.getISOYearWeek(tempdate1);
+    var week=parseInt(thisweek-beginweek+1);
+    
+    return week;
+  },
   cache: {},
   _server: 'https://wxapp.yicodes.com',
   _user: {

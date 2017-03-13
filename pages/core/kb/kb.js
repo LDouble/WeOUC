@@ -60,7 +60,7 @@ Page({
   onLoad: function(options){
     var _this = this;
        
-    var classweek=app.calWeek();
+    var classweek=parseInt(app.calWeek());
     
     var today=app.today-1;
     if(today<0){
@@ -74,7 +74,7 @@ Page({
       });
     // onLoad时获取一次课表
     var id = app.openid;
-    if(!id){
+    if(id==''){
       _this.setData({
         remind: '未绑定'
       });
@@ -275,9 +275,7 @@ Page({
       return array;
     }
     // 根据获取课表
-    var _this = this, data = {
-      openid: app.openid
-    };
+    var _this = this;
     
 
     //课表渲染
@@ -293,9 +291,20 @@ Page({
         
         for( j = 0, jlen = _lessons[i].length; j < jlen; j++){
           for( k = 0, klen = _lessons[i][j].length; k < klen; k++){
+            if(Array.isArray(_lessons[i][j][k])){
+          var y=0;
+          //处理重叠课程
+          //console.log(_lessons[i][j][k]);
+          for(y;y<todaydata.length;y++){
+            if(app.in_array(_lessons[i][j][k][y].weeks)){
+              break;
+            }
+          }
+          _lessons[i][j][k]=_lessons[i][j][k][y];
+        }
             
-            if (_lessons[i][j][k] && _lessons[i][j][k].classNum) {
-              //console.log(_lessons[i][j][k]);
+            if (_lessons[i][j][k]) {
+              
               // 找出冲突周数,及课程数
               var conflictWeeks = {};
               _lessons[i][j][k].weeks.forEach(function(e){
@@ -381,8 +390,9 @@ Page({
 
     //读取课表缓存
     var stuclass = wx.getStorageSync('stuclass')
-      var stuclass = JSON.parse(stuclass);
-      //console.log(stuclass);
+      //var stuclass = JSON.parse(stuclass);
+      var stuclass =stuclass;
+      console.log(stuclass);
       var strTem=[];
       for(var i=0;i<7;i++){
         var todaydata =[];

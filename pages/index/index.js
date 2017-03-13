@@ -121,7 +121,8 @@ Page({
     }
     else {
       stuclass = wx.getStorageSync('stuclass')
-      var stuclass = JSON.parse(stuclass);
+      var stuclass = stuclass;
+      //console.log('缓存读取的数据：');
       //console.log(stuclass);
        _this.setData({'user': {
         'is_bind': true
@@ -152,9 +153,20 @@ Page({
        _this.setData({ nothingclass: true });
     }else{
       for (var value in stuclass) {
-        //console.log("第星期"+today+'第'+value+'节');
+        //console.log("星期"+today+'第'+value+'节');
         
         var todaydata = stuclass[value].classes[today];
+
+        if(Array.isArray(todaydata)){
+          var i=0;
+          for(i;i<todaydata.length;i++){
+            if(app.in_array(todaydata[i].weeks)){
+              break;
+            }
+          }
+          todaydata=todaydata[i];
+        }
+
         
         var arrayweek = [];
         arrayweek = todaydata.weeks;
@@ -162,7 +174,7 @@ Page({
         strTem[value] = {};
         //console.log(arrayweek);
         if (app.in_array(arrayweek)) {
-          strTem[value].class = stuclass[value].classes[today];
+          strTem[value].class = todaydata;
           strTem[value].classtime = stuclass[value].time;
         }
         else{
@@ -192,11 +204,11 @@ Page({
           app.today = parseInt(new Date().getDay());
           var today = app.today;
           var stuclass = JSON.parse(res.data[0].data);
-          //console.log("服务器返回来的week:");
-          //console.log(stuclass);
-          wx.setStorageSync('stuclass', stuclass.allClass);
-          //wx.setStorageSync('week', stuclass.week);
-          _this.getTodayclass(JSON.parse(stuclass.allClass));
+          console.log("服务器返回来的数据:");
+          console.log(stuclass);
+          wx.setStorageSync('stuclass', stuclass);
+          
+          _this.getTodayclass(stuclass);
         }
       },
       fail: function () {
