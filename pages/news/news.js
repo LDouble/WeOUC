@@ -45,7 +45,7 @@ Page({
     var current_time = wx.getStorageSync('allcurrent_time');
     var nowtime = new Date();
     if (nowtime.getDate() != current_time && nowtime.getHours() >= 3) {
-      console.log('隔日删除缓存');
+      //console.log('隔日删除缓存');
       wx.removeStorageSync('all');
     }
 
@@ -54,10 +54,10 @@ Page({
     var temp_blog_data = wx.getStorageSync('all');
     var temp_lastblogid = wx.getStorageSync('allid');
     if (temp_lastblogid <= 0 || temp_lastblogid == '' || temp_blog_data == '') {
-      console.log("首次使用blog功能")
+      //console.log("首次使用blog功能")
       this.getNewsList();
     } else {
-      console.log("使用过blog")
+      //console.log("使用过blog")
       this.setData({
         'loading': false,
         'active.data': temp_blog_data,

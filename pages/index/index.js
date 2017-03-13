@@ -192,8 +192,10 @@ Page({
           app.today = parseInt(new Date().getDay());
           var today = app.today;
           var stuclass = JSON.parse(res.data[0].data);
+          //console.log("服务器返回来的week:");
+          //console.log(stuclass);
           wx.setStorageSync('stuclass', stuclass.allClass);
-          wx.setStorageSync('week', stuclass.week);
+          //wx.setStorageSync('week', stuclass.week);
           _this.getTodayclass(JSON.parse(stuclass.allClass));
         }
       },

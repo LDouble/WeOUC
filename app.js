@@ -4,10 +4,11 @@ App({
   today: '',
   logincode: '',
   openid: '',
-  beginweek: '9',//开学那一天在这一年的周数，例如开学第一周应该是10
-  thisweek: '',//当天在这一年的周数
+  beginday: '2 27, 2017',//开学那一天,注意格式要一致
+  schoolweek: '',//教学周
   onLaunch: function () {
     var _this = this;
+    _this.schoolweek=_this.calWeek();
     //读取缓存
     try {
       
@@ -51,10 +52,8 @@ App({
   //后台切换至前台时
   onShow: function () {
     var _this = this;
-    var date = new Date();
-    var thisweek = _this.getISOYearWeek(date);
-    console.log("这周的值是："+thisweek)
-    _this.thisweek = thisweek;
+    var _this = this;
+    _this.schoolweek=_this.calWeek();
   },
   //判断是否有登录信息，让分享时自动登录
   loginLoad: function (onLoad) {
@@ -124,7 +123,21 @@ App({
       }
     });
   },
-  //计算当前周数
+  //控制周数，返回当前教学周数
+  calWeek : function () {
+    var _this=this;
+    var begindate =new Date(Date.parse(_this.beginday));
+    var beginweek=_this.getISOYearWeek(begindate);
+
+    var nowdate =new Date();
+    var tempstr=(nowdate.getMonth()+1) +' '+nowdate.getDate()+ ',' +nowdate.getFullYear();
+    var tempdate1 =new Date(Date.parse(tempstr));
+    var thisweek=_this.getISOYearWeek(tempdate1);
+    var week=thisweek-beginweek+1;
+    console.log(week);
+    return week;
+  },
+  //传入时间计算周数
   getISOYearWeek: function (date) {
     var _this = this;
     var commericalyear = _this.getCommerialYear(date);
@@ -156,6 +169,7 @@ App({
     var thisthurdaydate = new Date(date.getFullYear(), date.getMonth(), monthday + 4 - daynum);
     return thisthurdaydate.getFullYear();
   },
+  //检验当天课程
   in_array: function (arr) {
     var _this = this;
 
@@ -164,20 +178,17 @@ App({
       //console.log('不是数组返回错误');
       return false;
     }
-    if (_this.thisweek == '' || null) {
-      var date = new Date();
-      var thisweek = _this.getISOYearWeek(date);
-      _this.thisweek = thisweek;
-    }
-    var classweek = _this.thisweek-_this.beginweek;
-    console.log("app的当前校历周数是："+classweek);
-    if(thisweek<=1&&thisweek>=-2){
+    
+    //console.log("app的当前校历周数是："+ _this.schoolweek);
+
+    var classweek=_this.schoolweek;
+    if(classweek<=1&&thisweek>=0){
       classweek=1;
     }
     
     for (var i = 0, k = arr.length; i < k; i++) {
       if (classweek == arr[i]) {
-        console.log("存在")
+        //console.log("存在")
         return true;
       }
     }

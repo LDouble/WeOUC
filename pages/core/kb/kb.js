@@ -59,16 +59,14 @@ Page({
   },
   onLoad: function(options){
     var _this = this;
-    var date = new Date();
-    var thisweek = app.getISOYearWeek(date);
-    console.log("kb这周的值是："+thisweek)
-   
-    var classweek=thisweek-app.beginweek;
+       
+    var classweek=app.calWeek();
+    
     var today=app.today-1;
     if(today<0){
       today=6;
     }
-    console.log("当前校历是："+classweek);
+    //console.log("当前校历是："+classweek);
     _this.setData({
         today : today,
         toweek: classweek,
@@ -377,6 +375,7 @@ Page({
         dates: dates,
         remind: ''
       });
+      //console.log(_this.data.lessons)
     }
 
 
