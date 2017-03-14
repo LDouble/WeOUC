@@ -31,13 +31,13 @@ Page({
       _this.getStuinfo();
     }
 
-
+    wx.hideNavigationBarLoading();
 
   },
   //连接服务器获取学生信息内容
   getStuinfo: function () {
     var _this = this;
-    app.showLoadToast('更新数据中');
+    
     wx.request({
       url: app._server + '/mywebapp/stuinfo?openid=' + _this.data.openid,
       success: function (res) {

@@ -9,7 +9,7 @@
 .main-box{
     position: relative;
     width: 100%;
-    height: 1328rpx;
+    height: 1740rpx;
     display: flex;
     flex-direction: row;
     padding-bottom: 100rpx;

@@ -18,11 +18,7 @@ Page({
       { '15 - 16 节': '20:30 - 21:50' },
     ],
     core: [
-      { id: 'kb', name: '课表查询', disabled: true, teacher_disabled: false, offline_disabled: true },
-      { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-      { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: false, offline_disabled: false },
-      { id: 'xs', name: '学生查询', disabled: false, teacher_disabled: false, offline_disabled: true },
-      { id: 'jy', name: '借阅信息', disabled: false, teacher_disabled: false, offline_disabled: false }
+      { id: 'kb', name: '课表查询', disabled: true, teacher_disabled: false, offline_disabled: true }
     ],
     card: {
       'kb': {
@@ -84,6 +80,7 @@ Page({
   onPullDownRefresh: function () {
     if (app._user.is_bind) {
       //this.getCardData();
+      wx.stopPullDownRefresh();
     } else {
       wx.stopPullDownRefresh();
     }
@@ -100,13 +97,21 @@ Page({
       console.log("onshow stuclass获取的缓存为空");
       //重定向
       _this.setData({remind:'加载中'});
+       _this.setData({'user': {
+        'is_bind': true
+      }});
       this.getStuclass();
+     
     }
     else {
       stuclass = wx.getStorageSync('stuclass')
       var stuclass = JSON.parse(stuclass);
       console.log(stuclass);
+       _this.setData({'user': {
+        'is_bind': true
+      }});
       _this.getTodayclass(stuclass);
+      
     }
     console.log("index onshow");
     
@@ -121,7 +126,7 @@ Page({
     app.today = parseInt(new Date().getDay());
     var today = app.today-1;
     console.log("目前星期：" + app.today);
-
+    console.log(stuclass)
     var strTem = {};  // 临时变量
       
       for (var value in stuclass) {
@@ -135,7 +140,7 @@ Page({
         console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
         if (app.in_array(arrayweek)) {
-          strTem[value].class = stuclass[value].classes[today - 1];
+          strTem[value].class = stuclass[value].classes[today];
           strTem[value].classtime = stuclass[value].time;
         }
         else{

@@ -27,7 +27,11 @@
                 <view>9</view>
                 <view class="mg-8">10</view>
                 <view>11</view>
-                <view>12</view>
+                <view class="mg-12">12</view>
+                <view>13</view>
+                <view class="mg-8">14</view>
+                <view>15</view>
+                <view>16</view>
                 <view class="kb-timeline-tri" style="top:{{timelineTop}}rpx"></view>
             </view>
             <scroll-view class="kb-ctn" catchscroll="scrollXHandle" scroll-x="true" scroll-left="{{scroll.left}}" >

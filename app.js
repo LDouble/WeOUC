@@ -4,7 +4,8 @@ App({
   todat: '',
   logincode: '',
   openid: '',
-  week:'1',
+  beginweek: '9',
+  thisweek: '',
   onLaunch: function () {
     var _this = this;
     //读取缓存
@@ -48,7 +49,10 @@ App({
   },
   //后台切换至前台时
   onShow: function () {
-
+    var _this = this;
+    var date = new Date();
+    var thisweek = _this.getISOYearWeek(date);
+    _this.thisweek = thisweek;
   },
   //判断是否有登录信息，让分享时自动登录
   loginLoad: function (onLoad) {
@@ -65,21 +69,21 @@ App({
   getUser: function (response) {
     var _this = this;
     //wx.showNavigationBarLoading();
-     wx.login({
-      success: function(res) {
+    wx.login({
+      success: function (res) {
         if (res.code) {
-           //调用函数获取微信用户信息
-          _this.getUserInfo(function(info){
+          //调用函数获取微信用户信息
+          _this.getUserInfo(function (info) {
             _this.saveCache('userinfo', info);
             _this._user.wx = info.userInfo;
-            if(!info.encryptedData || !info.iv){
+            if (!info.encryptedData || !info.iv) {
               _this.g_status = '无关联AppID';
               typeof response == "function" && response(_this.g_status);
               console.log('执行了info.encryptedData');
               return;
             }
           });
-        } 
+        }
       }
     });
     console.log("appjsgetUser函数调用");
@@ -90,8 +94,8 @@ App({
         duration: 1000
       });
       wx.navigateTo({
-            url: '/pages/more/login'
-          });
+        url: '/pages/more/login'
+      });
     }
   },
   processData: function (key) {
@@ -118,20 +122,61 @@ App({
       }
     });
   },
-  in_array : function (arr) {
-    var _this=this;
- 
-    // 不是数组返回错误
-    if(arr==null||arr==''||arr===[]){
-      console.log('不是数组返回错误');
-        return false; 
+  //计算当前周数
+  getISOYearWeek: function (date) {
+    var _this = this;
+    var commericalyear = _this.getCommerialYear(date);
+    var date2 = _this.getYearFirstWeekDate(commericalyear);
+    var day1 = date.getDay();
+    if (day1 == 0) day1 = 7;
+    var day2 = date2.getDay();
+    if (day2 == 0) day2 = 7;
+    var d = Math.round((date.getTime() - date2.getTime() + (day2 - day1) * (24 * 60 * 60 * 1000)) / 86400000);
+    return Math.ceil(d / 7) + 1;
+  },
+  getYearFirstWeekDate: function (commericalyear) {
+    var _this = this;
+    var yearfirstdaydate = new Date(commericalyear, 0, 1);
+    var daynum = yearfirstdaydate.getDay();
+    var monthday = yearfirstdaydate.getDate();
+    if (daynum == 0) daynum = 7;
+    if (daynum <= 4) {
+      return new Date(yearfirstdaydate.getFullYear(), yearfirstdaydate.getMonth(), monthday + 1 - daynum);
+    } else {
+      return new Date(yearfirstdaydate.getFullYear(), yearfirstdaydate.getMonth(), monthday + 8 - daynum)
     }
+  },
+  getCommerialYear: function (date) {
+    var _this = this;
+    var daynum = date.getDay();
+    var monthday = date.getDate();
+    if (daynum == 0) daynum = 7;
+    var thisthurdaydate = new Date(date.getFullYear(), date.getMonth(), monthday + 4 - daynum);
+    return thisthurdaydate.getFullYear();
+  },
+  in_array: function (arr) {
+    var _this = this;
 
-    for(var i=0,k=arr.length;i<k;i++){
-        if(_this.week==arr[i]){
-          console.log("存在")
-            return true;    
-        }
+    // 不是数组返回错误
+    if (arr == null || arr == '' || arr === []) {
+      console.log('不是数组返回错误');
+      return false;
+    }
+    if (_this.thisweek == '' || null) {
+      var date = new Date();
+      var thisweek = _this.getISOYearWeek(date);
+      _this.thisweek = thisweek;
+    }
+    var thisweek = _this.thisweek-_this.beginweek+1;
+    if(thisweek<=1){
+      thisweek=1;
+    }
+    console.log(thisweek);
+    for (var i = 0, k = arr.length; i < k; i++) {
+      if (thisweek == arr[i]) {
+        console.log("存在")
+        return true;
+      }
     }
   },
   showErrorModal: function (content, title) {

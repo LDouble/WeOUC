@@ -7,7 +7,7 @@
   <!--功能导航-->
   <view class="main-core">
     <block wx:for="{{core}}" wx:key="id">
-      <navigator wx:if="{{user.is_bind && !item.disabled && (!user.teacher || !item.teacher_disabled) && (!offline || !item.offline_disabled) }}" class="main-core-item" url="{{'/pages/core/'+item.id+'/'+item.id}}">
+      <navigator wx:if="{{user.is_bind}}" class="main-core-item" url="{{'/pages/core/'+item.id+'/'+item.id}}">
         <image class="core-item-icon" src="/images/core/{{item.id}}.png"></image>
         <text class="core-item-name">{{item.name}}</text>
       </navigator>
