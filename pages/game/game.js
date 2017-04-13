@@ -1,5 +1,6 @@
 // /pages/game/game.js
 var app = getApp()
+var config = require('../../config');
 
 /**
  * 生成一条聊天室的消息的唯一 ID
@@ -24,7 +25,7 @@ Page({
     user: {},
     openid: '',
     stuinfo: null,
-    url: 'wss://wss.yicodes.com',
+    url: `${config.service.wssUrl}`,
     remind: '正在连接服务器',
     boy: ['鹿晗', '刘德华', '林峰', 'Jay', '余文乐', '罗志祥', '黄宗泽', '甄子丹'],
     girl: ['蔡依林', '邓紫棋', 'Angelababy', '徐冬冬', '范玮琪', '郭采洁', '徐子珊', '钟嘉欣']
@@ -63,7 +64,7 @@ Page({
 
     //获取随机昵称
     var nickName = '';
-    var ran = Math.floor((Math.random()) * 10 % 7);
+    var ran = Math.floor((Math.random()) * 10 % 8);
     console.log(ran)
     if (sex == 1) {
       nickName = _this.data.boy[ran]
@@ -113,8 +114,8 @@ Page({
     //监听WebSocket连接打开事件。
     wx.onSocketOpen(function (res) {
       console.log('WebSocket连接已打开！')
-      _this.amendMessage(_this.createSystemMessage("登陆成功," + "你叫" + _this.data.myinfo.user.nickName));
-      _this.pushMessage(_this.createSystemMessage('正在寻找当前最佳...'));
+      _this.amendMessage(_this.createSystemMessage("登陆成功"));
+      _this.pushMessage(_this.createSystemMessage("匿名身份：" + _this.data.myinfo.user.nickName));
       socketOpen = true
       //聊天对象的信息
 
@@ -238,7 +239,7 @@ Page({
    * 生成聊天室的聊天消息
    */
   createUserMessage: function (content, user, isMe) {
-    console.log('不是wo')
+    console.log(isMe?'是我':'不是wo')
     return { id: msgUuid(), type: 'speak', content, user, isMe };
   },
 

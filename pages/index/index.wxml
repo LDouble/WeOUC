@@ -1,8 +1,9 @@
+
 <!--index.wxml-->
 <view class="container">
-    <view class="fix_tip {{offline?'active':''}}">
-        <text>离线缓存模式</text>
-    </view>
+  <view class="fix_tip {{offline?'active':''}}">
+    <text>离线缓存模式</text>
+  </view>
 
   <!--功能导航-->
   <view class="main-core">
@@ -17,8 +18,8 @@
       </view>
     </block>
     <view class="fix_tip {{disabledItemTap?'active':''}}">
-        <text wx:if="{{remind == '未绑定'}}">请先绑定帐号</text>
-        <text wx:else>{{(user.teacher && !offline) ? '无权限' : '该服务不可用'}}</text>
+      <text wx:if="{{remind == '未绑定'}}">请先绑定帐号</text>
+      <text wx:else>{{(user.teacher && !offline) ? '无权限' : '该服务不可用'}}</text>
     </view>
   </view>
   <view wx:if="{{remind}}" class="remind-box">
@@ -29,9 +30,31 @@
       <navigator wx:if="{{remind == '未绑定'}}" url="/pages/more/login" class="remind-btn">前往绑定</navigator>
     </block>
   </view>
+
   <!--卡片列表-->
   <view wx:else class="main-card">
-  
+
+    <!--推送通知-->
+    <view class="main-card-item" id="kb" wx:if="{{card.push.show}}">
+      <view class="card-item-hd">
+        <image class="card-item-icon" src="/images/core/kjs.png"></image>
+        <text class="card-item-name">你有新的消息</text>
+      </view>
+
+      <view class="card-item-bd">
+        <swiper indicator-dots="false" autoplay="false" interval="5000" duration="1000">
+          <block wx:for="{{pushdata}}">
+            <swiper-item>
+              <view class="push-item-what">
+                <text>{{item.message}}</text>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      
+    </view>
+
     <!--今日课表-->
     <view class="main-card-item" id="kb" wx:if="{{stuclass}}">
       <navigator url="/pages/core/kb/kb">
@@ -45,8 +68,8 @@
         <view wx:else class="card-item-bd">
           <view class="kb-item" wx:for="{{stuclass}}" wx:if="{{item.class}}">
             <view class="kb-item-left">
-              <text class="kb-item-what">{{item.class.name}}  ({{item.class.classNum}})</text>
-              <text class="kb-item-when">{{item.classtime}}    老师：{{item.class.teacher}} </text>
+              <text class="kb-item-what">{{item.class.name}} ({{item.class.classNum}})</text>
+              <text class="kb-item-when">{{item.classtime}} 老师：{{item.class.teacher}} </text>
             </view>
             <text class="kb-item-where">{{item.class.classRoom}}</text>
           </view>
@@ -92,7 +115,7 @@
         </view>
       </navigator>
     </view>
-    
+
     <!--借阅信息-->
     <view class="main-card-item" id="jy" wx:if="{{card.jy.show}}">
       <navigator url="/pages/core/jy/jy">
@@ -173,11 +196,9 @@
       </navigator>
     </view>
   </view>
-
   <view class="main-ending">
     <view class="main-ending-line"></view>
     <view class="main-ending-text">我是一个乖巧的结尾</view>
     <view class="main-ending-line"></view>
   </view>
-
 </view>

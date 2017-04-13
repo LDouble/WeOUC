@@ -7,6 +7,7 @@ Page({
     remind: '加载中',
     nothingclass: false,
     stuclass: null,
+    pushdata: null,
     classtime: [
       { '1 - 2 节': '09:00 - 10:20' },
       { '3 - 4 节': '10:40 - 12:00' },
@@ -133,13 +134,13 @@ Page({
     }
     else {
       //console.log("index onshow");
-    app._user.is_bind = true;
+      app._user.is_bind = true;
       var stuclass = wx.getStorageSync('stuclass')
 
       try {
         stuclass = JSON.parse(stuclass);
         _this.setData({ remind: '请重新绑定' });
-        app.showErrorModal('请到个人信息页面切换绑定再次登陆','版本升级啦');
+        app.showErrorModal('请到个人信息页面切换绑定再次登陆', '版本升级啦');
         return;
       } catch (err) {
         //console.log('缓存读取的数据：');
@@ -166,7 +167,7 @@ Page({
   },
   getTodayclass: function (stuclass) {
     var _this = this;
-    wx.showNavigationBarLoading();
+    //wx.showNavigationBarLoading();
     app.today = parseInt(new Date().getDay());
     //这个today是数组下标，所以减一
     var today = app.today - 1;
@@ -227,11 +228,11 @@ Page({
     _this.setData({
       'remind': ''
     });
-    wx.hideNavigationBarLoading();
-    wx.stopPullDownRefresh();
   },
+  //获取课程信息
   getStuclass: function () {
     var _this = this;
+    showNavigationBarLoading
     wx.request({
       url: app._server + '/mywebapp/kebiao?openid=' + app.openid,
       success: function (res) {
@@ -252,6 +253,34 @@ Page({
       },
       complete: function () {
         wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      }
+    })
+  },
+
+  //获取推送消息
+  getpush: function () {
+    var _this = this;
+    wx.showNavigationBarLoading();
+    wx.request({
+      url: app._server + '/mywebapp/push?openid=' + app.openid,
+      success: function (res) {
+        if (res.data[0].status == 90000) {
+          var pushdata = JSON.parse(res.data[0].data);
+          console.log("服务器返回来的数据:");
+          console.log(pushdata);
+          _this.setData({
+            'pushdata': pushdata,
+            'card.push.show': true
+          })
+        }
+      },
+      fail: function () {
+        app.showErrorModal("服务器连接失败", "请检查网络连接")
+      },
+      complete: function () {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       }
     })
   },
@@ -263,7 +292,11 @@ Page({
       wx.navigateTo({
         url: '/pages/more/login'
       });
+      return;
     }
+
+    //拉取推送
+    this.getpush();
   },
   login: function () {
     var _this = this;
@@ -367,88 +400,5 @@ Page({
       });
       _this.on
     }
-    //获取课表数据
-    var kb_data = {
-      id: app._user.we.info.id,
-    };
-    if (app._user.teacher) { kb_data.type = 'teacher'; }
-    var loadsum = 0; //正在请求连接数
-    loadsum++; //新增正在请求连接
-    wx.request({
-      url: app._server + '/api/get_kebiao.php',
-      method: 'POST',
-      data: app.key(kb_data),
-      success: function (res) {
-        if (res.data && res.data.status === 200) {
-          var info = res.data.data;
-          if (info) {
-            //保存课表缓存
-            app.saveCache('kb', info);
-            kbRender(info);
-          }
-        } else { app.removeCache('kb'); }
-      },
-      complete: function () {
-        loadsum--; //减少正在请求连接
-        if (!loadsum) {
-          if (_this.data.remind == '加载中') {
-            _this.setData({
-              remind: '首页暂无展示'
-            });
-          }
-          wx.hideNavigationBarLoading();
-          wx.stopPullDownRefresh();
-        }
-      }
-    });
-
-    //借阅信息渲染
-    function jyRender(info) {
-      if (parseInt(info.books_num) && info.book_list && info.book_list.length) {
-        var nowTime = new Date().getTime();
-        info.book_list.map(function (e) {
-          var oDate = e.yhrq.split('-'),
-            oTime = new Date(oDate[0], oDate[1] - 1, oDate[2]).getTime();
-          e.timing = parseInt((oTime - nowTime) / 1000 / 60 / 60 / 24);
-          return e;
-        });
-        _this.setData({
-          'card.jy.data': info,
-          'card.jy.show': true,
-          'remind': ''
-        });
-      }
-    }
-    //获取借阅信息
-    loadsum++; //新增正在请求连接
-    wx.request({
-      url: app._server + "/api/get_books.php",
-      method: 'POST',
-      data: app.key({
-        ykth: app._user.we.ykth
-      }),
-      success: function (res) {
-        if (res.data && res.data.status === 200) {
-          var info = res.data.data;
-          if (info) {
-            //保存借阅缓存
-            app.saveCache('jy', info);
-            jyRender(info);
-          }
-        } else { app.removeCache('jy'); }
-      },
-      complete: function () {
-        loadsum--; //减少正在请求连接
-        if (!loadsum) {
-          if (_this.data.remind) {
-            _this.setData({
-              remind: '首页暂无展示'
-            });
-          }
-          wx.hideNavigationBarLoading();
-          wx.stopPullDownRefresh();
-        }
-      }
-    });
   }
 });
