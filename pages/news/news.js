@@ -9,6 +9,7 @@ Page({
       { id: 1, 'type': 'jw', name: '教务公告', storage: [], url: '/blog/getjwblog.do', enabled: { guest: false, student: true, teacher: true } },
       { id: 2, 'type': 'oa', name: 'OA公告', storage: [], url: '/blog/getoablog.do', enabled: { guest: false, student: true, teacher: true } },
       { id: 3, 'type': 'new', name: '校园周边', storage: [], url: '/blog/getnewsblog.do', enabled: { guest: true, student: true, teacher: true } },
+      { id: 3, 'type': 'new', name: '校园周边', storage: [], url: '/blog/getnewsblog.do', enabled: { guest: true, student: true, teacher: true } },
     ],
     'active': {
       id: 0,

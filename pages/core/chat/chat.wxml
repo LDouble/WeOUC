@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view>
+    <view class="page-top">
+        <text class="username">欢迎你</text>
+        <text class="text-info">来到概率ROOM ！</text>
+        <view class="page-btn-wrap">
+            <button class="page-btn" bindtap="gotoGame">开始</button>
+        </view>
+    </view>
+    <view class="page-bottom">
+        <text class="qr-txt">这是we华软走心到炸的社交实验室</text>
+       <text class="qr-txt">在这里重新定义概率论</text>
+    </view>
+</view>

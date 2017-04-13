@@ -20,8 +20,9 @@
     "pages/core/ykt/ykt",
     "pages/core/jy/jy",
     "pages/core/xf/xf",
-    "pages/core/sdf/sdf",
-    "pages/core/bx/bx"
+    "pages/core/bx/bx",
+    "pages/core/chat/chat",
+    "pages/game/game"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7acfa6",
@@ -56,5 +57,6 @@
     "request": 20000,
     "uploadFile": 30000,
     "downloadFile": 30000
-  }
+  },
+  "debug": true
 }
