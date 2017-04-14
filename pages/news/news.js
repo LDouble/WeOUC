@@ -69,6 +69,9 @@ Page({
     //console.log(this.data.active.data);
   },
 
+  onShow: function () {
+    this.setAgo(this.data.active.data);
+  },
   //下拉更新
   onPullDownRefresh: function () {
     var _this = this;
@@ -168,7 +171,9 @@ Page({
           _this.setData({
             'active.remind': '网络错误'
           });
+          
         }
+       _this.setAgo(_this.data.active.data);
       },
       fail: function (res) {
         app.showErrorModal(res.errMsg);
@@ -183,7 +188,27 @@ Page({
         });
       }
     })
+  },
+  //计算多少小时/周前
+  setAgo:function(tem_blogdata){
+    //计算可视化时间
+    var _this = this;
+    console.log(tem_blogdata)
+    console.log("动态发布时间")
+    var tmp = tem_blogdata;
+    //console.log(tmp)
+    tmp.forEach(function (value, index) {
+      var time = value.pubtime;
+      time = time.replace(/(-)/g,"/")
+      var ago = _this.ago(time)
 
+      console.log(ago);
+      tmp[index].ago = ago
+    });
+    console.log(tmp)
+    _this.setData({
+      'active.data': tmp
+    })
   },
   //获取焦点
   changeFilter: function (e) {
@@ -203,7 +228,24 @@ Page({
   //增加动态
   addnews: function () {
     wx.navigateTo({
-        url: '/pages/more/issues'
-      });
+      url: '/pages/more/issues'
+    });
+  },
+
+  //动态发布时间
+  ago: function (datatime) {
+    
+    var diff = (((new Date()).getTime() - (new Date(datatime)).getTime()) / 1000);
+    var day_diff = Math.floor(diff / 86400);
+    return (day_diff == 0 && (diff < 60 && " 刚刚" ||
+      diff < 120 && "一分钟前" ||
+      diff < 3600 && Math.floor(diff / 60) + " 分钟前" ||
+      diff < 7200 && "1 小时前" ||
+      diff < 86400 && Math.floor(diff / 3600) + " 小时前")) ||
+      day_diff == 1 && "昨天" ||
+      day_diff < 7 && day_diff + " 天前" ||
+      Math.ceil(day_diff / 7) + " 周前";
+
   }
+
 });

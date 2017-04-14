@@ -37,9 +37,9 @@
 .avatar {
     width: 84rpx;
     height: 84rpx;
-    border: #a5a5a7 1rpx solid;
     display: inline-block;
     vertical-align: top;
+    border-radius:50%;
 }
 .text {
     display: inline-block;
@@ -57,7 +57,7 @@
     margin-bottom: 6rpx;
 }
 .text .content {
-    border: #ccc 1rpx solid;
+    border: none;
     border-radius: 4px;
     background: #fff;
     font-size: 36rpx;
@@ -139,7 +139,7 @@
 }
 .send-input {
     flex: 1;
-    height: 72rpx;
+    height: 52rpx;
     background: #fff;
     border:#ddd 1rpx solid;
     border-radius: 3px;
@@ -148,9 +148,9 @@
     padding: 0 10rpx;
 }
 .send-btn {
-    width: 160rpx;
-    height: 72rpx;
-    line-height: 72rpx;
+    width: 120rpx;
+    height: 52rpx;
+    line-height: 52rpx;
     background-color: #a0e75a;
     font-size: 28rpx;
 }

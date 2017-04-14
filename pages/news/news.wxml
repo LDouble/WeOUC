@@ -18,13 +18,13 @@
       <navigator url="/pages/news/{{(active.type)=='all'?'new':(active.type)}}/{{(active.type)=='all'?'new':(active.type)}}_detail?type={{active.type}}&id={{index}}">
         <view class="main-card-item">
           <view class="kb-item-left">
-              <text class="kb-item-what">{{item.nickname}} </text>
+              <text class="kb-item-what">{{item.nickname}}</text>
           <text class="list-item-title" wx:if="{{item.title}}">{{item.title}}</text>
             <text class="list-item-title" wx:else>{{item.pubissue}}</text>
             
           </view>
           <view>
-          <text class="kb-item-when">{{item.pubtime}}</text>
+          <text class="kb-item-when">{{item.ago}}</text>
           <text class="kb-item-look">{{item.commentCount}}/{{item.readCount}}</text>
           </view>
         </view>

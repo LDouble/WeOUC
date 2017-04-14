@@ -91,7 +91,11 @@
   color: #353535;
   white-space: nowrap;
   width: 100%;
-  padding: 45rpx;
+  max-height:200rpx;
+  line-height: 40rpx;
+  padding: 10rpx 45rpx 45rpx 45rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .list-item-time{
   font-size: 10pt;
@@ -112,7 +116,6 @@
   -moz-border-radius: 4px 3px 6px 10px;
   -o-border-radius: 4px 3px 6px 10px;
   border-radius: 4px 3px 6px 10px;
-  margin: 20rpx;
   padding: 20rpx;
   height: 100%;
   -webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
@@ -156,7 +159,9 @@
 }
 
 .kb-item-when {
+  padding: 0rpx 40rpx;
   white-space:nowrap;
+  font-size: 10pt;
   color: #bbb;
 }
 
