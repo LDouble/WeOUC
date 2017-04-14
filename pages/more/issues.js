@@ -69,7 +69,7 @@ Page({
           if(_this.data.title==''){
       title = '' + app._user.wx.nickName + '';
     }else{
-      title = '【' + _this.data.title + '】' 
+      title = '匿名：' + _this.data.title; 
     }
           
           content = _this.data.content;
