@@ -24,6 +24,7 @@ Page({
     this.getData();
     if (wx.getStorageSync('stuinfo')) {
       var stuinfo = wx.getStorageSync('stuinfo')
+      stuinfo.className=stuinfo.className.split("(")[0]
       _this.setData({ stuinfo: stuinfo });
       wx.hideNavigationBarLoading();
     }

@@ -13,6 +13,14 @@
 /**user-info**/
 .user-info-box{
   margin-bottom: 40rpx;
+  -webkit-border-radius: 4px 3px 6px 10px;
+  -moz-border-radius: 4px 3px 6px 10px;
+  -o-border-radius: 4px 3px 6px 10px;
+  border-radius: 4px 3px 6px 10px;
+  margin: 20rpx;
+  -webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
 }
 .user-info {
   flex-direction: column;
@@ -131,4 +139,14 @@
   padding-right: 5rpx;
   font-size: 8pt;
   color: #09BB07;
+}
+.circle {
+  -webkit-border-radius: 4px 3px 6px 10px;
+  -moz-border-radius: 4px 3px 6px 10px;
+  -o-border-radius: 4px 3px 6px 10px;
+  border-radius: 4px 3px 6px 10px;
+  margin: 20rpx;
+  -webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
 }

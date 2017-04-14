@@ -232,7 +232,7 @@ Page({
   //获取课程信息
   getStuclass: function () {
     var _this = this;
-    showNavigationBarLoading
+    wx.showNavigationBarLoading
     wx.request({
       url: app._server + '/mywebapp/kebiao?openid=' + app.openid,
       success: function (res) {
@@ -269,6 +269,9 @@ Page({
           var pushdata = JSON.parse(res.data[0].data);
           console.log("服务器返回来的数据:");
           console.log(pushdata);
+          pushdata.forEach(function (value, index) {
+            console.log(value.type);
+          });
           _this.setData({
             'pushdata': pushdata,
             'card.push.show': true

@@ -39,7 +39,7 @@
     </navigator>
   </view>
   <view class="more-list">
-    <navigator url="/pages/more/issues" class="issue-link">
+    <navigator url="/pages/more/issues" class="issue-link circle">
       <view class="more-btn">
         <image class="btn-icon" src="/images/more/issue.png"></image>
         <text class="btn-text">动态</text>
@@ -48,7 +48,7 @@
         </view>
       </view>
     </navigator>
-    <navigator url="about" class="about-link">
+    <navigator url="about" class="about-link circle" >
       <view class="more-btn">
         <image class="btn-icon" src="/images/more/about.png"></image>
         <text class="btn-text">关于</text>
@@ -59,7 +59,7 @@
     </navigator>
   </view>
 
-<view class="contact-box">
+<view class="contact-box ">
 <contact-button class="contact-help" type="default-light" size="22" session-from="weapp"></contact-button>
  <text class="contact-text">联系客服</text>
 </view>
