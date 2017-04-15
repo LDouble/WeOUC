@@ -8,7 +8,7 @@
     font-weight: bold;
     margin-top: 40rpx;
     line-height: 140%;
-    word-break: break-all;
+    word-bink: break-all;
 }
 .info{
     margin-top: 30rpx;
@@ -83,4 +83,33 @@
     flex: 0 0 39rpx;
     width: 39rpx;
     height: 48rpx;
+}
+
+.blog_content_widget_view{
+    text-align: center;
+}
+.view_interval{
+    margin-top: 5pt;
+}
+.likeView{
+    display:inline;
+    margin-right: 70rpx;
+}
+.likeView image{
+    width: 35rpx;
+    height: 35rpx;
+}
+.commentView{
+    display:inline;
+    margin-left: 70rpx;
+}
+.ignoreBorder{
+    box-sizing: border-box;
+}
+.clearFloat{
+    clear: both;
+}
+.comment_item_view .widget{
+    text-align: right;
+    border: 1px black solid;
 }
