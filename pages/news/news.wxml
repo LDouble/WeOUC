@@ -17,12 +17,21 @@
     <block wx:for="{{active.data}}" wx:key="item.blogid">
       <navigator url="/pages/news/{{(active.type)=='all'?'new':(active.type)}}/{{(active.type)=='all'?'new':(active.type)}}_detail?type={{active.type}}&id={{index}}">
         <view class="main-card-item">
+        
           <view class="kb-item-left">
+              <view class="kb-item-look">
               <text class="kb-item-what">{{item.nickname}}</text>
+              <!-- 点赞图标 -->
+            <view id="{{index}}" class="likeView ignoreBorder" catchtap="processLike">
+                <image mode="aspectFit" src="/images/news/liked@{{item.liked? 'colour': 'gray'}}.png"></image>
+                <text class="">({{item.likeCount}})</text>
+            </view>
+            </view>
           <text class="list-item-title" wx:if="{{item.title}}">{{item.title}}</text>
             <text class="list-item-title" wx:else>{{item.pubissue}}</text>
             
           </view>
+          
           <view>
           <text class="kb-item-when">{{item.ago}}</text>
           <text class="kb-item-look">{{item.commentCount}}/{{item.readCount}}</text>

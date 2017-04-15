@@ -180,3 +180,17 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.likeView{
+    float:right;
+    padding-top: 25rpx;
+    margin-right: -45rpx;
+  white-space:nowrap;
+}
+.likeView image{
+    width: 35rpx;
+    height: 35rpx;
+}
+.ignoreBorder{
+    box-sizing: border-box;
+  
+}

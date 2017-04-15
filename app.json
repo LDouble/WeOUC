@@ -18,7 +18,9 @@
     "pages/core/kjs/kjs",
     "pages/core/bx/bx",
     "pages/core/chat/chat",
-    "pages/game/game"
+    "pages/game/game",
+    "pages/news/detail/issuesComment",
+    "pages/news/detail/issuesReplyComment"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7acfa6",

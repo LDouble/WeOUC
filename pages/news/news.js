@@ -4,6 +4,7 @@ var app = getApp();
 Page({
   data: {
     page: 0,
+    likeremind: false,
     list: [
       { id: 0, 'type': 'all', name: '头条', storage: [], url: '/blog/getblog.do', enabled: { guest: false, student: true, teacher: true } },
       { id: 1, 'type': 'jw', name: '教务公告', storage: [], url: '/blog/getjwblog.do', enabled: { guest: false, student: true, teacher: true } },
@@ -19,9 +20,12 @@ Page({
     },
     loading: false,
     user_type: 'guest',
-    disabledRemind: false
+    disabledRemind: false,
   },
   onLoad: function () {
+
+  },
+  onReady: function () {
     if (app.openid) {
       this.setData({
         user_type: !app._user.teacher ? 'student' : 'teacher'
@@ -71,6 +75,7 @@ Page({
 
   onShow: function () {
     this.setAgo(this.data.active.data);
+
   },
   //下拉更新
   onPullDownRefresh: function () {
@@ -171,9 +176,9 @@ Page({
           _this.setData({
             'active.remind': '网络错误'
           });
-          
+
         }
-       _this.setAgo(_this.data.active.data);
+        _this.setAgo(_this.data.active.data);
       },
       fail: function (res) {
         app.showErrorModal(res.errMsg);
@@ -190,7 +195,7 @@ Page({
     })
   },
   //计算多少小时/周前
-  setAgo:function(tem_blogdata){
+  setAgo: function (tem_blogdata) {
     //计算可视化时间
     var _this = this;
     console.log(tem_blogdata)
@@ -199,7 +204,7 @@ Page({
     //console.log(tmp)
     tmp.forEach(function (value, index) {
       var time = value.pubtime;
-      time = time.replace(/(-)/g,"/")
+      time = time.replace(/(-)/g, "/")
       var ago = _this.ago(time)
 
       console.log(ago);
@@ -234,7 +239,7 @@ Page({
 
   //动态发布时间
   ago: function (datatime) {
-    
+
     var diff = (((new Date()).getTime() - (new Date(datatime)).getTime()) / 1000);
     var day_diff = Math.floor(diff / 86400);
     return (day_diff == 0 && (diff < 60 && " 刚刚" ||
@@ -246,6 +251,75 @@ Page({
       day_diff < 7 && day_diff + " 天前" ||
       Math.ceil(day_diff / 7) + " 周前";
 
+  },
+  // 处理点赞
+  processLike: function (e) {
+    var _this = this;
+    var likeremind = _this.data.likeremind;
+    if (likeremind != false) {
+      //console.log(likeremind)
+      wx.showToast({
+        title: '手速太快啦~',
+        icon: 'loading',
+        duration: 500
+      })
+      return
+    } else {
+      _this.setData({ 'likeremind': true })
+    }
+
+    var id = e.currentTarget.id;
+    var timestap = e.timeStamp;
+    var tmp_active_data = _this.data.active.data;
+    var likeid = tmp_active_data[id].blogid
+    var liked = !!!(tmp_active_data[id].liked);
+    if (liked) {
+      tmp_active_data[id].likeCount++;
+    } else {
+      tmp_active_data[id].likeCount--;
+    }
+
+    tmp_active_data[id].liked = liked;
+    console.log(tmp_active_data[id].likeCount)
+    _this.setData({
+      'active.data': tmp_active_data
+    })
+    var pushmethod = liked ? 'add' : 'del'
+    //console.log(app._user.wx.nickName)
+
+    wx.request({
+      url: `${app._server}/blog/like.do?openid=${app.openid}&likeid=${likeid}&type=blog&nickname=${app._user.wx.nickName}&method=${pushmethod}&${timestap}`,
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data.status)
+        app.saveCache(_this.data.active.type, tmp_active_data)
+
+        //如果失败则回退 40711&&40712属于本地数据不同步问题
+        if (res.data.status != 20010 && res.data.status != 40711 && res.data.status != 40712) {
+          console.log("回退")
+          liked = !!!liked;
+          tmp_active_data[id].liked = liked;
+          _this.setData({
+            'active.data': tmp_active_data
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+         //如果失败则回退 40711&&40712属于本地数据不同步问题
+          console.log("回退")
+          liked = !!!liked;
+          tmp_active_data[id].liked = liked;
+          _this.setData({
+            'active.data': tmp_active_data
+          })
+        
+      }, complete() {
+        _this.setData({
+          'likeremind': false
+        })
+      }
+    })
   }
 
 });
