@@ -73,9 +73,21 @@ Page({
     //console.log(this.data.active.data);
   },
 
+  //执行可视化时间函数  判断是否需要强制刷新
   onShow: function () {
     this.setAgo(this.data.active.data);
-
+    wx.getStorage({
+      key: 'last_current',
+      success: function(res){
+        console.log(res)
+      },
+      fail: function(res) {
+        // fail
+      },
+      complete: function(res) {
+        // complete
+      }
+    })
   },
   //下拉更新
   onPullDownRefresh: function () {
@@ -128,6 +140,10 @@ Page({
             }
 
           }
+
+          var updata_timestamp=new Date().getTime();
+          
+          app.saveCache('last_current', updata_timestamp);
           console.log(res)
           var blogdata = res.data.data;
           var size = res.data.size
@@ -181,7 +197,7 @@ Page({
         _this.setAgo(_this.data.active.data);
       },
       fail: function (res) {
-        app.showErrorModal(res.errMsg);
+        //app.showErrorModal(res.errMsg);
         _this.setData({
           'active.remind': '网络错误'
         });
@@ -229,6 +245,10 @@ Page({
     });
 
     this.getNewsList(e.target.dataset.id);
+  },
+  //判断是否需要执行强制刷新，删除对应的lastid，然后拉取数据
+  forceUpdata: function(typeId){
+    
   },
   //增加动态
   addnews: function () {
@@ -286,34 +306,46 @@ Page({
     })
     var pushmethod = liked ? 'add' : 'del'
     //console.log(app._user.wx.nickName)
-
+    var nickname = app._user.wx.nickName.replace(/\s+/g, "")
     wx.request({
-      url: `${app._server}/blog/like.do?openid=${app.openid}&likeid=${likeid}&type=blog&nickname=${app._user.wx.nickName}&method=${pushmethod}&${timestap}`,
+      url: `${app._server}/blog/like.do?openid=${app.openid}&likeid=${likeid}&type=blog&nickname=${nickname}&method=${pushmethod}&${timestap}`,
       method: 'GET',
       success: function (res) {
         console.log(res.data.status)
-        app.saveCache(_this.data.active.type, tmp_active_data)
 
         //如果失败则回退 40711&&40712属于本地数据不同步问题
-        if (res.data.status != 20010 && res.data.status != 40711 && res.data.status != 40712) {
+        if (res.data.status != 20010 && res.data.status != 40711 && res.data.status != 40712 && res.data.status != 40713) {
           console.log("回退")
+          //app.showErrorModal(res.data.status + '');
           liked = !!!liked;
           tmp_active_data[id].liked = liked;
+          if (liked) {
+            tmp_active_data[id].likeCount++;
+          } else {
+            tmp_active_data[id].likeCount--;
+          }
           _this.setData({
             'active.data': tmp_active_data
           })
+        } else {
+          app.saveCache(_this.data.active.type, tmp_active_data)
         }
       },
       fail: function (res) {
         console.log(res);
-         //如果失败则回退 40711&&40712属于本地数据不同步问题
-          console.log("回退")
-          liked = !!!liked;
-          tmp_active_data[id].liked = liked;
-          _this.setData({
-            'active.data': tmp_active_data
-          })
-        
+        //如果失败则回退 40711&&40712属于本地数据不同步问题
+        console.log("回退")
+        liked = !!!liked;
+        if (liked) {
+          tmp_active_data[id].likeCount++;
+        } else {
+          tmp_active_data[id].likeCount--;
+        }
+        tmp_active_data[id].liked = liked;
+        _this.setData({
+          'active.data': tmp_active_data
+        })
+
       }, complete() {
         _this.setData({
           'likeremind': false

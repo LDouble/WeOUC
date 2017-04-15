@@ -60,7 +60,7 @@
     border: none;
     border-radius: 4px;
     background: #fff;
-    font-size: 25rpx !important;
+    font-size: 34rpx !important;
     line-height: 36rpx;
     padding: 20rpx;
     position: relative;
@@ -139,7 +139,7 @@
 }
 .send-input {
     flex: 1;
-    height: 52rpx;
+    height: 68rpx;
     background: #fff;
     border:#ddd 1rpx solid;
     border-radius: 3px;
@@ -149,8 +149,8 @@
 }
 .send-btn {
     width: 120rpx;
-    height: 52rpx;
-    line-height: 52rpx;
+    height: 68rpx;
+    line-height: 68rpx;
     background-color: #a0e75a;
     font-size: 28rpx;
 }
@@ -222,6 +222,7 @@
         margin-right: 20rpx;
         box-sizing: border-box;
         padding: 0 10rpx;
+        font-size: 36rpx !important;
     }
     .send-btn {
         width: 160rpx;
