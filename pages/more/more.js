@@ -24,7 +24,9 @@ Page({
     this.getData();
     if (wx.getStorageSync('stuinfo')) {
       var stuinfo = wx.getStorageSync('stuinfo')
-      stuinfo.className=stuinfo.className.split("(")[0]
+      if(stuinfo.className.indexOf("(")!=-1){  
+        stuinfo.className=stuinfo.className.split("(")[0] 
+    }
       _this.setData({ stuinfo: stuinfo });
       wx.hideNavigationBarLoading();
     }
@@ -44,7 +46,8 @@ Page({
         if (res.data[0].status < 40000) {
           //console.log(res.data[0].data);
           var stuinfo = JSON.parse(res.data[0].data);
-          _this.setData({ stuinfo: stuinfo });
+          stuinfo.className=stuinfo.className.split("(")[0]
+          _this.setData({ 'stuinfo': stuinfo });
           wx.setStorageSync('stuinfo', stuinfo)
         }
         else{

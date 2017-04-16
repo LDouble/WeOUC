@@ -137,11 +137,6 @@ Page({
           var blogdata = res.data.data;
           var size = res.data.size
           if (size == 0) {
-            wx.showToast({
-              title: '无更新~',
-              icon: 'success',
-              duration: 500
-            });
             _this.setData({
               'active.remind': '——没有更多啦😆——',
               'active.data': tempblog,
