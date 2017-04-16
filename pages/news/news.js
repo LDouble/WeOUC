@@ -244,9 +244,10 @@ Page({
         var diff_time =  (this_timestamp-res.data)/1000
         console.log(diff_time)
         if(diff_time>180){
+          _this.setData({page:0});
           app.removeCache(active.type);
           app.removeCache(`${active.type}id`);
-          console.log(`缓存过期删除了${active.type}缓存`)
+          console.log(`缓存过期删除了${active.type}id缓存`)
         }
       },
       fail: function(res) {
