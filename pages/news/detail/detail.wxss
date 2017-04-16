@@ -98,6 +98,8 @@
 .likeView image{
     width: 35rpx;
     height: 35rpx;
+    position: relative;
+    top: 8rpx;
 }
 .commentView{
     display:inline;
@@ -109,7 +111,23 @@
 .clearFloat{
     clear: both;
 }
+.comment_item_view{
+    background-color: #f6f6f6;
+    padding: 5rpx 5rpx;
+    margin-top: 25rpx;
+    border-radius: 5rpx;
+    box-shadow: 1px 2px 3px #e5e5e5;
+}
 .comment_item_view .widget{
     text-align: right;
-    border: 1px black solid;
+}
+.comment_item_view .author{
+    color: #576b95;
+}
+
+.content-ending{
+  width: 100%;
+  color: #bbb;
+  text-align: center;
+  margin: 30rpx auto;
 }

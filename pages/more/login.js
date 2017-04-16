@@ -14,15 +14,6 @@ Page({
   },
   onLoad: function () {
     var _this = this;
-  },
-  onShow: function () {
-    var _this = this;
-    _this.getlogincode();
-    console.log("login.onshow输出的" + app.logincode);
-  },
-
-  onReady: function () {
-    var _this = this;
     setTimeout(function () {
       _this.setData({
         remind: ''
@@ -38,6 +29,19 @@ Page({
         });
       }
     });
+  },
+  onShow: function () {
+    
+  },
+
+  onReady: function () {
+    var _this = this;
+    _this.getlogincode();
+  },
+  onHide: function(){
+    var _this = this;
+    _this.getlogincode();
+    console.log("login.onhide输出的" + app.logincode);
   },
   //刷新logincode
   getlogincode: function () {

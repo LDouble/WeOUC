@@ -9,7 +9,7 @@ Page({
       { id: 0, 'type': 'all', name: '头条', storage: [], url: '/blog/getblog.do', enabled: { guest: false, student: true, teacher: true } },
       { id: 1, 'type': 'jw', name: '教务公告', storage: [], url: '/blog/getjwblog.do', enabled: { guest: false, student: true, teacher: true } },
       { id: 2, 'type': 'oa', name: 'OA公告', storage: [], url: '/blog/getoablog.do', enabled: { guest: false, student: true, teacher: true } },
-      { id: 3, 'type': 'new', name: '校园周边', storage: [], url: '/blog/getnewsblog.do', enabled: { guest: true, student: true, teacher: true } }
+      { id: 3, 'type': 'news', name: '校园周边', storage: [], url: '/blog/getnewsblog.do', enabled: { guest: true, student: true, teacher: true } }
     ],
     'active': {
       id: 0,
@@ -23,9 +23,6 @@ Page({
     disabledRemind: false,
   },
   onLoad: function () {
-
-  },
-  onReady: function () {
     if (app.openid) {
       this.setData({
         user_type: !app._user.teacher ? 'student' : 'teacher'
@@ -75,19 +72,10 @@ Page({
 
   //执行可视化时间函数  判断是否需要强制刷新
   onShow: function () {
-    this.setAgo(this.data.active.data);
-    wx.getStorage({
-      key: 'last_current',
-      success: function(res){
-        console.log(res)
-      },
-      fail: function(res) {
-        // fail
-      },
-      complete: function(res) {
-        // complete
-      }
-    })
+    var _this = this;
+    var active = _this.data.active;
+     _this.setAgo(active.data);
+    _this.forceUpdata();
   },
   //下拉更新
   onPullDownRefresh: function () {
@@ -97,7 +85,7 @@ Page({
       'active.showMore': true,
       'active.remind': '下滑加载更多',
     });
-    _this.getNewsList();
+    _this.forceUpdata();
     wx.stopPullDownRefresh();
   },
   //上滑出到底端
@@ -126,8 +114,9 @@ Page({
       'active.remind': '正在努力加载中'
     });
     wx.showNavigationBarLoading();
+    var updata_timestamp=new Date().getTime();
     wx.request({
-      url: app._server + _this.data.list[typeId].url + '?blogid=' + temp_lastblogid + '&openid=' + app.openid,
+      url: app._server + _this.data.list[typeId].url + '?blogid=' + temp_lastblogid + '&openid=' + app.openid+'&'+updata_timestamp,
       method: 'GET',
       success: function (res) {
         if (res.statusCode == 200) {
@@ -143,7 +132,7 @@ Page({
 
           var updata_timestamp=new Date().getTime();
           
-          app.saveCache('last_current', updata_timestamp);
+          app.saveCache(`${temptype}_last_current`, updata_timestamp);
           console.log(res)
           var blogdata = res.data.data;
           var size = res.data.size
@@ -151,7 +140,7 @@ Page({
             wx.showToast({
               title: '无更新~',
               icon: 'success',
-              duration: 1500
+              duration: 500
             });
             _this.setData({
               'active.remind': '——没有更多啦😆——',
@@ -162,12 +151,7 @@ Page({
             for (var i = size; i < size + tempblog_size; i++) {
               blogdata[i] = tempblog[j];
               j++;
-            }
-            wx.showToast({
-              title: '更新了' + size + '条数据',
-              icon: 'success',
-              duration: 2000
-            });
+            }            
 
             app.saveCache(temptype, blogdata);
 
@@ -244,11 +228,36 @@ Page({
       'page': 0
     });
 
-    this.getNewsList(e.target.dataset.id);
+    this.forceUpdata(e.target.dataset.id);
   },
   //判断是否需要执行强制刷新，删除对应的lastid，然后拉取数据
   forceUpdata: function(typeId){
-    
+    var _this = this;
+    var active = _this.data.active;
+    typeId = typeId || _this.data.active.id;
+
+    var temptype = _this.data.list[typeId].type;
+    wx.getStorage({
+      key: `${temptype}_last_current`,
+      success: function(res){
+        var this_timestamp=new Date().getTime();
+        var diff_time =  (this_timestamp-res.data)/1000
+        console.log(diff_time)
+        if(diff_time>180){
+          app.removeCache(active.type);
+          app.removeCache(`${active.type}id`);
+          console.log(`缓存过期删除了${active.type}缓存`)
+        }
+      },
+      fail: function(res) {
+        app.removeCache(active.type);
+        app.removeCache(`${active.type}id`);
+        console.log(`获取${active.type}所以删除了${active.type}缓存`)
+      },
+      complete: function(res) {
+        _this.getNewsList(typeId);
+      }
+    })
   },
   //增加动态
   addnews: function () {
@@ -291,13 +300,16 @@ Page({
     var id = e.currentTarget.id;
     var timestap = e.timeStamp;
     var tmp_active_data = _this.data.active.data;
-    var likeid = tmp_active_data[id].blogid
+    var likeid = tmp_active_data[id].blogid;
+    
     var liked = !!!(tmp_active_data[id].liked);
     if (liked) {
       tmp_active_data[id].likeCount++;
     } else {
       tmp_active_data[id].likeCount--;
     }
+
+    var type = _this.data.active.type=='all'?'blog':_this.data.active.type;
 
     tmp_active_data[id].liked = liked;
     console.log(tmp_active_data[id].likeCount)
@@ -308,7 +320,7 @@ Page({
     //console.log(app._user.wx.nickName)
     var nickname = app._user.wx.nickName.replace(/\s+/g, "")
     wx.request({
-      url: `${app._server}/blog/like.do?openid=${app.openid}&likeid=${likeid}&type=blog&nickname=${nickname}&method=${pushmethod}&${timestap}`,
+      url: `${app._server}/blog/like.do?openid=${app.openid}&likeid=${likeid}&type=${type}&nickname=${nickname}&method=${pushmethod}&${timestap}`,
       method: 'GET',
       success: function (res) {
         console.log(res.data.status)

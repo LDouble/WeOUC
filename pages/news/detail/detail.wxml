@@ -45,6 +45,8 @@
             </view>
         </view>
     </view>
+    <!--提醒消息-->
+    <text class="content-ending">{{msg}}</text>
     <swiper class="files_list" wx:if="{{files_len}}" indicator-dots="{{files_len !== 1}}" autoplay="{{!file_loading}}">
       <swiper-item wx:for="{{files_list}}" wx:key="fjid">
         <view class="file">

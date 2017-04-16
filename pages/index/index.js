@@ -261,11 +261,12 @@ Page({
   //获取推送消息
   getpush: function () {
     var _this = this;
-    wx.showNavigationBarLoading();
+    //wx.showNavigationBarLoading();
     wx.request({
       url: app._server + '/mywebapp/push?openid=' + app.openid,
       success: function (res) {
-        if (res.data[0].status == 90000) {
+        var statusCode = res.data[0].status || '50010'
+        if (statusCode == 90000) {
           var pushdata = JSON.parse(res.data[0].data);
           console.log("服务器返回来的数据:");
           console.log(pushdata);
@@ -282,7 +283,7 @@ Page({
         app.showErrorModal("服务器连接失败", "请检查网络连接")
       },
       complete: function () {
-        wx.hideNavigationBarLoading();
+        //wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
       }
     })

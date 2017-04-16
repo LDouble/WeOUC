@@ -6,7 +6,7 @@
     "pages/news/oa/oa_detail",
     "pages/news/hy/hy_detail",
     "pages/news/jz/jz_detail",
-    "pages/news/new/new_detail",
+    "pages/news/news/news_detail",
     "pages/more/login",
     "pages/more/append",
     "pages/more/more",
@@ -41,7 +41,7 @@
       "selectedIconPath": "images/index/index@active.png"
     },{
       "pagePath": "pages/news/news",
-      "text": "资讯",
+      "text": "华软",
       "iconPath": "images/index/news.png",
       "selectedIconPath": "images/index/news@active.png"
     }, {
@@ -52,7 +52,7 @@
     }]
   },
   "networkTimeout": {
-    "request": 20000,
+    "request": 10000,
     "uploadFile": 30000,
     "downloadFile": 30000
   },

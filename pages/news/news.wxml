@@ -15,7 +15,7 @@
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
     <block wx:for="{{active.data}}" wx:key="item.blogid">
-      <navigator url="/pages/news/{{(active.type)=='all'?'new':(active.type)}}/{{(active.type)=='all'?'new':(active.type)}}_detail?type={{active.type}}&id={{index}}">
+      <navigator url="/pages/news/{{(active.type)=='all'?'news':(active.type)}}/{{(active.type)=='all'?'news':(active.type)}}_detail?type={{active.type}}&id={{index}}">
         <view class="main-card-item">
         
           <view class="kb-item-left">
