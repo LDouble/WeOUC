@@ -20,17 +20,20 @@ We华软
 
 ![](https://yicodes.com/wemysise/images/web/a1.jpg)
 
+
 * 社交功能：客户可以在这里分享自己新鲜事，学校组织可以添加OA、教务公告，
 
 ![](https://yicodes.com/wemysise/images/web/a6.jpg)
 
 ![](https://yicodes.com/wemysise/images/web/a10.jpg)
 
+
 * 聊天系统：根据用户登陆信息，在同一个校园的社交圈内，可以进行一对一的陌生人实时聊天，扩大用户的交际圈。
-* 
+
 >每个用户都有独自的用户画像，机器学习构建用户画像模型，智能推荐用户感兴趣的聊天对象。
 
 ![](https://yicodes.com/wemysise/images/web/a7.jpg)
+
 
 * 校园周边：一些附近商家活动，帮助周边商家推广实现产品盈利
 
@@ -49,7 +52,7 @@ We华软
 4.	系统应具备数据库维护功能，及时根据用户需求进行数据的添加、删除、修改、备份等操作。
 5.	系统具有完备的服务器警告功能，对错误级别较高的信息及时提醒管理员对服务器进行调整修复
 
-更多请看视频[demo](https://v.qq.com/x/page/m0394fkrzo2.html)
+**更多请看视频 [demo](https://v.qq.com/x/page/m0394fkrzo2.html)**
 
 **We华软**代码源自于We重邮微信小程序，使用符合开源许可证 License AGPLv3
 
