@@ -31,7 +31,7 @@ Page({
     });
   },
   onShow: function () {
-    
+    wx.startAccelerometer();
   },
 
   onReady: function () {
@@ -42,6 +42,7 @@ Page({
     var _this = this;
     _this.getlogincode();
     console.log("login.onhide输出的" + app.logincode);
+    wx.stopAccelerometer();
   },
   //刷新logincode
   getlogincode: function () {

@@ -85,7 +85,7 @@ Page({
     var _this = this;
     //this.getCardData();
 
-    if (wx.getStorageSync('stuclass') === '') {
+    if (wx.getStorageSync('stuclass') == '') {
       //console.log("onshow stuclass获取的缓存为空");
       //重定向
       _this.setData({ remind: '加载中' });
@@ -114,14 +114,14 @@ Page({
   onShow: function () {
     var _this = this;
     console.log(_this.data.core[0].name)
-    if (app.openid === '' || app.openid === null) {
+    if (app.openid == '' || app.openid == null) {
       //console.log("onshow openid获取的缓存为空");
       wx.navigateTo({
         url: '/pages/more/login'
       });
     }
 
-    if (wx.getStorageSync('stuclass') === '') {
+    if (wx.getStorageSync('stuclass') == '') {
       //console.log("onshow stuclass获取的缓存为空");
       //重定向
       _this.setData({ remind: '加载中' });
@@ -177,7 +177,7 @@ Page({
     var noclassnum = 0;
     var strTem = {};  // 临时变量
     //周末都是没课滴
-    if (app.today === 0 || app.today === 6) {
+    if (app.today == 0 || app.today == 6) {
       _this.setData({ nothingclass: true });
     } else {
       for (var value in stuclass) {
@@ -292,7 +292,7 @@ Page({
     app.openid = wx.getStorageSync('openid');
     this.login();
     //重定向
-    if (app.openid === '') {
+    if (app.openid == '') {
       wx.navigateTo({
         url: '/pages/more/login'
       });
@@ -379,7 +379,7 @@ Page({
     //课表渲染
     function kbRender(info) {
       var today = parseInt(info.day),
-        lessons = info.lessons[today === 0 ? 6 : today - 1], //day为0表示周日(6)，day为1表示周一(0)..
+        lessons = info.lessons[today == 0 ? 6 : today - 1], //day为0表示周日(6)，day为1表示周一(0)..
         list = [],
         time_list = _this.data.card.kb.time_list;
       for (var i = 0; i < 6; i++) {

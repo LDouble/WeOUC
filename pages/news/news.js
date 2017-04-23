@@ -74,7 +74,7 @@ Page({
   onShow: function () {
     var _this = this;
     var active = _this.data.active;
-     _this.setAgo(active.data);
+    _this.setAgo(active.data);
     _this.forceUpdata();
   },
   //下拉更新
@@ -114,9 +114,9 @@ Page({
       'active.remind': '正在努力加载中'
     });
     wx.showNavigationBarLoading();
-    var updata_timestamp=new Date().getTime();
+    var updata_timestamp = new Date().getTime();
     wx.request({
-      url: app._server + _this.data.list[typeId].url + '?blogid=' + temp_lastblogid + '&openid=' + app.openid+'&'+updata_timestamp,
+      url: app._server + _this.data.list[typeId].url + '?blogid=' + temp_lastblogid + '&openid=' + app.openid + '&' + updata_timestamp,
       method: 'GET',
       success: function (res) {
         if (res.statusCode == 200) {
@@ -130,8 +130,8 @@ Page({
 
           }
 
-          var updata_timestamp=new Date().getTime();
-          
+          var updata_timestamp = new Date().getTime();
+
           app.saveCache(`${temptype}_last_current`, updata_timestamp);
           console.log(res)
           var blogdata = res.data.data;
@@ -146,7 +146,7 @@ Page({
             for (var i = size; i < size + tempblog_size; i++) {
               blogdata[i] = tempblog[j];
               j++;
-            }            
+            }
 
             app.saveCache(temptype, blogdata);
 
@@ -196,7 +196,9 @@ Page({
     console.log(tem_blogdata)
     console.log("动态发布时间")
     var tmp = tem_blogdata;
-    //console.log(tmp)
+    console.log(tmp)
+    try{
+
     tmp.forEach(function (value, index) {
       var time = value.pubtime;
       time = time.replace(/(-)/g, "/")
@@ -209,6 +211,10 @@ Page({
     _this.setData({
       'active.data': tmp
     })
+    }catch(e){
+      //console(console.log(e));
+      return;
+    }
   },
   //获取焦点
   changeFilter: function (e) {
@@ -226,7 +232,7 @@ Page({
     this.forceUpdata(e.target.dataset.id);
   },
   //判断是否需要执行强制刷新，删除对应的lastid，然后拉取数据
-  forceUpdata: function(typeId){
+  forceUpdata: function (typeId) {
     var _this = this;
     var active = _this.data.active;
     typeId = typeId || _this.data.active.id;
@@ -234,23 +240,23 @@ Page({
     var temptype = _this.data.list[typeId].type;
     wx.getStorage({
       key: `${temptype}_last_current`,
-      success: function(res){
-        var this_timestamp=new Date().getTime();
-        var diff_time =  (this_timestamp-res.data)/1000
+      success: function (res) {
+        var this_timestamp = new Date().getTime();
+        var diff_time = (this_timestamp - res.data) / 1000
         console.log(diff_time)
-        if(diff_time>180){
-          _this.setData({page:0});
+        if (diff_time > 180) {
+          _this.setData({ page: 0 });
           app.removeCache(active.type);
           app.removeCache(`${active.type}id`);
           console.log(`缓存过期删除了${active.type}id缓存`)
         }
       },
-      fail: function(res) {
+      fail: function (res) {
         app.removeCache(active.type);
         app.removeCache(`${active.type}id`);
         console.log(`获取${active.type}所以删除了${active.type}缓存`)
       },
-      complete: function(res) {
+      complete: function (res) {
         _this.getNewsList(typeId);
       }
     })
@@ -297,7 +303,7 @@ Page({
     var timestap = e.timeStamp;
     var tmp_active_data = _this.data.active.data;
     var likeid = tmp_active_data[id].blogid;
-    
+
     var liked = !!!(tmp_active_data[id].liked);
     if (liked) {
       tmp_active_data[id].likeCount++;
@@ -305,7 +311,7 @@ Page({
       tmp_active_data[id].likeCount--;
     }
 
-    var type = _this.data.active.type=='all'?'blog':_this.data.active.type;
+    var type = _this.data.active.type == 'all' ? 'blog' : _this.data.active.type;
 
     tmp_active_data[id].liked = liked;
     console.log(tmp_active_data[id].likeCount)

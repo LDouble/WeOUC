@@ -1,6 +1,6 @@
 //app.js
 App({
-  version: 'v2.7.1', //版本号
+  version: 'v2.7.5', //版本号
   today: '',
   logincode: '',
   openid: '',

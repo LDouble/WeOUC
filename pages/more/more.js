@@ -9,7 +9,7 @@ Page({
   },
   onLoad: function () {
     app.getUser();
-    if (app.openid === ''||app.openid ===null) {
+    if (app.openid == ''||app.openid ==null) {
       wx.navigateTo({
         url: '/pages/more/login'
       });
