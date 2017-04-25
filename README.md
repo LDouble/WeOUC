@@ -2,8 +2,11 @@ We华软
 ===
 [官网：https://yicodes.com/wemysise/](https://yicodes.com/wemysise/)
 
+<<<<<<< HEAD
 **使用请删除images目录下的web文件夹**
 
+=======
+>>>>>>> 742fa1f79525d881943548c68b68c7040734b082
 **We华软**是垂直化校园社交产品，集多种能于一体的微信小程序，无需下载，扫码即用。
 
 #### 核心功能概述

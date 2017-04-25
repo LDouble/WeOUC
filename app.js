@@ -216,7 +216,7 @@ App({
     return week;
   },
   cache: {},
-  _server: 'https://wxapp.yicodes.com',
+  _server: 'https://www.baidu.com',
   _user: {
     //微信数据
     wx: {},
