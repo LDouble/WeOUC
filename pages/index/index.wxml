@@ -62,7 +62,7 @@
       <navigator url="/pages/core/kb/kb">
         <view class="card-item-hd">
           <image class="card-item-icon" src="/images/core/kb.png"></image>
-          <text class="card-item-name">今日课表</text>
+          <text class="card-item-name">今日课表{{mind}}</text>
         </view>
         <view wx:if="{{nothingclass}}" class="card-item-bd kb-nothing">
           <text>今天居然没有课~😆</text>

@@ -119,6 +119,8 @@ Page({
       url: app._server + _this.data.list[typeId].url + '?blogid=' + temp_lastblogid + '&openid=' + app.openid + '&' + updata_timestamp,
       method: 'GET',
       success: function (res) {
+        console.log("new发起了请求")
+        console.log(res)
         if (res.statusCode == 200) {
           if (temptype == 'all') {
             //记录头条更新日期

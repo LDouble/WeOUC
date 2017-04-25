@@ -19,7 +19,7 @@ Page({
       { '15 - 16 节': '20:30 - 21:50' },
     ],
     core: [
-      { id: 'kb', name: '课表查询', disabled: true, teacher_disabled: false, offline_disabled: true },
+      { id: 'kb', name: '课表', disabled: true, teacher_disabled: false, offline_disabled: true },
       { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
       { id: 'bx', name: '考勤信息', disabled: false, teacher_disabled: false, offline_disabled: true },
       { id: 'chat', name: '概率论', disabled: false, teacher_disabled: true, offline_disabled: false }
