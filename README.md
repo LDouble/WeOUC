@@ -13,29 +13,45 @@ We华软
 
 * 核心功能：客户端可以查看课表、成绩、考试、校园资讯等，还有重要信息推送
 
-![](https://yicodes.com/wemysise/images/web/a3.jpg)
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a3.jpg" alt="Editor" width="400">
+</div>
 
-![](https://yicodes.com/wemysise/images/web/a2.jpg)
 
-![](https://yicodes.com/wemysise/images/web/a4.jpg)
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a2.jpg" alt="Editor" width="400">
+</div>
 
-![](https://yicodes.com/wemysise/images/web/a9.jpg)
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a4.jpg" alt="Editor" width="400">
+</div>
 
-![](https://yicodes.com/wemysise/images/web/a1.jpg)
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a9.jpg" alt="Editor" width="400">
+</div>
 
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a1.jpg" alt="Editor" width="400">
+</div>
 
 * 社交功能：客户可以在这里分享自己新鲜事，学校组织可以添加OA、教务公告，
 
-![](https://yicodes.com/wemysise/images/web/a6.jpg)
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a6.jpg" alt="Editor" width="400">
+</div>
 
-![](https://yicodes.com/wemysise/images/web/a10.jpg)
-
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a10.jpg" alt="Editor" width="400">
+</div>
 
 * 聊天系统：根据用户登陆信息，在同一个校园的社交圈内，可以进行一对一的陌生人实时聊天，扩大用户的交际圈。
 
 >每个用户都有独自的用户画像，机器学习构建用户画像模型，智能推荐用户感兴趣的聊天对象。
 
-![](https://yicodes.com/wemysise/images/web/a7.jpg)
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a7.jpg" alt="Editor" width="400">
+</div>
+
 
 
 * 校园周边：一些附近商家活动，帮助周边商家推广实现产品盈利
@@ -44,8 +60,9 @@ We华软
 
 * 管理后台：供系统管理员、学校组织和周边商家在web端使用，分不同角色不同权限，兼容手机和PC端，分别可以对OA系统、校园周边模块内容进添加、修改、删除。
 
-![](https://yicodes.com/wemysise/images/web/a8.jpg)
-
+<div align="center">
+	<img src="https://yicodes.com/wemysise/images/web/a8.jpg" alt="Editor" width="400">
+</div>
 
 设计思路
 
