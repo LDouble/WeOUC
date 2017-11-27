@@ -1,4 +1,4 @@
-// pages/news/jz/jz_detail.js
+// pages/news/xs/jz_detail.js
 Page({
 
   /**

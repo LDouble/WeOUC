@@ -1,6 +1,6 @@
 <!--detail.wxml (common)-->
 <view class="container">
-  <view wx:if="" class="remind-box">
+  <view wx:if="{{remind}}" class="remind-box">
     <image wx:if="{{remind == '加载中'}}" class="remind-img" src="/images/index/loading.gif"></image>
     <block wx:else>
       <image class="remind-img" src="/images/index/nothing.png"></image>
@@ -11,42 +11,7 @@
     <view class="title">
       <text>{{title}}</text>
     </view>
-    <view class="info">
-      <text wx:if="{{date}}">Date：{{date}}</text>
-      <text wx:if="{{author}}">Author：{{author}}</text>
-      <text wx:if="{{reading}}">阅读量：{{reading}}</text>
-    </view>
-    <!-- blog内容容器 -->
-    <view class="blog_content_view view_interval flex-wrp" style="flex-direction:row;">
-        <text class="detail">{{content}}</text>
-        <view class="blog_content_widget_view info view_interval">
-            <!-- 点赞图标 -->
-            <view class="likeView ignoreBorder" bindtap="processLike">
-                <image mode="aspectFit" src="/images/news/liked@{{liked? 'colour': 'gray'}}.png"></image>
-                <text class="">({{likeCount}})</text>
-            </view>
-            <view class="commentView ignoreBorder">
-                <text class="" bindtap="addComment" >评论({{commentCount}})</text>
-            </view>
-            <view class="clearFloat"></view>
-        </view>
-    </view>
-    <!-- 评论列表 -->
-    <view class="comments_view view_interval">
-        <view class="comment_item_view" wx:for="{{comments}}">
-            <view class="author">
-                <text>作者：{{item.nickname}}</text>
-            </view>
-            <view class="comment">
-                <text>{{item.pubissue}}</text>
-            </view>
-            <view class="widget">
-                <text id="{{item.commentid}}" bindtap="addReplyComment">回复</text>
-            </view>
-        </view>
-    </view>
-    <!--提醒消息-->
-    <text class="content-ending">{{msg}}</text>
+    <text class="detail">{{content}}</text>
     <swiper class="files_list" wx:if="{{files_len}}" indicator-dots="{{files_len !== 1}}" autoplay="{{!file_loading}}">
       <swiper-item wx:for="{{files_list}}" wx:key="fjid">
         <view class="file">

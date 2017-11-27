@@ -38,7 +38,7 @@
         margin: 10rpx 0 20rpx;
     }
         .dormitory-info {
-            font-size: 20pt;
+            font-size: 18pt;
             line-height: 150%;
             letter-spacing: 1px;
         }
@@ -98,7 +98,7 @@
 
                 color: #777;
                 font-weight: bold;
-                font-size: 40pt;
+                font-size: 30pt;
                 line-height: 120%;
                 padding: 0 15rpx 0 20rpx;
             }

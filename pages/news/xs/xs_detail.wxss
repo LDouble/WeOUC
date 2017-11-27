@@ -1,2 +1,2 @@
-/**new_detail.wxss**/
+/**jz_detail.wxss**/
 @import "../detail/detail.wxss";

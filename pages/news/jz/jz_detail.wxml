@@ -1,2 +1,2 @@
-<!--jz_detail.wxml-->
-<include src="../detail/detail.wxml" />
+<!--pages/news/jz/jz_detail.wxml-->
+<text>pages/news/jz/jz_detail.wxml</text>

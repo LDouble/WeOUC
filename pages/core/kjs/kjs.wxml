@@ -3,16 +3,16 @@
     <!--显示空教室信息-->
     <view class="main-roomUl" hidden="{{errObj.errorDisplay ? false : true}}">
         <!--楼层-->
-        <block wx:for="{{testData}}" wx:key="">
+       <!-- <block wx:for="{{testData}}" wx:key="">-->
             <view class="roomUl-floor" >
                 <!--楼层的空教室-->
                 <view class="floor">
-                    <block wx:for="{{item.room}}" wx:key="">
+                    <block wx:for="{{testData}}" wx:key="">
                         <text>{{item}}</text>
                     </block>
                 </view>
             </view>
-        </block>
+      <!--  </block>-->
     </view>
 
     <!--选择要查询的条件-->

@@ -8,7 +8,7 @@ Page({
     nothingclass: false,
     stuclass: null,
     _days: ['一','二','三','四','五','六','日'],
-    _weeks: ['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周','第九周','第十周','十一周','十二周','十三周','十四周','十五周','十六周','十七周','十八周','十九周','二十周'],
+    _weeks : ['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周','第九周','第十周','十一周','十二周','十三周','十四周','十五周','十六周','十七周','十八周','十九周','二十周'],
     _time: [ //课程时间与指针位置的映射，{begin:课程开始,end:结束时间,top:指针距开始top格数}
       { begin: '0:00', end: '8:59', beginTop: -4, endTop: -4 },
       { begin: '9:00', end: '10:20', beginTop: 0, endTop: 200 },
@@ -58,8 +58,8 @@ Page({
   onLoad: function(options){
     var _this = this;
 
-    var classweek=parseInt(app.calWeek());
-    _this.classweek = classweek;
+    var classweek=1;
+
     var today=app.today-1;
     if(today<0){
       today=6;
@@ -110,10 +110,6 @@ Page({
     _this.setData({
       'scroll.left': (nowWeek===6||nowWeek===0) ? 102 : 0
     });
-    if (_this.classweek <= 0){
-      console.log(12345)
-      _this.chooseView();
-    }
   },
   onReady: function(){
     var _this = this;
@@ -267,9 +263,71 @@ Page({
     data[dataset.target] = parseInt(_this.data[dataset.target]) + i;
     _this.setData(data);
   },
+
+  getStuclass: function (options) {
+    var _this = this;
+    wx.showNavigationBarLoading
+    wx.request({
+      url: app._server + '/oucjw/kb',
+      method: "POST",
+      data: {
+        token: app.token,
+        username: app.username,
+        password: app.password,
+        update: options
+      },
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      success: function (res) {
+        if (res.data.status < 40000) {
+          app.today = parseInt(new Date().getDay());
+          var today = app.today;
+          var stuclass = res.data.data;
+          wx.setStorageSync('stuclass', stuclass);
+          _this.getTodayclass(stuclass);        }
+      },
+      fail: function () {
+        app.showErrorModal("服务器连接失败", "请检查网络连接")
+      },
+      complete: function () {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      }
+    })
+  },
+  getStuclass: function (options) {
+    var _this = this;
+    wx.showNavigationBarLoading()
+    wx.request({
+      url: app._server + '/oucjw/kb',
+      method: "POST",
+      data: {
+        token: app.token,
+        username: app.username,
+        password: app.password,
+        update: options,
+        xn:"2017",
+        xq:"1"
+      },
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      success: function (res) {
+        if (res.data.status < 40000) {
+          app.today = parseInt(new Date().getDay());
+          var today = app.today;
+          var stuclass = res.data.data;
+          wx.setStorageSync('stuclass1', stuclass);
+          _this.get_kb(app.token);
+        }
+      },
+      fail: function () {
+        app.showErrorModal("服务器连接失败", "请检查网络连接")
+      },
+      complete: function () {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      }
+    })
+  },
   get_kb: function(id){
-    //console.log('课表渲染函数');
-    //数组去除指定值
     function removeByValue(array,val){
       for(var i=0,len=array.length;i<len;i++) {
         if(array[i]==val){array.splice(i,1);break;}
@@ -388,14 +446,19 @@ Page({
 
 
     //读取课表缓存
-    var stuclass = wx.getStorageSync('stuclass')
+    var stuclass = wx.getStorageSync('stuclass1')
+      //var stuclass = JSON.parse(stuclass);
       var stuclass =stuclass;
+      if(stuclass == "")
+        _this.getStuclass("1")
       var strTem=[];
       for(var i=0;i<7;i++){
         var todaydata =[];
         for (var value in stuclass) {
           todaydata[value]=[];
           if(stuclass[value].classes[i]==null){
+           //console.log("当日课程为空")
+           //console.log(todaydata[value][0]);
            todaydata[value][0]='';
          }else if( stuclass[value].classes[i] instanceof Array){
             for(var x in stuclass[value].classes[i])
@@ -404,13 +467,18 @@ Page({
           else {
             todaydata[value][0]=stuclass[value].classes[i];
           }
+         //console.log(todaydata[value][])
+         //防止null对象错误
+
       }
 
       strTem[i] = todaydata;
+      //console.log(strTem[i]);
       }
 
       //_this.setData({ lessons: strTem});
       kbRender(strTem);
+      //todayclass();
       function todayclass(){
         app.today = parseInt(new Date().getDay());
     //这个today是数组下标，所以减一

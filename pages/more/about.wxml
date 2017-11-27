@@ -8,7 +8,7 @@
   <view class="content">
     <view class="version">
       <view class="version-title">
-        <text class="title-name">We华软</text>
+        <text class="title-name">WeOUC</text>
         <text class="version-text">{{version}}</text>
         <text class="version-text">公测</text>
       </view>
@@ -20,158 +20,33 @@
     <view class="describe" wx:if="{{!showLog}}">
         <text class="desc-title">简介</text>
         <view class="desc-list">
-          <text class="desc-list-item">官网：https://yicodes.com/wemysise/</text>
-          <text class="desc-list-item">Github：https://github.com/cncoder/wemysise</text>
-          <text class="desc-list-item">商业合作：romennts@gmail.com</text>
         </view>
-        <text class="desc-content">We华软是一款微信小程序，由华软json工作室（学生技术组织/团队）开发。有别于公众号的的一种请全新连接用户与服务的方式，无需下载与安装即可在微信内被便捷地获取和传播，同时致力于提供更加出色的体验。</text>
-        <text class="desc-content">We华软是碎片化、一站式、一体化校园移动门户，适用于学生，集课表、成绩、考试、资讯等功能于一身。</text>
-        <text class="desc-content">We华软有更好用的课表查询，本周视图、学期视图、对应日期及时钟轴，清晰明了。</text>
-        <text class="desc-content">We华软有更方便的考试安排，帮你折算出考试周对应的日期，以及考试时间倒计时，一目了然。</text>
-        <text class="desc-content">We华软有更强大的学生交流平台，适合于寻找失主等等~~</text>
-        <text class="desc-content">We华软更是个百事通，校内头条、教务公告、OA公告、学术讲座、综合新闻等，随时随地即能了解校园动态，还能预览与下载附件。</text>
-        <text class="desc-content">We华软更是/更有... （期待您的发现）</text>
-    </view>
+        <text class="desc-content">WeOUC是一款微信小程序，其UI借鉴于重庆邮电大学We重邮，Github地址：https://github.com/mcc108/wecqupt，后端对接于中国海洋大学选课系统。</text>
+        <text class="desc-content">WeOU适用于本科生，集课表、成绩、考试、资讯等功能于一身。</text>
+            </view>
     <view class="log-list" wx:else>
       <view class="describe">
           <view class="desc-title">
-            <text class="desc-v">v2.0 公测版</text>
-            <text class="desc-time">2017.02.10</text>
-          </view>
-          <text class="desc-content">修复BUG</text>
-          <view class="desc-list">
-            <text class="desc-list-item">修复首页卡片都无数据导致无法正常使用的问题</text>
-          </view>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">完善缓存机制，异常情况即时清除缓存</text>
-            <text class="desc-list-item">涉及隐私不外泄的原因，禁止学生查询的分享</text>
-            <text class="desc-list-item">考试安排新增支持下拉刷新</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.1.1 公测版</text>
-            <text class="desc-time">2017.02.09</text>
-          </view>
-          <text class="desc-content">修复BUG</text>
-          <view class="desc-list">
-            <text class="desc-list-item">修复无网离线缓存模式情况下请求失败出现的错误</text>
-          </view>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">阻止了课表详情的滑动穿透</text>
-            <text class="desc-list-item">兼容用户拒绝授权时的场景</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.1.0 公测版</text>
-            <text class="desc-time">2017.02.09</text>
-          </view>
-          <text class="desc-content">新增离线缓存模式</text>
-          <view class="desc-list">
-            <text class="desc-list-item">支持无网离线缓存模式访问，指在无网且有缓存的状态下，可以离线使用部分功能</text>
-            <text class="desc-list-item">支持离线缓存模式的功能：首页、我的课表、成绩查询、考试安排、</text>
-          </view>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">现在可以分享考试安排页面了</text>
-            <text class="desc-list-item">打开分享单页时也将会进行自动登录</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.0.10 公测先行版</text>
-            <text class="desc-time">2016.01.29</text>
-          </view>
-          <text class="desc-content">随着小程序官方版本更新，进行以下改善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">新增验证appid机制，开发者需要正确的appid才能进行开发调试</text>
-            <text class="desc-list-item">加载中的showToast消息提示框新增参数mask透明蒙层，防止触摸穿透</text>
-            <text class="desc-list-item">新增分享页面功能，可分享：首页(即整个小程序)、课表、学生查询、新闻详情（后续增加考试安排分享）</text>
-            <text class="desc-list-item">新增设置disableScroll禁止登录、完善信息页面上下滚动</text>
-            <text class="desc-list-item">所有navigator废弃redirect属性，改用新增的open-type</text>
-            <text class="desc-list-item">课表周期及详情的swiper滑块采用circular衔接滑动</text>
-            <text class="desc-list-item">新增部分input及textarea与键盘的距离cursor-spacing</text>
-            <text class="desc-list-item">利用新增picker的disabled禁止没有选择服务类型就选择服务项目</text>
-            <text class="desc-list-item">利用新增input事件bindconfirm实现学生查询点击键盘完成按钮搜索</text>
-            <text class="desc-list-item">所有textarea改用bindinput来获取输入内容</text>
-            <text class="desc-list-item">反馈用户信息中新增platform客户端平台</text>
-          </view>
-          <text class="desc-content">修复部分BUG</text>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">表单验证提示优化</text>
-            <text class="desc-list-item">强化缓存机制，根据版本号判断是否更新从而清除缓存</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.0.9 内测版</text>
-            <text class="desc-time">2016.12.17</text>
-          </view>
-          <text class="desc-content">修复BUG</text>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">绑定、完善信息、关于新增"We华软"字体图片</text>
-            <text class="desc-list-item">更多其他细节优化</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.0.8 内测版</text>
-            <text class="desc-time">2016.12.12</text>
-          </view>
-          <text class="desc-content">修复BUG</text>
-          <view class="desc-list">
-            <text class="desc-list-item">修复课表详情课程名有两行时会被遮住一部分的问题</text>
-          </view>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">绑定及完善信息页面新增动画特效</text>
-            <text class="desc-list-item">优化课表等页面各动画，使其更快更流畅</text>
-            <text class="desc-list-item">现可以通过左右滑动来切换同时有两次课时的课表详情</text>
-            <text class="desc-list-item">现可以通过左右滑动来切换资讯新闻类别</text>
-            <text class="desc-list-item">兼容性优化，优化了ios的细节差异</text>
-            <text class="desc-list-item">完善关于、反馈页面</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.0.7 内测版</text>
-            <text class="desc-time">2016.12.5</text>
-          </view>
-          <text class="desc-content">修复BUG</text>
-          <view class="desc-list">
-            <text class="desc-list-item">修复绑定过后没有自动刷新首页</text>
-            <text class="desc-list-item">修复报修申请有时无法提交的问题</text>
-            <text class="desc-list-item">修复课表查询三节连上时的课次显示</text>
-            <text class="desc-list-item">修复课表查询第20周无日期的问题</text>
-          </view>
-          <text class="desc-content">优化完善</text>
-          <view class="desc-list">
-            <text class="desc-list-item">资讯类别筛选将一直固定在顶部</text>
-            <text class="desc-list-item">降低课表查询的黑色笼罩层透明度</text>
-            <text class="desc-list-item">某些位数固定的输入框，输入至指定位数后将自动收起键盘</text>
-            <text class="desc-list-item">去掉了登录帮助文字里的句号</text>
-          </view>
-      </view>
-      <view class="describe">
-          <view class="desc-title">
-            <text class="desc-v">v0.0.6 内测版</text>
-            <text class="desc-time">2016.12.1</text>
+            <text class="desc-v">v0.0.1 内测版</text>
+            <text class="desc-time">2017.05.31</text>
           </view>
           <text class="desc-content">开启内测</text>
+      </view>
+            <view class="describe">
+          <view class="desc-title">
+            <text class="desc-v">v1.0.0 公测版</text>
+            <text class="desc-time">2017.06.10</text>
+          </view>
+          <text class="desc-content">开启公测，添加了电量查询、资讯查询</text>
       </view>
     </view>
   </view>
   <view class="footer">
     <view class="footer-lanshan">
         <image src="/images/more/lanshan.png"></image>
-        <text>json工作室</text>
+        <text>虾米小匠</text>
     </view>
-    <text>特别感谢两位后端大神@lxw @tdtcn完成服务器交换的事情</text>
+    <text>特别感谢开发过程中一直鼓励我、帮助我做测试的同学</text>
     <text>Copyright @ {{year}} All Rights Reserved</text>
   </view>
 </view>

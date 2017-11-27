@@ -374,14 +374,14 @@ button::after{
         .ul-li-kb {
             /*background: url('/images/core/kb.png') no-repeat;*/
             /*微信暂不支持静态bgimg文件，改用服务器url*/
-            background: url('https://we.cqu.pt/app/images/core/kb.png') no-repeat;
+            background: url('https://wx.it592.com/images/core/kb.png') no-repeat;
             background-size: 30rpx 30rpx;
             background-position: 0 50%;
         }
         .ul-li-ks {
             /*background: url('/images/core/ks.png') no-repeat;*/
             /*微信暂不支持静态bgimg文件，改用服务器url*/
-            background: url('https://we.cqu.pt/app/images/core/ks.png') no-repeat;
+            background: url('https://wx.it592.com/images/core/ks.png') no-repeat;
             background-size: 30rpx 30rpx;
             background-position: 0 50%;
         }

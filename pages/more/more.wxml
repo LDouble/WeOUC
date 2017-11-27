@@ -4,23 +4,17 @@
   <view class="user-info-box">
     <block wx:if="{{is_bind}}">
       <view class="user-info">
-        <view class="info-hd">
+        <view class="info-hd" style="margin:0 auto">
           <image class="user-avatar" src="{{user.wx.avatarUrl}}"></image>
-          <view class="user-title">
-            <text class="user-name">{{stuinfo.name}}</text>
-            <text class="user-id">学号： {{stuinfo.num}}</text>
-          </view>
         </view>
-        <view class="info-bd" wx:if="{{!user.teacher}}">
+        <view class="info-bd" style="margin:0 auto">
           <view class="info-bd-left">
-            <text class="user-text">班级：{{stuinfo.className}}</text>
-            <text class="user-text">专业：{{stuinfo.major}}</text>
-            <text class="user-text">邮箱：{{stuinfo.email}}</text>
-            <text class="user-text">导师：{{stuinfo.teacher}}</text>
-            <text class="user-text">绩点：{{stuinfo.gradePoint}}</text>
-            <text class="user-text">辅导员：{{stuinfo.counsellor}}</text>
+            <text class="user-text">姓名：{{stuinfo.username}}</text>
+            <text class="user-text">学号：{{stuinfo.xh}}</text>
+            <text class="user-text">年级：{{stuinfo.nj}}</text>
+            <text class="user-text">专业：{{stuinfo.zymc}}</text>
           </view>
-          
+
         </view>
       </view>
     </block>
@@ -39,7 +33,7 @@
     </navigator>
   </view>
   <view class="more-list">
-    <navigator url="/pages/more/issues" class="issue-link circle">
+<!--    <navigator url="/pages/more/issues" class="issue-link circle">
       <view class="more-btn">
         <image class="btn-icon" src="/images/more/issue.png"></image>
         <text class="btn-text">动态</text>
@@ -47,7 +41,7 @@
           <image class="btn-enter" src="/images/more/enter.png"></image>
         </view>
       </view>
-    </navigator>
+    </navigator> -->
     <navigator url="about" class="about-link circle" >
       <view class="more-btn">
         <image class="btn-icon" src="/images/more/about.png"></image>
@@ -71,5 +65,5 @@
   <view wx:else class="login-btn" bindtap="gobind">
     <text>立即绑定</text>
   </view>
-  
+
 </view>
