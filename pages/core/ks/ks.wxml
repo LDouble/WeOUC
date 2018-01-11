@@ -29,11 +29,11 @@
                                 <text wx:if="{{item.type == '期中'}}">【{{item.type}}】</text>{{item.course}}
                             </view>
                             <view class="ks-hd-other">
-                                {{item.countdown}}<text class="ks-hd-place">{{item.place}}</text>
+                                {{item.date}}<text class="ks-hd-place">  {{item.address}}</text>
                             </view>
                         </view>
                         <image class="ks-item-icon" src="/images/core/common/down.png"></image>
-                    </view>                
+                    </view>
                     <view class="ks-detail">
                         <view class="ks-detail-item">
                             <text class="ks-detail-label">类型</text>
@@ -41,19 +41,19 @@
                         </view>
                         <view class="ks-detail-item">
                             <text class="ks-detail-label">日期</text>
-                            <text class="ks-detail-content">{{item.date}}（{{item.week}}周-周{{item.day}}）</text>
+                            <text class="ks-detail-content">{{item.date}}</text>
                         </view>
                         <view class="ks-detail-item">
                             <text class="ks-detail-label">时间</text>
-                            <text class="ks-detail-content">{{item.time}}（{{item.lesson}}）</text>
+                            <text class="ks-detail-content">{{item.time}}</text>
                         </view>
                         <view class="ks-detail-item">
                             <text class="ks-detail-label">地点</text>
-                            <text class="ks-detail-content">{{item.room}}</text>
+                            <text class="ks-detail-content">{{item.address}}</text>
                         </view>
                         <view class="ks-detail-item" wx:if="{{!teacher}}">
                             <text class="ks-detail-label">座位号</text>
-                            <text class="ks-detail-content">{{item.number}}</text>
+                            <text class="ks-detail-content">{{item.num}}</text>
                         </view>
                         <block wx:else>
                             <view class="ks-detail-item">
@@ -66,14 +66,14 @@
                             </view>
                         </block>
                         <view class="ks-detail-item">
-                            <text class="ks-detail-label">任课教师</text>
-                            <text class="ks-detail-content">{{item.teacher?item.teacher:'无'}}</text>
+                            <text class="ks-detail-label">上课班级</text>
+                            <text class="ks-detail-content">{{item.cls?item.cls:'无'}}</text>
                         </view>
                     </view>
                 </view>
             </block>
         </view>
-    
+
     </block>
 
 </view>

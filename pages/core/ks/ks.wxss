@@ -129,7 +129,7 @@
 .ks-jxb {
     /*background: url('/images/core/xs.png') no-repeat;*/
     /*微信暂不支持静态bgimg文件，改用服务器url*/
-    background: url('https://we.cqu.pt/app/images/core/xs.png') no-repeat;
+    background: url('https://wx.it592.com/images/core/xs.png') no-repeat;
     background-size: 30rpx 30rpx;
     background-position: 0 50%;
     padding-left: 40rpx;

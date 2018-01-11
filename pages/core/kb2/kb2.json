@@ -1,6 +1,6 @@
 {    
     "navigationBarBackgroundColor": "#73b4ef",
-    "navigationBarTitleText": "成绩查询" ,
+    "navigationBarTitleText": "秋季课表",
     "backgroundColor": "#73b4ef",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
 }

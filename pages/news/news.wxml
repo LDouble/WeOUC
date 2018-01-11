@@ -6,7 +6,6 @@
       <image wx:if="{{item.enabled[user_type]}}" class="filter-item {{active.type === item.type ? 'active' : ''}}" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilter" src="/images/news/{{item.type}}@colour.png"></image>
       <image wx:else class="filter-item disabled" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilterDisabled" src="/images/news/{{item.type}}@gray.png"></image>
     </block>
-    <image class="filter-item 'active'" bindtap="addnews" src="/images/news/add@color.png"></image>
   </scroll-view>
   
   <!--新闻列表-->
@@ -14,30 +13,15 @@
     <view class="loader">
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
-    <block wx:for="{{active.data}}" wx:key="item.blogid">
-      <navigator url="/pages/news/{{(active.type)=='all'?'news':(active.type)}}/{{(active.type)=='all'?'news':(active.type)}}_detail?type={{active.type}}&id={{index}}">
-        <view class="main-card-item">
-        
-          <view class="kb-item-left">
-              <view class="kb-item-look">
-              <text class="kb-item-what">{{item.nickname}}</text>
-              <!-- 点赞图标 -->
-            <view id="{{index}}" class="likeView ignoreBorder" catchtap="processLike">
-                <image mode="aspectFit" src="/images/news/liked@{{item.liked? 'colour': 'gray'}}.png"></image>
-                <text class="">({{item.likeCount}})</text>
-            </view>
-            </view>
-          <text class="list-item-title" wx:if="{{item.title}}">{{item.title}}</text>
-            <text class="list-item-title" wx:else>{{item.pubissue}}</text>
-            
+    <block wx:for="{{active.data}}" wx:key="item.url">
+      <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&url={{item.url}}">
+        <view class="list-item {{item.type}}">
+          <view class="list-item-left">
+            <text class="list-item-title">{{item.title}}</text>
+            <text class="list-item-time">{{item.date}}</text>
           </view>
-          
-          <view>
-          <text class="kb-item-when">{{item.ago}}</text>
-          <text class="kb-item-look">{{item.commentCount}}/{{item.readCount}}</text>
-          </view>
+     <!--     <image class="list-item-icon" src="/images/news/{{item.type}}.png"></image>-->
         </view>
-        
       </navigator>
     </block>
   </view>

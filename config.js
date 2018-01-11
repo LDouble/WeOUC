@@ -3,7 +3,7 @@
  */
 
 // 服务器域名
-var host = 'wss.yicodes.com';
+var host = 'api.it592.com';
 
 //本地调试
 //var host = 'localhost';

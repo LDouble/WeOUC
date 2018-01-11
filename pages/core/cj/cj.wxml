@@ -11,28 +11,43 @@
 
         <view class="cj-header">
             <view class="cj-text">
-                <text class="cj-header-title">成绩查询</text>
+                <view class="cj-header-title"> 
+                <view>成绩查询 </view>
+                </view>
                 <text class="cj-header-info">学号：{{id}}</text>
                 <text class="cj-header-info">姓名：{{name}}</text>
+                <text class="cj-header-info">绩点: {{jd}}</text>
+                <text class="cj-header-info">已修学分: {{xf}}</text>
+                <text class="cj-header-info">加权：{{aver}}</text>
             </view>
-            <image class="cj-bg" src="/images/core/cj.png"></image>
+           
         </view>
 
         <view class="cj-info-ctn">
-        
+
             <view class="cj-grade">
                 <image class="cj-grade-logo" src="/images/core/cj.png"></image>
                 <view class="cj-grade-term">
                     <view class="cj-grade-fst">
-                        <text>绩点:  {{point}}</text>
-                        <text class="grade-comment">点击课程名称查看更多信息</text>
+                        <text class="grade-comment">下拉可以更新成绩哦！点击课程名称查看更多信息</text>
                     </view>
                 </view>
             </view>
             <view class="cj-info-box">
+                <view class="cj-info">
+                               <view class="cj-name" bindtap="bindSelectAll"> 
+                         <icon wx:if="{{selectedAllStatus}}" type="success_circle" size="20"/>
+     <icon wx:else type="circle" size="20" />
+     <text style="margin-left:10px">全选</text>
+                    </view>
+                    <text class="cj-info-socre" > 分数 </text>
+                </view>
                 <view class="cj-info" wx:for="{{cjInfo}}" wx:key="courseid">
-                    <text class="cj-info-name" id="{{index}}" bindtap="showHelp">{{item.name}} </text>
-                    <text class="cj-info-socre">{{item.score}}</text>
+                               <view class="cj-name">    <icon wx:if="{{item.selected}}" type="success_circle" size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
+   <icon wx:else type="circle" size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
+                    <text class="cj-info-name" id="{{index}}" bindtap="showHelp" style="margin-left:10px" >{{item.course}} </text>
+                    </view>
+                    <text class="cj-info-socre"  >{{item.score}}</text>
                 </view>
             </view>
 
@@ -43,13 +58,14 @@
             <image class="box-close" src="/images/more/close.png" bindtap="hideHelp"></image>
           </view>
           <view class="box-bd">
-            <view class="help-q">开课学期：{{clickcj.term}}</view>
+            <view class="help-q">开课学期：{{clickcj.xn}}{{clickcj.xq}}</view>
             <view class="help-a">
-              <text>课程代码：{{clickcj.classNum}} {{clickcj.type}}</text>
-              <text>考核方式：{{clickcj.testWay}}</text>
+              <text>课程代码：{{clickcj.kcdm}} {{clickcj.type}}</text>
+              <text>考核方式：{{clickcj.qdfs}}</text>
               <text>成绩：{{clickcj.score}}</text>
-              <text>学分：{{clickcj.credit}}</text>
-            </view>                       
+              <text>学分：{{clickcj.xf}}</text>
+              <text>单科绩点：{{clickcj.jd}}</text>
+            </view>
           </view>
         </view>
       </view>

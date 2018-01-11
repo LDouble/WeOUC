@@ -23,6 +23,7 @@
     line-height: 150%;
     margin-bottom: 15rpx;
     color: #222;
+    display: flex;
 }
 .cj-header-info{
     font-size: 11pt;
@@ -45,6 +46,11 @@
     border-radius: 3px;
     background: #fff;
     margin-bottom: 50rpx;
+}
+.cj-info-hs{
+max-width:30px;
+padding-left: 40rpx;
+
 }
 .cj-grade{
     display: flex;
@@ -78,7 +84,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
-    padding: 5rpx 30rpx 15rpx;
+    padding: 5rpx 30rpx 15rpx 0rpx;
 }
 .cj-info{
     background: #fff;
@@ -157,4 +163,12 @@
 }
 .help-a text{
   word-break: break-all;
+}
+.cj-name{
+  margin-right:auto;
+  display: flex;
+  /*max-width: 300rpx;*/
+}
+.item_button{
+  margin-left: auto;
 }

@@ -9,20 +9,22 @@ Page({
     stuclass: null,
     pushdata: null,
     classtime: [
-      { '1 - 2 节': '09:00 - 10:20' },
-      { '3 - 4 节': '10:40 - 12:00' },
-      { '5 - 6 节': '12:30 - 13:50' },
-      { '7 - 8 节': '14:00 - 15:20' },
-      { '9 - 10 节': '15:30 - 16:50' },
+      { '1 - 2 节': '08:00 - 09:50' },
+      { '3 - 4 节': '10:20 - 12:00' },
+      { '5 - 6 节': '13:30 - 15:20' },
+      { '7 - 8 节': '15:30 - 17:20' },
+      { '9 - 10 节': '18:30 - 16:50' },
       { '11 - 12 节': '17:00 - 18:20' },
       { '13 - 14 节': '19:00 - 20:20' },
       { '15 - 16 节': '20:30 - 21:50' },
     ],
     core: [
-      { id: 'kb', name: '课表', disabled: true, teacher_disabled: false, offline_disabled: true },
+      { id: 'kb', name: '秋季课表', disabled: true, teacher_disabled: false, offline_disabled: true },
       { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-      { id: 'bx', name: '考勤信息', disabled: false, teacher_disabled: false, offline_disabled: true },
-      { id: 'chat', name: '概率论', disabled: false, teacher_disabled: true, offline_disabled: false }
+      { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: true, offline_disabled: true },
+      { id: 'kjs', name: '空教室', disabled: false, teacher_disabled: true, offline_disabled: false },
+      { id: 'sdf', name: '电量查询', disabled: false, teacher_disabled: true, offline_disabled: false },
+      { id: 'chat', name: '成绩通知', disabled: false, teacher_disabled: true, offline_disabled: false },
     ],
     card: {
       'kb': {
@@ -75,7 +77,7 @@ Page({
   //分享
   onShareAppMessage: function () {
     return {
-      title: 'We华软',
+      title: 'We海大',
       desc: '碎片化、一站式、一体化校园移动门户',
       path: '/pages/index/index'
     };
@@ -83,10 +85,7 @@ Page({
   //下拉更新
   onPullDownRefresh: function () {
     var _this = this;
-    //this.getCardData();
-
     if (wx.getStorageSync('stuclass') == '') {
-      //console.log("onshow stuclass获取的缓存为空");
       //重定向
       _this.setData({ remind: '加载中' });
       _this.setData({
@@ -94,8 +93,7 @@ Page({
           'is_bind': true
         }
       });
-      this.getStuclass();
-
+      this.getStuclass(1);
       wx.showToast({
         title: '刷新成功',
         icon: 'success',
@@ -103,86 +101,53 @@ Page({
       });
     }
     else {
-      wx.showToast({
-        title: '无需刷新',
-        icon: 'success',
-        duration: 1500
-      });
-      wx.stopPullDownRefresh();
-    }
-  },
-  onShow: function () {
-    var _this = this;
-    console.log(_this.data.core[0].name)
-    if (app.openid == '' || app.openid == null) {
-      //console.log("onshow openid获取的缓存为空");
-      wx.navigateTo({
-        url: '/pages/more/login'
-      });
-    }
-
-    if (wx.getStorageSync('stuclass') == '') {
-      //console.log("onshow stuclass获取的缓存为空");
-      //重定向
       _this.setData({ remind: '加载中' });
       _this.setData({
         'user': {
           'is_bind': true
         }
       });
-      this.getStuclass();
+      this.getStuclass(1);
+      wx.showToast({
+        title: '刷新成功',
+        icon: 'success',
+        duration: 1500
+      });
+    }
+  },
+  onShow: function () {
+    var _this = this;
+    if (app.token) { //展示时，来判断是否绑定
+      _this.setData({ remind: '加载中' });
+      var stuclass =  wx.getStorageSync('stuclass')
+      if (stuclass== '')
+       _this.getStuclass(1); //获取成绩信息
+      else
+       // _this.getStuclass(1); //获取成绩信息
+        _this.getTodayclass(stuclass)
+      _this.setData({
+        'user': {
+          'is_bind': true
+        }
+      });
     }
     else {
-      //console.log("index onshow");
-      app._user.is_bind = true;
-      var stuclass = wx.getStorageSync('stuclass')
-
-      try {
-        stuclass = JSON.parse(stuclass);
-        _this.setData({ remind: '请重新绑定' });
-        app.showErrorModal('请到个人信息页面切换绑定再次登陆', '版本升级啦');
-        return;
-      } catch (err) {
-        //console.log('缓存读取的数据：');
-        //console.log(stuclass);
-        _this.setData({
-          'user': {
-            'is_bind': true
-          }
-        });
-        try {
-          _this.getTodayclass(stuclass);
+      _this.setData({
+        'user': {
+          'is_bind': false
         }
-        catch (err) {
-          _this.getStuclass();
-        }
-      }
-
-
+      });
     }
-
   },
   onReady: function () {
-
   },
   getTodayclass: function (stuclass) {
     var _this = this;
-    //wx.showNavigationBarLoading();
     app.today = parseInt(new Date().getDay());
-    //这个today是数组下标，所以减一
     var today = app.today - 1;
-    //console.log("目前星期：" + app.today);
-    //console.log(stuclass)
-    //计算没课节数
     var noclassnum = 0;
-    var strTem = {};  // 临时变量
-    //周末都是没课滴
-    if (app.today == 0 || app.today == 6) {
-      _this.setData({ nothingclass: true });
-    } else {
+    var strTem = {};  
       for (var value in stuclass) {
-        //console.log("星期"+today+'第'+value+'节');
-
         var todaydata = stuclass[value].classes[today];
         try {
           if (Array.isArray(todaydata)) {
@@ -197,18 +162,18 @@ Page({
         } catch (err) {
           this.getStuclass();
         }
-
-
-
         var arrayweek = [];
+        if (todaydata == undefined ){
+          noclassnum++;
+          continue;
+        }
         arrayweek = todaydata.weeks;
-        //console.log('arrayweek的值'+arrayweek);
         strTem[value] = {};
-        //console.log(arrayweek);
         if (app.in_array(arrayweek)) {
           try {
             strTem[value].class = todaydata;
-            strTem[value].classtime = stuclass[value].time;
+            var classtime = todaydata.begin + "-" + (todaydata.num+todaydata.begin) +"节";
+            strTem[value].classtime = classtime;
           }
           catch (err) {
             _this.getStuclass();
@@ -216,35 +181,50 @@ Page({
         }
         else {
           noclassnum++;
+          strTem[value] = undefined
           continue;
         }
       };
-    }
     //如果没课的数量是8节那么当天没课
-    if (noclassnum == stuclass.length) {
+      var flag = false;
+      for(var x in strTem){
+        var stemp = strTem[x];
+        if (stemp != undefined){
+          flag = true;
+          break;
+        }
+      }
+      console.log("flag")
+      console.log(flag)
+      if(!flag) 
       _this.setData({ nothingclass: true });
-    }
     _this.setData({ stuclass: strTem });
     _this.setData({
       'remind': ''
     });
   },
   //获取课程信息
-  getStuclass: function () {
+  getStuclass: function (options) {
     var _this = this;
     wx.showNavigationBarLoading
     wx.request({
-      url: app._server + '/mywebapp/kebiao?openid=' + app.openid,
+      url: app._server + '/oucjw/kb',
+      method:"POST",
+      data:{
+        token:app.token,
+        username: app.username,
+        password: app.password,
+        update:options,
+        xn: "2017",
+        xq: "1"
+      },
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: function (res) {
-        if (res.data[0].status < 40000) {
-
+        if (res.data.status < 40000) {
           app.today = parseInt(new Date().getDay());
           var today = app.today;
-          var stuclass = JSON.parse(res.data[0].data);
-          console.log("服务器返回来的数据:");
-          console.log(stuclass);
+          var stuclass = res.data.data;
           wx.setStorageSync('stuclass', stuclass);
-
           _this.getTodayclass(stuclass);
         }
       },
@@ -258,98 +238,54 @@ Page({
     })
   },
 
-  //获取推送消息
-  getpush: function () {
-    var _this = this;
-    //wx.showNavigationBarLoading();
-    wx.request({
-      url: app._server + '/mywebapp/push?openid=' + app.openid,
-      success: function (res) {
-        var statusCode = res.data[0].status || '50010'
-        if (statusCode == 90000) {
-          var pushdata = JSON.parse(res.data[0].data);
-          console.log("服务器返回来的数据:");
-          console.log(pushdata);
-          pushdata.forEach(function (value, index) {
-            console.log(value.type);
-          });
-          _this.setData({
-            'pushdata': pushdata,
-            'card.push.show': true
-          })
-        }
-      },
-      fail: function () {
-        app.showErrorModal("服务器连接失败", "请检查网络连接")
-      },
-      complete: function () {
-        //wx.hideNavigationBarLoading();
-        wx.stopPullDownRefresh();
-      }
-    })
-  },
   onLoad: function () {
-    app.openid = wx.getStorageSync('openid');
-    this.login();
-    //重定向
-    if (app.openid == '') {
-      wx.navigateTo({
-        url: '/pages/more/login'
-      });
-      return;
-    }
-
-    //拉取推送
-    this.getpush();
+      app.token = wx.getStorageSync('token');
+      if(!app.token)
+        this.login();
   },
   login: function () {
     var _this = this;
-    //如果有缓存，则提前加载缓存
-    // if (app.cache.version === app.version) {
-    //   try {
-    //     _this.response();
-    //   } catch (e) {
-    //     //报错则清除缓存
-    //     app.cache = {};
-    //     //wx.clearStorage();
-    //   }
-    // }
-    //然后再尝试登录用户, 如果缓存更新将执行该回调函数
-
     app.getUser(function (status) {
       _this.response.call(_this, status);
     });
   },
   response: function (status) {
-    //console.log("执行了response")
     var _this = this;
+    console.log(status)
     if (status) {
-      if (status != '离线缓存模式') {
+      if (status == "已绑定") {
         //错误
+        app._user.is_bind = true;
         _this.setData({
-          'remind': status
+         'remind':""
         });
-        return;
-      } else {
-        //离线缓存模式
         _this.setData({
-          offline: true
+          'user': {
+            'is_bind': true
+          }
+        });
+        this.getStuclass()
+        app.getStuinfo()
+      } else if(status == "未授权"){
+        _this.setData({
+          'remind': "未授权"
         });
       }
-    }
-    _this.setData({
-      user: app._user
-    });
-    //判断绑定状态
-    if (!app._user.is_bind) {
-      _this.setData({
-        'remind': '未绑定'
-      });
-    } else {
-      _this.setData({
-        'remind': '加载中'
-      });
-      //_this.getCardData();
+      else {
+        app._user.is_bind = false;
+        _this.setData({
+          'user': {
+            'is_bind': false
+          }
+        });
+        wx.redirectTo({
+          url: '/pages/more/login',
+        })
+      }
+    }else{
+      wx.redirectTo({
+        url: '/pages/more/login',
+      })
     }
   },
   disabled_item: function () {
@@ -365,44 +301,13 @@ Page({
       }, 2000);
     }
   },
-  getCardData: function () {
-    //console.log("更新卡片内容");
-    var _this = this;
-    //判断并读取缓存
-    if (app.cache.kb) { kbRender(app.cache.kb); }
-    if (app.cache.ykt) { yktRender(app.cache.ykt); }
-    if (app.cache.sdf) { sdfRender(app.cache.sdf); }
-    if (app.cache.jy) { jyRender(app.cache.jy); }
-    if (_this.data.offline) { return; }
-    //wx.showNavigationBarLoading();
-
-    //课表渲染
-    function kbRender(info) {
-      var today = parseInt(info.day),
-        lessons = info.lessons[today == 0 ? 6 : today - 1], //day为0表示周日(6)，day为1表示周一(0)..
-        list = [],
-        time_list = _this.data.card.kb.time_list;
-      for (var i = 0; i < 6; i++) {
-        for (var j = 0; j < lessons[i].length; j++) {
-          var lesson = lessons[i][j];
-          if (lesson.weeks && lesson.weeks.indexOf(parseInt(info.week)) !== -1) {
-            var begin_lesson = 2 * i + 1, end_lesson = 2 * i + lesson.number;
-            list.push({
-              when: begin_lesson + ' - ' + end_lesson + '节'
-              + '（' + time_list[begin_lesson - 1].begin + '~' + time_list[end_lesson - 1].end + '）',
-              what: lesson.name,
-              where: lesson.place.trim()
-            });
-          }
-        }
-      }
-      _this.setData({
-        'card.kb.data': list,
-        'card.kb.show': true,
-        'card.kb.nothing': !list.length,
-        'remind': ''
-      });
-      _this.on
+  auth:function(userinfo){
+    if (userinfo.detail.errMsg == "getUserInfo:fail auth deny")
+      app.showErrorModal("我们需要使用你的头像以及微信id进行绑定，请同意授权！","授权失败")
+    else{
+      app.g_status=""
+      this.login()
     }
+
   }
 });

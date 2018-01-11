@@ -35,9 +35,9 @@
   color: #aaa;
 }
 .user-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 5px;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 90px;
 }
 .user-title {
   flex: 1;
@@ -121,7 +121,7 @@
   margin: 20rpx 3%;
 }
 .contact-box {
-  margin-right: 35rpx; 
+  margin-right: 35rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -21,15 +21,15 @@ Page({
     this.setData(data);
   },
   //分享
-  onShareAppMessage: function(){
-    var name = this.data.name || app._user.we.info.name,
-        id = this.data.id || app._user.we.info.id;
-    return {
-      title: name + '的考试安排',
-      desc: 'We重邮 - 考试安排',
-      path: '/pages/core/ks/ks?id='+id+'&name='+name
-    };
-  },
+  // onShareAppMessage: function(){
+  //   var name = this.data.name || app._user.we.info.name,
+  //       id = this.data.id || app._user.we.info.id;
+  //   return {
+  //     title: name + '的考试安排',
+  //     desc: 'We海大 - 考试安排',
+  //     path: '/pages/core/ks/ks?id='+id+'&name='+name
+  //   };
+  // },
   //下拉更新
   onPullDownRefresh: function(){
     var _this = this;
@@ -40,27 +40,26 @@ Page({
   },
   onLoad: function(options){
     var _this = this;
-    app.loginLoad(function(){
-      _this.loginHandler.call(_this, options);
-    });
+    if (app.token === ''||app.token ===null) {
+     //console.log("onshow token获取的缓存为空");
+     wx.navigateTo({
+       url: '/pages/more/login'
+     });
+   }
+   if (wx.getStorageSync('stuinfo')) {
+     var stuinfo = wx.getStorageSync('stuinfo')
+     app._user.we=stuinfo;
+   }else{
+     app.getStuinfo()
+   }
+   _this.loginHandler()
   },
   //让分享时自动登录
-  loginHandler: function(options){
+  loginHandler: function(){
     var _this = this;
     var id, name;
-    if(options.id && options.name){
-      id = options.id;
-      name = options.name;
-      _this.setData({
-        teacher: false
-      });
-    }else{
-      id = app._user.we.info.id,
-      name = app._user.we.info.name;
-      _this.setData({
-        teacher: app._user.teacher
-      });
-    }
+    id = app._user.we.xh,
+    name = app._user.we.username;
     if(!id || !name){
       _this.setData({
         remind: '未绑定'
@@ -72,13 +71,10 @@ Page({
       name: name
     });
     var data = {
-      openid: app._user.openid,
+      token: app._user.token,
       id: id
     };
-    if(app._user.teacher && !options.name){ data.type = 'teacher'; }
 
-    //判断并读取缓存
-    if(app.cache.ks && !options.name){ ksRender(app.cache.ks); }
     function ksRender(list){
       if(!list || !list.length){
         _this.setData({
@@ -87,29 +83,48 @@ Page({
         return false;
       }
       var days = ['一','二','三','四','五','六','日'];
+      var types = ["补考/缓考","期中考试","期末考试"]
       for (var i = 0, len = list.length; i < len; ++i) {
+        list[i].type = types[list[i].type - 1];
         list[i].open = false;
         list[i].index = i;
-        list[i].day = days[list[i].day - 1];
-        list[i].time = list[i].time.trim().replace('—','~');
-        list[i].lesson = list[i].lesson.replace(',','-');
-        //倒计时提醒
-        if(list[i].days > 0){
-          list[i].countdown = '还有' + list[i].days + '天考试';
-          list[i].place = '（'+list[i].time+'）'+list[i].room;
-          if(!app._user.teacher){
-            list[i].place += '#'+list[i].number; 
-          }
-        }else if(list[i].days < 0){
-          list[i].countdown = '考试已过了' + (-list[i].days) + '天';
-          list[i].place = '';
+        if(list[i].date == ''){
+          list[i].date = "非统一考试";
+          list[i].time = "非统一考试";
+          list[i].num = "非统一考试";
+          list[i].address = "";
         }else{
-          list[i].countdown = '今天考试';
-          list[i].place = '（'+list[i].time+'）'+list[i].room; 
-          if(!app._user.teacher){
-            list[i].place += '#'+list[i].number; 
+          var pattern = /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})-(\d{2}:\d{2})/;
+          var arr = pattern.exec(list[i].date);
+          var date = arr[1]; //获取时间进行判断
+          var ss = date + " " + arr[2];
+          var to = new Date(ss).getTime() - new Date().getTime();
+          if (to / 1000 / 60 >= 20){
+            list[i].num = "请先通过选课系统查询。备用查询考试前20分钟公布";
+            list[i].address = "请先通过选课系统查询。备用查询考试前20分钟公布";
           }
+          list[i].time = arr[2] + "-" + arr[3];
         }
+        //list[i].day = days[list[i].day - 1];
+      //  list[i].time = list[i].time.trim().replace('—','~');
+        //list[i].lesson = list[i].lesson.replace(',','-');
+        //倒计时提醒
+        // if(list[i].days > 0){
+        //   list[i].countdown = '还有' + list[i].days + '天考试';
+        //   list[i].place = '（'+list[i].time+'）'+list[i].room;
+        //   if(!app._user.teacher){
+        //     list[i].place += '#'+list[i].number;
+        //   }
+        // }else if(list[i].days < 0){
+        //   list[i].countdown = '考试已过了' + (-list[i].days) + '天';
+        //   list[i].place = '';
+        // }else{
+        //   list[i].countdown = '今天考试';
+        //   list[i].place = '（'+list[i].time+'）'+list[i].room;
+        //   if(!app._user.teacher){
+        //     list[i].place += '#'+list[i].number;
+        //   }
+        // }
       }
       list[0].open = true;
       _this.setData({
@@ -119,19 +134,31 @@ Page({
     }
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server + "/api/get_ks.php",
+      url: app._server + "/oucjw/test",
       method: 'POST',
-      data: app.key(data),
+      header:{"Content-Type": "application/x-www-form-urlencoded" },
+      data: {
+        token:app.token,
+        username: app.username,
+        password: app.password,
+        xn:app._xn,
+        xq:app._xq,
+        type:app._type
+      },
       success: function(res) {
-        if (res.data && res.data.status === 200){
+        if (res.data && res.data.status == "200"){
           var list = res.data.data;
+          console.log(list)
           if(list) {
-            if(!options.name){
-              //保存考试缓存
-              app.saveCache('ks', list);
-            }
-            ksRender(list);
-          } else { _this.setData({ remind: '暂无数据' }); }
+            // for(var i = 0; i < list.length; i++)
+            //   list[i] = _this.dealtest(list[i])
+            //   app.saveCache('ks', list);
+          ksRender(list);
+          }
+          else
+           {
+             _this.setData({ remind: '暂无数据' });
+           }
 
         } else {
           app.removeCache('ks');
@@ -151,12 +178,13 @@ Page({
       complete: function() {
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
+        app.showErrorModal('该数据仅供参考，请以选课系统为准！考试前请前往选课系统核对信息', '虾米提醒');
       }
     });
   },
   // 展示考试详情
   slideDetail: function(e) {
-    var id = e.currentTarget.dataset.id, 
+    var id = e.currentTarget.dataset.id,
         list = this.data.list;
     // 每次点击都将当前open换为相反的状态并更新到视图，视图根据open的值来切换css
     for (var i = 0, len = list.length; i < len; ++i) {
@@ -169,5 +197,36 @@ Page({
     this.setData({
       list: list
     });
-  }
+  },
+  dealtest: function(e) {
+    var pattern = /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})-(\d{2}:\d{2})/
+    var arr = pattern.exec(e.date)
+    var result = new Object()
+    if(arr && arr.length == 4){
+      result  = {
+        time:arr[2] + "-" + arr[3],
+        day:this.getDay(arr[1]),
+        days:this.GetDateDiff(arr[1]),
+        begin:arr[2],
+        end:arr[3],
+        date:arr[1]
+      }
+    }
+    result.origin = e.date
+    result.number = e.num
+    result.room = e.address
+    console.log(result)
+    return result
+  },
+  getDay: function(sDate){
+    var dt = new Date(sDate.replace(/-/g, '/'));
+    return dt.getDay()
+},
+
+GetDateDiff: function(endDate){
+  var startTime = new Date().getTime()
+  var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();
+  var dates = (endTime - startTime)/(1000*60*60*24);
+  return  parseInt(dates);
+},
 });

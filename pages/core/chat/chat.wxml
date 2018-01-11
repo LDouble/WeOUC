@@ -1,14 +1,16 @@
 <!--index.wxml-->
 <view>
     <view class="page-top">
-        <text class="username">欢迎你</text>
-        <text class="text-info">来到概率ROOM ！</text>
+        <text class="username">次数有效期为7天，请不要添加过多次数！</text>
+        <view class="text-info">点击下方按钮，增加次数</view>
         <view class="page-btn-wrap">
-            <button class="page-btn" bindtap="gotoGame">开始</button>
+        <form report-submit="true" bindsubmit ="go">
+         <button class="page-btn" form-type="submit">增加通知次数</button>
+        </form>
         </view>
     </view>
     <view class="page-bottom">
-        <text class="qr-txt">这是we华软走心到炸的社交实验室</text>
-       <text class="qr-txt">在这里重新定义概率论</text>
+        <text class="qr-txt">你当前剩余的通知次数为</text>
+       <text class="qr-txt model-info">{{time}}</text>
     </view>
 </view>

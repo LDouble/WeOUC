@@ -170,6 +170,9 @@
                                 
                                 <view class="info-list">
                                     <text class="info-text" wx:if="{{item.xf_num}}">{{item.xf_num}}</text>
+                                                                        <view class="info-item">
+                                        <text class="info-item-value">{{item.begin}} - {{item.begin + item.num}}节</text>（上课时间）
+                                    </view>
                                     <view class="info-item">
                                         <text class="info-item-value">{{item.teacher}}</text>（任课教师）
                                     </view>
@@ -178,7 +181,7 @@
                                     </view>
                                     <view class="info-item">
                                         <text class="info-item-value" wx:if="{{item.weeks.length<10}}">{{item.weeks}}</text>
- <text class="info-item-value" wx:if="{{item.weeks.length>=10}}">{{item.orgin}}</text>                                       （课程周数）
+ <text class="info-item-value" wx:if="{{item.weeks.length>=10}}">{{item.weeks[0]}}-{{item.weeks[item.weeks.length-1]}}周</text>                                       （课程周数）
                                     </view>
                                     <view class="info-item">
                                         <text class="info-item-value">{{item.classNum}}</text>（教学班）
@@ -206,6 +209,11 @@
                                     <text>{{item.name}}</text>
                                 </view>
                                 <view class="info-bd">
+                                    <view class="info-type">
+                                        <text>{{item.type}}</text>
+                                        <text wx:if="{{item.more && !teacher}}">{{item.more}}</text>
+                                    </view> 
+
                                     <view class="info-list">
                                         <text class="info-text" wx:if="{{item.xf_num}}">{{item.xf_num}}</text>
                                         <view class="info-item">
@@ -215,7 +223,7 @@
                                             <text class="info-item-value">{{item.classRoom}}</text>（上课地点）
                                         </view>
                                         <view class="info-item">
-                                            <text class="info-item-value">{{item.orgin}}</text>（课程时间）
+                                            <text class="info-item-value">{{item.week}}{{item.num===2?' / 三节连上':''}}</text>（课程周数）
                                         </view>
                                         <view class="info-item">
                                             <text class="info-item-value">{{item.classNum}}</text>（教学班）

@@ -1,31 +1,29 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/news/news",
-    "pages/news/jw/jw_detail",
-    "pages/news/oa/oa_detail",
-    "pages/news/hy/hy_detail",
-    "pages/news/jz/jz_detail",
-    "pages/news/news/news_detail",
     "pages/more/login",
     "pages/more/append",
     "pages/more/more",
     "pages/more/issues",
     "pages/more/about",
     "pages/core/kb/kb",
+    "pages/core/kb2/kb2",    
     "pages/core/cj/cj",
     "pages/core/ks/ks",
     "pages/core/kjs/kjs",
-    "pages/core/bx/bx",
-    "pages/core/chat/chat",
-    "pages/game/game",
-    "pages/news/detail/issuesComment",
-    "pages/news/detail/issuesReplyComment"
+    "pages/core/sdf/sdf",
+    "pages/core/chat/chat",    
+    "pages/news/news",
+    "pages/news/jwc/jwc_detail",
+    "pages/news/hq/hq_detail",
+    "pages/news/hy/hy_detail",
+    "pages/news/xs/xs_detail",
+    "pages/news/new/new_detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7acfa6",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "We华软",
+    "navigationBarTitleText": "WeOUC",
     "backgroundColor": "#7acfa6", 
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
@@ -39,12 +37,13 @@
       "text": "首页",
       "iconPath": "images/index/index.png",
       "selectedIconPath": "images/index/index@active.png"
-    },{
+    }, {
       "pagePath": "pages/news/news",
-      "text": "华软",
+      "text": "资讯",
       "iconPath": "images/index/news.png",
       "selectedIconPath": "images/index/news@active.png"
-    }, {
+    },
+    {
       "pagePath": "pages/more/more",
       "text": "个人信息",
       "iconPath": "images/index/more.png",
@@ -52,9 +51,9 @@
     }]
   },
   "networkTimeout": {
-    "request": 10000,
+    "request": 30000,
     "uploadFile": 30000,
     "downloadFile": 30000
   },
-  "debug": true
+  "debug": false
 }

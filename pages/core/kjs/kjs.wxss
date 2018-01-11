@@ -31,7 +31,7 @@ page {
         padding: 0 0 0 65rpx;
         /*background: url('/images/core/kjs/classroom-icon.png') no-repeat;*/
         /*微信暂不支持静态bgimg文件，改用服务器url*/
-        background: url('https://we.cqu.pt/app/images/core/kjs/classroom-icon.png') no-repeat;
+        background: url('https://wx.it592.com/images/core/kjs/classroom-icon.png') no-repeat;
         background-size: 30rpx 25rpx;
         background-position: 15rpx 8rpx;
     }
@@ -93,7 +93,7 @@ page {
         .day-active,
         .classTime-active,
         .building-active {
-            color: #FFF;
+            color: #e78ab0;
             font-weight: 900;
         }
         .scroll-space {
@@ -114,7 +114,7 @@ page {
 
         /*background: url('/images/core/kjs/week-icon.png') no-repeat;*/
         /*微信暂不支持静态bgimg文件，改用服务器url*/
-        background: url('https://we.cqu.pt/app/images/core/kjs/week-icon.png') no-repeat;
+        background: url('https://wx.it592.com/images/core/kjs/week-icon.png') no-repeat;
         background-size: 100rpx 100rpx;
         background-position: 50% 50%;
     }
@@ -130,7 +130,7 @@ page {
 
         /*background: url('/images/core/kjs/day-icon.png') no-repeat;*/
         /*微信暂不支持静态bgimg文件，改用服务器url*/
-        background: url('https://we.cqu.pt/app/images/core/kjs/day-icon.png') no-repeat;
+        background: url('https://wx.it592.com/images/core/kjs/day-icon.png') no-repeat;
         background-size: 100rpx 100rpx;
         background-position: 50% 50%;
     }
@@ -146,7 +146,7 @@ page {
 
         /*background: url('/images/core/kjs/classTime-icon.png') no-repeat;*/
         /*微信暂不支持静态bgimg文件，改用服务器url*/
-        background: url('https://we.cqu.pt/app/images/core/kjs/classTime-icon.png') no-repeat;
+        background: url('https://wx.it592.com/images/core/kjs/classTime-icon.png') no-repeat;
         background-size: 100rpx 100rpx;
         background-position: 50% 50%;
     }
@@ -162,7 +162,7 @@ page {
 
         /*background: url('/images/core/kjs/building-icon.png') no-repeat;*/
         /*微信暂不支持静态bgimg文件，改用服务器url*/
-        background: url('https://we.cqu.pt/app/images/core/kjs/building-icon.png') no-repeat;
+        background: url('https://wx.it592.com/images/core/kjs/building-icon.png') no-repeat;
         background-size: 100rpx 100rpx;
         background-position: 50% 50%;
     }

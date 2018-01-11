@@ -9,16 +9,20 @@ Page({
     passwd_focus: false,
     userid: '',
     passwd: '',
-    openid: '',
+    token: '',
     angle: 0
   },
   onLoad: function () {
     var _this = this;
+    _this.getlogincode();
     setTimeout(function () {
       _this.setData({
         remind: ''
       });
     }, 1000);
+  },
+  onShow: function () {
+    var _this = this;
     wx.onAccelerometerChange(function (res) {
       var angle = -(res.x * 30).toFixed(1);
       if (angle > 14) { angle = 14; }
@@ -29,9 +33,8 @@ Page({
         });
       }
     });
-  },
-  onShow: function () {
     wx.startAccelerometer();
+    app.showErrorModal('本系统只支持本科生，密码为教务处选课系统(jwgl.ouc.edu.cn)的密码,密码错误请前往选课系统核对', '登陆密码提醒');
   },
 
   onReady: function () {
@@ -41,7 +44,6 @@ Page({
   onHide: function(){
     var _this = this;
     _this.getlogincode();
-    console.log("login.onhide输出的" + app.logincode);
     wx.stopAccelerometer();
   },
   //刷新logincode
@@ -51,13 +53,13 @@ Page({
         if (res.code) {
           app.logincode = res.code;
         } else {
-          app.showErrorModal("获取用户登录态失败！请重新打开We华软", res.errMsg);
+          app.showErrorModal("获取用户登录态失败！请重新打开We海大", res.errMsg);
         }
       }
     });
   },
   bind: function (e) {
-    //console.log(e.detail.formId);
+    this.getlogincode()
     var _this = this;
     if (app.g_status) {
       app.showErrorModal(app.g_status, '绑定失败');
@@ -69,64 +71,67 @@ Page({
     }
     app.showLoadToast('绑定中');
     wx.showNavigationBarLoading();
-    wx.request({
-      url: app._server + '/mywebapp/login?username=' + _this.data.userid + '&password=' + _this.data.passwd + '&logincode=' + app.logincode,
+    wx.request({ //绑定接口，获取信息.
+      url: app._server + '/oucjw/bind',
+      data:{
+        username:_this.data.userid,
+        password:_this.data.passwd,
+        logincode:app.logincode,
+      },
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      method:'POST',
       success: function (res) {
         wx.showToast({
               title: '请稍后...',
               icon: 'success',
               duration: 1000
             });
-        console.log("登陆请求成功输出的" + app.logincode);
-        console.log(res.data[0])
-        //小于40000则登陆成功
-        if (res.data[0].status < 40000) {
-          
-          //清除缓存
-          //app.cache = {};
-          //wx.clearStorage();
-
-          app.openid = res.data[0].openid;
-          _this.setData({ openid: res.data[0].openid });
-          //向缓存同步写入openid
-          //app.saveCache('openid', app.openid)
+        //res.data 为返回的数据，200为绑定成功;
+        if (res.data.status == 200) {
+          app.token = res.data.token;
+          console.log(res.data) //绑定成功后，则返回token。
+          var stuinfo = res.data.user_info
+          wx.setStorageSync("stuinfo", stuinfo)
+          wx.setStorageSync("username", _this.data.userid)
+          wx.setStorageSync("password", _this.data.passwd)
+          app.username = _this.data.userid
+          app.password = _this.data.passwd
+          var stuclass = res.data.course;
+          wx.setStorageSync('stuclass', stuclass);
+          wx.setStorageSync('stuclass1', res.data.course2);//下个学期
+          _this.setData({ token: res.data.token });
           try {
-            wx.setStorageSync('openid', app.openid)
+            wx.setStorageSync('token', app.token) //写入Storage
           } catch (e) {
             console.log(e);
           }
           app._user.is_bind = true;
-          _this.getlogincode();
+
           //询问用户跳转的页面
           setTimeout(function () {
             wx.showModal({
-              title: '连接服务器成功',
-              content: '是否授权登陆mysise？',
-              cancelText: '否',
-              confirmText: '是',
+              title: '绑定成功',
+              content: '恭喜你,绑定成功,即将跳转!',
+              confirmText: '确定',
+              showCancel:false,
               success: function (res) {
                 if (res.confirm) {
                   wx.switchTab({
                     url: '/pages/more/more'
                   })
-                } else {
-                  _this.showErrorModal('同意授权才可以登陆噢~~', '授权失败');
-                  _this.getlogincode();
-                  return false;
                 }
               }
             });
-          }, 1500);
+          }, 1000);
         } else {
           wx.hideToast();
           //console.log("服务器返回失败的内容："+res.data[0])
-          app.showErrorModal(res.data[0].data, '错误状态码:'+res.data[0].status);
+          app.showErrorModal(res.data.message, '错误状态码:'+res.data.status);
           _this.getlogincode();
         }
       },
       fail: function (res) {
         wx.hideToast();
-        console.log(res)
         app.showErrorModal('请检查网络', '服务器连接失败!');
         _this.getlogincode();
       },
@@ -139,7 +144,7 @@ Page({
     this.setData({
       userid: e.detail.value
     });
-    if (e.detail.value.length >= 10) {
+    if (e.detail.value.length >= 16) {
       wx.hideKeyboard();
     }
   },

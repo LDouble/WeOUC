@@ -1,4 +1,10 @@
 //格式化时间
+function isEmptyObject(e) {
+  var t;
+  for (t in e)
+    return !1;
+  return !0
+}
 function formatTime(date, t) {
   var year = date.getFullYear();
   var month = date.getMonth() + 1;

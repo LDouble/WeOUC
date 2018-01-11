@@ -28,6 +28,7 @@
       <image class="remind-img" src="/images/index/nothing.png"></image>
       <text class="remind-text">{{remind}}</text>
       <navigator wx:if="{{remind == '未绑定'}}" url="/pages/more/login" class="remind-btn">前往绑定</navigator>
+      <button wx:if="{{remind == '未授权'}}"  open-type="getUserInfo" class="remind-btn" bindgetuserinfo="auth">前往授权</button>
     </block>
   </view>
 
