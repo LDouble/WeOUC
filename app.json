@@ -13,8 +13,12 @@
     "pages/core/ks/ks",
     "pages/core/kjs/kjs",
     "pages/core/sdf/sdf",
+<<<<<<< HEAD
     "pages/core/chat/chat",
     "pages/core/cjfx/cjfx",    
+=======
+    "pages/core/chat/chat",    
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
     "pages/news/news",
     "pages/news/jwc/jwc_detail",
     "pages/news/hq/hq_detail",

@@ -96,6 +96,7 @@ Page({
         }else{
           var pattern = /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})-(\d{2}:\d{2})/;
           var arr = pattern.exec(list[i].date);
+<<<<<<< HEAD
           var date = arr[1]; //获取时间进行判断
           var ss = date + " " + arr[2];
           var to = new Date(ss).getTime() - new Date().getTime();
@@ -103,6 +104,8 @@ Page({
             list[i].num = "请先通过选课系统查询。备用查询考试前20分钟公布";
             list[i].address = "请先通过选课系统查询。备用查询考试前20分钟公布";
           }
+=======
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
           list[i].time = arr[2] + "-" + arr[3];
         }
         //list[i].day = days[list[i].day - 1];

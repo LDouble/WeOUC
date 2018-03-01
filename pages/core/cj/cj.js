@@ -67,6 +67,7 @@ Page({
       _this.setData({ remind: '加载中' });
       this.getkscj();
 
+<<<<<<< HEAD
     }
   },
   hb:function(){
@@ -84,6 +85,65 @@ Page({
   }
 })
 },
+  calgpa:function(){
+    var cjInfo = this.data.cjInfo;
+    var i;
+    var credit=0,totaljd=0,xf = 0
+    var totalfs = 0,totalxf = 0;
+    for(i = 0 ; i < cjInfo.length;i++){
+      if(cjInfo[i].selected && cjInfo[i].jd){
+          credit += cjInfo[i].xf;
+          totaljd += cjInfo[i].jd*cjInfo[i].xf;   
+      }
+      if(cjInfo[i].selected){
+        var tcj = this.cjhs(cjInfo[i].score)
+        if(tcj && tcj >= 60){
+          totalfs += tcj * cjInfo[i].xf //计算分数
+          totalxf += cjInfo[i].xf //计算学分
+        }  
+      }
+      if(cjInfo[i].selected)
+           xf += cjInfo[i].xf;
+=======
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
+    }
+    var jd = 0,aver = 0
+    if(credit)
+      jd = totaljd / credit;
+    else
+      jd = 0;  
+    if (totalxf)
+      aver = totalfs / totalxf;
+    this.setData({
+      'jd': jd.toFixed(3),
+      'xf':xf,
+      'aver':aver.toFixed(3)
+    })
+  },
+bindCheckbox: function (e) {
+    /*绑定点击事件，将checkbox样式改变为选中与非选中*/
+    //拿到下标值，以在cjInfo作遍历指示用
+    var index = parseInt(e.currentTarget.dataset.index);
+    //原始的icon状态
+    var selected = this.data.cjInfo[index].selected;
+    var cjInfo = this.data.cjInfo;
+    // 对勾选状态取反
+    cjInfo[index].selected = !selected;
+    // 写回经点击修改后的数组
+    this.setData({
+      cjInfo: cjInfo
+    });
+    this.calgpa()
+  },
+  cjhs:function(cj){
+      if(parseFloat(cj)){
+        return cj;
+      }else{
+        return undefined;
+      }
+  },
+<<<<<<< HEAD
+=======
   calgpa:function(){
     var cjInfo = this.data.cjInfo;
     var i;
@@ -139,6 +199,7 @@ bindCheckbox: function (e) {
         return undefined;
       }
   },
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
 bindSelectAll: function () {
   // 环境中目前已选状态
   var selectedAllStatus = this.data.selectedAllStatus;

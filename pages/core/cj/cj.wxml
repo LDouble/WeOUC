@@ -10,10 +10,23 @@
     <block wx:else>
         <view class="cj-header">
             <view class="cj-text">
+<<<<<<< HEAD
                 <text class="cj-header-info">姓名:{{name}}[{{id}}]</text>
                 <text class="cj-header-info">绩点:{{jd}}     加权:{{aver}}</text>
                 <text class="cj-header-info">已修学分:{{xf}}</text>
             </view>
+=======
+                <view class="cj-header-title"> 
+                <view>成绩查询 </view>
+                </view>
+                <text class="cj-header-info">学号：{{id}}</text>
+                <text class="cj-header-info">姓名：{{name}}</text>
+                <text class="cj-header-info">绩点: {{jd}}</text>
+                <text class="cj-header-info">已修学分: {{xf}}</text>
+                <text class="cj-header-info">加权：{{aver}}</text>
+            </view>
+           
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
         </view>
         <view class='hb' bindtap="hb">
         <view><image  class='hbi' src='../../../images/core/cj.jpg'></image></view>
@@ -25,6 +38,10 @@
         </view>
         </view>
         <view class="cj-info-ctn">
+<<<<<<< HEAD
+=======
+
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
             <view class="cj-grade">
                 <image class="cj-grade-logo" src="/images/core/cj.png"></image>
                 <view class="cj-grade-term">

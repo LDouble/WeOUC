@@ -11,6 +11,10 @@
     </view>
     <view class="page-bottom">
         <text class="qr-txt">你当前剩余的通知次数为</text>
+<<<<<<< HEAD
        <text class="qr-txt model-info">{{time}}</text>
+=======
+       <text class="qr-txt model-info">期末开放通知功能</text>
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
     </view>
 </view>

@@ -1,5 +1,6 @@
 //app.js
 App({
+<<<<<<< HEAD
   version: 'v9.0.0', //版本号
   today: '',
   logincode: '',
@@ -8,12 +9,24 @@ App({
   schoolweek: 1,//教学周
   onLaunch: function () {
     var _this = this;
+=======
+  version: 'v8.0.0', //版本号
+  today: '',
+  logincode: '',
+  openid: '',
+  beginday: '2017/09/18',//开学那一天,注意格式要一致（不够要补上0）
+  schoolweek: 1,//教学周
+  onLaunch: function () {
+    var _this = this;
+    //读取缓存
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
     try {
       this.token = wx.getStorageSync("token");
       var info = wx.getStorageSync("userinfo")
       this.username = wx.getStorageSync("username")
       this.password = wx.getStorageSync("password")
       var cversion = wx.getStorageSync("version");
+<<<<<<< HEAD
       //获取现在版本和软件版本，如果版本不一致，则修改版本号
       if (cversion != "" && cversion != _this.version) {
         // wx.clearStorageSync()
@@ -21,13 +34,26 @@ App({
       } else
         wx.setStorageSync("version", _this.version);
       if (!info)
+=======
+      if(cversion != _this.version){
+        wx.removeStorageSync("stuclass")
+        wx.setStorageSync("version", _this.version);       
+      }   
+      if(!info)
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
         this.getUser()
       else
         this._user.wx = info.userInfo;
       var stu = wx.getStorageSync("stuinfo")
+<<<<<<< HEAD
       if (stu && this.token)
         this._user.we = info.userInfo;
     } catch (e) { console.warn(e) } //加载时先尝试读token;
+=======
+      if(stu && this.token)
+        this._user.we = info.userInfo;
+    }catch (e) { console.warn(e) } //加载时先尝试读token;
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
   },
   getlogincode: function () {
     wx.login({
@@ -35,7 +61,11 @@ App({
         if (res.code) {
           this.logincode = res.code;
         } else {
+<<<<<<< HEAD
           this.showErrorModal("获取用户登录态失败！请重新打开WeOUC", res.errMsg);
+=======
+          this.showErrorModal("获取用户登录态失败！请重新打开We海大", res.errMsg);
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
         }
       }
     });
@@ -84,29 +114,60 @@ App({
       success: function (res) {
         if (res.code) {
           //调用函数获取微信用户信息
+<<<<<<< HEAD
           _this.getUserInfo(function (info) {
             _this.saveCache('userinfo', info); //保存微信信息
             _this._user.wx = info.userInfo;
             if (info == "未授权") {
+=======
+            _this.getUserInfo(function (info) {
+            _this.saveCache('userinfo', info); //保存微信信息
+            _this._user.wx = info.userInfo;
+            if (info == "未授权"){
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
               typeof response == "function" && response("未授权");
               return;
             }
             else if (!info.encryptedData || !info.iv) {
               _this.g_status = '无关联AppID';
               typeof response == "function" && response(_this.g_status);
+<<<<<<< HEAD
               return;
             } else {
               typeof response == "function" && response("获取信息成功");
+=======
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
               return;
+            }else{
+                typeof response == "function" && response("获取信息成功");
+                return;
             }
           });
         }
       },
+<<<<<<< HEAD
       fail: function () {
+=======
+      fail:function(){
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
         typeof response == "function" && response("未授权");
       }
 
     });
+<<<<<<< HEAD
+=======
+  },
+  processData: function (key) {
+    var _this = this;
+    var data = JSON.parse(_this.util.base64.decode(key));
+    _this._user.is_bind = data.is_bind;
+    _this._user.openid = data.user.openid;
+    _this._user.teacher = (data.user.type == '教职工');
+    _this._user.we = data.user;
+    _this._time = data.time;
+    _this._t = data['\x74\x6f\x6b\x65\x6e'];
+    return data;
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
   },
   getUserInfo: function (cb) {
     var _this = this;
@@ -128,6 +189,7 @@ App({
     wx.getSetting({
       success: function success(res) {
         var authSetting = res.authSetting;
+<<<<<<< HEAD
         if (authSetting['scope.userInfo'] === false) {
           wx.showModal({
             title: '用户未授权',
@@ -144,6 +206,24 @@ App({
             }
           })
         }
+=======
+          if (authSetting['scope.userInfo'] === false) {
+            wx.showModal({
+              title: '用户未授权',
+              content: '如需正常使用WeOUC，请按确定并在授权管理中选中“用户信息”，然后点按确定。最后关闭微信后台，重启微信后再进入小程序即可正常使用。',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.openSetting({
+                    success: function success(res) {
+                      that.getStuinfo()
+                    }
+                  });
+                }
+              }
+            })
+          }
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
       }
     });
   },
@@ -190,13 +270,21 @@ App({
     var day2 = date2.getDay();
     if (day2 == 0) day2 = 7;
     var d = Math.round((date.getTime() - date2.getTime() + (day2 - day1) * (24 * 60 * 60 * 1000)) / 86400000);
+<<<<<<< HEAD
     if ((Math.ceil(d / 7)) > 0) {
+=======
+    if ((Math.ceil(d / 7)) > 0){
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
       console.log(d);
       return d;
     }
 
     else
+<<<<<<< HEAD
       return 1
+=======
+          return 1
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
   },
   getYearFirstWeekDate: function (commericalyear) {
     var _this = this;
@@ -237,7 +325,11 @@ App({
         return true;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
   },
   showErrorModal: function (content, title) {
     wx.showModal({
@@ -267,16 +359,33 @@ App({
     var intMon = parseInt(nowdate.getMonth()) + 1;
     var intDate = parseInt(nowdate.getDate());
     nowdate = new Date(intYear + '/' + intMon + '/' + intDate);
+<<<<<<< HEAD
     var days = nowdate.getTime() - begindate.getTime();
     var time = Math.ceil(days / (1000 * 60 * 60 * 24)) + 1;
     console.log((days / (1000 * 60 * 60 * 24)))
     return Math.ceil(time / 7);
+=======
+    // if (intMon < 10) { intMon = '0' + intMon }
+    // if (intDate < 10) { intDate = '0' + intMon }
+    // var tempstr = intYear + '/' + intMon + '/' + intDate;
+    // var tempdate1 = new Date(tempstr);
+    // var thisweek = _this.getISOYearWeek(tempdate1);
+    // var week = parseInt(thisweek - beginweek);
+    var days = nowdate.getTime() - begindate.getTime();
+    var time = Math.ceil(days / (1000 * 60 * 60 * 24)) + 1;
+    console.log((days / (1000 * 60 * 60 * 24)))
+    return Math.ceil(time/7);
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
   },
   cache: {},
   //_server: 'http://api.it592.com',
   //_server: 'http://192.168.218.1:5000',
   _server: 'https://oucjw.it592.com',
+<<<<<<< HEAD
   //  _server: 'http://114.115.200.3:5000',  
+=======
+//  _server: 'http://114.115.200.3:5000',  
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
   _user: {
     //微信数据
     wx: {},

@@ -30,6 +30,7 @@ Page({
    //
       go: function (e) {
         var _this = this;
+<<<<<<< HEAD
         var to = new Date("2018-01-13 00:00").getTime() - new Date().getTime();
         var flag = 0;
         if (to > 0) {
@@ -40,6 +41,9 @@ Page({
           return;
                   }
           if (this.data.time == 15){
+=======
+        if (this.data.time == 15){
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
           app.showErrorModal("当前次数已超过15次，请改日再增加！");
           _this.setData({
             remind: '网络错误'

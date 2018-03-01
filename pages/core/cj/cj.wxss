@@ -171,6 +171,7 @@ padding-left: 40rpx;
 }
 .item_button{
   margin-left: auto;
+<<<<<<< HEAD
 }
 .hb{
    border-radius: 8px;
@@ -200,4 +201,6 @@ padding-left: 40rpx;
   margin-left:20px;
   height: auto; 
   padding: 0 2px;
+=======
+>>>>>>> a0048c0f82e83528696b9cc8ee81ea5b12f1e8e8
 }
