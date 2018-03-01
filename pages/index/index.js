@@ -24,7 +24,7 @@ Page({
       { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: true, offline_disabled: true },
       { id: 'kjs', name: '空教室', disabled: false, teacher_disabled: true, offline_disabled: false },
       { id: 'sdf', name: '电量查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-      { id: 'chat', name: '成绩通知', disabled: false, teacher_disabled: true, offline_disabled: false },
+      { id: 'cjfx', name: '成绩分析', disabled: false, teacher_disabled: true, offline_disabled: false },
     ],
     card: {
       'kb': {

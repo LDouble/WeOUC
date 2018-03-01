@@ -8,23 +8,23 @@
         </block>
     </view>
     <block wx:else>
-
         <view class="cj-header">
             <view class="cj-text">
-                <view class="cj-header-title"> 
-                <view>成绩查询 </view>
-                </view>
-                <text class="cj-header-info">学号：{{id}}</text>
-                <text class="cj-header-info">姓名：{{name}}</text>
-                <text class="cj-header-info">绩点: {{jd}}</text>
-                <text class="cj-header-info">已修学分: {{xf}}</text>
-                <text class="cj-header-info">加权：{{aver}}</text>
+                <text class="cj-header-info">姓名:{{name}}[{{id}}]</text>
+                <text class="cj-header-info">绩点:{{jd}}     加权:{{aver}}</text>
+                <text class="cj-header-info">已修学分:{{xf}}</text>
             </view>
-           
         </view>
-
+        <view class='hb' bindtap="hb">
+        <view><image  class='hbi' src='../../../images/core/cj.jpg'></image></view>
+        <view class='hright'>恭喜，你被幸运红包砸中啦!
+        <view>
+        <text class='grade-comment'>最高价值99元红包,点击领取</text>
+        <text class='cm'>广告</text>
+        </view>
+        </view>
+        </view>
         <view class="cj-info-ctn">
-
             <view class="cj-grade">
                 <image class="cj-grade-logo" src="/images/core/cj.png"></image>
                 <view class="cj-grade-term">
@@ -69,8 +69,6 @@
           </view>
         </view>
       </view>
-
         </view>
-
     </block>
 </view>

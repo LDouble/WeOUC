@@ -1,10 +1,11 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/more/login",
     "pages/more/append",
     "pages/more/more",
-    "pages/more/issues",
+    "pages/more/say",    
     "pages/more/about",
     "pages/core/kb/kb",
     "pages/core/kb2/kb2",    
@@ -12,7 +13,8 @@
     "pages/core/ks/ks",
     "pages/core/kjs/kjs",
     "pages/core/sdf/sdf",
-    "pages/core/chat/chat",    
+    "pages/core/chat/chat",
+    "pages/core/cjfx/cjfx",    
     "pages/news/news",
     "pages/news/jwc/jwc_detail",
     "pages/news/hq/hq_detail",

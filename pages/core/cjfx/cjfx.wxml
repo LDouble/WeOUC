@@ -1,0 +1,31 @@
+<view class="container">
+    <view wx:if="{{remind}}" class="remind-box">
+        <image wx:if="{{remind == '加载中'}}" class="remind-img" src="/images/index/loading.gif"></image>
+        <block wx:else>
+          <image class="remind-img" src="/images/index/nothing.png"></image>
+          <text class="remind-text">{{remind}}</text>
+        </block>
+    </view>
+        <block wx:else>
+        <view class="cj-header">
+            <view class="cj-text">
+                <text class="cj-header-info">专业排名:{{rank}}     
+                当前参与人数:{{total}}</text>
+                <text class="cj-header-info">总加权:{{averAll}}</text>
+            </view>
+        </view>
+        <view class="cj-info-ctn">
+            <view class="cj-grade">
+                    <view class="cj-grade-fst">
+                        <text class="grade-comment">
+                        本分析仅供参考，不代表任何官方组织，
+                        总加权公式为Σ学分*成绩/Σ学分，重修取最高分
+                        学期加权为Σ学分*成绩/Σ学分+0.2*学分,补考、重修不算
+                        </text>
+                    </view>
+            </view>
+                                      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+
+          </view>
+          </block>
+</view>

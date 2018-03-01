@@ -172,3 +172,32 @@ padding-left: 40rpx;
 .item_button{
   margin-left: auto;
 }
+.hb{
+   border-radius: 8px;
+   min-height: 50px;
+   background: white;
+   margin-bottom:5px; 
+   display: flex;  
+   flex-direction: row;  
+   padding-top:10px ;
+   padding-left: 10px;
+}
+.hbi{
+  width: 40px;
+  border-radius: 50px;
+  height: 40px;
+  font-size:13px;
+}
+.hright{
+  margin-left: 10px;
+}
+.cm{
+  border: 1px solid #999;
+  font-size: 26rpx;
+  border-radius: 3px;
+  color: #999;
+  float: right;
+  margin-left:20px;
+  height: auto; 
+  padding: 0 2px;
+}

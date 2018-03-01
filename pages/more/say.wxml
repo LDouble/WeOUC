@@ -1,0 +1,28 @@
+<!--about.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="black-cover"></view>
+    <image class="logo" src="/images/more/logo.png"></image>
+    <image class="title" src="/images/more/title.png"></image>
+  </view>
+  <view class="content">
+    <view class="describe" wx:if="{{!showLog}}">
+        <view class="desc-list">
+        </view>
+        <text class="desc-content">
+      各位新童鞋、老童鞋，大家晚上好。首先声明一下，WeOUC纯属个人开发，并不属于学校任何部门、任何组织。我是海大2013级计算机专业的，现在在海大读研。
+一个人不知不觉的已经做公众号2年的时间，一开始的虾米小匠，low到爆的程序到现在的WeOUC，无论是我还是我的程序，都经历了很大的改变。在这里虾米感谢大家的支持。也希望大家能够多多包容与理解，一个人做公众号不容易，我除了需要写推送，还要维护程序，研究生的任务比较繁忙。有时候回复的可能不及时。
+希望大家能够多多支持虾米。
+</text>
+</view>
+
+  </view>
+  <view class="footer">
+    <view class="footer-lanshan">
+        <image src="/images/more/lanshan.png"></image>
+        <text>虾米小匠</text>
+    </view>
+    <text>特别感谢开发过程中一直鼓励我、帮助我做测试的同学</text>
+    <text>Copyright @ 2018 All Rights Reserved</text>
+  </view>
+</view>

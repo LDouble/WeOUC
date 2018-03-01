@@ -69,6 +69,21 @@ Page({
 
     }
   },
+  hb:function(){
+    wx.setClipboardData({
+    data: '快来领取支付宝跨年红包！打开最新版支付宝就能领取！bs4kcR233A',
+    showCancel:false,
+  success: function(res) {
+    wx.showModal({
+      title: '领取成功',
+      content: '恭喜你，成功领取红包,请打开支付宝领取',
+      success: function (res) {
+        //
+      }
+    })
+  }
+})
+},
   calgpa:function(){
     var cjInfo = this.data.cjInfo;
     var i;
