@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "plugins": {
+    "calendar": {
+      "version": "1.1.2",
+      "provider": "wx92c68dae5a8bb046"
+    }
+  }
+}

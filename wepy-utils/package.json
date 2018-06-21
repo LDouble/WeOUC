@@ -1,0 +1,25 @@
+{
+  "name": "wepy-utils",
+  "version": "1.0.3",
+  "description": "WePy Utils",
+  "main": "index.js",
+  "author": {
+    "name": "Ming",
+    "email": "muvoid@foxmail.com",
+    "url": "migong.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiGongOrg/wepy-utils.git"
+  },
+  "homepage": "https://github.com/MiGongOrg/wepy-utils#readme",
+  "keywords": [
+    "wepy",
+    "utils",
+    "wepy utils"
+  ],
+  "bugs": {
+    "url": "https://github.com/MiGongOrg/wepy-utils/issues"
+  },
+  "license": "MIT"
+}

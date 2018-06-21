@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "WeOUC",
+  "navigationBarBackgroundColor": "#7acfa6",
+  "navigationBarTextStyle": "white",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "calendar": "plugin://calendar/calendar"
+  }
+
+}
