@@ -1,0 +1,41 @@
+@import "/template/help/help.wxss";
+@import "/template/tip/tip.wxss";
+@import "/template/list/list.wxss";
+
+.e-card {
+  color: #fff;
+  background-color: #ffc11b;
+}
+.e-card__balance {
+  display: flex;
+  justify-content: center;
+  padding: 45rpx 0 15rpx 0;
+}
+.e-card__rmb {
+  font-size: 34pt;
+  font-weight: bolder;
+}
+.e-card__tip {
+  text-align: center;
+  font-size: 9pt;
+  font-weight: 400;
+}
+
+.e-card__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80rpx;
+  padding: 15rpx 30rpx;
+  height: 60rpx;
+  font-size: 9pt;
+  font-weight: bold;
+  background-color: #ffae0d;
+}
+.e-card__help {
+  padding: 5rpx 10rpx;
+  border: solid 1rpx #fff;
+}
+.card{
+  padding: 0px;
+}

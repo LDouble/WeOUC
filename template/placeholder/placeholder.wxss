@@ -1,0 +1,23 @@
+.placeholder-basic,
+.placeholder-fullpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.placeholder-fullpage__bg,
+.placeholder-basic__bg {
+  width: 380rpx;
+  height: 380rpx;
+}
+.placeholder-fullpage__tip,
+.placeholder-basic__tip {
+  font-size: 11pt;
+  color: #999;
+}
+
+/* 全屏占位 */
+.placeholder-fullpage {
+  margin-top: 20%;
+}

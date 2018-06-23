@@ -1,0 +1,43 @@
+<!-- 导入模板 -->
+<import src="/template/placeholder/placeholder.wxml" />
+
+<!-- 详情 -->
+<template name="details-common">
+  <view class="details-common">
+    <!-- 头部 -->
+    <view wx:if="{{!href}}" class="details-common__head">
+      <view class="details-common__title">{{title}}</view>
+      <view class="details-common__meta">
+        <text wx:if="{{tag}}" class="details-common__tag">{{tag}}</text>
+        <text wx:if="{{time || timestamp}}" class="details-common__time">{{time || timestamp}}</text>
+      </view>
+    </view>
+
+    <!-- 附加字段 -->
+    <text wx:if="{{speaker}}" class="details-common__content">主讲人：{{speaker}}\t</text>
+    <text wx:if="{{place}}" class="details-common__content">地点：{{place}}</text>
+
+    <!-- 主题内容 -->
+    <text wx:if="{{content}}" class="details-common__content">{{content}}</text>
+
+    <!-- 暂无 -->
+    <template wx:if="{{!content && !href}}" is="placeholder-fullpage" data="{{bg:'/images/placeholder/bg_no_data.png'}}" />
+
+    <!-- 文件下载 -->
+    <view wx:if="{{href}}" class="download">
+      <image class="download__icon" src="/images/file_type/{{suffix}}.png"></image>
+
+      <block wx:if="{{preview}}">
+        <text class="download__title">{{title}}.{{suffix}}</text>
+        <text class="download__tip">该文件支持预览</text>
+        <button class="download__preview" bindtap="openDocument">预览文件</button>
+      </block>
+      <block wx:if="{{!preview}}">
+        <text class="download__title">{{title}}</text>
+        <text class="download__tip">不支持预览请手动下载文件</text>
+        <button class="download__preview" bindtap="handleCopy">复制链接</button>
+      </block>
+
+    </view>
+  </view>
+</template>

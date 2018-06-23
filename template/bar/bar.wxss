@@ -1,0 +1,27 @@
+.bar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.bar-search__input {
+  width: 100%;
+  padding: 30rpx 60rpx 30rpx 0;
+  vertical-align: baseline;
+  font-size: 11pt;
+  border-bottom: solid 1rpx #eee;
+  z-index: 1;
+}
+.input-placeholder {
+  color: #999;
+}
+.bar-search__icon {
+  position: absolute;
+  right: 0;
+  top: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+  z-index: 2;
+}
+.input-active {
+  border-color: #0099ff;
+}

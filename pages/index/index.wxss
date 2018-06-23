@@ -282,11 +282,12 @@ page .navigator-hover {
 .kb-item-when {
   line-height: 125%;
   color: #bbb;
+  font-size: 10pt;
 }
 
 .kb-item-where {
   flex: 0 0 auto;
-  font-size: 14pt;
+  font-size: 10pt;
   color: #999;
   letter-spacing: 1px;
 }

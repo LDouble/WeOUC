@@ -1,0 +1,10 @@
+<!-- 通用分类标头 -->
+<!--
+  title: 标题
+  href: 更多链接
+-->
+<template name="head-classify">
+  <view class="head-classify">
+    <text class="head-classify__title">{{title}}</text>
+  </view>
+</template>

@@ -1,11 +1,39 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/more/bind",
+    "pages/core/kb/kb",
+    "pages/core/ks/ks",
+    "pages/core/cj/cj",
+    "pages/core/df/df",
+    "pages/news/news"
   ],
-  "plugins": {
-    "calendar": {
-      "version": "1.1.2",
-      "provider": "wx92c68dae5a8bb046"
-    }
+  "plugins": {},
+  "window": {
+    "navigationBarBackgroundColor": "#7acfa6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "WeOUC",
+    "backgroundColor": "#7acfa6",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#7f848a",
+    "selectedColor": "#7acfa6",
+    "backgroundColor": "#f7f6fb",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/index/index.png",
+        "selectedIconPath": "images/index/index@active.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "资讯",
+        "iconPath": "images/index/news.png",
+        "selectedIconPath": "images/index/news@active.png"
+      }
+    ]
   }
 }

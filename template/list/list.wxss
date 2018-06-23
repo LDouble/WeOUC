@@ -1,0 +1,299 @@
+/* 基础列表 */
+.list-basic__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 40rpx 0;
+  background-color: #fff;
+  border-bottom: solid 1rpx #eee;
+}
+.list-basic__l-text {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+}
+.list-basic__r-wrap {
+  display: flex;
+  align-items: center;
+}
+.list-basic__r-text {
+  font-size: 11pt;
+  color: #999;
+}
+.list-basic__r-icon {
+  width: 45rpx;
+  height: 45rpx;
+  margin-left: 10rpx;
+}
+.list-basic__r-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+/* 图标列表 */
+.list-icon__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 45rpx;
+  margin-left: 135rpx;
+  border-bottom: solid 1rpx #eee;
+}
+.list-icon__text {
+  flex: 1;
+  margin-left: 45rpx;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+}
+.list-icon__l-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-left: -135rpx;
+}
+.list-icon__r-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 头像列表 */
+.list-avatar {
+  background-color: #fff;
+  padding: 45rpx;
+}
+.list-avatar__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.list-avatar__avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: #eee;
+}
+.list-avatar__meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 30rpx;
+}
+.list-avatar__nickName {
+  padding-bottom: 10rpx;
+  font-size: 13pt;
+  font-weight: bold;
+  color: #000;
+}
+.list-avatar__bind {
+  font-size: 10pt;
+  color: #999;
+}
+.list-avatar__r-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 课表列表 */
+.list-course {
+  padding: 45rpx 30rpx;
+  background-color: #fff;
+}
+.list-course__item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-top: solid 1rpx #eee;
+}
+.list-course__section {
+  display: flex;
+  align-self: flex-start;
+  flex: 1;
+  font-size: 13pt;
+  color: #000;
+  font-weight: bold;
+}
+.list-course__info {
+  flex: 4;
+}
+.list-course__name {
+  font-size: 13pt;
+  font-weight: bold;
+  color: #000;
+}
+.list-course__place {
+  margin-top: 10rpx;
+  font-size: 9pt;
+  font-weight: bold;
+  color: #999;
+}
+.list-course__time {
+  padding: 2rpx 10rpx;
+  font-size: 9pt;
+  font-weight: bold;
+  color: #fff;
+  background-color: #33cc66;
+  border-radius: 10rpx;
+}
+
+/* 文章列表 */
+.list-article {
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx 0;
+  border-top: solid 1rpx #eee;
+}
+.list-article__title {
+  margin-bottom: 15rpx;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+}
+.list-article__description {
+  margin-bottom: 15rpx;
+  font-size: 10pt;
+  color: #999;
+}
+.list-article__meta {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 9pt;
+  color: #999;
+}
+.list-article__time,
+.list-article__tag {
+  margin-right: 15rpx;
+}
+.list-article__tag {
+  padding: 4rpx 8rpx;
+  color: #fff;
+  background-color: #0099ff;
+  border-radius: 4rpx;
+}
+
+/* 图书列表 */
+.list-book {
+  display: flex;
+  flex-direction: column;
+  padding: 45rpx 15rpx;
+  border-bottom: solid 1rpx #eee;
+}
+.list-book__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-book__title {
+  width: 80%;
+  margin-bottom: 15rpx;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.list-book__title--query {
+  width: 100%;
+  margin-bottom: 15rpx;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #000;
+}
+.list-book__renew {
+  padding: 5rpx 10rpx;
+  font-size: 11pt;
+  color: #0099ff;
+  border: solid 1rpx #0099ff;
+}
+.list-book__renew--disabled {
+  color: #999;
+  border: solid 1rpx #999;
+}
+.list-book__meta,
+.list-book__place,
+.list-book__time {
+  margin-right: 15rpx;
+  margin-bottom: 15rpx;
+  font-size: 9pt;
+  font-weight: 500;
+  color: #999;
+}
+
+.list-book__borrowing {
+  display: flex;
+  flex-direction: column;
+}
+.list-book__query {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 体测成绩 */
+.list-physical {
+  margin-bottom: 15rpx;
+  padding: 30rpx 60rpx;
+  background-color: #fff;
+}
+.list-physical__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;
+  font-size: 9pt;
+  color: #999;
+  font-weight: bold;
+  border-bottom: solid 1rpx #eee;
+}
+.list-physical__ic-fold {
+  width: 32rpx;
+  height: 32rpx;
+}
+.list-physical__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  font-size: 11pt;
+  color: #000;
+  font-weight: bold;
+  border-bottom: solid 1rpx #f7f7f7;
+}
+.list-physical__item--last {
+  border-bottom: solid 1rpx #eee;
+}
+.list-physical__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30rpx;
+  font-size: 13pt;
+  color: #000;
+  font-weight: bold;
+}
+/* 折叠 */
+@keyframes foldOn {
+  0% {
+    height: 400rpx;
+  }
+
+  50% {
+    height: 200;
+  }
+
+  100% {
+    height: 100;
+  }
+}
+.list-physical--fold {
+  height: 60rpx;
+  overflow: hidden;
+  animation: fold 0.5s linear;
+}

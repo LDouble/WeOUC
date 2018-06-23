@@ -1,0 +1,19 @@
+<!-- 基础占位 -->
+<template name="placeholder-basic">
+  <navigator wx:if="{{href}}" class="placeholder-basic" url="{{href}}">
+    <image class="placeholder-basic__bg" src="{{bg}}"></image>
+    <text class="placeholder-basic__tip">{{text}}</text>
+  </navigator>
+  <view wx:else class="placeholder-basic">
+    <image class="placeholder-basic__bg" src="{{bg}}"></image>
+    <text class="placeholder-basic__tip">{{text}}</text>
+  </view>
+</template>
+
+<!-- 全屏占位 -->
+<template name="placeholder-fullpage">
+  <view class="placeholder-fullpage">
+    <image class="placeholder-fullpage__bg" src="{{bg}}"></image>
+    <text wx:if="{{text}}" class="placeholder-fullpage__tip">{{text}}</text>
+  </view>
+</template>

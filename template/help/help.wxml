@@ -1,0 +1,14 @@
+<!-- 帮助 -->
+<template name="help">
+  <view class="help" id="help" wx:if="{{helpStatus}}" bindtap="hideHelp">
+    <view class="help__box">
+      <image class="help__close" id="close-help" src="/images/common/clear.png" bindtap="hideHelp"></image>
+      <block wx:for="{{faqList}}" wx:key="{{item.question}}">
+        <view class="help__item">
+          <text class="help__question">{{item.question}}</text>
+          <text class="help__answer">{{item.answer}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+</template>

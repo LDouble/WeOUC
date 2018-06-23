@@ -1,0 +1,55 @@
+.details-common {
+  overflow: hidden;
+}
+.details-common__title {
+  margin-bottom: 30rpx;
+  font-size: 18pt;
+  color: #000;
+  font-weight: bold;
+}
+.details-common__meta {
+  margin-bottom: 60rpx;
+  font-size: 9pt;
+  color: #999;
+  font-weight: bold;
+}
+.details-common__tag {
+  margin-right: 15rpx;
+}
+.details-common__content {
+  line-height: 2;
+  font-size: 12pt;
+  color: #333;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.download {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45rpx;
+}
+.download__icon {
+  width: 180rpx;
+  height: 180rpx;
+  margin-bottom: 30rpx;
+}
+.download__title {
+  margin-bottom: 120rpx;
+  text-align: center;
+  font-size: 10pt;
+  color: #000;
+  font-weight: bold;
+}
+.download__tip {
+  margin-bottom: 30rpx;
+  font-size: 9pt;
+  color: #999;
+  font-weight: bold;
+}
+.download__preview {
+  width: 100%;
+  color: #fff;
+  background-color: #0099ff;
+}

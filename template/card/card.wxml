@@ -1,0 +1,25 @@
+<!-- 导入模板 -->
+<import src="/template/placeholder/placeholder.wxml" />
+
+<!-- 成绩卡片 -->
+<template name="card-score">
+  <view class="card-score">
+    <view class="card-score__head">
+      <text class="card-score__title">{{title}}</text>
+      <button class="card-score__share" bindtap="showHelp">
+        <image class="card-score__ic-share" src="/images/common/tip.png"></image>
+      </button>
+    </view>
+    <view class="card-score__box">
+      <block wx:if="{{scoreList}}" wx:for="{{scoreList}}" wx:key="courseName">
+        <view class="card-score__item" data-score="{{item}}" bindtap="showDetail">
+          <text class="card-score__course-name">{{item.name}}</text>
+          <text class="card-score__mark">{{item.mark ? item.mark : '-'}}</text>
+        </view>
+      </block>
+      <block wx:if="{{scoreList.length === 0}}">
+        <template is="placeholder-basic" data="{{bg: '/images/placeholder/bg_no_data.png', text: '暂无成绩信息'}}" />
+      </block>
+    </view>
+  </view>
+</template>

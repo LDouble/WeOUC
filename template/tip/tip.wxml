@@ -1,0 +1,7 @@
+<!-- 基础提示 -->
+<template name="tip-basic">
+  <view class="tip-basic">
+    <text class="tip-basic__text">{{text}}</text>
+    <text wx:if="{{help}}" class="tip-basic__open-help" bindtap="showHelp">{{help}}</text>
+  </view>
+</template>

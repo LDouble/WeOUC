@@ -1,0 +1,150 @@
+<import src="/template/head/head.wxml" />
+<import src="/template/placeholder/placeholder.wxml" />
+
+<!-- 基础列表 -->
+<template name="list-basic">
+  <navigator wx:if="{{href}}" class="list-basic__item" url="{{href}}">
+    <text class="list-basic__l-text">{{lText}}</text>
+    <view class="list-basic__r-wrap">
+      <text class="list-basic__r-text">{{rText}}</text>
+      <image class="list-basic__r-icon" src="/images/more/arrow_right.png"></image>
+      <image wx:if="{{avatar}}" class="list-basic__r-avatar" src="{{avatar}}"></image>
+    </view>
+  </navigator>
+  <view wx:else class="list-basic__item">
+    <text class="list-basic__l-text">{{lText}}</text>
+    <view class="list-basic__r-wrap">
+      <text class="list-basic__r-text">{{rText}}</text>
+      <image wx:if="{{avatar}}" class="list-basic__r-avatar" src="{{avatar}}"></image>
+    </view>
+  </view>
+</template>
+
+<!-- 图标列表 -->
+<template name="list-icon">
+  <navigator class="list-icon__nav" url="{{href}}">
+    <view class="list-icon__item">
+      <image class="list-icon__l-icon" src="{{lIcon}}"></image>
+      <text class="list-icon__text">{{text}}</text>
+      <image class="list-icon__r-icon" src="/images/more/arrow_right.png"></image>
+    </view>
+  </navigator>
+</template>
+
+<!-- 头像列表 -->
+<template name="list-avatar">
+  <view class="list-avatar">
+    <navigator class="list-avatar__item" url="{{href}}">
+      <image class="list-avatar__avatar" src="{{avatar}}"></image>
+      <view class="list-avatar__meta">
+        <text class="list-avatar__nickName">{{nickName}}</text>
+        <text class="list-avatar__bind">{{bind ? '已绑定' : '未绑定'}}</text>
+      </view>
+      <image class="list-avatar__r-icon" src="/images/more/arrow_right.png"></image>
+    </navigator>
+  </view>
+</template>
+
+<!-- 课表列表 -->
+<template name="list-course">
+  <view class="list-course">
+    <!-- 分类头部 -->
+    <template is="head-classify" data="{{title: '今日课程'}}" />
+    <!-- 列表项 -->
+    <view wx:if="{{item.current}}" class="list-course__item" wx:for="{{courses}}" wx:key="{{item.name}}">
+      <view class="list-course__section">{{item.time}}</view>
+      <view class="list-course__info">
+        <view class="list-course__name">{{item.name}}</view>
+        <view class="list-course__place">{{item.place}}</view>
+      </view>
+      <view wx:if="{{item.time === '1-2'}}" class="list-course__time">08:00</view>
+      <view wx:if="{{item.time === '3-4'}}" class="list-course__time">10:10</view>
+      <view wx:if="{{item.time === '5-6'}}" class="list-course__time">02:30</view>
+      <view wx:if="{{item.time === '7-8'}}" class="list-course__time">04:30</view>
+      <view wx:if="{{item.time === '9-10'}}" class="list-course__time">07:00</view>
+    </view>
+    <!-- 暂无课程 -->
+    <template wx:if="{{todayHasCourse === false}}" is="placeholder-basic" data="{{text: '暂无课程', bg: '/images/placeholder/bg_no_data.png'}}"
+    />
+  </view>
+</template>
+
+<!-- 文章列表 -->
+<template name="list-article">
+  <navigator class="list-article" url="news_details?classify={{classify}}&id={{_id}}">
+    <view class="list-article__title">{{title}}</view>
+    <view wx:if="{{description}}" class="list-article__description">{{description}}</view>
+    <view class="list-article__meta">
+      <!-- <view wx:if="{{tag}}" class="list-article__tag">{{tag}}</view> -->
+      <view wx:if="{{time}}" class="list-article__time">{{time}} </view>
+    </view>
+  </navigator>
+</template>
+
+<!-- 图书列表 -->
+<template name="list-book">
+  <view class="list-book" id="{{id}}" bindtap="showDetail">
+    <view class="list-book__head">
+      <text class="{{query ? 'list-book__title--query' : 'list-book__title'}}">{{title ? title : name}}</text>
+      <text wx:if="{{renew === true || renew === false}}" class="list-book__renew {{renew === false ? '' : 'list-book__renew--disabled'}}"
+        catchtap="renew">续借</text>
+    </view>
+    <view wx:if="{{query}}" class="list-book__query">
+      <text wx:if="{{callNumber}}" class="list-book__meta">{{callNumber}}</text>
+      <text wx:if="{{author}}" class="list-book__meta">{{author}}</text>
+      <text wx:if="{{publisher}}" class="list-book__meta">{{publisher}}</text>
+    </view>
+    <view wx:if="{{borrowing}}" class="list-book__borrowing">
+      <text class="list-book__place">剩余{{remain}}天</text>
+      <text class="list-book__time">{{start}} 至 {{end}}</text>
+    </view>
+  </view>
+</template>
+
+<!-- 体测成绩列表 -->
+<template name="list-physical">
+  <view class="list-physical {{fold ? 'list-physical--fold' : ''}}">
+    <view id="{{index}}" class="list-physical__head" bindtap="fold">
+      <text>{{year}}年度</text>
+      <image class="list-physical__ic-fold" src="/images/common/up.png"></image>
+    </view>
+
+    <view class="list-physical__item">
+      <text>身高</text>
+      <text>{{height}}</text>
+    </view>
+    <view class="list-physical__item">
+      <text>体重</text>
+      <text>{{weight}}</text>
+    </view>
+    <view class="list-physical__item">
+      <text>肺活量</text>
+      <text>{{vitalCapacity}}</text>
+    </view>
+    <view class="list-physical__item">
+      <text>跳远</text>
+      <text>{{longJump}}</text>
+    </view>
+    <view class="list-physical__item">
+      <text>短跑</text>
+      <text>{{sprint}}</text>
+    </view>
+    <view class="list-physical__item">
+      <text>坐位体前屈</text>
+      <text>{{flexion}}</text>
+    </view>
+    <view class="list-physical__item">
+      <text>长跑</text>
+      <text>{{longRun}}</text>
+    </view>
+    <view class="list-physical__item list-physical__item--last">
+      <text>一分钟引体向上/仰卧起坐</text>
+      <text>{{pullOrSitup}}</text>
+    </view>
+
+    <view class="list-physical__foot">
+      <text>总分</text>
+      <text>{{totalScore}}</text>
+    </view>
+  </view>
+</template>

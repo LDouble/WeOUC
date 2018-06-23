@@ -1,0 +1,122 @@
+/* 课程信息 */
+.course__item {
+  box-sizing: border-box;
+  position: absolute;
+  height: 310rpx;
+  margin-top: 10rpx;
+  padding: 8rpx 5rpx;
+  font-size: 10pt;
+  color: #fff;
+  border-radius: 15rpx;
+  overflow: hidden;
+}
+
+.course__flag,
+.course__name,
+.course__place {
+  display: block;
+}
+
+/* 定位槽 */
+.course__time-slot-1-2 {
+  top: 0;
+}
+.course__time-slot-3-4 {
+  top: 320rpx;
+}
+.course__time-slot-5-6 {
+  top: 640rpx;
+}
+.course__time-slot-7-8 {
+  top: 960rpx;
+}
+.course__time-slot-9-10 {
+  top: 1280rpx;
+}
+
+/* 颜色填充 */
+.course__color-1 {
+  background-color: #99ccff;
+}
+.course__color-2 {
+  background-color: #ff9999;
+}
+.course__color-3 {
+  background-color: #ffcc99;
+}
+.course__color-4 {
+  background-color: #cc99ff;
+}
+.course__color-5 {
+  background-color: #ccccff;
+}
+
+/* 当前周层叠置上 */
+.course__item--current {
+  z-index: 1;
+}
+
+/* 非当前 */
+.course__item--notcurrent {
+  color: #999;
+  background-color: #f7f7f7;
+}
+
+/* 详细信息 */
+.course-detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9;
+}
+.course-detail__box {
+  position: relative;
+  width: 75%;
+  max-height: 80%;
+  padding: 45rpx 45rpx 15rpx 45rpx;
+  background-color: #fff;
+  border-radius: 5rpx;
+  overflow-y: scroll;
+  z-index: 10;
+}
+.course-detail__close {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  width: 45rpx;
+  height: 45rpx;
+}
+.course-detail__content {
+  margin-bottom: 30rpx;
+}
+.course-detail__name {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 45rpx;
+  font-size: 13pt;
+  color: #000;
+  font-weight: bold;
+}
+.course-detail__place,
+.course-detail__weekly,
+.course-detail__teacher {
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+  font-size: 11pt;
+  line-height: 1;
+}
+.course-detail__title {
+  color: #999;
+  margin: 0 15rpx 0 0;
+}
+.course-detail__flag {
+  color: #999;
+  font-size: 8pt;
+}

@@ -1,5 +1,8 @@
 <!--pages/index/index.wxml-->
-<swiper style="" class="swiper" autoplay="true" interval="4000" duration="1000">
+<view class="fix_tip {{offline?'active':''}}">
+  <text>离线缓存模式</text>
+</view>
+<swiper wx:if="{{!offline}}" style="" class="swiper" autoplay="true" interval="4000" duration="1000">
   <block wx:for="{{notices}}" wx:key="{{index}}">
     <swiper-item>
       <image style="width:100%" bindtap="noticeTo" data-id='{{item.id}}' src="{{item.cover}}" class="slide-image" />
@@ -9,14 +12,14 @@
 <view class="container" style='margin-top:-20rpx'>
   <!--导航部分-->
   <form bindsubmit="submit" report-submit="ture">
-  <view class='main-core'>
-    <block wx:for="{{core}}" wx:key="id">
-      <button class="form_button main-core-item" form-type='submit' url="{{'/pages/core/'+item.id+'/'+item.id}}"  plain="{{plain}}">
-        <image class="core-item-icon" src="/images/index/{{item.id}}.png"></image>
-        <text class="core-item-name">{{item.name}}</text>
-      </button>
-    </block>
-  </view>
+    <view class='main-core'>
+      <block wx:for="{{core}}" wx:key="id">
+        <button data-id='{{item.id}}' data-require="{{item.require}}" class="form_button main-core-item" form-type='submit' plain="{{plain}}">
+          <image class="core-item-icon" src="/images/index/{{item.id}}.png"></image>
+          <text class="core-item-name">{{item.name}}</text>
+        </button>
+      </block>
+    </view>
   </form>
   <!--提醒部分-->
   <view wx:if="{{remind}}" class="remind-box">
@@ -24,8 +27,8 @@
     <block wx:else>
       <image class="remind-img" src="/images/index/nothing.png"></image>
       <text class="remind-text">{{remind}}</text>
-      <button wx:if="{{remind == '未绑定'}}"  open-type="getUserInfo" class="remind-btn" bindgetuserinfo="auth">前去绑定</button>
-      <button wx:if="{{remind == '未授权'}}" open-type="getUserInfo" class="remind-btn" bindgetuserinfo="auth">前去授权</button>
+      <button wx:if="{{remind == '未绑定'}}" class="remind-btn" bindtap="auth">前去绑定</button>
+      <button wx:if="{{remind == '未授权'}}" class="remind-btn" bindtap="auth">前去授权</button>
     </block>
   </view>
   <!--提醒部分结束-->
@@ -41,14 +44,15 @@
         <view wx:if="{{nothingclass}}" class="card-item-bd kb-nothing">
           <text>今天居然没有课~😆</text>
         </view>
+
         <!--有课的话，则显示今天有什么课-->
         <view wx:else class="card-item-bd">
           <view class="kb-item" wx:for="{{stuclass}}" wx:if="{{item.class}}">
             <view class="kb-item-left">
-              <text class="kb-item-what">{{item.class.name}} ({{item.class.classNum}})</text>
-              <text class="kb-item-when">{{item.classtime}} 老师：{{item.class.teacher}} </text>
+              <text class="kb-item-what">{{item.class.name}}</text>
+              <text class="kb-item-when">{{item.class.classRoom}}</text>
             </view>
-            <text class="kb-item-where">{{item.class.classRoom}}</text>
+            <text class="kb-item-where">{{item.classtime}}</text>
           </view>
         </view>
         <view class="kb-open">

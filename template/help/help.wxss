@@ -1,0 +1,42 @@
+/* 帮助 */
+.help {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9;
+}
+.help__box {
+  position: relative;
+  width: 72.5%;
+  padding: 45rpx;
+  background-color: #fff;
+  border-radius: 5rpx;
+  z-index: 10;
+}
+.help__item {
+  padding: 15rpx;
+}
+.help__question {
+  display: block;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #999;
+}
+.help__answer {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #ccc;
+}
+.help__close {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  width: 45rpx;
+  height: 45rpx;
+}

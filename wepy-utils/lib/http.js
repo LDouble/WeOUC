@@ -62,7 +62,7 @@ var Http = {
         data: params,
         method: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'].indexOf(method) > -1 ? method : 'GET',
         header: Object.assign({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
           /*
           这里可以自定义全局的头信息，这是一个栗子
           'Authorization': 'Bearer ' + wx.getStorageSync('token'),

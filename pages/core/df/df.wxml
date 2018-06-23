@@ -1,0 +1,21 @@
+<import src="/template/tip/tip.wxml" />
+<import src="/template/help/help.wxml" />
+<import src="/template/list/list.wxml" />
+<!-- 一卡通 -->
+<view class="card">
+  <view class="fix_tip active{{offline?'active':''}}">
+    <text>离线缓存模式</text>
+  </view>
+  <view class="e-card">
+    <view class="e-card__balance">
+      <text class="e-card__rmb">{{df.restAmp}}</text>
+    </view>
+    <view class="e-card__tip">当前宿舍电量</view>
+    <view class="e-card__foot">
+      <text>对电费有疑问?</text>
+      <text class="e-card__help" bindtap="showHelp">帮助</text>
+    </view>
+  </view>
+
+  <template is="help" data="{{...help}}" />
+</view>

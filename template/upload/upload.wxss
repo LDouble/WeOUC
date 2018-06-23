@@ -1,0 +1,39 @@
+/* 图片上传 */
+.upload-photo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 100rpx 0 30rpx 0;
+}
+.upload-photo__add {
+  position: relative;
+  width: 135rpx;
+  height: 135rpx;
+  background-color: #f7f7f7;
+  border-radius: 5rpx;
+}
+.upload-photo__add::before,
+.upload-photo__add::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #e5e5e5;
+}
+.upload-photo__add::before {
+  width: 10rpx;
+  height: 80rpx;
+  margin-top: -40rpx;
+  margin-left: -5rpx;
+}
+.upload-photo__add::after {
+  width: 80rpx;
+  height: 10rpx;
+  margin-top: -5rpx;
+  margin-left: -40rpx;
+}
+.upload-photo__preview {
+  width: 135rpx;
+  height: 135rpx;
+  margin: 0 15rpx;
+}

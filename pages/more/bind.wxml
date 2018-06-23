@@ -1,0 +1,24 @@
+<view id="bind">
+    <view id="stars"/>
+    <view id="stars2"/>
+    <view id="stars3"/>
+    <view id="content">
+      <view id="title">
+        绑定{{types[type].name}}
+      </view>
+      <form bindsubmit="bind">
+        <view class="input-group" hover-class="active">
+          <text class="input-label">学号</text>
+          <input name="xh" type="number" placeholder="请输入您的学号"/>
+        </view>
+        <view class="input-group" hover-class="active">
+          <text class="input-label">密码</text>
+          <input name="password" type="password" placeholder="请输入您的密码"/>
+        </view>
+        <view class="help">
+          <view>{{types[type].help}}</view>
+        </view>
+        <button formType="submit">绑定</button>
+      </form>
+    </view>
+  </view>
