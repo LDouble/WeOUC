@@ -87,8 +87,8 @@
                 <view style="height:{{(cards.num + 1)*100}}rpx;margin-top:{{cards.py*100}}rpx" data-day="{{day}}" data-wid="{{wid}}" data-cid="{{cid}}" bindtap="showDetail" wx:for="{{cards.weeks}}" wx:key="*this" wx:for-item="iweek" class="mg-8 kb-card-content {{cards.conflictWeeks[iweek] || (week == '*' && cards.klen > 1) ?'k-sec':''}} {{iweek==week || week == '*' ?cards.color:''}}"
                   wx:if="{{iweek==week || week == '*'}}">
                   <!-- 判断上课地点是数字还是汉字 -->
-                  <text wx:if="{{cards.classRoom < '99999'}}" class="kb-card-place-num">{{cards.classRoom}}</text>
-                  <text wx:else class="kb-card-place-num">{{cards.classRoom}}</text>
+                  <text wx:if="{{cards.classRoom < '99999'}}" class="kb-card-place-num">{{cards.classRoom}}<block wx:if="{{cards.status!='选中' && cards.status != '预选中'}}">@未选中</block></text>
+                  <text wx:else class="kb-card-place-num">{{cards.classRoom}}<block wx:if="{{cards.status!='选中' && cards.status != '预选中'}}">@未选中</block></text>
                   <view class="kb-card-name">
                     <text class="kb-card-name-text" style="-webkit-line-clamp:{{3*(cards.number-1)}};">{{cards.name}}</text>
                   </view>

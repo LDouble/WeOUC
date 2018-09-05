@@ -38,7 +38,7 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding: 45rpx;
+  padding: 25rpx 25rpx;
   margin-left: 135rpx;
   border-bottom: solid 1rpx #eee;
 }
@@ -62,7 +62,7 @@
 /* 头像列表 */
 .list-avatar {
   background-color: #fff;
-  padding: 45rpx;
+  padding: 25rpx;
 }
 .list-avatar__item {
   display: flex;

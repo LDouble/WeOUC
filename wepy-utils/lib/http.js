@@ -50,11 +50,17 @@ var Http = {
 
   // request
   Request: function(method, requestHandler) {
-    const { url, params, headers } = requestHandler
+    const {
+      url,
+      params,
+      headers
+    } = requestHandler
 
-    console.table(requestHandler)
+    // console.table(requestHandler)
 
-    wx.showLoading && wx.showLoading({title: 'Loading...'})
+    wx.showLoading && wx.showLoading({
+      title: 'Loading...'
+    })
 
     return new Promise((resolve, reject) => {
       wx.request({
@@ -70,15 +76,18 @@ var Http = {
           'Content-Type': 'application/x-www-form-urlencoded'
           */
         }, headers),
-        success: function (res) {
-          const { data, statusCode } = res
+        success: function(res) {
+          const {
+            data,
+            statusCode
+          } = res
           // 处理数据
           statusCode === 200 ? resolve(data) : reject(data, statusCode)
         },
-        fail: function () {
+        fail: function() {
           reject('Network request failed')
         },
-        complete: function () {
+        complete: function() {
           wx.hideLoading && wx.hideLoading()
         }
       })

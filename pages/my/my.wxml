@@ -1,0 +1,25 @@
+<!-- 导入模板 -->
+<import src="/template/list/list.wxml" />
+
+<!-- 更多 -->
+<view class="more">
+  <!-- 用户信息 -->
+  <template is="list-avatar" data="{{...userInfo}}" />
+  <!-- 功能列表 -->
+  <view class="list">
+    <template wx:if="{{!bind}}" is="list-icon" data="{{href: '/pages/more/bind', lIcon: '/images/more/bind.png', text: '账号绑定'}}" />
+    <view class="list-icon__nav" url="">
+      <view class="list-icon__item">
+        <image class="list-icon__l-icon" src="/images/more/notice.png"></image>
+        <text class="list-icon__text">成绩通知</text>
+        <switch bindchange='notice' checked="{{is_notice}}" />
+      </view>
+      <view bindtap='unbind' wx:if="{{bind}}" class="list-icon__item">
+        <image class="list-icon__l-icon" src="/images/more/unbind.png"></image>
+        <text class="list-icon__text">解除绑定</text>
+        <image class="list-icon__r-icon" src="/images/more/arrow_right.png"></image>
+      </view>
+      <!-- <template is="list-icon" data="{{href: '/pages/more/about', lIcon: '/images/more/about.png', text: '关于我'}}" /> -->
+    </view>
+  </view>
+</view>

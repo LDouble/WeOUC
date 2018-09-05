@@ -1,79 +1,49 @@
 App({
-  version: '', //版本号
+  version: 'v2016.6.28', //版本号
   today: '',
   logincode: '',
   openid: '',
-  beginday: '2018/03/05', //开学那一天,注意格式要一致（不够要补上0）
+  beginday: '2018/08/20', //开学那一天,注意格式要一致（不够要补上0）
   schoolweek: 1, //教学周
   _time: {}, //当前学期周数
   remind: "",
   offline: false,
+  xn: 2018,
+  xq: 0,
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function() {
-    const updateManager = wx.getUpdateManager()
-    updateManager.onCheckForUpdate(function(res) {
-      console.log(res.hasUpdate)
-    })
-    updateManager.onUpdateReady(function() {
-      wx.showModal({
-        title: '更新提示',
-        content: '新版本已经准备好，是否重启应用？',
-        success: function(res) {
-          if (res.confirm) {
-            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-            updateManager.applyUpdate()
-          }
-        }
+    if (wx.getUpdateManager) {
+      const updateManager = wx.getUpdateManager()
+      updateManager.onCheckForUpdate(function(res) {
+        console.log(res.hasUpdate)
       })
-    })
-    updateManager.onUpdateFailed(function() {
-      // 新的版本下载失败
+      updateManager.onUpdateReady(function() {
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          success: function(res) {
+            if (res.confirm) {
+              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              updateManager.applyUpdate()
+            }
+          }
+        })
+      })
+      updateManager.onUpdateFailed(function() {
+        // 新的版本下载失败
 
-    })
-    var that = this;
-    wx.getNetworkType({
-      success: function(res) {
-        // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
-        if (res.networkType == "none") { //无网络
-          that.offline = true;
-          that.init();
-        } else { // 有网络则请求服务器
-          that.offline = false;
-          that.http.get({
-            url: that._server + "/config"
-          }).then(data => {
-            that.init(data);
-          }).catch(error => {
-            that.init();
-          })
-        }
-      },
-    });
+      })
+    }
+    this.week = this.calWeek()
+    if (new Date() >= new Date("2018-09-14"))
+      this.beginday = '2018/09/17'
   },
   /**
    * 初始化，包括计算当前周次，加载相关
    */
-  init: function(data = undefined) {
-    var that = this;
-    if (data != undefined) {
-      /*
-      获取到服务器的版本后，初始化完毕
-      然后到index进行判断是否为新版本，如果是新版本，则清空缓存重新获取信息。
-     */
-      that.version = data.version;
-      that.slides = data.slides;
-      if (that.version != wx.getStorageSync("version")) {
-        wx.removeStorageSync("stuclass"); //清空stuclass，重新进行绑定。
-        wx.setStorageSync("version", that.version);
-      }
-      wx.setStorageSync("slides", that.slides);
-    } else {
-      that.version = wx.getStorageSync("version")
-      that.slides = wx.getStorageSync("slides")
-    }
-  },
+
   calWeek: function() {
     var _this = this;
     var begindate = new Date(_this.beginday);
@@ -92,12 +62,30 @@ App({
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
    */
   onShow: function(options) {
+    if (this.version != wx.getStorageSync("version")) { // 判断app版本是否为最新的，
+      wx.clearStorageSync();
+      wx.setStorageSync("version", this.version)
+    } else {
+      this.user_token = wx.getStorageSync("user_token"); // 获取user_token
+      if (!this.user_token)
+        this.remind = "未绑定"
+      else
+        this.remind = "加载中"
+    }
+    var that = this;
+    wx.getNetworkType({
+      success: function(res) {
+        // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        if (res.networkType == "none") { //无网络
+          that.offline = true;
+          that.remind = "无网络"
+
+        } else { // 有网络则请求服务器
+          that.offline = false;
+        }
+      },
+    });
     this.schoolweek = parseInt(this.calWeek());
-    this.user_token = wx.getStorageSync("user_token"); // 获取user_token
-    if (!this.user_token)
-      this.remind = "未绑定"
-    else
-      this.remind = "加载中"
   },
   getISOYearWeek: function(date) {
     var _this = this;
@@ -158,8 +146,9 @@ App({
   onError: function(msg) {
 
   },
-  http: require('/wepy-utils/lib/http'),
-  tips: require('/wepy-utils/lib/tips'),
-  _server: "http://127.0.0.1:5000/api",
+  // http: require('/wepy-utils/lib/http'),
+  // tips: require('/wepy-utils/lib/tips'),
+  _server: "https://weouc.it592.com/api",
+  //_server: "http://127.0.0.1:5000/api",
   util: require('./utils/util'),
 })

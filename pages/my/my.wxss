@@ -1,0 +1,12 @@
+@import "/template/list/list.wxss";
+
+.more {
+  background-color: #f7f7f7;
+  overflow: hidden;
+}
+
+/* 功能列表 */
+.list {
+  margin-top: 15rpx;
+  background-color: #fff;
+}

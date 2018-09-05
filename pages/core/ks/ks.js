@@ -22,11 +22,10 @@ Page({
     this.setData(data);
   },
   onPullDownRefresh: function() {
-    var _this = this;
-    _this.loginHandler({
-      id: _this.data.id || app._user.we.info.id,
-      name: _this.data.name || app._user.we.info.name
-    });
+    if (this.data.pull == true)
+      return
+    this.data.pull = true;
+    this.get_ks()
   },
   onLoad: function(options) {
     var _this = this;
@@ -45,6 +44,7 @@ Page({
     })
   },
   onShow: function() {
+    var _this = this;
     this.setData({
       offline: app.offline
     })
@@ -57,33 +57,64 @@ Page({
   },
   //让分享时自动登录
   get_ks: function() {
-    var _this = this;
-    app.http.post({
-      url: app._server + "/test",
-      params: app.jwc
-    }).then((res) => {
-      var ks = res.data.sort(function(a, b) {
-        var y = a['time'];
-        var x = b['time'];
-        console.log(x)
-        if (x == ".")
-          return -5
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-      });
-      wx.setStorageSync('ks', ks);
-      _this.ksRender(ks)
-    }).catch((error) => {
-      var ks = wx.getStorageSync("ks")
-      _this.ksRender(ks)
-      _this.setData({
-        offline: true
+    if (!app.jwc) {
+      this.setData({
+        "remind": "请先绑定"
       })
-      console.log(error)
+      return
+    }
+    var _this = this;
+    wx.showLoading({
+      title: '加载中',
     })
+    wx.request({
+      url: app._server + "/test",
+      data: app.jwc,
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      method: "POST",
+      success: function(res) {
+        res = res.data
+        var ks = res.data.sort(function(a, b) {
+          var y = a['time'];
+          var x = b['time'];
+          console.log(x)
+          if (x == ".")
+            return -5
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+        wx.setStorageSync('ks', ks);
+        _this.ksRender(ks)
+        if (_this.data.pull) {
+          _this.data.pull = false
+          wx.stopPullDownRefresh()
+        }
+      },
+      fail: function(error) {
+        var ks = wx.getStorageSync("ks")
+        if (ks) {
+          _this.ksRender(ks)
+          _this.setData({
+            offline: true,
+          })
+        } else
+          _this.setData({
+            remind: "暂无考试安排",
+          })
+        if (_this.data.pull) {
+          _this.data.pull = false
+          wx.stopPullDownRefresh()
+        }
+      },
+      complete: function(res) {
+        wx.hideLoading();
+      }
+    });
   },
   ksRender: function(list) {
     if (!list || !list.length) {
-      _this.setData({
+      this.setData({
         remind: '无考试安排'
       });
       return false;
@@ -102,15 +133,19 @@ Page({
         list[i].address = "";
       } else {
         var pattern = /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})-(\d{2}:\d{2})/;
-        console.log(list[i].time)
+       // console.log(list[i].time)
         var arr = pattern.exec(list[i].time);
         list[i].date = list[i].time
+        if(!arr){
+          continue;
+        }
         var date = arr[1]; //获取时间进行判断
         var ss = date + " " + arr[2];
+        ss = ss.replace(/\-/g, "/");
         var to = new Date(ss).getTime() - new Date().getTime();
-        if (to / 1000 / 60 >= 20) {
-          list[i].num = "请先通过选课系统查询。备用查询考试前20分钟公布";
-          list[i].address = "请先通过选课系统查询。备用查询考试前20分钟公布";
+        if (to / 1000 / 60 >= 35) {
+          list[i].num = "请先通过选课系统查询。备用查询考试前35分钟公布";
+          list[i].address = "请先通过选课系统查询。备用查询考试前35分钟公布";
         }
         list[i].time = arr[2] + "-" + arr[3];
       }
@@ -174,7 +209,7 @@ Page({
     result.origin = e.date
     result.number = e.num
     result.room = e.address
-    console.log(result)
+   // console.log(result)
     return result
   },
   getDay: function(sDate) {

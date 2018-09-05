@@ -34,14 +34,21 @@
 <!-- 头像列表 -->
 <template name="list-avatar">
   <view class="list-avatar">
-    <navigator class="list-avatar__item" url="{{href}}">
+    <navigator wx:if="{{href}}" class="list-avatar__item" url="{{href}}">
       <image class="list-avatar__avatar" src="{{avatar}}"></image>
       <view class="list-avatar__meta">
         <text class="list-avatar__nickName">{{nickName}}</text>
-        <text class="list-avatar__bind">{{bind ? '已绑定' : '未绑定'}}</text>
+        <text class="list-avatar__bind">{{xh ? xh : '未绑定'}}</text>
       </view>
       <image class="list-avatar__r-icon" src="/images/more/arrow_right.png"></image>
     </navigator>
+    <view wx:else class="list-avatar__item">
+      <image class="list-avatar__avatar" src="{{avatar}}"></image>
+      <view class="list-avatar__meta">
+        <text class="list-avatar__nickName">{{nickName}}</text>
+        <text class="list-avatar__bind">{{xh ? xh : '未绑定'}}</text>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -64,19 +71,18 @@
       <view wx:if="{{item.time === '9-10'}}" class="list-course__time">07:00</view>
     </view>
     <!-- 暂无课程 -->
-    <template wx:if="{{todayHasCourse === false}}" is="placeholder-basic" data="{{text: '暂无课程', bg: '/images/placeholder/bg_no_data.png'}}"
-    />
+    <template wx:if="{{todayHasCourse === false}}" is="placeholder-basic" data="{{text: '暂无课程', bg: '/images/placeholder/bg_no_data.png'}}" />
   </view>
 </template>
 
 <!-- 文章列表 -->
 <template name="list-article">
-  <navigator class="list-article" url="news_details?classify={{classify}}&id={{_id}}">
+  <navigator class="list-article" url="detail?type={{classify}}&url={{url}}">
     <view class="list-article__title">{{title}}</view>
     <view wx:if="{{description}}" class="list-article__description">{{description}}</view>
     <view class="list-article__meta">
       <!-- <view wx:if="{{tag}}" class="list-article__tag">{{tag}}</view> -->
-      <view wx:if="{{time}}" class="list-article__time">{{time}} </view>
+      <view wx:if="{{date}}" class="list-article__time">{{date}} </view>
     </view>
   </navigator>
 </template>
@@ -86,8 +92,7 @@
   <view class="list-book" id="{{id}}" bindtap="showDetail">
     <view class="list-book__head">
       <text class="{{query ? 'list-book__title--query' : 'list-book__title'}}">{{title ? title : name}}</text>
-      <text wx:if="{{renew === true || renew === false}}" class="list-book__renew {{renew === false ? '' : 'list-book__renew--disabled'}}"
-        catchtap="renew">续借</text>
+      <text wx:if="{{renew === true || renew === false}}" class="list-book__renew {{renew === false ? '' : 'list-book__renew--disabled'}}" catchtap="renew">续借</text>
     </view>
     <view wx:if="{{query}}" class="list-book__query">
       <text wx:if="{{callNumber}}" class="list-book__meta">{{callNumber}}</text>

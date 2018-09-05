@@ -1,0 +1,12 @@
+<!-- 导入模板 -->
+<import src="/template/card/card.wxml" />
+<import src="/template/details/details.wxml" />
+<import src="/template/placeholder/placeholder.wxml" />
+
+<!-- 公告详情 -->
+<view class="news-details">
+  <template wx:if="{{loading === false}}" is="details-common" data="{{...news, suffix: suffix, preview: preview}}" />
+
+  <!-- 暂无 -->
+  <template wx:if="{{loading === true}}" is="placeholder-fullpage" data="{{bg:'/images/placeholder/bg_no_data.png'}}" />
+</view>

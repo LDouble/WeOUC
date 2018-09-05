@@ -22,11 +22,10 @@ Page({
     xf: 0,
   },
   onPullDownRefresh: function() {
-    var _this = this;
-    _this.setData({
-      remind: '加载中'
-    });
-    this.getkscj();
+    if (this.data.pull == true)
+      return
+    this.data.pull = true;
+    this.get_cj()
   },
   onLoad: function() {
     var _this = this;
@@ -85,7 +84,7 @@ Page({
     var totalfs = 0,
       totalxf = 0;
     for (i = 0; i < cjInfo.length; i++) {
-      cjInfo[i].xf = parseInt(cjInfo[i].xf)
+      cjInfo[i].xf = parseFloat(cjInfo[i].xf)
       if (cjInfo[i].selected && cjInfo[i].jd) {
         credit += cjInfo[i].xf;
         totaljd += cjInfo[i].jd * cjInfo[i].xf;
@@ -133,7 +132,25 @@ Page({
     if (parseFloat(cj)) {
       return cj;
     } else {
-      return undefined;
+      switch (cj) {
+        case "优秀":
+        case "优":
+          return 90;
+        case "良":
+        case "良好":
+          return 80;
+        case "中":
+        case "中等":
+          return 70;
+        case "合格":
+        case "及格":
+          return 60
+        case "不合格":
+        case "不及格":
+          return 0
+        default:
+          return undefined
+      }
     }
   },
   bindSelectAll: function() {
@@ -154,23 +171,51 @@ Page({
     this.calgpa()
   },
   get_cj: function() {
-    var _this = this;
-    var _this = this;
-    app.http.post({
-      url: app._server + "/cj",
-      params: app.jwc
-    }).then((res) => {
-      var cj = res.data
-      wx.setStorageSync('cj', cj);
-      _this.cjRender(cj)
-    }).catch((error) => {
-      var cj = wx.getStorageSync("cj")
-      _this.cjRender(cj)
-      _this.setData({
-        offline: true
+    if (!app.jwc) {
+      this.setData({
+        "remind": "请先绑定"
       })
-      console.log(error)
+      return
+    }
+    var _this = this;
+    wx.showLoading({
+      title: '加载中',
     })
+    wx.request({
+      url: app._server + "/cj",
+      data: app.jwc,
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      method: "POST",
+      success: function(res) {
+        res = res.data
+        if (res && res.data)
+          var cj = res.data.reverse()
+        else
+          var cj = []
+        wx.setStorageSync('cj', cj);
+        _this.cjRender(cj)
+        if (_this.data.pull) {
+          _this.data.pull = false
+          wx.stopPullDownRefresh()
+        }
+      },
+      fail: function(error) {
+        var cj = wx.getStorageSync("cj")
+        _this.cjRender(cj)
+        _this.setData({
+          offline: true
+        })
+        if (_this.data.pull) {
+          _this.data.pull = false
+          wx.stopPullDownRefresh()
+        }
+      },
+      complete: function(res) {
+        wx.hideLoading();
+      }
+    });
   },
   cjRender: function(_data) {
     var _this = this;

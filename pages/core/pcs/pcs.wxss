@@ -1,0 +1,96 @@
+@import "/template/list/list.wxss";
+@import "/template/help/help.wxss";
+@import "/template/tip/tip.wxss";
+@import "/template/placeholder/placeholder.wxss";
+@import "/template/bar/bar.wxss";
+@import "/pages/core/pcs/pc.wxss";
+
+.library {
+  margin-top:10px; 
+  padding: 0 10rpx 
+}
+
+/* model */
+
+.model {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9;
+}
+
+.model__box {
+  position: relative;
+  width: 75%;
+  max-height: 80%;
+  padding: 45rpx 45rpx 15rpx 45rpx;
+  background-color: #fff;
+  border-radius: 5rpx;
+  overflow-y: scroll;
+  z-index: 10;
+}
+
+.model__content {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30rpx;
+  overflow: hidden;
+}
+
+.model__input {
+  margin-bottom: 80rpx;
+  padding: 30rpx 60rpx 30rpx 0;
+  vertical-align: baseline;
+  font-size: 11pt;
+  border-bottom: solid 1rpx #eee;
+  z-index: 1;
+}
+
+.input-placeholder {
+  color: #999;
+}
+
+.model__ic-send {
+  position: absolute;
+  top: 30rpx;
+  right: 0;
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.input-active {
+  border-color: #09f;
+}
+
+/* 底部 */
+
+.foot {
+  margin-top: 15rpx;
+  text-align: center;
+}
+
+.foot__tip {
+  font-size: 9pt;
+  color: #999;
+}
+.pc-form__post{
+  display: flex;
+  justify-content: space-around;
+  padding: 5rpx;
+  background: inherit;
+}
+.pc-form__button--post{
+  line-height: 2;
+}
+.list-book__title{
+  width: inherit;
+}
+.list-book {
+background: white;
+}

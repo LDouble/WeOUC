@@ -1,0 +1,28 @@
+<!--cj.wxml-->
+<view class="container">
+  <view wx:if="{{remind}}" class="remind-box">
+    <image wx:if="{{remind == '加载中'}}" class="remind-img" src="/images/index/loading.gif"></image>
+    <block wx:else>
+      <image class="remind-img" src="/images/index/nothing.png"></image>
+      <text class="remind-text">{{remind}}</text>
+    </block>
+  </view>
+  <block wx:else>
+    <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <view class="header">
+      <view style='padding:10rpx'>{{name}}</view>
+      <view wx:if="{{times <= 8}}" style='padding:10rpx'>你已经来海大{{time}}年了</view>
+      <view wx:elif="{{times < 11}}" style='padding:10rpx'>距离毕业还有{{4-time}}年</view>
+      <view wx:else style='padding:10rpx'>毕业的日子还好吗</view>
+
+      <view style='margin-top:30rpx;padding:10rpx'>在海大的日子里</view>
+      <view style='padding:10rpx'>总共学了{{xf}}学分</view>
+      <view wx:if="{{gk}}" style='padding:10rpx'>一不小心挂了{{gk}}科，加油！</view>
+      <view wx:else style='padding:10rpx'>你很棒棒，一科也没挂，继续保持</view>
+    </view>
+    <view class="help">
+      成绩分析加权公式与成绩查询中不同，公式为Σ课程成绩*学分/Σ学分 + Σ本学期及格课程学分*0.2,这些课程不包括重修课程与刷分课程。如果需要计算保研加权，请到成绩查询计算，手动筛选需要计算的课程。
+      
+    </view>
+  </block>
+</view>

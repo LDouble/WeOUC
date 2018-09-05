@@ -1,0 +1,55 @@
+<import src="/template/help/help.wxml" />
+<import src="/template/tip/tip.wxml" />
+<import src="/template/bar/bar.wxml" />
+<import src="/template/placeholder/placeholder.wxml" />
+<import src="/template/list/list.wxml" />
+
+<view class="library">
+  <view class="pc-form__item">
+    <view class="pc-form__container">
+      <picker class="pc-form__picker" mode="multiSelector" bindchange="bindMultiPickerChange" range="{{project}}">
+        <view class="pc-form__field">
+          <text class="pc-form__value">{{departure}} 至 </text>
+          <text class="pc-form__value">{{destination}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="pc-form__item">
+    <view class="pc-form__container">
+      <picker class="pc-form__picker" mode="date" data-id="date" bindchange='bindValueChange'>
+        <view class="pc-form__field">
+          <text class="pc-form__value">{{date}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="pc-form__item pc-form__post">
+    <button class="pc-form__button--post" bindtap='submit'>搜索一下</button>
+    <button class="pc-form__button--post" bindtap='want_pc'>我要拼车</button>
+  </view>
+  
+  <block wx:for="{{pc_lists}}"  wx:key="id">
+    <view class="list-book" id="{{item.id}}" bindtap="copy_wx"  data-wx="{{item.wx}}">
+      <view class="list-book__head">
+        <text class="{{query ? 'list-book__title--query' : 'list-book__title'}}">{{item.departure}} => {{item.destination}}</text>
+        <text class="list-book__meta">  {{item.date}}  </text>
+      </view>
+      <view class="list-book__query">
+        <text class="list-book__meta">出发时间:{{item.time}}</text>
+        <text class="list-book__meta" wx:if="{{item.vehicle_num}}">班次:{{item.vehicle_num}}</text>
+        <text class="list-book__meta" wx:if="{{item.note}}">备注:{{item.note}}</text>
+      </view>
+      <view class="list-book__borrowing">
+        <text class="list-book__place">微信号:{{item.wx}}(点击复制)</text>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{last}}" class="foot">
+    <text class="foot__tip">已显示全部</text>
+  </view>
+</view>
+
+
+<!-- 帮助 -->
+<template is="help" data="{{...help}}" />

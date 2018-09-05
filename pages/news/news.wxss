@@ -1,0 +1,37 @@
+@import "/template/list/list.wxss";
+@import "/template/placeholder/placeholder.wxss";
+
+/* 分类标签 */
+.classify {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 30rpx 15rpx;
+  background-color: #f7f7f7;
+}
+.classify__item {
+  margin: 15rpx;
+  padding: 8rpx 45rpx;
+  border: solid 2rpx #ddd;
+  border-radius: 10rpx;
+  font-size: 10pt;
+  font-weight: bold;
+  color: #000;
+}
+
+.classify__item--active {
+  color: #fff;
+  background-color: #0099ff;
+  border: solid 2rpx #0099ff;
+}
+
+/* 新闻列表 */
+.news-list {
+  padding: 45rpx;
+}
+.news-list__foot {
+  text-align: center;
+  margin: 30rpx 0;
+  font-size: 9pt;
+  color: #999;
+}

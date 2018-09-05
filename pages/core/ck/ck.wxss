@@ -1,0 +1,215 @@
+/**kjs.wxss**/
+
+page {
+  position: relative;
+  height: 100%;
+}
+
+.container {
+  background: #fff;
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+.pc-form__item {
+  box-sizing: border-box;
+  margin-bottom: 15rpx;
+  padding: 15rpx 45rpx 15rpx 45rpx;
+  background-color: #fff;
+}
+
+.pc-form__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==========================================================================
+   main-roomUl
+ ============================================================================ */
+
+.main-roomUl {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 30rpx 45rpx;
+}
+
+.roomUl-floor {
+  display: flex;
+  width: 600rpx;
+  flex-flow: column nowrap;
+  margin-top: 20rpx;
+  padding: 0 0 0 65rpx;
+  background: url('https://we.cqu.pt/app/images/core/kjs/classroom-icon.png') no-repeat;
+  background-size: 30rpx 25rpx;
+  background-position: 15rpx 8rpx;
+}
+
+.floor {
+  flex: 1;
+  width: 600rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.floor text {
+  padding-bottom: 25rpx;
+  width: 120rpx;
+  font-size: 11pt;
+  letter-spacing: 0.1rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   main-condition
+ ============================================================================ */
+
+.main-condition {
+  z-index: 100;
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  border-top: 1rpx solid #f1f1f2;
+}
+
+.condition {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  height: 120rpx;
+  white-space: nowrap;
+}
+
+.condition-li {
+  display: inline-block;
+  width: 111rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+}
+
+.building-condition .condition-li {
+  width: 150rpx;
+}
+
+.day-condition .condition-li {
+  width: 115rpx;
+}
+
+.week-active, .day-active, .classTime-active, .building-active {
+  color: #fff;
+  font-weight: 900;
+}
+
+.scroll-space {
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+/* main-condition > condition-week
+ ============================================================================ */
+
+.condition-week {
+  background-color: #fbfaf8;
+}
+
+.week-active {
+  /*background: url('/images/core/kjs/week-icon.png') no-repeat;*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background: url('https://we.cqu.pt/app/images/core/kjs/week-icon.png') no-repeat;
+  background-size: 100rpx 100rpx;
+  background-position: 50% 50%;
+}
+
+/* main-condition > condition-day
+ ============================================================================ */
+
+.condition-day {
+
+}
+
+.day-active {
+  /*background: url('/images/core/kjs/day-icon.png') no-repeat;*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background: url('https://we.cqu.pt/app/images/core/kjs/day-icon.png') no-repeat;
+  background-size: 100rpx 100rpx;
+  background-position: 50% 50%;
+}
+
+/* main-condition > condition-classTime
+ ============================================================================ */
+
+.condition-classTime {
+  background-color: #fbfaf8;
+  overflow: hidden;
+}
+
+.classTime-active {
+  /*background: url('/images/core/kjs/classTime-icon.png') no-repeat;*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background: url('https://we.cqu.pt/app/images/core/kjs/classTime-icon.png') no-repeat;
+  background-size: 100rpx 100rpx;
+  background-position: 50% 50%;
+}
+
+/* main-condition > condition-building
+ ============================================================================ */
+
+.condition-building {
+  background-color: #f1f1f2;
+  overflow: hidden;
+}
+
+.building-active {
+  /*background: url('/images/core/kjs/building-icon.png') no-repeat;*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background: url('https://we.cqu.pt/app/images/core/kjs/building-icon.png') no-repeat;
+  background-size: 100rpx 100rpx;
+  background-position: 50% 50%;
+}
+
+.search {
+  width: 80%;
+}
+
+.search_arr {
+  border: 1px solid #d0d0d0;
+  border-radius: 10rpx;
+  margin-left: 20rpx;
+}
+
+.search_arr input {
+  margin-left: 60rpx;
+  height: 60rpx;
+  border-radius: 5px;
+}
+
+.bc_text {
+  line-height: 68rpx;
+  height: 68rpx;
+  margin-top: 34rpx;
+}
+
+.sousuo {
+  margin-left: 15rpx;
+  width: 15%;
+  line-height: 150%;
+  text-align: center;
+  border: 1px solid #d0d0d0;
+  border-radius: 10rpx;
+  padding: 0px;
+}
+
+.page_row {
+  display: flex;
+  flex-direction: row;
+  margin-top:10px 
+}
+
+.searchcion {
+  margin: 10rpx 10rpx 10rpx 10rpx;
+  position: absolute;
+  left: 25rpx;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}

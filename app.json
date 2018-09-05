@@ -2,13 +2,20 @@
   "pages": [
     "pages/index/index",
     "pages/more/bind",
+    "pages/more/about",
+    "pages/more/feedback",
     "pages/core/kb/kb",
     "pages/core/ks/ks",
     "pages/core/cj/cj",
+    "pages/core/cjfx/cjfx",
+    "pages/core/pcs/pc",
+    "pages/core/pcs/pcs",
     "pages/core/df/df",
-    "pages/news/news"
+    "pages/core/cls/cls",
+    "pages/core/ck/ck",
+    "pages/my/my",
+    "pages/more/web/view"
   ],
-  "plugins": {},
   "window": {
     "navigationBarBackgroundColor": "#7acfa6",
     "navigationBarTextStyle": "white",
@@ -29,10 +36,10 @@
         "selectedIconPath": "images/index/index@active.png"
       },
       {
-        "pagePath": "pages/news/news",
-        "text": "资讯",
-        "iconPath": "images/index/news.png",
-        "selectedIconPath": "images/index/news@active.png"
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "images/index/more.png",
+        "selectedIconPath": "images/index/more@active.png"
       }
     ]
   }

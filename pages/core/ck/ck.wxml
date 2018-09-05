@@ -1,0 +1,26 @@
+<!--kjs.wxml-->
+<view class="container">
+
+  <!--选择要查询的条件-->
+  <view class="main-condition">
+    <!--选择教学楼-->
+    <view class="building-condition condition-building condition" catchtap="chooseBuilding">
+      <view class="scroll-space"></view>
+      <block wx:for="{{type}}" wx:key="*this">
+        <block wx:if="{{item != ''}}">
+          <view class="condition-li {{index == active.buildingNo ? 'building-active' : ''}}" data-buildingNo="{{index}}">{{item}}</view>
+        </block>
+      </block>
+      <view class="scroll-space"></view>
+    </view>
+  </view>
+  <view class='page_row' bindtap="suo">
+    <view class="search">
+      <view class="df search_arr">
+        <icon class="searchcion" size='20' type='search'></icon>
+        <input class="" placeholder="请输入关键字" value="{{searchValue}}" />
+      </view>
+    </view>
+    <button class='sousuo'>搜索</button>
+  </view>
+</view>

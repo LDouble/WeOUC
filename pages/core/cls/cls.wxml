@@ -1,0 +1,31 @@
+<view class="classroom">
+  <picker value="{{index}}" range="{{JA}}" bindchange="bindPickerChange">
+    <view class="picker">
+      <view>当前选择：{{JA[index]}}</view>
+      <view style='color:red;font-weight:bold;'>
+        点击切换
+      </view>
+    </view>
+  </picker>
+  <view class="table">
+    <view class="thead row">
+      <view>教室</view>
+      <view>一大节</view>
+      <view>二大节</view>
+      <view>三大节</view>
+      <view>四大节</view>
+      <view>五大节</view>
+    </view>
+    <block wx:for="{{rooms}}" wx:key="{{index}}">
+      <view class="row">
+        <view class="room-name">{{index}}</view>
+        <block wx:for="{{item}}" wx:for-item="val" wx:key="{{index}}">
+          <view bindtap="show" class="item" data-wpyshow-a="{{val}}" data-wpyshow-b="{{index}}">
+            <view class="{{val == '' ? 'not-use' : 'use'}}">{{val ? "课" : '空'}}</view>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+  <ad unit-id="adunit-c992b9cbfa69132c"></ad>
+</view>

@@ -5,7 +5,7 @@
 <swiper wx:if="{{!offline}}" style="" class="swiper" autoplay="true" interval="4000" duration="1000">
   <block wx:for="{{notices}}" wx:key="{{index}}">
     <swiper-item>
-      <image style="width:100%" bindtap="noticeTo" data-id='{{item.id}}' src="{{item.cover}}" class="slide-image" />
+      <image style="width:100%" bindtap="noticeTo" data-id='{{item.url}}' src="{{item.pic}}" class="slide-image" />
     </swiper-item>
   </block>
 </swiper>
@@ -60,6 +60,7 @@
         </view>
       </navigator>
     </view>
+    <ad unit-id="adunit-a34907734236a670"></ad>
   </view>
   <!--卡片部分 end-->
 </view>

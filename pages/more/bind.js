@@ -35,7 +35,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.type = options.type || this.type;
+    this.type = options.type || this.data.type;
+    console.log(this.data.type)
     this.setData({
       type: this.type
     })
@@ -85,43 +86,62 @@ Page({
       return
     }
     params.login_code = this.code
-    app.http.post({
-      url: app._server + this.data.types[this.type].url,
-      params: params
-    }).then((data) => {
-      if (data.status == "200") { // 
-        data = data.data
-        wx.setStorageSync("name", data.name)
-        wx.setStorageSync("xh", data.xh)
-        wx.setStorageSync("user_token", data.user_token)
-        wx.setStorageSync("jw_info", data)
-        wx.setStorageSync(this.type, params)
-        app.remind = "加载中";
-        if (this.type == "jwc")
-          app.jwc = data;
-        else
-          app.id = data;
-        wx.showToast({
-          title: '绑定成功,跳转中',
-          duration: 3500,
-          success: function() {
-            wx.redirectTo({
-              url: '/pages/index/index',
-            })
-          }
-        })
-      } else {
-        wx.showModal({
-          title: '绑定提示',
-          content: data.message,
-        })
-      }
-    }).catch((error) => {
-      wx.showModal({
-        title: '请求错误',
-        content: error,
-      })
+    var _this = this
+    wx.showLoading({
+      title: '加载中',
     })
+    wx.request({
+      url: app._server + this.data.types[this.type].url,
+      data: params,
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      method: "POST",
+      success: function(res) {
+        var data = res.data
+        if (data.status == "200") { // 
+          data = data.data
+          wx.setStorageSync("name", data.name)
+          wx.setStorageSync("xh", data.xh)
+          wx.setStorageSync("user_token", data.user_token)
+          wx.setStorageSync("jw_info", data)
+          wx.setStorageSync(_this.type, params)
+          app.remind = "加载中";
+          app.user_token = data.user_token
+          if (_this.type == "jwc")
+            app.jwc = data;
+          else
+            app.id = data;
+          wx.hideLoading();
+          wx.showToast({
+            title: '绑定成功,跳转中',
+            duration: 1500,
+            success: function() {
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
+            }
+          })
+        } else {
+          wx.hideLoading();
+          wx.showModal({
+            title: '绑定提示',
+            content: data.message,
+          })
+          _this.get_code()
+        }
+      },
+      fail: function(error) {
+        wx.hideLoading();
+        wx.showModal({
+          title: '请求错误',
+          content: error,
+        })
+        _this.get_code()
+      },
+      complete: function(res) {
+      }
+    });
     // return app.http.POST(this.types[this.type].url || "/bind", params);
   }
 })

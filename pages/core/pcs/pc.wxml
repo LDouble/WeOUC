@@ -1,0 +1,103 @@
+<!-- 导入模板 -->
+<import src="/template/upload/upload.wxml" />
+
+<!-- 报修 -->
+<view class="pc">
+  <form wx:if="{{succeed === false}}" class="pc-form" bindsubmit="formSubmit">
+    <!--出发地点-->
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">出发地点</text>
+        <text class="pc-form__required">*</text>
+      </view>
+      <view class="pc-form__container">
+        <picker class="pc-form__picker" data-id="departure" bindchange="bindAreaChange" range="{{area}}">
+          <view class="pc-form__field">
+            <text class="pc-form__value">{{departure}}</text>
+          </view>
+        </picker>
+        <image class="pc-form__r-icon" src="/images/common/location.png" bindtap=""></image>
+      </view>
+    </view>
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">目的地点</text>
+        <text class="pc-form__required">*</text>
+      </view>
+      <view class="pc-form__container">
+        <picker class="pc-form__picker" data-id="destination" bindchange="bindAreaChange" range="{{area}}">
+          <view class="pc-form__field">
+            <text class="pc-form__value">{{destination}}</text>
+          </view>
+        </picker>
+        <image class="pc-form__r-icon" src="/images/common/location.png" bindtap=""></image>
+      </view>
+    </view>
+    <!-- 出发日期 -->
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">出发日期</text>
+        <text class="pc-form__required">*</text>
+      </view>
+      <view class="pc-form__container">
+        <picker class="pc-form__picker" mode="date" data-id="date" bindchange='bindValueChange'>
+          <view class="pc-form__field">
+            <text class="pc-form__value">{{date}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <!-- 出发时间 -->
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">出发时间(不是起飞时间)</text>
+        <text class="pc-form__required"></text>
+      </view>
+      <view class="pc-form__container">
+        <picker class="pc-form__picker" value="12:00" mode="time" data-id='time' bindchange='bindValueChange'>
+          <view class="pc-form__field">
+            <text class="pc-form__value">{{time}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">航班号/车次号(如MF857、G2231)</text>
+      </view>
+      <view class="pc-form__container">
+        <input id="mobile" class="pc-form__input" data-id="vehicle_num" value="{{vehicle_num}}" placeholder="请输入航班号或车次号" bindchange='bindValueChange' />
+      </view>
+    </view>
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">联系方式</text>
+        <text class="pc-form__required">*</text>
+      </view>
+      <view class="pc-form__container">
+        <input class="pc-form__input" data-id="wx" value="{{wx}}" placeholder="请输入微信号码" bindchange='bindValueChange' />
+      </view>
+    </view>
+    <!-- 备注详情 -->
+    <view class="pc-form__item">
+      <view class="pc-form__title">
+        <text class="pc-form__text">备注</text>
+      </view>
+      <input class="content" data-id="note" name="textarea" maxlength="400" auto-height="true" cursor-spacing="45" placeholder="请描述你的备注" placeholder-style="color: #999;" bindchange='bindValueChange' value='{{note}}' />
+      <!-- 图片上传 -->
+    </view>
+    <!-- 提交 -->
+    <view class="pc-form__item pc-form__post">
+      <button class="pc-form__button--post" form-type="submit">提交信息</button>
+    </view>
+  </form>
+
+  <!-- 成功 -->
+  <view wx:if="{{succeed === true}}" class="succeed">
+    <view class="succeed__title">
+      <text>提交成功</text>
+    </view>
+    <text class="succeed__tip">你的拼车信息会展示给其它童鞋，请耐心等待</text>
+  </view>
+</view>

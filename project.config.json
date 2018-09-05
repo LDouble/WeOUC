@@ -4,11 +4,11 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.93",
+	"libVersion": "1.9.9",
 	"appid": "wx91f6e62bb57074f7",
 	"projectname": "WeOUC%E5%B0%8F%E7%A8%8B%E5%BA%8F",
 	"isGameTourist": false,

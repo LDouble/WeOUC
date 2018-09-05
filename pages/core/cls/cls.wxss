@@ -1,0 +1,56 @@
+/* pages/core/cls/cls.wxss */
+
+page {
+  font-size: 0.8rem;
+  background: #f8f8f5;
+  color: #555;
+}
+
+.picker {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  padding: 0.5rem;
+}
+
+.table .row {
+  background: #efefef;
+  box-shadow: 4rpx 4rpx 8rpx #ddd;
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.table .row:nth-child(1) {
+  background: #efefef;
+}
+
+.table .row view {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.2rem;
+}
+
+.table .row .item {
+  padding: 0.2rem 0;
+  color: #fffafa;
+  border-radius: 0.1rem;
+}
+
+.table .row .item view {
+  padding: 0.3rem 0;
+}
+
+.table .row .use {
+  box-shadow: 4rpx 4rpx 4rpx #ccc;
+  background: red;
+}
+
+.table .row .not-use {
+  box-shadow: 4rpx 4rpx 4rpx #ccc;
+  background: #008e59;
+}

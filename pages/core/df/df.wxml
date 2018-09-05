@@ -3,7 +3,7 @@
 <import src="/template/list/list.wxml" />
 <!-- 一卡通 -->
 <view class="card">
-  <view class="fix_tip active{{offline?'active':''}}">
+  <view class="fix_tip {{offline?'active':''}}">
     <text>离线缓存模式</text>
   </view>
   <view class="e-card">
@@ -16,6 +16,6 @@
       <text class="e-card__help" bindtap="showHelp">帮助</text>
     </view>
   </view>
-
+  <ad unit-id="adunit-ec3e3215c5407d2e"></ad>
   <template is="help" data="{{...help}}" />
 </view>

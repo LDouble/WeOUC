@@ -31,7 +31,7 @@ Page({
   //     path: '/pages/core/kb/kb?id='+id+'&name='+name
   //   };
   // },
-  onLoad: function(options) {
+  onLoad: function (options) {
     var _this = this;
 
     var classweek = parseInt(app.calWeek());
@@ -57,7 +57,7 @@ Page({
     _this.get_kb(id);
   },
   //让分享时自动登录
-  loginHandler: function(options) {
+  loginHandler: function (options) {
     //console.log('让分享时自动登录');
     var _this = this;
     _this.setData({
@@ -65,18 +65,22 @@ Page({
       'teacher': app._user.teacher
     });
   },
-  onShow: function() {
+  onShow: function () {
     var _this = this;
     //设置滚动至当前时间附近，如果周末为设置left为其最大值102
     var nowWeek = new Date().getDay();
+    console.log(_this.classweek)
     _this.setData({
       'scroll.left': (nowWeek === 6 || nowWeek === 0) ? 102 : 0
     });
     if (_this.classweek <= 0) {
-      _this.chooseView();
+      //切换视图(周/学期) *表示学期视图
+      this.setData({
+        week: "*"
+      });
     }
   },
-  onReady: function() {
+  onReady: function () {
     var _this = this;
     //查询其他人课表时显示
     if (_this.data.name) {
@@ -85,19 +89,19 @@ Page({
       });
     }
   },
-  scrollXHandle: function(e) {
+  scrollXHandle: function (e) {
     this.setData({
       'scroll.left': e.detail.scrollLeft
     });
   },
-  showDetail: function(e) {
+  showDetail: function (e) {
     var _this = this;
     var week = _this.data.week;
     var dataset = e.currentTarget.dataset;
     var lessons = _this.data.lessons[dataset.day][dataset.wid];
     var targetI = 0;
     lessons[dataset.cid].target = true;
-    lessons.map(function(e, i) {
+    lessons.map(function (e, i) {
       if (lessons.length === 1) {
         e.left = 0;
       } else {
@@ -111,7 +115,7 @@ Page({
       }
       return e;
     });
-    lessons.forEach(function(e, i) {
+    lessons.forEach(function (e, i) {
       if (e.target) {
         targetI = i;
         lessons[i].target = false;
@@ -131,7 +135,7 @@ Page({
       blur: true
     });
   },
-  hideDetail: function() {
+  hideDetail: function () {
     // 点击遮罩层时触发，取消主体部分的模糊，清空target
     this.setData({
       blur: false,
@@ -145,7 +149,7 @@ Page({
     });
 
   },
-  infoCardTap: function(e) {
+  infoCardTap: function (e) {
     var dataset = e.currentTarget.dataset;
     if (this.data.targetI == dataset.index) {
       return false;
@@ -154,7 +158,7 @@ Page({
       targetI: dataset.index
     });
   },
-  infoCardChange: function(e) {
+  infoCardChange: function (e) {
     var current = e.detail.current;
     if (this.data.targetI == current) {
       return false;
@@ -163,33 +167,33 @@ Page({
       targetI: current
     });
   },
-  chooseView: function() {
+  chooseView: function () {
     //切换视图(周/学期) *表示学期视图
     this.setData({
       week: this.data.week == '*' ? this.data.toweek : '*'
     });
   },
-  returnCurrent: function() {
+  returnCurrent: function () {
     //返回本周
     this.setData({
       week: this.data.toweek
     });
   },
-  currentChange: function(e) {
+  currentChange: function (e) {
     // 更改底部周数时触发，修改当前选择的周数
     var current = e.detail.current
     this.setData({
       week: current + 1
     });
   },
-  catchMoveDetail: function() { /*阻止滑动穿透*/ },
-  bindStartDetail: function(e) {
+  catchMoveDetail: function () { /*阻止滑动穿透*/ },
+  bindStartDetail: function (e) {
     this.setData({
       startPoint: [e.touches[0].pageX, e.touches[0].pageY]
     });
   },
   //滑动切换课程详情
-  bindMoveDetail: function(e) {
+  bindMoveDetail: function (e) {
     var _this = this;
     var curPoint = [e.changedTouches[0].pageX, e.changedTouches[0].pageY],
       startPoint = _this.data.startPoint,
@@ -215,7 +219,7 @@ Page({
     });
   },
   //点击左右按钮切换swiper
-  swiperChangeBtn: function(e) {
+  swiperChangeBtn: function (e) {
     var _this = this;
     var dataset = e.currentTarget.dataset,
       i, data = {};
@@ -227,7 +231,7 @@ Page({
     data[dataset.target] = parseInt(_this.data[dataset.target]) + i;
     _this.setData(data);
   },
-  get_kb: function(id) {
+  get_kb: function (id) {
     //console.log('课表渲染函数');
     //数组去除指定值
     function removeByValue(array, val) {
@@ -267,7 +271,7 @@ Page({
 
               // 找出冲突周数,及课程数
               var conflictWeeks = {};
-              _lessons[i][j][k].weeks.forEach(function(e) {
+              _lessons[i][j][k].weeks.forEach(function (e) {
                 for (var n = 0; n < klen; n++) {
                   if (n !== k && _lessons[i][j][n].weeks.indexOf(e) !== -1) {
                     !conflictWeeks[e] ? conflictWeeks[e] = 2 : conflictWeeks[e]++;
@@ -331,9 +335,9 @@ Page({
         nowMonth = nowD.getMonth() + 1,
         nowDate = nowD.getDate();
       var dates = _this.data._weeks.slice(0); //0:第1周,1:第2周,..19:第20周
-      dates = dates.map(function(e, m) {
+      dates = dates.map(function (e, m) {
         var idates = _this.data._days.slice(0); //0:周一,1:周二,..6:周日
-        idates = idates.map(function(e, i) {
+        idates = idates.map(function (e, i) {
           var d = (m === (week - 1) && i === today) ? nowD : new Date(nowD.getFullYear(), nowD.getMonth(), nowD.getDate() - ((week - 1 - m) * 7 + (today - i)));
           return {
             month: d.getMonth() + 1,
@@ -413,46 +417,59 @@ Page({
 
     }
   },
-  update: function() {
+  update: function () {
     var date = new Date;
     var year = date.getFullYear();
     var itemlist = ["本学期", year - 1 + "夏", year - 1 + "秋", year + "春", year + "夏", year + "秋"]
     var item = [{}, {
-        xn: year - 1,
-        xq: 0
-      }, {
-        xn: year - 1,
-        xq: 1
-      },
-      {
-        xn: year - 1,
-        xq: 2
-      }, {
-        xn: year,
-        xq: 0
-      }, {
-        xn: year,
-        xq: 1
-      },
+      xn: year - 1,
+      xq: 0
+    }, {
+      xn: year - 1,
+      xq: 1
+    },
+    {
+      xn: year - 1,
+      xq: 2
+    }, {
+      xn: year,
+      xq: 0
+    }, {
+      xn: year,
+      xq: 1
+    },
     ]
     var _this = this;
     wx.showActionSheet({
       itemList: itemlist,
-      success: function(res) {
+      success: function (res) {
         var params = item[res.tapIndex];
         params.xh = app.jwc.xh
         params.password = app.jwc.password
-        app.http.post({
-          url: app._server + "/kb",
-          params: params
-        }).then((res) => {
-          var stuclass = res.data;
-          if (params.xn == undefined)
-            wx.setStorageSync('stuclass', stuclass);
-          _this.get_kb(stuclass);
-        }).catch((error) => {
-          console.log(error)
+        wx.showLoading({
+          title: '加载中',
         })
+        wx.request({
+          url: app._server + "/kb",
+          data: params,
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          method: "POST",
+          success: function (res) {
+            res = res.data
+            var stuclass = res.data;
+            if (params.xn == undefined)
+              wx.setStorageSync('stuclass', stuclass);
+            _this.get_kb(stuclass);
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+          complete: function (res) {
+            wx.hideLoading();
+          }
+        });
       }
     })
   }

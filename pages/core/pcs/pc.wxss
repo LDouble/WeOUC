@@ -1,0 +1,77 @@
+/* 报修 */
+.pc {
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  overflow: hidden;
+}
+.pc-form__item {
+  box-sizing: border-box;
+  margin-bottom: 15rpx;
+  padding: 45rpx 45rpx 30rpx 45rpx;
+  background-color: #fff;
+}
+.pc-form__title {
+  margin-bottom: 30rpx;
+  padding-bottom: 30rpx;
+  border-bottom: solid 1rpx #eee;
+}
+.pc-form__text {
+  font-size: 13pt;
+  color: #000;
+  font-weight: bold;
+}
+.pc-form__required {
+  color: #cc3333;
+  font-weight: bold;
+}
+.pc-form__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pc-form__picker {
+  flex: 1;
+  font-size: 11pt;
+}
+.pc-form__r-icon {
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: 45rpx;
+}
+
+/* 提交 */
+.pc-form__post {
+  margin-bottom: 0;
+}
+.pc-form__button--post {
+  color: #fff;
+  background-color: #0099ff;
+  border: none;
+  outline: none;
+}
+
+/* 成功 */
+.succeed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 45rpx;
+  margin: 15rpx;
+}
+.succeed__title {
+  padding-bottom: 80rpx;
+  font-size: 16pt;
+  color: #000;
+  font-weight: bold;
+}
+.succeed__tip {
+  display: inline-block;
+  padding-bottom: 15rpx;
+  font-size: 9pt;
+  color: #999;
+  font-weight: bold;
+}
+.pc-form__field{
+  border-bottom: solid 1rpx #eee;
+}

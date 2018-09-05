@@ -1,0 +1,26 @@
+<!-- 导入模板 -->
+<import src="/template/list/list.wxml" />
+<import src="/template/placeholder/placeholder.wxml" />
+
+<!-- 分类标签 -->
+<view class="classify">
+  <block wx:for="{{classify}}" wx:key="{{item.id}}">
+    <text id="{{item.id}}" class="classify__item {{classifyActived === item.id ? 'classify__item--active' : ''}}" bindtap="changeClassify">{{item.name}}</text>
+  </block>
+</view>
+
+<view class="news-list">
+  <block wx:for="{{newsList[classifyActived].list}}" wx:key="{{title}}">
+    <template is="list-article" data="{{...item, classify: classifyActived}}" />
+  </block>
+
+  <!-- 暂无 -->
+  <block wx:if="{{newsList[classifyActived].list.length === 0}}">
+    <template is="placeholder-fullpage" data="{{bg:'/images/placeholder/bg_no_data.png'}}" />
+  </block>
+  <block wx:if="{{newsList[classifyActived].empty}}">
+    <view class="news-list__foot">
+      <text>无更多新闻</text>
+    </view>
+  </block>
+</view>
