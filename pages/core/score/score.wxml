@@ -1,0 +1,37 @@
+<view class='container'>
+  <view class='fix'>
+    <view class='header'>
+    </view>
+    <view class="info layout-row layout-space-around-start">
+      <text class='text-caption' style='width:50%'>学号:{{xh}}</text>
+      <text class='text-caption' style='width:50%'>当前选择学分:{{total_xf}}</text>
+      <text class=' text-caption' style='width:50%'>绩点:{{jd}}</text>
+      <text class='text-caption' style='width:50%'>加权:{{aver_score}}</text>
+    </view>
+  </view>
+  <view wx:if="{{remind}}" class='card-content layout-column layout-center'>
+    <sc-loading wx:if="{{remind == 'update'}}" color="rgb(63, 81, 181)" size="108" width="12"></sc-loading>
+    <block wx:else>
+      <view class='text-caption'>{{remind}}</view>
+    </block>
+  </view>
+  <view wx:else class='card' style='margin-top:220rpx'>
+    <view class='score-item  layout-row layout-space-between-center'>
+      <sc-checkbox label="全选" bindtap="bindSelectAll" data-index="{{index}}" checked="selectedAllStatus" value="check1" color="#00BCD4" style='margin:8rpx' class='text-caption'></sc-checkbox>
+      <view class='layout-column layout-row layout-space-between-center text-caption' style='margin-left:20rpx;flex:1;'>
+        <text class='text-body2'>课程详情</text>
+      </view>
+    </view>
+    <view wx:for="{{cjInfo}}" class='score-item layout-row layout-start-center'>
+      <sc-checkbox bindtap="bindCheckbox" data-index="{{index}}" checked='{{item.selected}}' value="check1" color="#00BCD4" style='margin:8rpx' class='text-caption'></sc-checkbox>
+      <view class='layout-column layout-space-between-start text-caption' style='margin-left:20rpx;flex:1;'>
+        <text class='text-body2'>{{item.name}}</text>
+        <view class='layout-row layout-space-between-center' style='width:100%;'>
+          <view>成绩: {{item.score}} </view>
+          <view>学分: {{item.xf}} </view>
+          <view style='padding-right:30rpx'>绩点: {{item.jd}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

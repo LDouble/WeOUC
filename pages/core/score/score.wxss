@@ -1,0 +1,31 @@
+/* pages/core/score/score.wxss */
+
+.header {
+  background: #00bcd4;
+  height: 80rpx;
+  z-index: 0;
+}
+
+.info {
+  margin: 0 20rpx;
+  margin-top: -60rpx;
+  min-height: 80rpx;
+  background: white;
+  z-index: 10;
+  flex: 1;
+  border-radius: 30rpx;
+  padding: 60rpx;
+  flex-flow: column wrap;
+  flex-direction: row;
+}
+.cj_lists{
+  background: white;
+}
+.score-item{
+  min-height: 45rpx;
+  padding: 20rpx 0;
+}
+.fix{
+  position: fixed;
+  z-index:200
+}

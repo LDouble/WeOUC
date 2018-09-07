@@ -1,0 +1,1 @@
+<view class="sc-class {{direction === 'column' ? 'sc-checkbox-group-column' : 'sc-checkbox-group-row'}}" catch:checkchange="_checkChange"><slot></slot></view>

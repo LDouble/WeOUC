@@ -1,0 +1,1 @@
+<view class="sc-class {{direction === 'column' ? 'sc-radio-group-column' : 'sc-radio-group-row'}}" catch:radiochange="_radioChange"><slot></slot></view>

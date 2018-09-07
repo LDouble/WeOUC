@@ -1,0 +1,11 @@
+{
+  "navigationBarBackgroundColor": "#00BCD4",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "成绩",
+  "usingComponents": {
+    "sc-checkbox": "/scui/components/scCheckbox/sc-checkbox",
+    "sc-checkbox-group": "/scui/components/scCheckboxGroup/sc-checkbox-group",
+    "sc-loading": "/scui/components/scLoading/sc-loading"
+  },
+  "enablePullDownRefresh": true
+}

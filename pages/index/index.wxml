@@ -1,0 +1,45 @@
+<!--pages/index/index.wxml-->
+<swiper wx:if="{{!offline}}" style="" class="swiper" autoplay="true" interval="4000" duration="1000">
+  <block wx:for="{{notices}}" wx:key="{{index}}">
+    <swiper-item>
+      <image style="width:100%" bindtap="noticeTo" data-id='{{item.url}}' src="{{item.pic}}" class="slide-image" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class='container'>
+  <view class='card' style='margin-top:-30rpx;'>
+    <form bindsubmit="submit" report-submit="ture">
+      <view class='navs'>
+        <block wx:for="{{navs}}" wx:key="key">
+          <button data-key='{{item.key}}' data-verify="{{item.verify}}" class="form_button nav" form-type='submit' plain="{{plain}}">
+            <image class="nav-icon" src="/images/index/{{item.key}}.png"></image>
+            <text class="nav-desc text-caption">{{item.desc}}</text>
+          </button>
+        </block>
+      </view>
+    </form>
+  </view>
+  <view class='card'>
+    <view class='card-desc text-caption'>今天的课</view>
+    <view wx:if="{{remind}}" class='card-content layout-column layout-center'>
+      <sc-loading wx:if="{{remind == 'update'}}" color="rgb(63, 81, 181)" size="108" width="12"></sc-loading>
+      <sc-button wx:if="{{remind == 'unauth'}}" class='remind-btn' bindtap="auth" sc-class="sc-btn sc-outlined-btn" flat>前去绑定账号</sc-button>
+      <block wx:else>
+        <view class='text-caption'>{{remind}}</view>
+        <sc-button class='remind-btn' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</sc-button>
+      </block>
+    </view>
+    <view wx:else class='card-content'>
+      <view wx:for="{{courses}}" class='layout-row layout-space-between-center today_kb'>
+        <view class='layout-column layout-start'>
+          <view class='text-subtitle2'>{{item.cls.name}}</view>
+          <view class='text-caption' style='margin-top:10rpx'>{{item.classtime}}</view>
+        </view>
+        <view class='text-caption'>{{item.cls.classRoom}}</view>
+      </view>
+      <view class='card-content layout-row layout-center-start'>
+        <sc-button class='remind-btn' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</sc-button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,46 @@
+/* pages/my/my.wxss */
+
+.sc-cell-left .iconfont {
+  width: 100rpx;
+}
+
+.bind_color {
+  color: #1296db;
+}
+
+.container {
+  margin-top: 8rpx;
+}
+
+.list-icon__nav {
+  margin-top: 20rpx;
+}
+
+.list-icon__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 25rpx 25rpx;
+  margin-left: 135rpx;
+  border-bottom: solid 1rpx #eee;
+}
+
+.list-icon__text {
+  flex: 1;
+  margin-left: 45rpx;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+}
+
+.list-icon__l-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-left: -135rpx;
+}
+
+.list-icon__r-icon {
+  width: 50rpx;
+  height: 50rpx;
+}

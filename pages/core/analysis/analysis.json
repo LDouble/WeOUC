@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#00BCD4",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "成绩分析",
+  "usingComponents": {
+    "sc-loading": "/scui/components/scLoading/sc-loading"
+  }
+}

@@ -1,0 +1,1 @@
+<view class="sc-class"><slot></slot></view>

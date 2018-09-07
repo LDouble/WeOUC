@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#00BCD4",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "自习室查询",
+  "usingComponents": {
+    "sc-button": "/scui/components/scButton/sc-button"
+  }
+}

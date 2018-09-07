@@ -1,0 +1,1 @@
+<view class="nav-item" style="height: {{tabHeight}};"><slot></slot></view>
