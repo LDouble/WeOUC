@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/login/login",
+    "pages/core/kb/kb",
     "pages/core/timetable/timetable",
     "pages/core/score/score",
     "pages/core/room/room",
@@ -13,23 +14,25 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#00BCD4",
+    "navigationBarTitleText": "WeOUC",
+    "navigationBarTextStyle": "white"
+
   },
   "tabBar": {
-    "list":[
-    {
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "images/index/home.png",
-      "selectedIconPath": "images/index/home@active.png"
-    },
-    {
-      "pagePath": "pages/my/my",
-      "text": "个人中心",
-      "iconPath": "images/index/person.png",
-      "selectedIconPath": "images/index/person@active.png"
-    }
-  ]}
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/index/home.png",
+        "selectedIconPath": "images/index/home@active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "images/index/person.png",
+        "selectedIconPath": "images/index/person@active.png"
+      }
+    ]
+  }
 }

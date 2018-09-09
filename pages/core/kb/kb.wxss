@@ -1,0 +1,8 @@
+.tools {
+  background: white;
+  margin: 15rpx;
+  min-height: 20px;
+  z-index: 100;
+  border-radius: 25rpx;
+  padding: 10rpx;
+}

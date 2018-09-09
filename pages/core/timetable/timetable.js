@@ -1,61 +1,84 @@
 // pages/core/timetable/timetable.js
 var app = getApp()
-const scui = app.scui
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //tabList: ['周一', "周二", "周三", "周四", "周五", "周六", "周日"],
-    tabList: [{
-        label: '周一',
-      id: 'Mon',
-      name: 'Mon'
-      }, {
-        label: '周二',
-        id: 'Tues',
-        name: 'Tues'
-      }, {
-        label: '周三',
-        id: 'Wed',
-        name: 'Wed'
-      },
-      {
-        label: '周四',
-        id: 'Thurs',
-        name: 'Thurs'
-      },{
-        label: '周五',
-        id: 'Fri',
-        name: 'Fri'
-      },{
-        label: '周六',
-        id: 'Sat',
-        name: 'Sat'
-      }, {
-        label: '周日',
-        id: 'Sun',
-        name: 'Sun'
-      }
+    headers: [{}, {}, {}, {}, {}, {}, {}],
+    month: "",
+    schedules: [
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', '']
     ],
+    xqs: ["夏", "秋", "春"],
+    weeks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+    times: [{
+      time: "08:00",
+      num: 1
+    }, {
+      time: "09:00",
+      num: 2
+    }, {
+      time: "10:10",
+      num: 3
+    }, {
+      time: "11:10",
+      num: 4
+    }, {
+      time: "13:30",
+      num: 5
+    }, {
+      time: "14:30",
+      num: 6
+    }, {
+      time: "15:30",
+      num: 7
+    }, {
+      time: "16:30",
+      num: 8
+    }, {
+      time: "17:30",
+      num: 9
+    }, {
+      time: "18:30",
+      num: 10
+    }, {
+      time: "19:30",
+      num: 11
+    }, {
+      time: "20:30",
+      num: 12
+    }]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var stuclass = wx.getStorageSync("stuclass")
-    if (stuclass) {
-      this.render_kb(stuclass)
-    }
+    this.week = app.week = app.week ? app.week : app.calWeek()
+    this.xn = app.xn = app.xn ? app.xn : wx.getStorageSync("xn")
+    this.xq = app.xq = app.xq ? app.xq : wx.getStorageSync("xq")
+    var _this = this
+    wx.getStorage({
+      key: 'stuclass',
+      success: function(res) {
+        _this.stuclass = res.data
+        _this.render_kb()
+      },
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.data.dialog = scui.Dialog("#dialog");
 
   },
 
@@ -80,37 +103,162 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
-  render_kb: function(stuclass) {
-    var cls = [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
+  render_kb: function() {
+    var stuclass = this.stuclass
+    var colors = ['green', 'red', 'purple', 'yellow', "blue"];
+    var schedules = [
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
+      [{
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 1,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+        {
+          num: 2,
+          cls: []
+        },
+      ],
     ]
-    console.log(cls[0])
+    if (this.week < 1)
+      this.week = 1
+    var last_color = -1
     for (var i in stuclass) {
       var lessons = stuclass[i].classes // 第i节课里的课。
       for (var j in lessons) { // 第j天里的课
@@ -119,67 +267,109 @@ Page({
           for (var m = 0; m < temp.length; m++) {
             var flag = false;
             for (var n = 0, k = temp[m].weeks.length; n < k; n++) {
-              if (app.week == temp[m].weeks[n]) {
-                console.log(j)
-                cls[j].push({
+              if (this.week == temp[m].weeks[n]) {
+                var color = Math.floor(Math.random() * 10) % 5 // 随机颜色
+                if (color == last_color)
+                  color = (color + 1) % 5
+                if (i == 5) {
+                  i = 4;
+                }
+                schedules[j][i].num = temp[m].num
+                schedules[j][i].cls.push({
                   flag: true,
                   cls: temp[m],
-                  classtime: temp[m].begin + "-" + (temp[m].num + temp[m].begin) + "节"
+                  classtime: temp[m].begin + "-" + (temp[m].num + temp[m].begin) + "节",
+                  color: colors[color]
                 })
+
+                last_color = color;
                 flag = true;
                 break
               }
             }
-            if (flag == false)
-              cls[j].push({
+            if (flag == false) {
+              if (i == 5) {
+                i = 4;
+              }
+              schedules[j][i].num = temp[m].num
+              schedules[j][i].cls.push({
                 flag: false,
                 "cls": temp[m],
                 classtime: temp[m].begin + "-" + (temp[m].num + temp[m].begin) + "节"
               })
+            }
+            if (temp[m].num > 1 && i < 4) { //三节这种特殊情况, 四节这种情况
+              i = parseInt(i)
+              if (i == 0 && temp[m].num == 3)
+                schedules[j][i + 1].num = -1 // 上午连上四节这种情况
+              else if (i == 2 && temp[m].num == 3) {
+                schedules[j][i + 1].num = 0 // 5 -8 上课 //就是一上一下午的
+              } else if (i == 0 && temp[m].num == 2)
+                schedules[j][i + 1].num = 0 //上午连上三节,也就是第四节没课
+              else if (i == 1 && temp[m].num == 2)
+                schedules[j][i - 1].num = 0 // 上午连上三节,也就是第一节没课
+              else if (i == 2 && temp[m].num == 2)
+                schedules[j][i + 1].num = 1 // 下午5-7 上课， 然后剩下的是8 - 9
+            }
+            if (i == 4)
+              schedules[j][i].num = 2
+            if (i == 3 && schedules[j][2].num == 1) {
+              schedules[j][3].num = 2;
+            }
           }
         }
       }
     }
+    this.initHeaders()
     this.setData({
-      "course": cls
-    })
-    var day = new Date().getDay()
-    if (day == 0)
-      day = 6
-    else
-      day -= 1
-    this.setData({
-      day: day,
-      week: app.week
+      schedules: schedules,
+      headers: this.headers,
+      month: this.month,
+      week: this.week,
+      xn: this.xn,
+      xq: this.xq
     })
   },
   update: function() {
     var date = new Date;
     var year = date.getFullYear();
-    var itemlist = ["本学期", year - 1 + "夏", year - 1 + "秋", year + "春", year + "夏", year + "秋"]
-    var item = [{}, {
-        xn: year - 1,
-        xq: 0
+    var itemlist = ["本学期", year + "秋", year + "夏", year + "春",
+      year - 1 + "秋", year - 1 + "夏"
+    ]
+    var item = [{
+        xn: app.xn,
+        xq: app.xq
       }, {
-        xn: year - 1,
+        xn: year,
         xq: 1
+      }, {
+        xn: year,
+        xq: 0
       },
       {
         xn: year - 1,
         xq: 2
       }, {
-        xn: year,
-        xq: 0
-      }, {
-        xn: year,
+        xn: year - 1,
         xq: 1
-      },
+      }, {
+        xn: year - 1,
+        xq: 0
+      }
     ]
     var _this = this;
     wx.showActionSheet({
       itemList: itemlist,
       success: function(res) {
         var params = item[res.tapIndex];
+        _this.xn = params.xn
+        _this.xq = params.xq
+        if (_this.xn == app.xn && _this.xq == app.xq) {
+          _this.week = app.week
+        } else {
+          _this.week = 1
+        }
+        app.jwc = app.jwc ? app.jwc : wx.getStorageSync("jwc")
         params.xh = app.jwc.xh
         params.password = app.jwc.password
         wx.showLoading({
@@ -197,7 +387,8 @@ Page({
             var stuclass = res.data;
             if (params.xn == undefined)
               wx.setStorageSync('stuclass', stuclass);
-            _this.render_kb(stuclass);
+            _this.stuclass = stuclass;
+            _this.render_kb();
           },
           fail: function(error) {
             console.log(error)
@@ -209,7 +400,50 @@ Page({
       }
     })
   },
-  answer: function() {
-    this.data.dialog.toggle();
+  changeweek: function(e) {
+    this.week = e.detail.value
+    console.log(this.week)
+    this.render_kb()
+  },
+  initHeaders: function() {
+    if (this.xn != app.xn || this.xq != app.xq) {
+      this.month = ""
+      this.week = ""
+      this.headers = [{
+        day: "一"
+      }, {
+        day: "二"
+      }, {
+        day: "三"
+      }, {
+        day: "四"
+      }, {
+        day: "五"
+      }, {
+        day: "六"
+      }, {
+        day: "日"
+      }]
+    } else {
+      if (this.week < 1)
+        this.week = 1
+      var current = this.getDate(this.week)
+      this.month = current.getMonth() + 1
+      this.headers = []
+      for (var _i2 = 0; _i2 < 7; _i2++) {
+        this.headers.push({
+          day: ["日", "一", "二", "三", "四", "五", "六"][current.getDay()],
+          date: current.getDate()
+        });
+        current.setDate(current.getDate() + 1);
+      }
+    }
+  },
+  getDate: function(week) {
+    // 根据周获取日期
+    app.begin_day = app.begin_day ? app.begin_day : wx.getStorageSync("begin_day")
+    var date = new Date(app.begin_day) // 获取begin_day;
+    date = new Date(date.getTime() + 7 * 24 * 3600000 * (week - 1)) //获取到某个的第一天的日期
+    return date
   }
 })

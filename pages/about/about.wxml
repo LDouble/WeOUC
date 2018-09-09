@@ -6,7 +6,9 @@
       <view card>
         <view class='card-desc text-subtitle1' style='text-align:center'>致谢</view>
         <text class='card-desc text-caption'>首先感谢各位小伙伴们对我的支持和鼓励，也感谢有人能够指出我的问题。为了不必要的误会和麻烦，WeOUC前端进行了重构，在前端重构时，使用了sc-ui开源框架。在程序结构方面，借鉴了We重邮、We川大、文经课表，以及iconfont中的提供的icon。在此表示感谢!</text>
+        <text class='card-desc text-caption'>项目开源地址:https://github.com/LDouble/WeOUC/</text>
         <view class='card-desc text-subtitle1' style='text-align:center'>更新说明</view>
+                <text class='card-desc text-overline'>2018.09.10 重构课表查询，实现九宫格查询</text>
         <text class='card-desc text-overline'>2018.09.07 初步重构实现常用功能:成绩、成绩分析、课表、自习室</text>
       </view>
     </view>

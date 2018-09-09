@@ -1,0 +1,38 @@
+<view class='header'>
+</view>
+<view class="shift layout-row layout-space-between-center">
+  <view class='text-caption'>本周是第{{week}}周 </view>
+  <view>
+    <sc-button fab size="small" style='margin:10rpx' bindtap='answer'>
+      <i class="iconfont icon-question" style="color: red"></i>
+    </sc-button>
+    <sc-button fab size="small" style='margin:10rpx' bindtap='update'>
+      <i class="icon iconfont icon-Updatereset_" style="color: #0b93d5"></i>
+    </sc-button>
+  </view>
+</view>
+<sc-tab-group tab-list="{{tabList}}" active-class="active" driver-color="rgb(63, 81, 181)" transition="false">
+  <sc-tab class="text-body2" wx:for="{{course}}" wx:for-item="items" wx:key="*this">
+    <view class='card' wx:if="{{items.length}}">
+      <view wx:for="{{items}}" class='layout-row layout-space-between-center today_kb'>
+        <view class='layout-column layout-start'>
+          <view class='text-subtitle2'>{{item.cls.name}}[{{item.cls.status}}]</view>
+          <view class='text-caption' style='margin-top:10rpx;color:#00BCD4'>{{item.classtime}}</view>
+          <view class='text-caption' style='margin-top:10rpx;color:#00BCD4'>{{item.cls.orgin}}</view>
+        </view>
+        <view class='layout-column layout-start'>
+          <view class='text-subtitle2' wx:if="{{!item.flag}}">非本周</view>
+          <view class='text-caption'>{{item.cls.classRoom}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class='card layout-row layout-center'>
+      今天木有课哦！
+    </view>
+  </sc-tab>
+</sc-tab-group>
+<sc-dialog id="dialog" sc-class="box-shadow-8" bind:open="dialogOpen" bind:close="dialogClose" bind:opened="dialogOpened" bind:closed="dialogClosed">
+  <view style="padding: 16px" class="text-body2">
+    <text>课程表详情页面提供所有的课程展示，没有选中的课程会被标注，点击更新图标，可进行课表更新。</text>
+  </view>
+</sc-dialog>

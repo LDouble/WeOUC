@@ -1,37 +1,75 @@
 <view class='header'>
-</view>
-<view class="shift layout-row layout-space-between-center">
-  <view class='text-caption'>本周是第{{week}}周 </view>
-  <view>
-    <sc-button fab size="small" style='margin:10rpx' bindtap='answer'>
-      <i class="iconfont icon-question" style="color: red"></i>
-    </sc-button>
-    <sc-button fab size="small" style='margin:10rpx' bindtap='update'>
-      <i class="icon iconfont icon-Updatereset_" style="color: #0b93d5"></i>
-    </sc-button>
+  <view class='layout-row layout-center-start'>
+    <view class="shift layout-row layout-space-around-center">
+      <!-- <sc-button fab size="small" style='margin:10rpx' bindtap='answer'>
+        <i class="iconfont icon-question" style="color: red"></i>
+      </sc-button> -->
+      <view class='text-caption layout-row layout-center'>
+        <button class="" plain="true" size='mini' bindtap='update' style='background:#337ab7;color:white;border-color:#37ab7'>
+          {{xn}}{{xqs[xq]}}
+        </button>
+      </view>
+      <picker value="{{week}}" range="{{weeks}}" bindchange='changeweek' wx:if="{{week}}">
+        <view class='text-caption layout-row layout-center'>
+          <button class="" plain="true" size='mini' style='background:#337ab7;color:white;border-color:#37ab7'>
+            第{{week}}周
+          </button>
+        </view>
+      </picker>
+      <!-- <sc-button fab size="small" style='margin:10rpx'>
+        <i class="icon iconfont icon-Updatereset_" style="color: #0b93d5;border-color:blue"></i>
+      </sc-button> -->
+    </view>
   </view>
 </view>
-<sc-tab-group tab-list="{{tabList}}" active-class="active" driver-color="rgb(63, 81, 181)" transition="false">
-  <sc-tab class="text-body2" wx:for="{{course}}" wx:for-item="items" wx:key="*this">
-    <view class='card' wx:if="{{items.length}}">
-      <view wx:for="{{items}}" class='layout-row layout-space-between-center today_kb'>
-        <view class='layout-column layout-start'>
-          <view class='text-subtitle2'>{{item.cls.name}}[{{item.cls.status}}]</view>
-          <view class='text-caption' style='margin-top:10rpx'>{{item.classtime}}</view>
-        </view>
-        <view class='layout-column layout-start'>
-          <view class='text-subtitle2' wx:if="{{!item.flag}}">非本周</view>
-          <view class='text-caption'>{{item.cls.classRoom}}</view>
-        </view>
+<scroll-view class="box" scroll-x="true" scroll-y="true">
+  <view class="top">
+    <view class="title" wx:if="{{month}}">{{month}}月</view>
+    <block wx:for="{{headers}}" wx:key="{{index}}">
+      <view class="time">
+        <view class="day">周{{item.day}}</view>
+        <view class="date" wx:if="{{item.date}}">{{item.date}}日</view>
+      </view>
+    </block>
+  </view>
+  <view class='main-card'>
+    <view class="col title">
+      <view wx:for="{{times}}" class="row title layout-column layout-center">
+        <view class='text-overline'> {{item.time}}</view>
+        <view> {{item.num}}</view>
       </view>
     </view>
-    <view wx:else class='card layout-row layout-center'>
-      今天木有课哦！
+    <view wx:for="{{schedules}}" wx:for-item="items" class='col layout-column layout-start-center'>
+      <view wx:for="{{items}}" wx:for-item="list" style="flex:{{list.num+1}};" class='layout-column layout-start-center'>
+        <block wx:if="{{list.cls.length > 1}}">
+          <block wx:for="{{list.cls}}">
+            <view wx:if="{{item.flag}}" class='info-card {{item.color}} layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;flex:2;order:1'>
+              <view class='info-card-name'>{{item.cls.name}}</view>
+              <view>{{item.cls.orgin}}</view>
+              <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+            </view>
+            <view wx:else class='info-card gray layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;display:flex;flex:1;order:2;flex-direction:column;font-size:7pt'>
+              <navigator url='/pages/core/kb/kb'>
+                <view class='not_week'>点击查看非本周课程</view>
+              </navigator>
+            </view>
+          </block>
+        </block>
+        <block wx:else>
+          <block wx:for="{{list.cls}}">
+            <view wx:if="{{item.flag}}" class='info-card {{item.color}} layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;flex:3;order:1'>
+              <view class='info-card-name'>{{item.cls.name}}</view>
+              <view>{{item.cls.orgin}}</view>
+              <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+            </view>
+            <view wx:else class='info-card gray layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;display:flex;flex:1;order:2;flex-direction:column;'>
+              <view class='info-card-name'>[非本周]{{item.cls.name}}</view>
+              <view>{{item.cls.orgin}}</view>
+              <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+            </view>
+          </block>
+        </block>
+      </view>
     </view>
-  </sc-tab>
-</sc-tab-group>
-<sc-dialog id="dialog" sc-class="box-shadow-8" bind:open="dialogOpen" bind:close="dialogClose" bind:opened="dialogOpened" bind:closed="dialogClosed">
-  <view style="padding: 16px" class="text-body2">
-    <text>课程表详情页面提供所有的课程展示，没有选中的课程会被标注，点击更新图标，可进行课表更新。</text>
   </view>
-</sc-dialog>
+</scroll-view>

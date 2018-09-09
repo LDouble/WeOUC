@@ -134,7 +134,8 @@ Page({
   },
   init: function(data = undefined) {
     var that = this;
-    if (new Date().getTime() < (new Date(app.begin_day).getTime() + 24 * 60 * 60 * 1000 * 30)) // 开学前一个月不使用缓存
+    if (new Date().getTime() < (new Date(app.begin_day).getTime() + 24 * 60 * 60 * 1000 * 30))
+      // 开学前一个月不使用缓存
       wx.removeStorageSync("stuclass");
     if (data != undefined) {
       /*
@@ -144,7 +145,7 @@ Page({
       that.kb_version = data.version;
       that.slides = data.slides;
       if (that.kb_version != wx.getStorageSync("kb_version")) {
-        wx.removeStorageSync("stuclass"); //清空stuclass，重新进行绑定。
+        wx.removeStorageSync("stuclass"); //清空stuclass，重新进行课表获取。
         wx.setStorageSync("kb_version", that.kb_version);
       }
       wx.setStorageSync("slides", that.slides);
@@ -192,9 +193,6 @@ Page({
         var stuclass = res.data;
         wx.setStorageSync('stuclass', stuclass); // 缓存到本地
         _this.getTodayClass(stuclass);
-        _this.setData({
-          "remind": ""
-        })
         if (_this.data.pull) {
           _this.data.pull = false
           wx.stopPullDownRefresh()
@@ -240,13 +238,15 @@ Page({
         }
       }
     }
+    console.log(todays.length)
     if (todays.length == 0) {
       this.setData({
         remind: "你今天没有课哦"
       })
     } else {
       this.setData({
-        courses: todays
+        courses: todays,
+        remind: ""
       })
     }
   },
@@ -291,7 +291,7 @@ Page({
       })
     }
   },
-  noticeTo: function (e) {
+  noticeTo: function(e) {
     wx.navigateTo({
       url: '/pages/web/web?url=' + e.target.dataset.id,
     })

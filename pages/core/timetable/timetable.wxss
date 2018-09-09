@@ -1,8 +1,148 @@
-.tools {
+/* pages/core/timetable/timetable.wxss */
+
+.shift {
+  width: 90%;
+  padding: 0rpx;
+  margin-top: 10rpx;
+}
+
+.header {
+  height: auto;
   background: white;
-  margin: 15rpx;
-  min-height: 20px;
+  position: fixed;
+  width: 100%;
+  min-height: 120rpx;
+  top: 0;
   z-index: 100;
-  border-radius: 25rpx;
-  padding: 10rpx;
+}
+
+sc-button {
+  margin: 0;
+}
+
+.sc-btn-fab {
+  border-radius: 10rpx;
+}
+
+.box {
+  background: white;
+  margin-top: 120rpx;
+}
+
+.top {
+  padding-top: 10rpx;
+  display: flex;
+  width: 130%;
+  top: 0;
+  font-size: 28rpx;
+  background: #f5f5f5;
+}
+
+.top .title {
+  flex: 1;
+  font-size: 24rpx;
+}
+
+.top .time {
+  flex-wrap: wrap;
+  margin-left: 10rpx;
+}
+
+.top .time view {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top>view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-right: 1px solid #e0e0e0; */
+  height: 80rpx;
+  flex: 2;
+}
+
+.main-card {
+  min-height: 1440rpx;
+  display: flex;
+  width: 130%;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  width: 0;
+  flex-wrap: wrap;
+}
+
+.col.title {
+  flex: 1;
+}
+
+.row {
+  text-align: center;
+  flex: 2;
+  padding: 0 0.15rem;
+  border-bottom: 1px solid #f8f8f5;
+}
+
+.row.title {
+  display: flex;
+  justify-content: center;
+  background: #f5f5f5;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.row.title:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.info-card {
+  color: white;
+  font-size: 8pt;
+}
+
+.info-card-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  width: 100%;
+}
+
+.not_week {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.green {
+  background: #7acfa6;
+}
+
+.blue {
+  background: #73b4ef;
+}
+
+.purple {
+  background: #9f8bea;
+}
+
+.red {
+  background: #e286ab;
+}
+
+.yellow {
+  background: #ffcb63;
+}
+
+.gray {
+  background: rgb(184, 182, 182);
 }
