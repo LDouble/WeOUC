@@ -43,12 +43,12 @@
       <view wx:for="{{items}}" wx:for-item="list" style="flex:{{list.num+1}};" class='layout-column layout-start-center'>
         <block wx:if="{{list.cls.length > 1}}">
           <block wx:for="{{list.cls}}">
-            <view wx:if="{{item.flag}}" class='info-card {{item.color}} layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;flex:2;order:1'>
-              <view class='info-card-name'>{{item.cls.name}}</view>
+            <view wx:if="{{item.flag}}" class='info-card {{item.color}} layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;flex:2;order:1;overflow:hidden;'>
+              <view class='info-card-name'>{{item.cls.name}} ({{item.cls.teacher}})</view>
               <view>{{item.cls.orgin}}</view>
               <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
             </view>
-            <view wx:else class='info-card gray layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;display:flex;flex:1;order:2;flex-direction:column;font-size:7pt'>
+            <view wx:else class='info-card gray layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;display:flex;flex:1;order:2;flex-direction:column;font-size:7pt;overflow:hidden;'>
               <navigator url='/pages/core/kb/kb'>
                 <view class='not_week'>点击查看非本周课程</view>
               </navigator>
@@ -57,15 +57,19 @@
         </block>
         <block wx:else>
           <block wx:for="{{list.cls}}">
-            <view wx:if="{{item.flag}}" class='info-card {{item.color}} layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;flex:3;order:1'>
-              <view class='info-card-name'>{{item.cls.name}}</view>
-              <view>{{item.cls.orgin}}</view>
-              <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+            <view wx:if="{{item.flag}}" class='info-card' style='width:120rpx;margin:2rpx;border-radius:5rpx;order:1'>
+              <view class="{{item.color}}" style='height:{{(item.cls.num + 1)*110}}rpx;'>
+                <view class='info-card-name'>{{item.cls.name}} ({{item.cls.teacher}})</view>
+                <view>{{item.cls.orgin}}</view>
+                <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+              </view>
             </view>
-            <view wx:else class='info-card gray layout-column layout-center-start' style='height:{{(item.cls.num + 1)*110}}rpx;width:120rpx;margin:2rpx;border-radius:5rpx;display:flex;flex:1;order:2;flex-direction:column;'>
-              <view class='info-card-name'>[非本周]{{item.cls.name}}</view>
-              <view>{{item.cls.orgin}}</view>
-              <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+            <view wx:else class='info-card' style='width:120rpx;margin:2rpx;border-radius:5rpx;display:flex;flex:1;order:2;flex-direction:column;overflow:hidden;'>
+              <view class="gray" style='height:{{(item.cls.num + 1)*110}}rpx;'>
+                <view class='info-card-name'>[非本周]{{item.cls.name}} ({{item.cls.teacher}})</view>
+                <view>{{item.cls.orgin}}</view>
+                <view wx:if="{{item.cls.classRoom}}">@{{item.cls.classRoom}}</view>
+              </view>
             </view>
           </block>
         </block>

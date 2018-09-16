@@ -1,18 +1,47 @@
 /* pages/core/course/course.wxss */
-.header {
-  background: #00bcd4;
-  height: 80rpx;
-  z-index: 0;
+
+.shift {
+  padding: 5rpx 40rpx;
 }
 
-.info {
-  margin: 0 20rpx;
-  margin-top: -60rpx;
+.header {
+  text-align: center;
+  background-image: linear-gradient(to top, #96deda 0%, #00bcd4 100%);
   min-height: 80rpx;
-  padding: 0 60rpx;
+  height: auto;
+  z-index: 0;
+  color: white;
+}
+
+.type {
+  display: flex;
+  flex: 1;
   background: white;
-  z-index: 10;
-  border-radius: 30rpx;
-  flex-flow: column wrap;
-  flex-direction: row;
+  color: black;
+  /* border-bottom: 1rpx solid black; */
+  text-align: left;
+  margin: 0 50rpx 0 50rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0rpx 20rpx;
+  border-radius: 10rpx;
+}
+
+.type .image {
+  height: 25rpx;
+  width: 25rpx;
+  margin-bottom: 0rpx;
+  margin-right: 0rpx;
+}
+
+.input_name {
+  border-radius: 10rpx;
+  color: black;
+  background: white;
+  display: flex;
+  flex: 1;
+  margin-right: 10rpx;
+  height: 70rpx;
+  padding: 5rpx 20rpx;
+  text-align: left;
 }

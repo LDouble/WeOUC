@@ -5,11 +5,13 @@
   height: 80rpx;
   z-index: 0;
 }
-.fix{
+
+.fix {
   position: fixed;
   width: 100%;
-  z-index:200
+  z-index: 200;
 }
+
 .search {
   margin: 0 10rpx;
   margin-top: -60rpx;
@@ -40,9 +42,9 @@
 }
 
 .use {
-  background: red;
+  background: rgb(184, 182, 182);
 }
 
 .not-use {
-  background: #008e59;
+  background: #00bcd4;
 }

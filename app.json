@@ -4,10 +4,12 @@
     "pages/login/login",
     "pages/core/kb/kb",
     "pages/core/timetable/timetable",
+    "pages/core/test/test",
     "pages/core/score/score",
     "pages/core/room/room",
     "pages/core/course/course",
     "pages/core/analysis/analysis",
+    "pages/core/oucbaike/oucbaike",
     "pages/my/my",
     "pages/about/about",
     "pages/web/web"
@@ -17,7 +19,6 @@
     "navigationBarBackgroundColor": "#00BCD4",
     "navigationBarTitleText": "WeOUC",
     "navigationBarTextStyle": "white"
-
   },
   "tabBar": {
     "list": [

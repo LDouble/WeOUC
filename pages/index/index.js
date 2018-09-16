@@ -23,6 +23,10 @@ Page({
         desc: "成绩",
         verify: "jwc"
       }, {
+        key: "test",
+        desc: "考场",
+        verify: "jwc"
+      }, {
         key: "room",
         desc: "自习室",
         verify: ""
@@ -30,11 +34,7 @@ Page({
         key: "analysis",
         desc: "成绩分析",
         verify: "jwc"
-      }, //{
-      //   key: "course",
-      //   desc: "蹭课",
-      //   verify: ""
-      // },
+      }
     ],
 
   },

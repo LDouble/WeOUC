@@ -1,0 +1,12 @@
+/* pages/core/test/test.wxss */
+.shift{
+  padding:5rpx 40rpx; 
+}
+.header {
+  text-align: center;
+  background-image: linear-gradient(to top, #96deda 0%, #00bcd4 100%);
+  min-height: 80rpx;
+  height: auto;
+  z-index: 0;
+  color: white;
+}

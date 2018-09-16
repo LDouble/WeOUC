@@ -1,15 +1,21 @@
 <view class='container'>
-  <view class='fix'>
-    <view class='header'>
+  <view class='header'>
+    <view class="layout-column layout-space-around-center">
+      <text class='text-5' style='width:90%;padding:15rpx;'>课程搜索</text>
+      <view class='layout-row layout-start-center' style='width:100%;;'>
+        <view class='type layout-row layout-space-between-center;'>
+          <text>{{type}}</text>
+          <image src='/images/down.png' class='image'></image>
+        </view>
+      </view>
     </view>
-    <view class="info layout-row layout-space-between-center">
-      <text class='text-body2'>当前选择:{{types[index]}}</text>
-      <picker value="{{index}}" range="{{types}}" bindchange="bindPickerChange">
-        <sc-button sc-class="sc-btn sc-outlined-btn" size='small'>切换类型</sc-button>
-      </picker>
-      <sc-form bind:submit="submit" report-submit submit-text="搜索" sc-button-class="sc-btn submit-btn" style='width:100%'>
-        <sc-input sc-class="sc-input" label="课程" name="name" bindinput="input" selection-start="{{-1}}" cursor="0" style='margin:0;width:100%'></sc-input>
-      </sc-form>
+    <view class='layout-row layout-start-center' style='padding:25rpx 50rpx'>
+      <input type='text' placeholder="请输入课程名" class='input_name'></input>
+      <button size='mini' style='height:80rpx;line-height: 80rpx;'>搜 索</button>
     </view>
+  </view>
+  <ad unit-id="adunit-c992b9cbfa69132c"></ad>
+  <view class='layout-column layout-center' style='margin-top:15rpx'>
+     <text class='text-caption'>最近搜索</text>
   </view>
 </view>

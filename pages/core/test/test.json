@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "考试安排",
+  "navigationBarBackgroundColor": "#00bcd4",
+  "enablePullDownRefresh": true,
+    "usingComponents": {
+      "sc-loading": "/scui/components/scLoading/sc-loading"
+    }
+}

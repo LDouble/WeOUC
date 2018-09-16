@@ -259,6 +259,7 @@ Page({
     if (this.week < 1)
       this.week = 1
     var last_color = -1
+    var tmp_colors = {}
     for (var i in stuclass) {
       var lessons = stuclass[i].classes // 第i节课里的课。
       for (var j in lessons) { // 第j天里的课
@@ -268,9 +269,14 @@ Page({
             var flag = false;
             for (var n = 0, k = temp[m].weeks.length; n < k; n++) {
               if (this.week == temp[m].weeks[n]) {
-                var color = Math.floor(Math.random() * 10) % 5 // 随机颜色
-                if (color == last_color)
-                  color = (color + 1) % 5
+                if (tmp_colors[temp[m].name]) {
+                  var color = tmp_colors[temp[m].name] // 之前这门课已经有颜色了。
+                } else {
+                  var color = Math.floor(Math.random() * 10) % 5 // 随机颜色
+                  if (color == last_color)
+                    color = (color + 1) % 5
+                  tmp_colors[temp[m].name] = color
+                }
                 if (i == 5) {
                   i = 4;
                 }

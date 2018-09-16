@@ -1,0 +1,28 @@
+<view class='container'>
+  <view class='header'>
+    <view class="layout-row layout-column layout-space-around-center">
+      <text class='text-body1' style='width:90%;padding:15rpx'>学号:{{xh}}</text>
+       <text class='text-caption' style='width:90%;padding:15rpx'>
+       仅作参考,具体安排以选课系统为准       
+       </text>
+    </view>
+  </view>
+  <view wx:if="{{remind}}" class='card-content layout-column layout-center'>
+    <sc-loading wx:if="{{remind == 'update'}}" color="rgb(63, 81, 181)" size="108" width="12"></sc-loading>
+    <block wx:else>
+      <view class='text-caption'>{{remind}}</view>
+    </block>
+  </view>
+  <view wx:else class='card'>
+    <view wx:for="{{tests}}" class='layout-row layout-space-between-center today_kb'>
+      <view class='layout-column layout-start'>
+        <view class='text-subtitle2'>{{item.name}}</view>
+        <view class='text-caption' style='margin-top:10rpx;color:#00BCD4'>{{item.time}}</view>
+        <view class='layout-row layout-space-between-start'>
+          <view class='text-caption' style='margin-top:10rpx;'>教室号:{{item.address}} </view>
+          <view class='text-caption' style='margin-top:10rpx;margin-left:20rpx;'> 座位号:{{item.num}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
