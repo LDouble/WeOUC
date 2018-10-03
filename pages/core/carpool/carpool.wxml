@@ -1,0 +1,117 @@
+<view class='container'>
+  <view class='header'>
+    <view class='layout-row layout-space-between-center text-body1'>
+      <view style='display:flex;flex:1;' class='left'>
+        <picker range='{{area}}' data-id='departure' bindchange='select'>
+          <input placeholder='起点' value='{{departure}}' disabled='true' />
+        </picker>
+      </view>
+      <view style='display:flex;flex:0;padding:20rpx;'>
+        <i class="iconfont icon-jiantou_zuoyouqiehuan"></i>
+      </view>
+      <view style='display:flex;flex:1' class='right'>
+        <picker range='{{area}}' data-id="destination" bindchange='select'>
+          <input placeholder='终点' value='{{destination}}' disabled='true' />
+        </picker>
+      </view>
+    </view>
+    <view class='layout-row layout-space-between-center text-body1'>
+      <picker mode="date" bindchange='select' data-id='date' style='padding:10rpx;display:flex;flex:1'>
+        <view style='padding: 20rpx 0rpx 20rpx 20rpx;border-bottom:1rpx solid grey;' class='layout-row layout-start-center'>{{date}}
+        </view>
+      </picker>
+    </view>
+    <view class='search' style='padding:30rpx 120rpx'>
+      <form report-submit='true' bindsubmit='search'>
+        <button type='primary' style='line-height:80rpx;background:#0097a7' form-type='submit'>开始搜索</button>
+      </form>
+
+    </view>
+  </view>
+  <view class='medium layout-row layout-space-between-center text-body2'>
+    <view class='item {{current == 0 ? "active" : ""}}' data-id='0' bindtap='move'>
+      全部拼车
+    </view>
+    <view class='item {{current == 1 ? "active" : ""}}' data-id='1' bindtap='move'>
+      我的拼车
+    </view>
+    <navigator url='add'>
+      <view class='item' bindtap='add'>
+        <view>
+          我要拼车
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <!-- <ad unit-id="adunit-c992b9cbfa69132c"></ad> -->
+  <view class='lists' wx:if="{{current == 0}}">
+    <view wx:for="{{lists[0]}}" wx:key="*" class="card">
+      <view class='list_item layout-row layout-space-between-center'>
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>起</view>
+          <view style='margin-left:10rpx;' class='text-body1'>{{item.departure}}</view>
+        </view>
+      </view>
+      <view class='list_item'>
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>终</view>
+          <view style='margin-left:10rpx;' class='text-body1'>{{item.destination}}</view>
+        </view>
+      </view>
+      <view class='list_item'>
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>时间</view>
+          <view style='margin-left:10rpx;' class='text-body1'>{{item.date}} {{item.time}}出发</view>
+        </view>
+      </view>
+      <view class='list_item'>
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>微信号</view>
+          <view style='margin-left:10rpx;' class='text-caption'>{{item.wx}}</view>
+        </view>
+      </view>
+      <view class='list_item' wx:if="{{item.vehicle_num && (item.vehicle_num != 'None' &&item.vehicle_num != 'undefined')|| item.vehicle_time && (item.vehicle_time != 'None' &&item.vehicle_time != 'undefined') }}">
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>车次与时间</view>
+          <view style='margin-left:10rpx;' class='text-caption' wx:if="{{item.vehicle_time && (item.vehicle_time != 'None' && item.vehicle_time != 'undefined')}}">{{item.vehicle_time}}</view>
+          <view style='margin-left:10rpx;' class='text-caption' wx:if="{{item.vehicle_num  && (item.vehicle_num != 'None' ||item.vehicle_num != 'undefined')}}">{{item.vehicle_num}}</view>
+        </view>
+      </view>
+      <view class='list_item' wx:if="{{item.note}}">
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>备注</view>
+          <view style='margin-left:10rpx;color:grey' class='text-caption'>{{item.note}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='my' wx:if="{{current == 1}}">
+    <view class='card' wx:for="{{lists[1]}}" wx:key="*">
+      <view class='list_item'>
+        <view class='layout-row layout-start-center'>
+          <view class='flag'>拼车</view>
+          <view style='margin-left:10rpx;' class='text-body1'>{{item.departure}} to {{item.destination}}</view>
+        </view>
+      </view>
+      <view class='list_item'>
+        <view class='layout-row layout-start-center'>
+          <view style='margin-left:10rpx;' class='text-caption'>{{item.date}} {{item.time}}</view>
+        </view>
+      </view>
+      <view class='list_item'>
+        <view class='layout-row layout-start-center'>
+          <view style='margin-left:10rpx;' class='text-caption'>{{item.wx}}</view>
+        </view>
+      </view>
+      <view class='list_item'>
+        <view class='layout-row layout-start' style='border-top:1rpx solid #e0e0e0;padding-top:20rpx;'>
+          <view style='width:100%'>
+            <button size='mini'  bindtap='delete' type="primary" plain class='text-button' style='margin-left:20rpx' data-id='{{item.id}}'>拼成</button>
+            <button size='mini'  bindtap='delete' type="warn" plain class='text-button' style='margin-left:20rpx' data-id='{{item.id}}'>删除</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

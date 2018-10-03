@@ -21,39 +21,51 @@ Page({
     weeks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
     times: [{
       time: "08:00",
+      end: "08:50",
       num: 1
     }, {
       time: "09:00",
+      end: "09:50",
       num: 2
     }, {
       time: "10:10",
+      end: "11:00",
       num: 3
     }, {
       time: "11:10",
+      end: "12:00",
       num: 4
     }, {
       time: "13:30",
+      end: "14:20",
       num: 5
     }, {
       time: "14:30",
+      end: "15:20",
       num: 6
     }, {
       time: "15:30",
+      end: "16:20",
       num: 7
     }, {
       time: "16:30",
+      end: "17:20",
       num: 8
     }, {
       time: "17:30",
+      end: "18:20",
       num: 9
     }, {
       time: "18:30",
+      end: "19:20",
       num: 10
     }, {
       time: "19:30",
+      end: "20:20",
       num: 11
     }, {
       time: "20:30",
+      end: "21:20",
       num: 12
     }]
   },
@@ -267,6 +279,8 @@ Page({
         if (Array.isArray(temp)) {
           for (var m = 0; m < temp.length; m++) {
             var flag = false;
+            if (!app.low_day && temp[m].name.indexOf("未选中") != -1) // 大于15天，
+              continue
             for (var n = 0, k = temp[m].weeks.length; n < k; n++) {
               if (this.week == temp[m].weeks[n]) {
                 if (tmp_colors[temp[m].name]) {
@@ -310,6 +324,8 @@ Page({
                 schedules[j][i + 1].num = -1 // 上午连上四节这种情况
               else if (i == 2 && temp[m].num == 3) {
                 schedules[j][i + 1].num = 0 // 5 -8 上课 //就是一上一下午的
+              } else if (i == 2 && temp[m].num == 4) {
+                schedules[j][i + 1].num = -1 // 5 -9 上课 //就是一上一下午的
               } else if (i == 0 && temp[m].num == 2)
                 schedules[j][i + 1].num = 0 //上午连上三节,也就是第四节没课
               else if (i == 1 && temp[m].num == 2)

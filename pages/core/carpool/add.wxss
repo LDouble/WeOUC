@@ -1,0 +1,16 @@
+/* pages/core/carpool/add.wxss */
+.item{
+  background: white;
+  padding: 30rpx 20rpx;
+  margin-bottom:5rpx; 
+}
+.item .left{
+  display: flex;
+  color: rgb(146, 143, 143);
+}
+
+.item .right{
+  justify-content: flex-end;
+  display: flex;
+  flex: 1;
+}

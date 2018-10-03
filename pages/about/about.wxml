@@ -9,6 +9,10 @@
         <text class='card-desc text-caption'>项目开源地址:https://github.com/LDouble/WeOUC/</text>
         <view class='card-desc text-subtitle1' style='text-align:center'>更新说明</view>
         <view class='layout-column layout-start'>
+          <text class='card-desc text-overline'>2018.10.03 增加了拼车和搜课功能</text>
+
+          <text class='card-desc text-overline'>2018.09.21 改进课表更新算法，如果没有未选中课程，开学15天也不进行更新</text>
+
           <text class='card-desc text-overline'>2018.09.15 重构自习室查询，增加教室描述和帮助文档</text>
           <text class='card-desc text-overline'>2018.09.10 重构实现考试安排查询</text>
           <text class='card-desc text-overline'>2018.09.09 重构课表查询，实现九宫格查询</text>

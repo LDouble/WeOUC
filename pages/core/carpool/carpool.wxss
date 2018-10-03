@@ -1,0 +1,63 @@
+/* pages/core/carpool/lists.wxss */
+
+.header {
+  background: white;
+  height: auto;
+  margin: 10rpx 10rpx;
+}
+
+.header .left {
+  padding-left: 10rpx;
+}
+
+.header .right {
+  padding-right: 10rpx;
+}
+
+.header .left input, .header .right input {
+  padding: 10rpx 0rpx 10rpx 20rpx;
+  border-bottom: 1rpx solid grey;
+}
+
+.header .left input,  {
+  padding-left: 0rpx;
+}
+
+.medium {
+  background: white;
+  margin-top: 20rpx;
+}
+
+.medium .item {
+  display: flex;
+  flex: 1;
+  border-bottom: 6rpx solid rgba(190, 183, 183, 0.877);
+  justify-content: center;
+  padding: 20rpx;
+}
+
+.item.active {
+  border-bottom: 6rpx solid #00bcd4;
+}
+
+.card {
+  padding: 10rpx;
+  margin: 0px;
+  margin-top: 10rpx;
+}
+
+.flag {
+  background: #03a9f4;
+  color: white;
+  font-size: 22rpx;
+  /* min-width: 35rpx; */
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+  height: 35rpx;
+  text-align: center;
+  line-height: 35rpx;
+}
+
+.list_item {
+  padding: 0rpx 0rpx 20rpx 0rpx;
+}

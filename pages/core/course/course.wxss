@@ -11,6 +11,7 @@
   height: auto;
   z-index: 0;
   color: white;
+  padding-bottom:15rpx; 
 }
 
 .type {

@@ -11,7 +11,7 @@ Page({
     "swiper_height": 200,
     "notices": [{
       url: "https://mp.weixin.qq.com/s/_NMmkQSgxDvu1MPmC4f3_g",
-      pic: "https://lg-mq3kp55s-1253895749.cos.ap-shanghai.myqcloud.com/slide.jpg"
+      pic: "https://lg-mq3kp55s-1253895749.cos.ap-shanghai.myqcloud.com/slide.png"
     }],
     "navs": [{
         key: "timetable",
@@ -31,6 +31,15 @@ Page({
         desc: "自习室",
         verify: ""
       }, {
+        key: "course",
+        desc: "蹭课",
+        verify: ""
+      }, 
+      {
+        key: "carpool",
+        desc: "拼车",
+        verify: "jwc"
+      },{
         key: "analysis",
         desc: "成绩分析",
         verify: "jwc"
@@ -134,9 +143,12 @@ Page({
   },
   init: function(data = undefined) {
     var that = this;
-    if (new Date().getTime() < (new Date(app.begin_day).getTime() + 24 * 60 * 60 * 1000 * 30))
-      // 开学前一个月不使用缓存
+    var not_flag = wx.getStorageSync("not_flag");
+    if (app.low_day && (not_flag == false)) {
+      // 开学前半个月不使用缓存
       wx.removeStorageSync("stuclass");
+    }
+
     if (data != undefined) {
       /*
       获取到服务器的版本后，初始化完毕
@@ -189,9 +201,27 @@ Page({
       },
       method: "POST",
       success: function(res) {
+        if (res.data.status == "402") {
+          wx.showModal({
+            title: '密码错误',
+            content: "你或许在教务系统中修改了密码，请重新绑定",
+            showCancel: false,
+            success: function(res) {
+              wx.clearStorageSync();
+              app.user_token = ""
+              app.xh = "",
+                app.remind = "unauth"
+              wx.setStorageSync("version", app.version)
+              wx.reLaunch({
+                url: '/pages/login/login',
+              })
+            }
+          })
+        }
         res = res.data
         var stuclass = res.data;
         wx.setStorageSync('stuclass', stuclass); // 缓存到本地
+        wx.setStorageSync("not_flag", !res.flag)
         _this.getTodayClass(stuclass);
         if (_this.data.pull) {
           _this.data.pull = false
@@ -227,7 +257,9 @@ Page({
               break
             }
           }
-          if (flag == true) { // 说明是该周的课，记录下来，break
+          if (flag == true ) { // 说明是该周的课，记录下来，break
+            if (!app.low_day && today_class[i].name.indexOf("未选中") != -1) // 大于15天，
+                continue
             var todaydata = today_class[i]; // 找到这门课了
             todays.push({
               cls: todaydata,
@@ -271,17 +303,7 @@ Page({
       wx.navigateTo({
         url: '/pages/core/' + key + "/" + key,
       })
-      wx.request({
-        url: app.server + "/add_formid",
-        data: {
-          user_token: app.user_token,
-          formid: e.detail.formId
-        },
-        method: "POST",
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      });
+      app.add_formid(e.detail.formId)
     }
     if (content != "") {
       wx.showModal({

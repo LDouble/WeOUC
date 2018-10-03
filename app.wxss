@@ -2,6 +2,7 @@
 @import "scui/sc-ui.wxss";
 @import "scui/assets/font-icon/material.wxss";
 @import "scui/assets/font-icon/iconfont.wxss";
+@import "scui/assets/font-icon/iconzuoyou.wxss";
 
 .container {
   height: 100%;

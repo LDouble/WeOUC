@@ -1,0 +1,71 @@
+<view class='container'>
+  <form bindsubmit="formSubmit" report-submit='true'>
+    <view class='form'>
+      <picker range='{{area}}' bindchange='select' data-id="departure">
+        <view class='item layout-row layout-start-center'>
+          <view class='left text-body2'>起点 *</view>
+          <view class='right text-body2'>{{departure}}
+            <i class="iconfont icon-arrow-right-outline"></i>
+          </view>
+        </view>
+      </picker>
+      <picker range='{{area}}' bindchange='select' data-id="destination">
+        <view class='item layout-row layout-start-center'>
+          <view class='left text-body2'>终点 *</view>
+          <view class='right text-body2'>{{destination}}
+            <i class="iconfont icon-arrow-right-outline"></i>
+          </view>
+        </view>
+      </picker>
+
+      <picker mode="date" bindchange='select' data-id="date">
+        <view class='item layout-row layout-start-center'>
+          <view class='left text-body2'>出发日期 *</view>
+          <view class='right text-body2'>{{date}}
+            <i class="iconfont icon-arrow-right-outline"></i>
+          </view>
+        </view>
+      </picker>
+
+      <picker mode="time" value="13:30" bindchange='select' data-id="time">
+        <view class='item layout-row layout-start-center'>
+          <view class='left text-body2'>出发时间 *</view>
+          <view class='right text-body2'>{{time}}
+            <i class="iconfont icon-arrow-right-outline"></i>
+          </view>
+        </view>
+      </picker>
+
+      <view class='item layout-row layout-start-center'>
+        <view class='left text-body2'>微信号 *</view>
+        <view class='right text-body2'>
+          <input bindblur='input' bindconfirm='input' data-id="wx" style="text-align:right;padding-right:10rpx" placeholder='请输入微信号...' />
+        </view>
+      </view>
+
+      <view class='item layout-row layout-start-center'>
+        <view class='left text-body2'>车次/航班</view>
+        <view class='right text-body2'>
+          <input bindblur='input' bindconfirm='input' data-id="vehicle_num" style="text-align:right;padding-right:10rpx" placeholder='请输入车次/航班号...' />
+        </view>
+      </view>
+
+      <picker mode="time" value="13:30" bindchange="select" data-id="vehicle_time">
+        <view class='item layout-row layout-start-center'>
+          <view class='left text-body2'>车次/航班时间</view>
+          <view class='right text-body2'>{{vehicle_time}}
+            <i class="iconfont icon-arrow-right-outline"></i>
+          </view>
+        </view>
+      </picker>
+
+      <view class='item layout-row layout-start-center'>
+        <textarea  placeholder='补充说明...如果有特殊需求请在此处说明' class='text-body2' name="note">
+        </textarea>
+      </view>
+      <view style='padding:50rpx;'>
+        <button type='primary' style='background:#0097a7;border:none' form-type='submit'>发布</button>
+      </view>
+    </view>
+  </form>
+</view>

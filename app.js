@@ -57,6 +57,7 @@ App({
           that.xq = res.data.xq
           that.slides = res.data.slides //幻灯片
           wx.removeStorageSync("stuclass")
+          that.low_day = new Date().getTime() < (new Date(that.begin_day).getTime() + 24 * 60 * 60 * 1000 * 15) // 判断是否小于15天，
           that.calWeek()
         },
       })
@@ -65,7 +66,7 @@ App({
       this.xn = wx.getStorageSync("xn")
       this.xq = wx.getStorageSync("xq")
       this.calWeek()
-
+      that.low_day = new Date().getTime() < (new Date(that.begin_day).getTime() + 24 * 60 * 60 * 1000 * 15)
     }
     wx.getNetworkType({ //判断是否有网络
       success: function(res) {
@@ -102,7 +103,21 @@ App({
     var date = new Date(date)
     return now > date
   },
+  add_formid: function(formid){
+    var that = this
+    wx.request({
+      url: that.server + "/add_formid",
+      data: {
+        user_token: that.user_token,
+        formid: formid
+      },
+      method: "POST",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+  },
   server: "https://weouc.it592.com/api",
-// server: "http://127.0.0.1:5000/api",
+  //server: "http://127.0.0.1:5000/api",
 
 })

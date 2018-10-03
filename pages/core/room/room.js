@@ -28,8 +28,9 @@ Page({
     if (!building)
       building = [0, 4]
     this.setData({
-      index: building
+      index: [0,building[1]]
     })
+    building[0] = 0;
     this.get_data(building)
   },
 

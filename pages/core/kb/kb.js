@@ -119,7 +119,6 @@ Page({
             var flag = false;
             for (var n = 0, k = temp[m].weeks.length; n < k; n++) {
               if (app.week == temp[m].weeks[n]) {
-                console.log(j)
                 cls[j].push({
                   flag: true,
                   cls: temp[m],

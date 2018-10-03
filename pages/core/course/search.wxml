@@ -1,0 +1,23 @@
+<view class='container'>
+  <view class='header'>
+    <view class="layout-column layout-space-around-center">
+      <text class='text-5' style='width:90%;padding:15rpx;'>搜索结果</text>
+      <text class='text-overline'>(下滑加载更多)</text>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='search-item text-caption' wx:for="{{courses}}">
+      <view class='row layout-row layout-space-between-center'>
+        <text>{{item.name}}</text>
+      </view>
+      <view class='row layout-row layout-space-between-center'>
+        <text>{{item.teacher}}</text>
+        <text>{{item.type}}</text>
+      </view>
+      <view wx:for="{{item.classes}}" class='row layout-row layout-space-between-center'>
+        <text>{{item.orgin}}</text>
+        <text>{{item.classRoom}}</text>
+      </view>
+    </view>
+  </view>
+</view>
