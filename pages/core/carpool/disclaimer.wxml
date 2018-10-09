@@ -1,0 +1,38 @@
+<view class='container'>
+  <view class='content'>
+    <view class='text-body2'>
+      本协议的协议对象为本平台(WeOUC+小程序)用户，用户确定本协议后，本协议在用户与本平台之间产生法律效应。
+    </view>
+    <view class='text-body2'>
+      首先，本平台只是展示平台，意在为海大学生架设一座信息的桥梁，平台向您展示的信息均为用户自行上传发布，信息真伪我们无法全部辨别，仅供您参考。
+    </view>
+    <view class='text-body2'>
+      您承诺绝不为任何非法目的或任何非法方式使用普通，并承诺遵守中华人民共和国法律法规，不得侵犯他人的合法权益。不发布与拼车无关的信息。
+    </view>
+    <view class='text-body2' style='color:red'>
+      <view>免责声明</view>
+      <view>1. 平台与用户的关系:始于用户使用平台发布信息，止于平台对用户完成信息展示，后续用户之间的所有行为及后果均与平台无关，平台不承担任何法律责任。
+      </view>
+      <view>2.任何使用本平台的用户均需要仔细阅读本协议，无论您是否在使用之前认真阅读本协议，只要您点击协议下方的"同意"按钮并按流程完成信息发布，您的行为依旧表示您同意并签署了本服务协议。
+      </view>
+      <view>3.任何使用本平台的用户均需要仔细阅读本协议，无论您是否在使用之前认真阅读本协议，只要您点击协议下方的"同意"按钮并按流程完成信息发布，您的行为依旧表示您同意并签署了本服务协议。
+      </view>
+    </view>
+
+    <view class='text-body2' style='color:blue'>
+      <view>温馨提示</view>
+      <view>1. 在共同出行时，请您务必保持警惕。妥善保管好自己的随身物品
+      </view>
+      <view>2. 在不确定身份的前提下，可通过验证智能卡、学生证等方式确保对方的身份。
+      </view>
+      <view>3. 乘车途中，如果遇到危险，请及时联系110报警解决。
+      </view>
+      <view>4. 在拼车前，请及时沟通好细节问题。比如从北门或者南门出发
+      </view>
+    </view>
+  </view>
+  <view class='layout-row layout-center'>
+    <button type='warn' bindtap='agree'>同意</button>
+    <button type='primary' bindtap='reject'>拒绝</button>
+  </view>
+</view>

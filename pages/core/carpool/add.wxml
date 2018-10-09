@@ -64,7 +64,7 @@
         </textarea>
       </view>
       <view style='padding:50rpx;'>
-        <button type='primary' style='background:#0097a7;border:none' form-type='submit'>发布</button>
+        <button type='primary' style='background:#0097a7;border:none' form-type='submit' disabled='{{disabled}}'>发布</button>
       </view>
     </view>
   </form>

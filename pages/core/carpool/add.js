@@ -22,7 +22,8 @@ Page({
     destination: "请选择终点",
     date: "请选择起点出发日期",
     time: "请选择起点出发时间",
-    vehicle_time: "请选择航班/车次时间"
+    vehicle_time: "请选择航班/车次时间",
+    disable:false
   },
 
   /**
@@ -53,12 +54,22 @@ Page({
     this.setData(params)
   },
   formSubmit: function(e) {
+    this.setData({
+      disabled: false
+    })
+    wx.showLoading({
+      title: '提交中',
+    })
     params['note'] = e.detail.value.note
     var formid = e.detail.formId
     app.add_formid(formid)
-    if (!this.check())
+    if (!this.check()){
+      this.setData({
+        disabled: true
+      })
+      wx.hideLoading()
       return
-    console.log(params)
+    }
     var that = this
     wx.request({
       url: app.server + "/pc",
@@ -69,6 +80,7 @@ Page({
       },
       success: function(res) {
         if (res.data.status == 200) {
+          wx.hideLoading()
           wx.showModal({
             title: '提交成功',
             content: '你的拼车需求已提交，请耐心等待联系',
@@ -82,6 +94,9 @@ Page({
             }
           })
         }
+      },
+      complete: function(){
+        wx.hideLoading()
       }
     });
   },

@@ -17,7 +17,7 @@
     </view>
     <view class='layout-row layout-space-between-center text-body1'>
       <picker mode="date" bindchange='select' data-id='date' style='padding:10rpx;display:flex;flex:1'>
-        <view style='padding: 20rpx 0rpx 20rpx 20rpx;border-bottom:1rpx solid grey;' class='layout-row layout-start-center'>{{date}}
+        <view style='padding: 20rpx 0rpx 20rpx 20rpx;' class='layout-row layout-start-center'>{{date}}
         </view>
       </picker>
     </view>
@@ -25,7 +25,9 @@
       <form report-submit='true' bindsubmit='search'>
         <button type='primary' style='line-height:80rpx;background:#0097a7' form-type='submit'>开始搜索</button>
       </form>
-
+    </view>
+    <view class='layout-row layou-center'>
+      <text class='text-caption' style='margin:0 auto'>(下拉刷新，上滑加载更多)</text>
     </view>
   </view>
   <view class='medium layout-row layout-space-between-center text-body2'>
@@ -65,9 +67,9 @@
         </view>
       </view>
       <view class='list_item'>
-        <view class='layout-row layout-start-center'>
-          <view class='flag'>微信号</view>
-          <view style='margin-left:10rpx;' class='text-caption'>{{item.wx}}</view>
+        <view class='layout-row layout-start-center' bindtap='copy' data-wx='{{item.wx}}'>
+          <view class='flag'>微信号(点击复制)</view>
+          <view style='margin-left:10rpx;' class='text-body1'>{{item.wx}}</view>
         </view>
       </view>
       <view class='list_item' wx:if="{{item.vehicle_num && (item.vehicle_num != 'None' &&item.vehicle_num != 'undefined')|| item.vehicle_time && (item.vehicle_time != 'None' &&item.vehicle_time != 'undefined') }}">
@@ -107,11 +109,16 @@
       <view class='list_item'>
         <view class='layout-row layout-start' style='border-top:1rpx solid #e0e0e0;padding-top:20rpx;'>
           <view style='width:100%'>
-            <button size='mini'  bindtap='delete' type="primary" plain class='text-button' style='margin-left:20rpx' data-id='{{item.id}}'>拼成</button>
-            <button size='mini'  bindtap='delete' type="warn" plain class='text-button' style='margin-left:20rpx' data-id='{{item.id}}'>删除</button>
+            <button size='mini' bindtap='delete' type="primary" plain class='text-button' style='margin-left:20rpx' data-id='{{item.id}}'>拼成</button>
+            <button size='mini' bindtap='delete' type="warn" plain class='text-button' style='margin-left:20rpx' data-id='{{item.id}}'>删除</button>
           </view>
         </view>
       </view>
     </view>
+  </view>
+  <view wx:if="{{is_bottom[current]}}" class='foot layout-row layout-center'>
+    <view class='line'></view>
+    <text class='text-caption'>我是有底线的</text>
+    <view class='line'></view>
   </view>
 </view>

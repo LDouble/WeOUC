@@ -61,3 +61,12 @@
 .list_item {
   padding: 0rpx 0rpx 20rpx 0rpx;
 }
+
+.line {
+  display: flex;
+  flex: 1;
+  border-bottom: 1px dashed rgba(190, 183, 183, 0.877);
+}
+.foot{
+  color:rgba(190, 183, 183, 0.877)
+}

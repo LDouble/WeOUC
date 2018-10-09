@@ -1,0 +1,6 @@
+/* pages/core/carpool/disclaimer.wxss */
+
+.content {
+  padding: 20rpx;
+  text-indent: 2em;
+}

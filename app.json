@@ -11,6 +11,7 @@
     "pages/core/course/search",
     "pages/core/carpool/carpool",
     "pages/core/carpool/add",
+    "pages/core/carpool/disclaimer",
     "pages/core/analysis/analysis",
     "pages/core/oucbaike/oucbaike",
     "pages/my/my",

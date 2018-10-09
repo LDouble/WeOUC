@@ -28,6 +28,8 @@ Page({
     departure: "起点",
     destination: "终点",
     current: 0,
+    is_bottom: [false, false]
+
   },
 
   /**
@@ -35,6 +37,11 @@ Page({
    */
   onLoad: function(options) {
     app.user_token = app.user_token ? app.user_token : wx.getStorageSync("user_token")
+    app.carpool_agree = app.carpool_agree ? app.carpool_agree : wx.getStorageSync("carpool_agree")
+    if (!app.carpool_agree)
+        wx.redirectTo({
+          url: 'disclaimer',
+        })
     if (app.user_token)
       params['user_token'] = app.user_token
     else
@@ -47,14 +54,20 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.get_data()
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    lists = [[],[]]
+    pages = [1, 1];
+    is_bottom = [false, false]
+    this.setData({
+      lists:lists
+    })
+    this.get_data()
   },
 
   /**
@@ -76,8 +89,10 @@ Page({
    */
   onPullDownRefresh: function() {
     is_bottom[current] = false
+    lists[current] = []
     this.setData({
-      is_bottom: is_bottom
+      is_bottom: is_bottom,
+      lists:lists
     })
     this.get_data(true)
   },
@@ -187,8 +202,9 @@ Page({
         wx.hideLoading()
         wx.showToast({
           title: '删除成功',
-
         })
+        lists = [[], []]
+        pages = [1, 1];
         setTimeout(function() {
           that.get_data(true)
         }, 2000)
@@ -200,6 +216,17 @@ Page({
         })
       },
       complete: function(res) {}
+    })
+  },
+  copy: function(e){
+    var value = e.currentTarget.dataset.wx
+    wx.setClipboardData({
+      data: value,
+      success:function(e){
+        wx.showToast({
+          title: '复制微信号成功',
+        })
+      }
     })
   }
 })

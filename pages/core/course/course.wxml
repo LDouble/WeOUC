@@ -12,14 +12,14 @@
       </picker>
     </view>
     <view class='layout-row layout-start-center' style='padding:25rpx 50rpx'>
-      <input type='text' placeholder="课程名(选填)" class='input_name' bindblur='input_name'></input>
+      <input type='text' placeholder="填写课程名(选填)" class='input_name' bindblur='input_name'></input>
     </view>
     <view class='layout-row layout-start-center' style='padding:0rpx 50rpx'>
       <input type='text' placeholder="教师名称(选填)" class='input_name' bindblur='input_teacher'></input>
       <button size='mini' style='height:80rpx;line-height: 80rpx;' bindtap='search'>搜 索</button>
     </view>
   </view>
-  <ad unit-id="adunit-c992b9cbfa69132c"></ad>
+  <!-- <ad unit-id="adunit-c992b9cbfa69132c"></ad> -->
   <view class='layout-column layout-center' style='margin-top:15rpx'>
     <text class='text-caption'>最近搜索</text>
   </view>
