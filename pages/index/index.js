@@ -243,7 +243,13 @@ Page({
   /* 获取今天要上的有哪些课 */
   getTodayClass: function(stuclass) {
     app.today = parseInt(new Date().getDay());
-    var today = app.today - 1 //数组从0开始的，
+    var today;
+    if (app.today == 0){
+        app.today = 6
+        today = 6;
+    }
+    else
+         today = app.today - 1 //数组从0开始的，
     var todays = []
     for (var cls in stuclass) { // 先遍历节
       var today_class = stuclass[cls].classes[today]
