@@ -1,5 +1,6 @@
 // pages/more/bind.js
 var app = getApp();
+var RSA = require('../../utils/wxapp_rsa.js')
 Page({
 
   /**
@@ -90,6 +91,12 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    var publicKey_pkcs1 = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6Qy3ymw7vaTF1CLm+V0NTZaBRnIH9vYoQgVU4GDKF4W3vGkDmE7PdWwk3hPuNE4ypDdBqhG0qqksNCtNrlo2WPp+RXCrRw7HxYT0mmC+e96Wofoz3JfeWfP9eCYKM0NgvZBzRepy92GewayyARfebLf1co5f2YUOLisQQFzlCqQIDAQAB-----END PUBLIC KEY-----'
+    var encrypt_rsa = new RSA.RSAKey();
+    encrypt_rsa = RSA.KEYUTIL.getKey(publicKey_pkcs1);
+    var encStr = encrypt_rsa.encrypt(params.password)
+    params.password = encStr
+    params.type = "base64"
     wx.request({
       url: app.server + this.data.types[this.type].url,
       data: params,

@@ -11,7 +11,7 @@ Page({
     "swiper_height": 200,
     "notices": [{
       url: "https://mp.weixin.qq.com/s/_NMmkQSgxDvu1MPmC4f3_g",
-      pic: "https://lg-mq3kp55s-1253895749.cos.ap-shanghai.myqcloud.com/slide.png"
+      pic: "https://lg-mq3kp55s-1253895749.cos.ap-shanghai.myqcloud.com/stop.jpg"
     }],
     "navs": [{
         key: "timetable",
@@ -34,12 +34,12 @@ Page({
         key: "course",
         desc: "蹭课",
         verify: ""
-      }, 
+      },
       {
         key: "carpool",
         desc: "拼车",
         verify: "jwc"
-      },{
+      }, {
         key: "analysis",
         desc: "成绩分析",
         verify: "jwc"
@@ -90,7 +90,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+      
   },
 
   /**
@@ -244,12 +244,11 @@ Page({
   getTodayClass: function(stuclass) {
     app.today = parseInt(new Date().getDay());
     var today;
-    if (app.today == 0){
-        app.today = 6
-        today = 6;
-    }
-    else
-         today = app.today - 1 //数组从0开始的，
+    if (app.today == 0) {
+      app.today = 6
+      today = 6;
+    } else
+      today = app.today - 1 //数组从0开始的，
     var todays = []
     for (var cls in stuclass) { // 先遍历节
       var today_class = stuclass[cls].classes[today]
@@ -263,9 +262,9 @@ Page({
               break
             }
           }
-          if (flag == true ) { // 说明是该周的课，记录下来，break
+          if (flag == true) { // 说明是该周的课，记录下来，break
             if (!app.low_day && today_class[i].name.indexOf("未选中") != -1) // 大于15天，
-                continue
+              continue
             var todaydata = today_class[i]; // 找到这门课了
             todays.push({
               cls: todaydata,

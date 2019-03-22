@@ -41,5 +41,6 @@
         <sc-button class='remind-btn' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</sc-button>
       </view>
     </view>
+    <ad unit-id="adunit-ec3e3215c5407d2e"></ad>
   </view>
 </view>

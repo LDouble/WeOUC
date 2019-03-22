@@ -15,6 +15,7 @@
       <view class='text-caption'>{{remind}}</view>
     </block>
   </view>
+  
   <view wx:else class='card' style='margin-top:220rpx'>
     <view class='score-item  layout-row layout-space-between-center'>
       <sc-checkbox label="全选" bindtap="bindSelectAll" data-index="{{index}}" checked="selectedAllStatus" value="check1" color="#00BCD4" style='margin:8rpx' class='text-caption'></sc-checkbox>
@@ -22,6 +23,9 @@
         <text class='text-body2'>课程详情</text>
       </view>
     </view>
+          <view>
+        <ad unit-id="adunit-ec3e3215c5407d2e"></ad>
+      </view>
     <view wx:for="{{cjInfo}}" class='score-item layout-row layout-start-center'>
       <sc-checkbox bindtap="bindCheckbox" data-index="{{index}}" checked='{{item.selected}}' value="check1" color="#00BCD4" style='margin:8rpx' class='text-caption'></sc-checkbox>
       <view class='layout-column layout-space-between-start text-caption' style='margin-left:20rpx;flex:1;'>

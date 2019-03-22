@@ -16,7 +16,8 @@
     "pages/core/oucbaike/oucbaike",
     "pages/my/my",
     "pages/about/about",
-    "pages/web/web"
+    "pages/web/web",
+    "pages/core/scratch/scratch"
   ],
   "window": {
     "backgroundTextStyle": "light",

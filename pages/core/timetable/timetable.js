@@ -279,7 +279,7 @@ Page({
         if (Array.isArray(temp)) {
           for (var m = 0; m < temp.length; m++) {
             var flag = false;
-            if (!app.low_day && temp[m].name.indexOf("未选中") != -1) // 大于15天，
+            if (!app.low_day && temp[m].name.indexOf("未选中") != -1 && this.xn == app.xn && this.xq == app.xq) // 大于15天，
               continue
             for (var n = 0, k = temp[m].weeks.length; n < k; n++) {
               if (this.week == temp[m].weeks[n]) {
@@ -343,25 +343,33 @@ Page({
       }
     }
     this.initHeaders()
+    var txn;
+    if (this.xq == 2)
+      txn = parseInt(this.xn) + 1
+    else
+        txn = this.xn
     this.setData({
       schedules: schedules,
       headers: this.headers,
       month: this.month,
       week: this.week,
-      xn: this.xn,
+      xn: txn,
       xq: this.xq
     })
   },
   update: function() {
     var date = new Date;
     var year = date.getFullYear();
-    var itemlist = ["本学期", year + "秋", year + "夏", year + "春",
-      year - 1 + "秋", year - 1 + "夏"
+    var itemlist = ["本学期", year+1 +"春",year + "秋", year + "夏", year + "春",
+      year - 1 + "秋"
     ]
     var item = [{
         xn: app.xn,
         xq: app.xq
-      }, {
+      },{
+        xn:year,
+        xq:2
+      },{
         xn: year,
         xq: 1
       }, {
@@ -374,9 +382,6 @@ Page({
       }, {
         xn: year - 1,
         xq: 1
-      }, {
-        xn: year - 1,
-        xq: 0
       }
     ]
     var _this = this;

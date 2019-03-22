@@ -1,6 +1,6 @@
 //app.js
 App({
-  version: "v0.0.1",
+  version: "v1",
   week: 1,
   remind: "",
   offline: false,
@@ -28,8 +28,11 @@ App({
 
       })
     }
+    if (wx.getStorageSync("version") != this.version){ //需要清空所有数据，重大版本变化
+      wx.clearStorageSync()
+      wx.setStorageSync("version", this.version)
+    }
     var end_day = wx.getStorageSync("end_day") //从本地获取学期结束日期
-    console.log(end_day)
     var that = this
     if (this.cmpDate(end_day) || !end_day) { // 当前缓存学期时间失效，重新获取。
       wx.request({
@@ -85,6 +88,18 @@ App({
     } else {
       this.remind = "unauth"
     }
+    
+    wx.onUserCaptureScreen(function (res) {
+      var pages = getCurrentPages() //获取加载的页面
+      var currentPage = pages[pages.length - 1] //获取当前页面的对象
+      var url = currentPage.route //当前页面url
+      if (url == "pages/core/timetable/timetable"){
+        wx.showModal({
+          title: '友情提示',
+          content: '数据仅供参考，课表会根据单双周进行切换显示，尤其是MOOC见面课。建议每天查看需要上什么课',
+        })
+      }
+    })
   },
   globalData: {
     userInfo: null
@@ -104,6 +119,20 @@ App({
     return now > date
   },
   add_formid: function(formid){
+    var that = this
+    wx.request({
+      url: that.server + "/add_formid",
+      data: {
+        user_token: that.user_token,
+        formid: formid
+      },
+      method: "POST",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+  },
+  get_user: function (formid) {
     var that = this
     wx.request({
       url: that.server + "/add_formid",

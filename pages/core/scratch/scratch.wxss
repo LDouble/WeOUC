@@ -1,0 +1,5 @@
+/* pages/core/scratch/scratch.wxss */
+
+canvas{
+  position: fixed
+}
