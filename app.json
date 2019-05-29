@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/my/my",
     "pages/login/login",
     "pages/core/kb/kb",
     "pages/core/timetable/timetable",
@@ -12,12 +13,8 @@
     "pages/core/carpool/carpool",
     "pages/core/carpool/add",
     "pages/core/carpool/disclaimer",
-    "pages/core/analysis/analysis",
-    "pages/core/oucbaike/oucbaike",
-    "pages/my/my",
     "pages/about/about",
-    "pages/web/web",
-    "pages/core/scratch/scratch"
+    "pages/web/web"
   ],
   "window": {
     "backgroundTextStyle": "light",

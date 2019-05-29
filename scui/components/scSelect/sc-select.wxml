@@ -1,0 +1,1 @@
+<view class="sc-class"><view class="sc-select {{clicked ? 'active' :''}}" catch:tap="_select"><text class="iconfont icon-triangledownfill"></text><view class="sc-options box-shadow-5"><slot></slot></view></view></view>

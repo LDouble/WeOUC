@@ -39,19 +39,31 @@ Page({
         key: "carpool",
         desc: "拼车",
         verify: "jwc"
-      }, {
-        key: "analysis",
-        desc: "成绩分析",
-        verify: "jwc"
       }
     ],
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if(wx.cloud){
+      wx.cloud.init({
+        env: 'develop-b907d7'
+      })
+      const db = wx.cloud.database()
+      db.collection('news').get().then(res => {
+        var a = new Array("日", "一", "二", "三", "四", "五", "六");
+        var week = new Date().getDay();
+        var str = "周" + a[week];
+        this.setData({
+          "title": res.data[0].title,
+          "url": res.data[0].url,
+          'week': str,
+          'week_index': week,
+        })
+      })
+    }
     var that = this
     this.setData({
       "remind": app.remind,
@@ -90,7 +102,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-      
+
   },
 
   /**
@@ -319,6 +331,7 @@ Page({
     }
   },
   noticeTo: function(e) {
+    console.log(e)
     wx.navigateTo({
       url: '/pages/web/web?url=' + e.target.dataset.id,
     })

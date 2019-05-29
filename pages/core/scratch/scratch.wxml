@@ -1,8 +1,0 @@
-<view>
-<text width="350px">96.05</text>
-  <canvas style='width: 350px;height: 50rpx;top:0rpx;position:fix' 
-          canvas-id='canvas-demo' 
-          bindtouchstart="touchStart" 
-          bindtouchmove="touchMove" 
-          bindtouchend="touchEnd"></canvas>
-</view>

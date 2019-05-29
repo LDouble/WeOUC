@@ -19,6 +19,19 @@
       </view>
     </form>
   </view>
+  <view class='card' wx:if="{{url}}">
+    <navigator url='/pages/web/web?url={{url}}'>
+      <view class='card-desc text-caption'>今日推送</view>
+      <view class='card-content layout-row layout-start-center' style='height:120rpx;'>
+        <view style='color:white; height:inherit;min-width:120rpx;' class='layout-column layout-center color{{week_index}}'>
+          {{week}}
+        </view>
+        <view class='text-body1' style="margin-left:30rpx;text-decoration:underline">
+          {{title}}
+        </view>
+      </view>
+    </navigator>
+  </view>
   <view class='card'>
     <view class='card-desc text-caption'>今天的课</view>
     <view wx:if="{{remind}}" class='card-content layout-column layout-center'>

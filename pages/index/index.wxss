@@ -52,3 +52,24 @@ button.form_button::after {
   z-index: 0;
   top: 0;
 }
+.color0{
+  background-color: #8BC34A;
+}
+.color1{
+  background-color: #00BCD4;
+}
+.color2{
+  background-color: #FF4081;
+}
+.color3{
+  background-color: #03A9F4;
+}
+.color4{
+  background-color: #8BC34A;
+}
+.color5{
+  background-color: #2196F3;
+}
+.color6{
+  background-color: #4CAF50;
+}
