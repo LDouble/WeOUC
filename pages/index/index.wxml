@@ -35,11 +35,10 @@
   <view class='card'>
     <view class='card-desc text-caption'>今天的课</view>
     <view wx:if="{{remind}}" class='card-content layout-column layout-center'>
-      <sc-loading wx:if="{{remind == 'update'}}" color="rgb(63, 81, 181)" size="108" width="12"></sc-loading>
-      <sc-button wx:if="{{remind == 'unauth'}}" class='remind-btn' bindtap="auth" sc-class="sc-btn sc-outlined-btn" flat>前去绑定账号</sc-button>
+      <button wx:if="{{remind == 'unauth'}}" class='remind-btn sc-button sc-outlined-btn ' bindtap="auth" sc-class="sc-btn sc-outlined-btn" flat>前去绑定账号</button>
       <block wx:else>
         <view class='text-caption'>{{remind}}</view>
-        <sc-button class='remind-btn' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</sc-button>
+        <button class='remind-btn sc-button sc-outlined-btn ' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</button>
       </block>
     </view>
     <view wx:else class='card-content'>
@@ -51,7 +50,7 @@
         <view class='text-caption'>{{item.cls.classRoom}}</view>
       </view>
       <view class='card-content layout-row layout-center-start'>
-        <sc-button class='remind-btn' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</sc-button>
+        <button class='remind-btn sc-button sc-outlined-btn ' bindtap="navigatetokb" sc-class="sc-btn sc-outlined-btn" flat>查看完整课表</button>
       </view>
     </view>
     <ad unit-id="adunit-ec3e3215c5407d2e"></ad>

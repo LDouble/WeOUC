@@ -5,7 +5,7 @@
     <view class="search layout-row layout-space-between-center">
       <text class='text-body2'>当前选择:{{building[0][index[0]]}}-{{building[1][index[1]]}}</text>
       <picker mode="multiSelector" value="{{index}}" range="{{building}}" bindchange="bindPickerChange">
-        <sc-button sc-class="sc-btn sc-outlined-btn" size='small'>时间-地点切换</sc-button>
+        <button class="sc-btn sc-outlined-btn sc-button sc-outlined-btn" size='small'>时间-地点切换</button>
       </picker>
     </view>
     <view class="layout-row layout-space-between-center text-body2" style='background:white;padding:15rpx;'>

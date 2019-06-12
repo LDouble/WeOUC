@@ -18,14 +18,49 @@
   flex-flow: column wrap;
   flex-direction: row;
 }
-.cj_lists{
+
+.cj_lists {
   background: white;
 }
-.score-item{
+
+.score-item {
   min-height: 45rpx;
   padding: 20rpx 0;
 }
-.fix{
+
+.fix {
   position: fixed;
-  z-index:200
+  z-index: 200;
+}
+
+/*  重写 checkbox 样式  */
+
+/* 未选中的 背景样式 */
+
+checkbox .wx-checkbox-input {
+  border-radius: 50%;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 选中后的 背景样式 */
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: none;
+  background: #4eac6d;
+}
+
+/* 选中后的 对勾样式 */
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
 }

@@ -3,12 +3,12 @@
 <view class="shift layout-row layout-space-between-center">
   <view class='text-caption'>本周是第{{week}}周 </view>
   <view>
-    <sc-button fab size="small" style='margin:10rpx' bindtap='answer'>
+    <button fab size="small" style='margin:10rpx' bindtap='answer'>
       <i class="iconfont icon-question" style="color: red"></i>
-    </sc-button>
-    <sc-button fab size="small" style='margin:10rpx' bindtap='update'>
+    </button>
+    <button fab size="small" style='margin:10rpx' bindtap='update'>`
       <i class="icon iconfont icon-Updatereset_" style="color: #0b93d5"></i>
-    </sc-button>
+    </button>
   </view>
 </view>
 <sc-tab-group tab-list="{{tabList}}" active-class="active" driver-color="rgb(63, 81, 181)" transition="false">

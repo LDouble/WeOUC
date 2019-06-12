@@ -1,9 +1,6 @@
 <view class='header'>
   <view class='layout-row layout-center-start'>
     <view class="shift layout-row layout-space-around-center">
-      <!-- <sc-button fab size="small" style='margin:10rpx' bindtap='answer'>
-        <i class="iconfont icon-question" style="color: red"></i>
-      </sc-button> -->
       <view class='text-caption layout-row layout-center'>
         <button class="" plain="true" size='mini' bindtap='update' style='background:#00acc1;color:white;border-color:#37ab7'>
           {{xn}}{{xqs[xq]}}
@@ -16,9 +13,6 @@
           </button>
         </view>
       </picker>
-      <!-- <sc-button fab size="small" style='margin:10rpx'>
-        <i class="icon iconfont icon-Updatereset_" style="color: #0b93d5;border-color:blue"></i>
-      </sc-button> -->
     </view>
   </view>
 </view>

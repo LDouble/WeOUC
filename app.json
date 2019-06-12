@@ -1,20 +1,19 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/my/my",
     "pages/login/login",
-    "pages/core/kb/kb",
-    "pages/core/timetable/timetable",
+    "pages/my/my",
+    "pages/web/web",
     "pages/core/test/test",
     "pages/core/score/score",
+    "pages/core/timetable/timetable",
     "pages/core/room/room",
     "pages/core/course/course",
     "pages/core/course/search",
     "pages/core/carpool/carpool",
     "pages/core/carpool/add",
     "pages/core/carpool/disclaimer",
-    "pages/about/about",
-    "pages/web/web"
+    "pages/core/xk_result/xk_result"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,5 +36,6 @@
         "selectedIconPath": "images/index/person@active.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

@@ -160,13 +160,13 @@ Page({
       }
     });
   },
-  bind: function(){
+  bind: function() {
     var type = "jwc"
     wx.navigateTo({
       url: '/pages/login/login?type=' + type,
     })
   },
-  about:function(){
+  about: function() {
     wx.navigateTo({
       url: '/pages/about/about'
     })

@@ -45,7 +45,8 @@ page {
 .card-content {
   padding: 20rpx;
 }
-.today_kb{
+
+.today_kb {
   min-height: 120rpx;
   padding: 30rpx;
 }
@@ -55,6 +56,7 @@ page {
   height: 80rpx;
   z-index: 0;
 }
+
 .shift {
   margin: 0 10rpx;
   margin-top: -60rpx;
@@ -64,4 +66,29 @@ page {
   padding: 10rpx;
   flex-flow: column wrap;
   flex-direction: row;
+}
+
+.sc-button {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  touch-action: manipulation;
+  zoom: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: 0;
+  -webkit-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow;
+  background-color: transparent;
+  line-height: 72rpx;
+  min-width: 128rpx;
+  height: 72rpx;
+  padding: 0 32rpx;
+  font-size: 28rpx;
+  border-radius: 4rpx;
 }

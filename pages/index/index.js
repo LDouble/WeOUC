@@ -13,7 +13,12 @@ Page({
       url: "https://mp.weixin.qq.com/s/_NMmkQSgxDvu1MPmC4f3_g",
       pic: "https://lg-mq3kp55s-1253895749.cos.ap-shanghai.myqcloud.com/stop.jpg"
     }],
-    "navs": [{
+    "navs": [
+      {
+        key: "xk_result",
+        desc: "选课结果",
+        verify: "jwc"
+      },{
         key: "timetable",
         desc: "课表",
         verify: "jwc"

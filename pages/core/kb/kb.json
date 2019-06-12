@@ -1,11 +1,5 @@
 {
   "navigationBarBackgroundColor": "#00BCD4",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "课表",
-  "usingComponents": {
-    "sc-tab-group": "/scui/components/scTabGroup/sc-tab-group",
-    "sc-tab": "/scui/components/scTab/sc-tab",
-    "sc-button": "/scui/components/scButton/sc-button",
-    "sc-dialog": "/scui/components/scDialog/sc-dialog"
-  }
+  "navigationBarTitleText": "课表"
 }

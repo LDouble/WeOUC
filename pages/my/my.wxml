@@ -1,8 +1,11 @@
 <view class='container'>
-  <sc-cell style="background:white" right-icon="iconfont icon-right icon-right-color" left-icon="iconfont icon-accountcircle {{color}}" bindtap="bind">
-    <text>{{name}}</text>
-    <text slot="subheader">{{xh}}</text>
-  </sc-cell>
+  <view style='background:white; padding-left:10rpx' class='layout-row layout-start-center'>
+    <icon class='iconfont icon-accountcircle {{color}}' style="font-size:60px" size='60'></icon>
+    <view class='layout-column layout-start text-subtitle2' style='padding-left:10rpx'>
+      <text>{{name}}</text>
+      <text>{{xh}}</text>
+    </view>
+  </view>
   <view class="list-icon__nav" url="">
     <view wx:if="{{bind}}" class="list-icon__item">
       <image class="list-icon__l-icon" src="/images/my/notice.png"></image>
@@ -19,7 +22,7 @@
       <text class="list-icon__text">绑定账号</text>
       <image class="list-icon__r-icon" src="/images/my/arrow_right.png"></image>
     </view>
-    <view bindtap='about'  class="list-icon__item">
+    <view bindtap='about' class="list-icon__item">
       <image class="list-icon__l-icon" src="/images/my/about.png"></image>
       <text class="list-icon__text">致谢与说明</text>
       <image class="list-icon__r-icon" src="/images/my/arrow_right.png"></image>

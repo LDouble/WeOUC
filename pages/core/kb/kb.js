@@ -1,6 +1,5 @@
 // pages/core/timetable/timetable.js
 var app = getApp()
-const scui = app.scui
 Page({
 
   /**
@@ -10,8 +9,8 @@ Page({
     //tabList: ['周一', "周二", "周三", "周四", "周五", "周六", "周日"],
     tabList: [{
         label: '周一',
-      id: 'Mon',
-      name: 'Mon'
+        id: 'Mon',
+        name: 'Mon'
       }, {
         label: '周二',
         id: 'Tues',
@@ -25,11 +24,11 @@ Page({
         label: '周四',
         id: 'Thurs',
         name: 'Thurs'
-      },{
+      }, {
         label: '周五',
         id: 'Fri',
         name: 'Fri'
-      },{
+      }, {
         label: '周六',
         id: 'Sat',
         name: 'Sat'
@@ -54,10 +53,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-    this.data.dialog = scui.Dialog("#dialog");
-
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示

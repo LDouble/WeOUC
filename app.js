@@ -101,6 +101,7 @@ App({
         }
       })
     }
+  
   },
   globalData: {
     userInfo: null
@@ -112,7 +113,6 @@ App({
     this.week = Math.ceil(day / 7)
     return this.week
   },
-  scui: require("scui/sc-ui"),
   cmpDate: function(date) { // 现在是否大于指定的时间。
     var now = new Date()
     var date = new Date(date)

@@ -1,0 +1,32 @@
+<view class='container'>
+  <view class='header'>
+    <view class="layout-row layout-column layout-center">
+      <view class="layout-row layout-row" style='margin-top:10rpx'>
+        <text class='text-body1' style='padding:15rpx'>学号:{{xh}}</text>
+        <button class='sc-button sc-outlined-btn' bindtap='update'>学期切换</button>
+      </view>
+      <text class='text-caption' style='width:90%;padding:15rpx'>
+       仅作参考,具体安排以选课系统为准       
+       </text>
+    </view>
+  </view>
+  <view wx:if="{{remind}}" class='card-content layout-column layout-center'>
+    <view class='text-caption'>{{remind}}</view>
+  </view>
+  <view wx:else class='card'>
+    <view wx:for="{{data}}" class='layout-row layout-space-between-center today_kb'>
+      <view class='layout-column layout-start'>
+        <view class='text-subtitle2'>{{item.name }}</view>
+        <view class='text-caption' style='margin-top:10rpx;color:#00BCD4'>{{item.status}}</view>
+        <view class='layout-row layout-space-between-start'>
+          <view class='text-caption' style='margin-top:10rpx;'>老师:{{item.teacher}} </view>
+          <view class='text-caption' style='margin-top:10rpx;margin-left:20rpx;'> 选课号:{{item.xkh}}</view>
+        </view>
+        <view class='layout-row layout-space-between-start'>
+          <view class='text-caption' style='margin-top:10rpx;'>提交人:{{item.user}} </view>
+          <view class='text-caption' style='margin-top:10rpx;margin-left:20rpx;'> 选课币:{{item.xkb}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

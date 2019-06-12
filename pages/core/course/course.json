@@ -1,12 +1,5 @@
 {
   "navigationBarBackgroundColor": "#00BCD4",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "蹭课",
-  "usingComponents": {
-    "sc-button": "/scui/components/scButton/sc-button",
-    "sc-radio": "/scui/components/scRadio/sc-radio",
-    "sc-radio-group": "/scui/components/scRadioGroup/sc-radio-group",
-    "sc-input": "/scui/components/scInput/sc-input",
-    "sc-form": "/scui/components/scForm/sc-form"
-  }
+  "navigationBarTitleText": "蹭课"
 }

@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "个人中心",
-  "usingComponents": {
-    "sc-cell": "/scui/components/scCell/sc-cell"
-  }
-  }
+  "navigationBarTitleText": "个人中心"
+}

@@ -2,8 +2,5 @@
   "navigationBarBackgroundColor": "#00BCD4",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "课表",
-  "usingComponents": {
-    "sc-button": "/scui/components/scButton/sc-button"
-  },
   "enablePullDownRefresh": false
 }
