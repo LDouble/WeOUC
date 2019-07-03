@@ -8,8 +8,10 @@
 ```
   ![image](https://github.com/LDouble/WeOUC/blob/master/preview.png?raw=true)
 
-  二维码
-  ![qr](https://github.com/LDouble/WeOUC/blob/master/gh_9f72ed97eb36_258.jpg?raw=true)
+## 演示
+扫描二维码查看！
+ 
+ ![qr](https://github.com/LDouble/WeOUC/blob/master/gh_9f72ed97eb36_258.jpg?raw=true)
 
 ## 鸣谢
 感谢以下优秀开源项目,排名不分先后。在开发的过程中，在程序的结构与逻辑上参考了We重邮、We川大。前端UI基于开源框架SC-UI进行开发。
